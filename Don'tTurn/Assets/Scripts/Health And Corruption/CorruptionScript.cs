@@ -6,28 +6,28 @@ using TMPro;
 
 public class CorruptionScript : MonoBehaviour
 {
-    private bool hasStopped; 
+    public float areaTick = 0.024f; 
     public float stoppingPoint; //This is the point where the multiplier changes 
-    public float multiplier; 
-    public float test; 
     public float timer;
     public float metre; 
     public Image corruptionMetre;
     private bool hasBeenPressedOnce;
-    public TextMeshProUGUI healthText; 
+    public TextMeshProUGUI curseText;
+    private HealthScript healthScript; 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthScript = GetComponent<HealthScript>(); 
     }
 
     // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
-        corruptionMetre.fillAmount = timer * 0.1f;
-
+        metre = timer * areaTick;
+        corruptionMetre.fillAmount = timer * areaTick;
+        curseText.text = "Curse Points: " + metre.ToString(); 
 
 
 
@@ -39,20 +39,22 @@ public class CorruptionScript : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.P) && hasBeenPressedOnce == false)
         {
-            PowerUpOn(); 
+            PowerUpOn(0.003f); 
         }
-        if(Input.GetKeyDown(KeyCode.P))
-        {
 
-            stoppingPoint = metre;
-            metre = stoppingPoint; 
+        if(metre >= 1)
+        {
+            //decrease health here
+            
         }
+
     }
 
-    public void PowerUpOn()
+    public void PowerUpOn(float cursePoints)
     {
         hasBeenPressedOnce = true;
-        stoppingPoint = timer; 
+        timer += cursePoints; 
+        //stoppingPoint = timer; 
     }
     public void PowerUpOff()
     {
