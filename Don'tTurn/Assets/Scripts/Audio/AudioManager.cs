@@ -6,7 +6,7 @@ using System;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager AudioManagerInstance;
+    public static AudioManager AudioManagerInstance {get; private set;}
 
     [SerializeField] private AudioMixerGroup MainMixerGroup;
     [SerializeField] private AudioMixerGroup SFXMixerGroup;
@@ -16,7 +16,17 @@ public class AudioManager : MonoBehaviour
 
     private void Awake() 
     {
-        AudioManagerInstance = this;
+        DontDestroyOnLoad(this);
+
+        if (AudioManagerInstance != null && AudioManagerInstance != this)
+        {
+            Destroy(this.gameObject);
+        } 
+        else
+        {
+            AudioManagerInstance = this;
+        }
+        
 
         foreach (Sound s in sounds)
         {

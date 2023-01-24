@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8448941725971375446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8448941725971375444}
+  - component: {fileID: 8448941725971375443}
+  - component: {fileID: 8448941725971375442}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8448941725971375444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8448941725971375446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8448941725971375443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8448941725971375446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aea5b89132d6d4489b3100cd42839b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainMixerGroup: {fileID: 24300002, guid: e79ca88de357c0f47b8917e88aed4428, type: 2}
+  SFXMixerGroup: {fileID: -2284554292980791894, guid: e79ca88de357c0f47b8917e88aed4428, type: 2}
+  MusicMixerGroup: {fileID: 3146933662277546626, guid: e79ca88de357c0f47b8917e88aed4428, type: 2}
+  sounds:
+  - audiotype: 0
+    source: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: d5b7a8b041df8ef439451ad689ad3b47, type: 3}
+    clipName: SFX
+    volume: 0.524
+  - audiotype: 1
+    source: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 24ef7892f0ce6f14baec9d8a1bbcb287, type: 3}
+    clipName: Music
+    volume: 0.566
+--- !u!114 &8448941725971375442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8448941725971375446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9aad9db76072d04797a4b4f21d7e786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainSliderText: {fileID: 0}
+  musicSliderText: {fileID: 0}
+  soundEffectsSliderText: {fileID: 0}
