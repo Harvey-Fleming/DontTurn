@@ -28,23 +28,32 @@ public class PauseMenu : MonoBehaviour
         {
             if (isPaused)
             {
-                Time.timeScale = 1;
-                pMenu.SetActive(false);
-                isPaused = false;
+                resume();
             }
             else
             {
-                Time.timeScale = 0;
-                pMenu.SetActive(true);
-                isPaused = true;    
+                openPauseMenu();   
             }
         }
         
     }
 
+    public void resume()
+    {
+        Time.timeScale = 1;
+        pMenu.SetActive(false);
+        isPaused = false;
+    }
+
+    void openPauseMenu()
+    {
+        Time.timeScale = 0;
+        pMenu.SetActive(true);
+        isPaused = true;
+    }
+
     private void Update()
     {
         Pause();
-        Debug.Log(Time.timeScale);
     }
 }
