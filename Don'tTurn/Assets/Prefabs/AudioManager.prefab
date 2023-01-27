@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8448941725971375444}
   - component: {fileID: 8448941725971375443}
-  - component: {fileID: 8448941725971375442}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -59,18 +58,3 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 24ef7892f0ce6f14baec9d8a1bbcb287, type: 3}
     clipName: Music
     volume: 0.566
---- !u!114 &8448941725971375442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8448941725971375446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9aad9db76072d04797a4b4f21d7e786, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainSliderText: {fileID: 0}
-  musicSliderText: {fileID: 0}
-  soundEffectsSliderText: {fileID: 0}
