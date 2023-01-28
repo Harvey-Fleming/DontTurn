@@ -32,6 +32,7 @@ public class MainMenu : MonoBehaviour
     public void onLoadGameClicked()
     {
         DataPersistenceManager.instance.LoadGame();
+        SceneManager.LoadScene("Game");
     }
 
 }
