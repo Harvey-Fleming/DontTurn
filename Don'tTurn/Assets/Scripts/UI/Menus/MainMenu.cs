@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+
+    [SerializeField] private Button loadGameButton;
     // Start is called before the first frame update
     void Start()
     {
-        
+       if (!DataPersistenceManager.instance.HasGameData()) 
+       {
+            loadGameButton.interactable = false;
+       }
     }
 
     // Update is called once per frame
@@ -26,13 +32,13 @@ public class MainMenu : MonoBehaviour
     public void onNewGameClicked()
     {
         DataPersistenceManager.instance.NewGame();
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadSceneAsync("Game");
     }
 
     public void onLoadGameClicked()
     {
         DataPersistenceManager.instance.LoadGame();
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadSceneAsync("Game");
     }
 
 }
