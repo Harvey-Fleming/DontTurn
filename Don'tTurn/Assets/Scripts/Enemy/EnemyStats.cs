@@ -8,6 +8,8 @@ public class EnemyStats : MonoBehaviour, IDataPersistence
 
     [SerializeField] private bool isDead = false;
 
+    private int health = 20f;
+
     [ContextMenu("Generate Unique Guid for id")]
     private void GenerateGuid()
     {
