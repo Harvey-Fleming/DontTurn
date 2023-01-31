@@ -2892,9 +2892,9 @@ GameObject:
   - component: {fileID: 1776263212}
   - component: {fileID: 1776263211}
   - component: {fileID: 1776263210}
-  - component: {fileID: 1776263209}
   - component: {fileID: 1776263213}
   - component: {fileID: 1776263214}
+  - component: {fileID: 1776263215}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Player
@@ -2902,21 +2902,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1776263209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776263208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4646687a4bea444ab1616ed6ce4120f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  healthBar: {fileID: 1806014241}
-  healthText: {fileID: 339549922}
 --- !u!61 &1776263210
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3049,6 +3034,19 @@ MonoBehaviour:
   metre: 1000
   corruptionMetre: {fileID: 1604953027}
   curseText: {fileID: 1703789604}
+--- !u!114 &1776263215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776263208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f9f4b2def25b7547ad6ea9c967a5b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &1806014238
 GameObject:
   m_ObjectHideFlags: 0
