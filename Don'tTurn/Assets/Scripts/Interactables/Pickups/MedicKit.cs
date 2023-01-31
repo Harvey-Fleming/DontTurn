@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MedicKit : MonoBehaviour
 {
-    public bool isActive; 
+    public bool isActive;
+    public string type; 
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -26,8 +27,20 @@ public class MedicKit : MonoBehaviour
     {
         if(isActive && Input.GetKeyDown(KeyCode.E))
         {
-            //add health or minus curse 
-            Destroy(gameObject); 
+            switch (type)
+            {
+                case "Medic":
+                    Debug.Log("Took Med Kit!"); 
+                    //add health or minus curse 
+                    Destroy(gameObject);
+                    break;
+                case "Mushroom":
+                    Debug.Log("Took Mushroom!");
+                    Destroy(gameObject);
+                    break; 
+
+            }
+            
         }
     }
 }
