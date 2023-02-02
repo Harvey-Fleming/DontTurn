@@ -13,12 +13,12 @@ public class CorruptionScript : MonoBehaviour
     public Image corruptionMetre;
     private bool hasBeenPressedOnce;
     public TextMeshProUGUI curseText;
-    private HealthScript healthScript; 
+    private HealthBarScript healthScript; 
 
     // Start is called before the first frame update
     void Start()
     {
-        healthScript = GetComponent<HealthScript>(); 
+        healthScript = GetComponent<HealthBarScript>(); 
     }
 
     // Update is called once per frame
