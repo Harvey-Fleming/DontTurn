@@ -61,7 +61,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
     public void OnDeath()
     {
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
         isDead = true;
     }
 }
