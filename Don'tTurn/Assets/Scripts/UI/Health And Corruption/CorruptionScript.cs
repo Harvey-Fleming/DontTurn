@@ -29,10 +29,6 @@ public class CorruptionScript : MonoBehaviour
         corruptionMetre.fillAmount = timer * areaTick;
         curseText.text = "Curse Points: " + metre.ToString(); 
 
-
-
-
-
         if(Input.GetKeyDown(KeyCode.P) && hasBeenPressedOnce == true)
         {
             PowerUpOff(); 

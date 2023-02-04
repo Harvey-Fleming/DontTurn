@@ -55,8 +55,9 @@ public class AttackScript : MonoBehaviour
         {
             MeleeAttack();
             canAttack = false;
-            yield return new WaitForSeconds(attackCooldownTime * attackSpeedMultiplier);
+            yield return new WaitForSeconds(attackCooldownTime);
             canAttack = true;   
+            yield break;
         }
     
     }

@@ -6,9 +6,10 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 {
     [SerializeField] private string id;
 
-    [SerializeField] private bool isDead = false;
+    public bool isDead = false;
 
-    private int health = 20;
+    private int maxHealth = 20;
+    private int currentHealth = 20;
 
     [ContextMenu("Generate Unique Guid for id")]
     private void GenerateGuid()
@@ -19,16 +20,13 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     // Start is called before the first frame update
     void Start()
     {
-
+        Respawn();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(isDead)
-        {
-            gameObject.SetActive(false);
-        }   
+ 
     }
 
     public void SaveData(GameData data)
@@ -43,20 +41,17 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     public void LoadData(GameData data)
     {
         data.isEnemyDead.TryGetValue(id, out isDead);
-        if(isDead)
-        {
-            gameObject.SetActive(false);
-        }
+        Respawn();
     }
 
     public void OnHit(int damageTaken)
     {
-        health -= damageTaken;
-        if (health <= 0)
+        currentHealth = currentHealth - damageTaken;
+        if (currentHealth <= 0)
         {
             OnDeath();
         }
-        Debug.Log(health);
+        Debug.Log(currentHealth);
     }
 
     public void OnDeath()
@@ -64,4 +59,18 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         gameObject.SetActive(false);
         isDead = true;
     }
+
+    public void Respawn()
+    {
+        if(isDead)
+        {
+            gameObject.SetActive(false);
+        }  
+        else if (!isDead)
+        {
+            gameObject.SetActive(true);
+            currentHealth = maxHealth;
+        }
+    }
+
 }

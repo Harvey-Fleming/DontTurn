@@ -1992,6 +1992,7 @@ GameObject:
   - component: {fileID: 1291431050}
   - component: {fileID: 1291431052}
   - component: {fileID: 1291431053}
+  - component: {fileID: 1291431054}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -2106,6 +2107,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &1291431054
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291431049}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1324208795
 GameObject:
   m_ObjectHideFlags: 0
@@ -2414,7 +2436,6 @@ GameObject:
   - component: {fileID: 1845172527}
   - component: {fileID: 1845172526}
   - component: {fileID: 1845172529}
-  - component: {fileID: 1845172532}
   - component: {fileID: 1845172531}
   m_Layer: 0
   m_Name: Player
@@ -2607,22 +2628,6 @@ MonoBehaviour:
   metre: 0
   corruptionMetre: {fileID: 419992958300173334}
   curseText: {fileID: 419992958935356401}
---- !u!114 &1845172532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1845172521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4646687a4bea444ab1616ed6ce4120f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStats: {fileID: 1845172527}
-  health: 100
-  healthBar: {fileID: 419992959038619892}
-  healthText: {fileID: 419992957034236215}
 --- !u!1 &1875798014
 GameObject:
   m_ObjectHideFlags: 0
@@ -3360,8 +3365,10 @@ GameObject:
   - component: {fileID: 419992957288276073}
   - component: {fileID: 419992957288276078}
   - component: {fileID: 419992957288276079}
+  - component: {fileID: 419992957288276080}
+  - component: {fileID: 419992957288276081}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UICanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3407,6 +3414,40 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &419992957288276080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419992957288276077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4646687a4bea444ab1616ed6ce4120f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 1845172527}
+  health: 100
+  healthBar: {fileID: 419992959038619892}
+  healthText: {fileID: 419992957034236215}
+--- !u!114 &419992957288276081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419992957288276077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be951d0ae2583834b90f30b786dae911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaTick: 0.024
+  stoppingPoint: 0
+  timer: 0
+  metre: 0
+  corruptionMetre: {fileID: 419992958300173334}
+  curseText: {fileID: 419992958935356401}
 --- !u!224 &419992957575495938
 RectTransform:
   m_ObjectHideFlags: 0
