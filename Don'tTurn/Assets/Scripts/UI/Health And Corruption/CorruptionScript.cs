@@ -6,7 +6,8 @@ using TMPro;
 
 public class CorruptionScript : MonoBehaviour
 {
-    public float areaTick = 0.024f; 
+    [SerializeField] private PlayerStats playerStats;
+    public float areaTick = 0.0048f; 
     public float stoppingPoint; //This is the point where the multiplier changes 
     public float timer;
     public float metre; 
@@ -26,34 +27,24 @@ public class CorruptionScript : MonoBehaviour
     {
         timer += Time.deltaTime;
         metre = timer * areaTick;
-        corruptionMetre.fillAmount = timer * areaTick;
-        curseText.text = "Curse Points: " + metre.ToString(); 
-
-        if(Input.GetKeyDown(KeyCode.P) && hasBeenPressedOnce == true)
-        {
-            PowerUpOff(); 
-        }
-        else if (Input.GetKeyDown(KeyCode.P) && hasBeenPressedOnce == false)
-        {
-            PowerUpOn(0.003f); 
-        }
+        corruptionMetre.fillAmount = metre;
+        float numberText = metre * 100; 
+        curseText.text = "Curse Points: " + numberText.ToString(); 
 
         if(metre >= 1)
         {
             //decrease health here
+            playerStats.health -= areaTick * 4; 
             
+        }
+
+        if(Input.GetKeyDown(KeyCode.P) && metre < 1)
+        {
+            timer += 35; 
         }
 
     }
 
-    public void PowerUpOn(float cursePoints)
-    {
-        hasBeenPressedOnce = true;
-        timer += cursePoints; 
-        //stoppingPoint = timer; 
-    }
-    public void PowerUpOff()
-    {
-        hasBeenPressedOnce = false; 
-    }
+
+
 }

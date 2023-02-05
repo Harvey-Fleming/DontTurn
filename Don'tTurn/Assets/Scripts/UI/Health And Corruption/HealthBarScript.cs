@@ -10,6 +10,7 @@ public class HealthBarScript : MonoBehaviour
     [SerializeField] private float health = 0f; 
     public Image healthBar;
     public TextMeshProUGUI healthText;
+    public Transform checkpoint; 
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,12 @@ public class HealthBarScript : MonoBehaviour
         health = playerStats.health;
         healthBar.fillAmount = health / 100;
         healthText.text = health.ToString(); 
+
+        if(playerStats.health <= 0)
+        {
+            Debug.Log("You Died!");
+            transform.position = checkpoint.position; 
+        }
     }
 
 
