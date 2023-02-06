@@ -6,10 +6,9 @@ using TMPro;
 
 public class CorruptionScript : MonoBehaviour
 {
+    public float time = 0; 
     [SerializeField] private PlayerStats playerStats;
     public float areaTick = 0.0048f; 
-    public float stoppingPoint; //This is the point where the multiplier changes 
-    public float timer;
     public float metre; 
     public Image corruptionMetre;
     private bool hasBeenPressedOnce;
@@ -19,30 +18,46 @@ public class CorruptionScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthScript = GetComponent<HealthBarScript>(); 
+        healthScript = GetComponent<HealthBarScript>();
+        StartCoroutine(Timer(areaTick)); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        metre = timer * areaTick;
+        metre = time / 100;
         corruptionMetre.fillAmount = metre;
-        float numberText = metre * 100; 
-        curseText.text = "Curse Points: " + numberText.ToString(); 
+        curseText.text = "Curse Points: " + time.ToString(); 
 
-        if(metre >= 1)
+
+
+        if(Input.GetKeyDown(KeyCode.P))
         {
-            //decrease health here
-            playerStats.health -= areaTick * 4; 
-            
+            if(time > 35)
+            {
+                time -= 35;
+            }
+            else if (time < 50)
+            {
+                playerStats.health -= 35; 
+            }
+           
         }
 
-        if(Input.GetKeyDown(KeyCode.P) && metre < 1)
-        {
-            timer += 35; 
-        }
+    }
 
+    public IEnumerator Timer(float tick)
+    {
+        while(time<100)
+        {
+            time++;
+            yield return new WaitForSeconds(tick); 
+        }
+        while(time >= 100)
+        {
+            playerStats.health--;
+            yield return new WaitForSeconds(tick/4);
+        }
     }
 
 
