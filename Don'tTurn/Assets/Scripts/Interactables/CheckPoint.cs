@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckPoint : MonoBehaviour
+public class CheckPoint : MonoBehaviour, IDataPersistence
 {
-    GameObject player;
-    bool isTriggerOn = false; 
+    [SerializeField] private PlayerStats playerStatsScript;
+    private bool isTriggerOn = false; 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +18,9 @@ public class CheckPoint : MonoBehaviour
     {
         if (isTriggerOn == true)
         {
-            player.GetComponent<HealthBarScript>().checkpoint = gameObject.transform;
-            player.GetComponent<HealthBarScript>().checkpoint.position = gameObject.transform.position;
+            playerStatsScript.checkpointTransform = gameObject.transform;
+            playerStatsScript.checkpointTransform.position = gameObject.transform.position;
             
-
         }
     }
 
@@ -29,7 +29,6 @@ public class CheckPoint : MonoBehaviour
         if(collision.gameObject.CompareTag("Player") == true)
         {
             Debug.Log("Collision");
-            player = collision.gameObject;
             isTriggerOn = true;
         }
     
@@ -38,5 +37,15 @@ public class CheckPoint : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         isTriggerOn = false; 
+    }
+
+    public void SaveData(GameData gameData)
+    {
+
+    }
+
+    public void LoadData(GameData gameData)
+    {
+
     }
 }

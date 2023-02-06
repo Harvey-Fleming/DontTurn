@@ -6,6 +6,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
 {
     public float health = 100f;
     private Vector3 playerPosition;
+    [SerializeField] public Transform checkpointTransform; 
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,11 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
     // Update is called once per frame
     void Update()
     {
-        
+        if(health <= 0)
+        {
+            Debug.Log("You Died!");
+            transform.position = checkpointTransform.position; 
+        }    
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
