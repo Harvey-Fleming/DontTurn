@@ -17,7 +17,9 @@ public class CheckPoint : MonoBehaviour
     {
         if (isTriggerOn == true)
         {
-            player.GetComponent<HealthBarScript>().checkpoint.position = transform.position;
+            player.GetComponent<HealthBarScript>().checkpoint = gameObject.transform;
+            player.GetComponent<HealthBarScript>().checkpoint.position = gameObject.transform.position;
+            
 
         }
     }
