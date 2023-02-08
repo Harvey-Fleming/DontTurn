@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 1f;
     int aerialJumpCount;
     public int maxAerialJumpCount;
-    public LayerMask groundLayer;
 
     [Header("Player")]
     SpriteRenderer playerSprite;
@@ -33,8 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
         Jump();
 
-        FlipSprite();
-
         AerialJump();
     }
 
@@ -46,21 +43,11 @@ public class PlayerMovement : MonoBehaviour
     void GroundMovement()
     {
         rb.velocity = new Vector2(moveValue * (moveSpeed * moveMultiplier) * Time.deltaTime, rb.velocity.y);
+
+        FlipSprite();
     }
     void Jump()
     {
-        //raycast checks if player is on the ground
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, groundLayer);
-
-        if(hit.collider != null)
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
-        }
-
         if (isGrounded)
         {
             //Reset aerial jumps when on ground
@@ -69,10 +56,27 @@ public class PlayerMovement : MonoBehaviour
             //Basic Jump
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = false;
+        }
     }
 
     void FlipSprite()
@@ -82,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerSprite.flipX = true;
         }
-        else
+        if(moveValue > 0)
         {
             playerSprite.flipX = false;
         }
