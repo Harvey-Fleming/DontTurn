@@ -11,18 +11,13 @@ public class HealthBarScript : MonoBehaviour
     public Image healthBar;
     public TextMeshProUGUI healthText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
         health = playerStats.health;
         healthBar.fillAmount = health / 100;
         healthText.text = health.ToString(); 
+
     }
 
 

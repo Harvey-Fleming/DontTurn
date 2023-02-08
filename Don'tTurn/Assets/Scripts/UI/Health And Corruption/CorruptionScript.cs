@@ -6,9 +6,9 @@ using TMPro;
 
 public class CorruptionScript : MonoBehaviour
 {
-    public float areaTick = 0.024f; 
-    public float stoppingPoint; //This is the point where the multiplier changes 
-    public float timer;
+    public float time = 0; 
+    [SerializeField] private PlayerStats playerStats;
+    public float areaTick = 0.0048f; 
     public float metre; 
     public Image corruptionMetre;
     private bool hasBeenPressedOnce;
@@ -18,46 +18,48 @@ public class CorruptionScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthScript = GetComponent<HealthBarScript>(); 
+        healthScript = GetComponent<HealthBarScript>();
+        StartCoroutine(Timer(areaTick)); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        metre = timer * areaTick;
-        corruptionMetre.fillAmount = timer * areaTick;
-        curseText.text = "Curse Points: " + metre.ToString(); 
+        metre = time / 100;
+        corruptionMetre.fillAmount = metre;
+        curseText.text = "Curse Points: " + time.ToString(); 
 
 
 
-
-
-        if(Input.GetKeyDown(KeyCode.P) && hasBeenPressedOnce == true)
+        if(Input.GetKeyDown(KeyCode.P))
         {
-            PowerUpOff(); 
-        }
-        else if (Input.GetKeyDown(KeyCode.P) && hasBeenPressedOnce == false)
-        {
-            PowerUpOn(0.003f); 
-        }
-
-        if(metre >= 1)
-        {
-            //decrease health here
-            
+            if(time > 35)
+            {
+                time -= 35;
+            }
+            else if (time < 50)
+            {
+                playerStats.health -= 35; 
+            }
+           
         }
 
     }
 
-    public void PowerUpOn(float cursePoints)
+    public IEnumerator Timer(float tick)
     {
-        hasBeenPressedOnce = true;
-        timer += cursePoints; 
-        //stoppingPoint = timer; 
+        while(time<100)
+        {
+            time++;
+            yield return new WaitForSeconds(tick); 
+        }
+        while(time >= 100)
+        {
+            playerStats.health--;
+            yield return new WaitForSeconds(tick/4);
+        }
     }
-    public void PowerUpOff()
-    {
-        hasBeenPressedOnce = false; 
-    }
+
+
+
 }

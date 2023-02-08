@@ -10,23 +10,12 @@ public class AttackScript : MonoBehaviour
     [SerializeField] private Transform attackCirclePoint;
     [SerializeField] private float attackRadius;
     [SerializeField] private int attackDamage;
-    [SerializeField]private float attackCooldownTime = 1f;
-        
-    private bool isTimerDone = true;
-    private float timeToNextAttack;
+    [SerializeField] private float attackCooldownTime = 1.0f;
+    [SerializeField] private bool canAttack = true;
 
     [Header("Corruption Effect")]
     [SerializeField] private CorruptionScript corruptionScript;
-    private int attackSpeedMultiplier;
-
-
-
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        timeToNextAttack = attackCooldownTime;
-    }
+    private float attackSpeedMultiplier;
 
     // Update is called once per frame
     void Update()
@@ -36,38 +25,40 @@ public class AttackScript : MonoBehaviour
 
     private void MeleeAttackCooldown()
     {
-        if (isTimerDone)
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                MeleeAttack();
-                isTimerDone = false;
-            }
+            attackSpeedMultiplier = (corruptionScript.metre + 1);
+            StartCoroutine(AttackCooldown());
         }
-        else
-        {
-            timeToNextAttack -= 1 * Time.deltaTime;
-            if (timeToNextAttack <= 0)
-            {
-                isTimerDone = true;
-                timeToNextAttack = attackCooldownTime;
-                return;
-            }
-        }
+
     }
 
     void MeleeAttack()
     {
         Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackCirclePoint.position, attackRadius);
 
-        foreach (Collider2D Enemy in enemiesHit)
+        foreach(Collider2D Enemy in enemiesHit)
         {
-            Enemy.GetComponent<EnemyStats>().OnHit(attackDamage);
+            Enemy.GetComponent<EnemyStats>()?.OnHit(attackDamage);
         } 
+        Debug.Log("Attacked");
     }
 
     void OnDrawGizmosSelected() 
     {
         Gizmos.DrawWireSphere(attackCirclePoint.position, attackRadius);
+    }
+
+    IEnumerator AttackCooldown()
+    {
+        while (canAttack == true)
+        {
+            MeleeAttack();
+            canAttack = false;
+            yield return new WaitForSeconds(attackCooldownTime);
+            canAttack = true;   
+            yield break;
+        }
+    
     }
 }
