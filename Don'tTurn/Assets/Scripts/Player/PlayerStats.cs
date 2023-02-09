@@ -4,46 +4,42 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour, IDataPersistence
 {
+    private float maxHealth = 100f;
     public float health = 100f;
     private Vector3 playerPosition;
-    [SerializeField] public Transform checkpointTransform; 
+    public Vector2 lastcheckpointPosition; 
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start() 
     {
+        if (lastcheckpointPosition != null)
+        {
+            lastcheckpointPosition = this.transform.position;
+        }
         
     }
-
     // Update is called once per frame
     void Update()
     {
         if(health <= 0)
         {
             Debug.Log("You Died!");
-            transform.position = checkpointTransform.position; 
+            transform.position = lastcheckpointPosition; 
+            health = maxHealth;
         }    
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            health -= 0.5f;
-        }      
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-
-    }
 
     public void LoadData(GameData data)
     {
         this.transform.position = data.playerPosition;
+        this.health = data.playerHealth;
+        this.lastcheckpointPosition = data.lastcheckpointPosition;
     }
 
     public void SaveData(GameData data)
     {
         data.playerPosition = this.transform.position;
+        data.playerHealth = this.health;
+        data.lastcheckpointPosition = this.lastcheckpointPosition;
     }
 }

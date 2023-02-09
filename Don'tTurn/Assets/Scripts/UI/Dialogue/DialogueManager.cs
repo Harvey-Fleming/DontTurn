@@ -8,7 +8,7 @@ public class DialogueManager : MonoBehaviour
 {
     //this script manages 
     public Animator animator; 
-    public TextMeshProUGUI name;
+    public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText; 
 
     private Queue<string> sentences; 
@@ -32,7 +32,7 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("isOpen", true); 
         Debug.Log("Starting conversation with" + dialogue.name);
 
-        name.text = dialogue.name;
+        nameText.text = dialogue.name;
 
         sentences.Clear(); 
 

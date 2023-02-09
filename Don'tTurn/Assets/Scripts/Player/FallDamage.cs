@@ -5,13 +5,13 @@ using UnityEngine;
 public class FallDamage : MonoBehaviour
 {
     PlayerMovement PlayerMovement;
-    Rigidbody2D rigidbody2D;
+    Rigidbody2D rb2D;
     PlayerStats playerStats;
     public float maxYVel; 
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>(); 
+        rb2D = GetComponent<Rigidbody2D>(); 
         PlayerMovement = GetComponent<PlayerMovement>();
         playerStats = GetComponent<PlayerStats>(); 
     }
@@ -19,7 +19,7 @@ public class FallDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerMovement.isGrounded == true && rigidbody2D.velocity.y == 0)
+        if(PlayerMovement.isGrounded == true && rb2D.velocity.y == 0)
         {
             if(maxYVel <= -2)
             {
@@ -28,9 +28,9 @@ public class FallDamage : MonoBehaviour
         }
         else if(PlayerMovement.isGrounded == false)
         {
-            if(rigidbody2D.velocity.y < maxYVel)
+            if(rb2D.velocity.y < maxYVel)
             {
-                maxYVel = rigidbody2D.velocity.y; 
+                maxYVel = rb2D.velocity.y; 
             }
         }
 

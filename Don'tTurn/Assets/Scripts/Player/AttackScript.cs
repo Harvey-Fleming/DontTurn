@@ -14,7 +14,7 @@ public class AttackScript : MonoBehaviour
     [SerializeField] private bool canAttack = true;
 
     [Header("Corruption Effect")]
-    [SerializeField] private CorruptionScript corruptionScript;
+    //[SerializeField] private CorruptionScript corruptionScript;
     private float attackSpeedMultiplier;
 
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class AttackScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            attackSpeedMultiplier = (corruptionScript.metre + 1);
+            attackSpeedMultiplier = (1);
             StartCoroutine(AttackCooldown());
         }
 
@@ -55,7 +55,7 @@ public class AttackScript : MonoBehaviour
         {
             MeleeAttack();
             canAttack = false;
-            yield return new WaitForSeconds(attackCooldownTime);
+            yield return new WaitForSeconds(attackCooldownTime * attackSpeedMultiplier);
             canAttack = true;   
             yield break;
         }

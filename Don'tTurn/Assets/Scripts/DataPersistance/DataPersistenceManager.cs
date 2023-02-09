@@ -106,7 +106,7 @@ public class DataPersistenceManager : MonoBehaviour
         dataHandler.Save(gameData);
     }
 
-    private void OnApplicationQuit() 
+    public void OnCheckPointReached() 
     {
         SaveGame();
     }

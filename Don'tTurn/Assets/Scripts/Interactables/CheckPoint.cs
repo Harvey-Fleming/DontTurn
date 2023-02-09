@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckPoint : MonoBehaviour, IDataPersistence
+public class CheckPoint : MonoBehaviour
 {
     [SerializeField] private PlayerStats playerStatsScript;
     private bool isTriggerOn = false; 
@@ -18,8 +18,8 @@ public class CheckPoint : MonoBehaviour, IDataPersistence
     {
         if (isTriggerOn == true)
         {
-            playerStatsScript.checkpointTransform = gameObject.transform;
-            playerStatsScript.checkpointTransform.position = gameObject.transform.position;
+            playerStatsScript.lastcheckpointPosition = gameObject.transform.position;
+            DataPersistenceManager.instance.OnCheckPointReached();
             
         }
     }
@@ -39,13 +39,4 @@ public class CheckPoint : MonoBehaviour, IDataPersistence
         isTriggerOn = false; 
     }
 
-    public void SaveData(GameData gameData)
-    {
-
-    }
-
-    public void LoadData(GameData gameData)
-    {
-
-    }
 }
