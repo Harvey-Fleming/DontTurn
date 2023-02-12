@@ -1,9 +1,11 @@
+#if UNITY_EDTIOR
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(EnemyStats))]
+[RequireComponent(typeof(EnemyStats))]
 public class EnemyEditor : Editor
 {
     public override void OnInspectorGUI()
@@ -18,3 +20,4 @@ public class EnemyEditor : Editor
         }
     }
 }
+#endif

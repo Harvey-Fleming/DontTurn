@@ -7,6 +7,12 @@ public class CheckPoint : MonoBehaviour
     [SerializeField] private PlayerStats playerStatsScript;
     private bool isTriggerOn = false; 
     
+
+    private void Awake() 
+    {
+        playerStatsScript = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +24,7 @@ public class CheckPoint : MonoBehaviour
     {
         if (isTriggerOn == true)
         {
-            playerStatsScript.lastcheckpointPosition = gameObject.transform.position;
+            playerStatsScript.spawnPointTransform = this.gameObject.transform;
             DataPersistenceManager.instance.OnCheckPointReached();
             
         }

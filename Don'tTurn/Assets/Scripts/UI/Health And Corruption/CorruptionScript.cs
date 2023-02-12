@@ -15,6 +15,11 @@ public class CorruptionScript : MonoBehaviour
     public TextMeshProUGUI curseText;
     private HealthBarScript healthScript; 
 
+
+    private void Awake() 
+    {
+        playerStats = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
+    }
     // Start is called before the first frame update
     void Start()
     {

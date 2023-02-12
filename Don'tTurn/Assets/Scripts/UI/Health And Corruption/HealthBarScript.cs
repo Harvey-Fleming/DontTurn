@@ -11,6 +11,11 @@ public class HealthBarScript : MonoBehaviour
     public Image healthBar;
     public TextMeshProUGUI healthText;
 
+
+    private void Awake() 
+    {
+        playerStats = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
+    }
     // Update is called once per frame
     void Update()
     {
