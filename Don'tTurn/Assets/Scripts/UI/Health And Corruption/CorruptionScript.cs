@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro; 
 
 public class CorruptionScript : MonoBehaviour
@@ -64,6 +65,15 @@ public class CorruptionScript : MonoBehaviour
             yield return new WaitForSeconds(tick/4);
         }
     }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (playerStats == null)
+        {
+            playerStats = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
+        }
+    }
+
 
 
 

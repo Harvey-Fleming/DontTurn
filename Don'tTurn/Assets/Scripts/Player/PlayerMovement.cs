@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Player")]
     SpriteRenderer playerSprite;
+    bool facingright = true;
 
     void Start()
     {
@@ -44,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = new Vector2(moveValue * (moveSpeed * moveMultiplier) * Time.deltaTime, rb.velocity.y);
 
-        FlipSprite();
+        CheckFlip();
     }
     void Jump()
     {
@@ -79,17 +80,26 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void FlipSprite()
+    void CheckFlip()
     {
         //flips the sprite depending on their direction of movement
-        if(moveValue < 0)
+        if(moveValue < 0 && facingright)
         {
-            playerSprite.flipX = true;
+            Flip();
         }
-        if(moveValue > 0)
+        if(moveValue > 0 && !facingright)
         {
-            playerSprite.flipX = false;
-        }
+            Flip();
+        }  
+    }
+
+    private void Flip()
+    {
+        Vector2 currentScale = gameObject.transform.localScale;
+        currentScale.x *= -1;
+        gameObject.transform.localScale = currentScale;
+
+        facingright = !facingright;
     }
 
     void AerialJump()

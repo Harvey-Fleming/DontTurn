@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheckPoint : MonoBehaviour
 {
@@ -43,6 +44,19 @@ public class CheckPoint : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         isTriggerOn = false; 
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (playerStatsScript == null)
+        {
+            playerStatsScript = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
+        }
+    }
+
+    public void OnSceneUnloaded(Scene scene)
+    {
+        playerStatsScript = null;
     }
 
 }
