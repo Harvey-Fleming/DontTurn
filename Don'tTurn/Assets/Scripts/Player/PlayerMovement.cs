@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Player")]
     SpriteRenderer playerSprite;
-    bool facingright = true;
+    public bool facingright = true;
 
     void Start()
     {
