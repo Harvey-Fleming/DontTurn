@@ -140,15 +140,15 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 4
+  m_Material: {fileID: 6200000, guid: 3be9318967f8dd44db1ee23dc6e02a4a, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &6406451567839429295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,9 +165,16 @@ MonoBehaviour:
   moveSpeed: 2
   damageRange: 1.5
   maxRange: 10
+  wanderDistance: 25
+  jumpForce: 1200
+  jumpCooldown: 0.5
   layerMask:
     serializedVersion: 2
     m_Bits: 64
+  jumpMask:
+    serializedVersion: 2
+    m_Bits: 1
   isWandering: 0
   isAggro: 0
   isDamaging: 0
+  canJump: 0
