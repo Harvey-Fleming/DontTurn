@@ -7,7 +7,6 @@ public class BulletScript : MonoBehaviour
 {
     private Rigidbody2D rb2D;
 
-
     [SerializeField] private int bulletDamage;
     
     // Start is called before the first frame update
@@ -18,7 +17,7 @@ public class BulletScript : MonoBehaviour
 
     private void CalculateBulletDamage()
     {
-        bulletDamage = 2 * Mathf.RoundToInt(rb2D.velocity.y);
+        bulletDamage = 2 * Mathf.RoundToInt(rb2D.velocity.x);
         Debug.Log(rb2D.velocity.x);
     }
 

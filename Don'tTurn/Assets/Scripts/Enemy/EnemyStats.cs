@@ -8,8 +8,8 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
     public bool isDead = false;
 
-    private int maxHealth = 20;
-    private int currentHealth = 20;
+    private int maxHealth = 15;
+    private int currentHealth = 15;
 
     [ContextMenu("Generate Unique Guid for id")]
     private void GenerateGuid()

@@ -25,7 +25,7 @@ public class AttackScript : MonoBehaviour
 
     private void MeleeAttackCooldown()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             attackSpeedMultiplier = (1);
             StartCoroutine(AttackCooldown());

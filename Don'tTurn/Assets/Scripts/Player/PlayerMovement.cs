@@ -61,7 +61,6 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

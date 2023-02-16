@@ -3080,53 +3080,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1766014749
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1766014751}
-  - component: {fileID: 1766014750}
-  m_Layer: 0
-  m_Name: DialogueManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1766014750
+--- !u!114 &1766014750 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1463181968963903848, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+  m_PrefabInstance: {fileID: 1463181970419392118}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766014749}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 779530482d7f41f4b87d3580d7c54093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1702896257}
-  nameText: {fileID: 0}
-  dialogueText: {fileID: 880285400}
---- !u!4 &1766014751
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766014749}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1210.1868, y: 747.17523, z: -7.545972}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1776263208
 GameObject:
   m_ObjectHideFlags: 0
@@ -3647,3 +3611,68 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1463181970419392118
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1463181968963903848, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1702896257}
+    - target: {fileID: 1463181968963903848, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+      propertyPath: dialogueText
+      value: 
+      objectReference: {fileID: 880285400}
+    - target: {fileID: 1463181968963903849, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463181968963903849, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1210.1868
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463181968963903849, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 747.17523
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463181968963903849, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.545972
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463181968963903849, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463181968963903849, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463181968963903849, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463181968963903849, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463181968963903849, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463181968963903849, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463181968963903849, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463181968963903851, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}
+      propertyPath: m_Name
+      value: DialogueManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 926ba1a5c5d8c3f478bd4f04b8ce9769, type: 3}

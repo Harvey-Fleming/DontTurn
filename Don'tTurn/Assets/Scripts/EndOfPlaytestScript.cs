@@ -10,7 +10,11 @@ public class EndOfPlaytestScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        Instantiate(EndScreenCanvas);
+        if (other.gameObject.tag == "Player")
+        {
+            Instantiate(EndScreenCanvas);
+        }
+        
     }
 
     public void ExitToMenu()

@@ -11,19 +11,22 @@ public class PrototypeDash : MonoBehaviour
     Rigidbody2D rb;
 
     //Dash Variables
-    public float dashSpeed;
+    [Header("Dash Variables")]
+    public bool isUnlocked  = false;
+    [SerializeField] private float dashSpeed;
     bool isDashing;
     bool canDash = true;
-    public float dashTime;
+    [SerializeField] private float dashTime;
     float dashDirection;
     int dashCount = 0;
+    [SerializeField] private int dashCooldown = 2;
 
     //Bullet Variables
+    [Header("Bullet Variables")]
     [SerializeField] GameObject BulletObj;
     [SerializeField] private GameObject bulletSpawnObj;
-    GameObject currentBulletObj;
-    private float bulletSpeed = 25f;
     [SerializeField] private float autoBulletDestroyTime = 0.25f;
+    private float bulletSpeed = 25f;
     private bool canShoot = true;
 
     private void Start()
@@ -34,7 +37,11 @@ public class PrototypeDash : MonoBehaviour
 
     void Update()
     {
-        CheckDash();
+        //Only allows Dash to be performed if it has been picked up from NPC
+        if (isUnlocked)
+        {
+            CheckDash();
+        }
     }
 
     private void CheckDash()
@@ -51,19 +58,20 @@ public class PrototypeDash : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.X))
             {
-                isDashing = true;
                 dashCount--;
+                isDashing = true; 
             }
         }
 
         if (movement.isGrounded && canDash)
         {
-            dashCount = 1;
+            dashCount = 1;          
         }
 
         if (isDashing)
         {
-            StartCoroutine(DashAbility());
+            canDash = false;
+            StartCoroutine(DashAbility());        
         }
     }
 
@@ -73,9 +81,13 @@ public class PrototypeDash : MonoBehaviour
         SpawnBullet();
         rb.velocity = new Vector2(dashDirection * dashSpeed, 0f);  
         yield return new WaitForSeconds(dashTime);
-        movement.enabled = true;
+        rb.velocity = new Vector2(0, 0);
+        movement.enabled = true; 
         isDashing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
         canShoot = true;
+        yield break;
     }
 
     private void SpawnBullet()
@@ -83,7 +95,7 @@ public class PrototypeDash : MonoBehaviour
         if (canShoot == true)
         {
             canShoot = false;
-            currentBulletObj = Instantiate(BulletObj, bulletSpawnObj.transform.position, transform.rotation);
+            GameObject  currentBulletObj = Instantiate(BulletObj, bulletSpawnObj.transform.position, transform.rotation);
             currentBulletObj.GetComponent<Rigidbody2D>().AddRelativeForce((transform.right * -dashDirection) * bulletSpeed, ForceMode2D.Impulse);
             Destroy(currentBulletObj, autoBulletDestroyTime);
         }
