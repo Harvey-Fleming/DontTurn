@@ -5,26 +5,24 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Ground Movement")]
-    private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private BoxCollider2D boxCollider2D;
     float moveValue = 0;
     public float moveSpeed = 3f;
     float moveMultiplier = 100f;
 
     [Header("Jump Movement")]
-    public bool isGrounded;
+    [SerializeField] private LayerMask GroundLayerMask;
     public float jumpForce = 1f;
     int aerialJumpCount;
     public int maxAerialJumpCount;
 
     [Header("Player")]
+    [SerializeField] Animator animator;
     SpriteRenderer playerSprite;
     public bool facingright = true;
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        playerSprite = GetComponentInChildren<SpriteRenderer>();
-    }
+
 
     void Update()
     {
@@ -38,45 +36,56 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         GroundMovement();
     }
 
     void GroundMovement()
     {
         rb.velocity = new Vector2(moveValue * (moveSpeed * moveMultiplier) * Time.deltaTime, rb.velocity.y);
-
+        animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
         CheckFlip();
     }
+
     void Jump()
     {
-        if (isGrounded)
-        {
-            //Reset aerial jumps when on ground
-            aerialJumpCount = maxAerialJumpCount;
-
             //Basic Jump
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
             {
+                
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                
             }
-        }
+
+            if(IsGrounded())
+            {
+                //Reset aerial jumps when on ground
+                aerialJumpCount = maxAerialJumpCount;
+                animator.SetBool("IsJumping", false);
+            }
+            else if (!IsGrounded())
+            {
+                animator.SetBool("IsJumping", true);
+            }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public bool IsGrounded()
     {
-        if (collision.gameObject.tag == "Ground")
+        float extraHeightTest = 0.1f;
+        RaycastHit2D raycastHit = Physics2D.Raycast(boxCollider2D.bounds.center, Vector2.down, boxCollider2D.bounds.extents.y + extraHeightTest, GroundLayerMask);
+        Color rayColor;
+        Debug.Log(raycastHit.collider);
+        if (raycastHit.collider != null)
         {
-            isGrounded = true;
+            rayColor = Color.green;
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
+        else
         {
-            isGrounded = false;
+            rayColor = Color.red;
         }
+        Debug.DrawRay(boxCollider2D.bounds.center, Vector2.down * (boxCollider2D.bounds.extents.y + extraHeightTest), rayColor);
+        return raycastHit.collider != null;
     }
 
     void CheckFlip()
@@ -104,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
     void AerialJump()
     {
         //Can perform as many aerial jumps as there are max aerial jumps
-        if (aerialJumpCount > 0 && !isGrounded)
+        if (aerialJumpCount > 0 && !IsGrounded())
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
