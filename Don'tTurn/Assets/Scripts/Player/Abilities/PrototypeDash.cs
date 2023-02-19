@@ -79,6 +79,8 @@ public class PrototypeDash : MonoBehaviour
 
     IEnumerator DashAbility()
     {
+        while (canDash == false && canShoot == true)
+        {
         animator.SetBool("IsDashing", true);
         movement.enabled = false;
         SpawnBullet();
@@ -92,6 +94,7 @@ public class PrototypeDash : MonoBehaviour
         canDash = true;
         canShoot = true;
         yield break;
+        }
     }
 
     private void SpawnBullet()
