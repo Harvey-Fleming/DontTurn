@@ -9,6 +9,7 @@ public class PrototypeDash : MonoBehaviour
     //Component References
     PlayerMovement movement;
     Rigidbody2D rb;
+    Animator animator;
 
     //Dash Variables
     [Header("Dash Variables")]
@@ -33,6 +34,7 @@ public class PrototypeDash : MonoBehaviour
     {
         movement = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -77,6 +79,7 @@ public class PrototypeDash : MonoBehaviour
 
     IEnumerator DashAbility()
     {
+        animator.SetBool("IsDashing", true);
         movement.enabled = false;
         SpawnBullet();
         rb.velocity = new Vector2(dashDirection * dashSpeed, 0f);  
@@ -84,6 +87,7 @@ public class PrototypeDash : MonoBehaviour
         rb.velocity = new Vector2(0, 0);
         movement.enabled = true; 
         isDashing = false;
+        animator.SetBool("IsDashing", false);
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
         canShoot = true;
