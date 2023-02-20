@@ -1771,6 +1771,7 @@ MonoBehaviour:
     - Good for you
     name: Joe Mama
   buttonToPress: {fileID: 0}
+  currentDialogueNPC: {fileID: 0}
 --- !u!114 &956379273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1865,6 +1866,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 956379270}
   m_CullTransparentMesh: 1
+--- !u!1 &993715197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 993715198}
+  - component: {fileID: 993715200}
+  - component: {fileID: 993715199}
+  m_Layer: 0
+  m_Name: 'Punch Hitbox '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &993715198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993715197}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.98, y: 0.01999998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1776263212}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &993715199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993715197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b1817ed9160834ab4ba80f07499b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackType: Punch
+  enemy: {fileID: 0}
+  player: {fileID: 1776263208}
+--- !u!61 &993715200
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993715197}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.5812048, y: -0.021263719}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.1198816, y: 1.0000002}
+  m_EdgeRadius: 0
 --- !u!1 &1039445732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2487,6 +2562,7 @@ MonoBehaviour:
     - 'I love you '
     name: 'Jeremy '
   buttonToPress: {fileID: 24306483}
+  currentDialogueNPC: {fileID: 0}
 --- !u!1 &1604953025
 GameObject:
   m_ObjectHideFlags: 0
@@ -3082,7 +3158,7 @@ GameObject:
   - component: {fileID: 1763088535}
   - component: {fileID: 1763088537}
   - component: {fileID: 1763088536}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -3310,6 +3386,7 @@ Transform:
   m_Children:
   - {fileID: 730702759}
   - {fileID: 1101434150}
+  - {fileID: 993715198}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3394,10 +3471,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3573ee7de46fee849954923c52a3d318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 1776263213}
+  boxCollider2D: {fileID: 1776263210}
   moveSpeed: 3
-  isGrounded: 0
+  GroundLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   jumpForce: 1
   maxAerialJumpCount: 0
+  animator: {fileID: 0}
   facingright: 1
 --- !u!114 &1776263218
 MonoBehaviour:
@@ -3427,6 +3509,7 @@ MonoBehaviour:
   bomb: {fileID: 5308605656713169980, guid: 6fe276ab925621f418bb235006036b25, type: 3}
   firePoint: {fileID: 730702759}
   eatTrigger: {fileID: 1101434148}
+  PunchHitbox: {fileID: 993715197}
 --- !u!1 &1806014238
 GameObject:
   m_ObjectHideFlags: 0

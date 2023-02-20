@@ -6,7 +6,8 @@ public class CurseAttacks : MonoBehaviour
 {
     public GameObject bomb;
     public Transform firePoint;
-    public GameObject eatTrigger; 
+    public GameObject eatTrigger;
+    public GameObject PunchHitbox; 
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,11 @@ public class CurseAttacks : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Mouse1))
         {
-            StartCoroutine(EatEnemy()); 
+            EatEnemyFunction(); 
+        }
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            PunchEnemy(); 
         }
     }
 
@@ -38,5 +43,15 @@ public class CurseAttacks : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         eatTrigger.SetActive(false); 
+    }
+
+    public void EatEnemyFunction()
+    {
+        eatTrigger.SetActive(true); 
+    }
+
+    public void PunchEnemy()
+    {
+        PunchHitbox.SetActive(true); 
     }
 }
