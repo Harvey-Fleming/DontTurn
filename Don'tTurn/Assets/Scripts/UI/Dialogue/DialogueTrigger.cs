@@ -7,7 +7,7 @@ public class DialogueTrigger : MonoBehaviour
     public Dialogue dialogue;
     public GameObject buttonToPress;
     public GameObject currentDialogueNPC;
-    private bool isActive;
+    [SerializeField] private bool isActive;
 
     public delegate void DialogueEndAction();
     public static event DialogueEndAction OnDialogueEnd; 
@@ -33,8 +33,8 @@ public class DialogueTrigger : MonoBehaviour
     {
         if(isActive == true && Input.GetKeyDown(KeyCode.E))
         {
-            TriggerDialogue(); 
             currentDialogueNPC = this.gameObject;
+            TriggerDialogue(); 
         }
     }
 
@@ -42,6 +42,8 @@ public class DialogueTrigger : MonoBehaviour
     public void TriggerDialogue()
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        currentDialogueNPC.GetComponent<UnlockAbility>()?.OnAbilityUnlock();
+
         if (OnDialogueEnd != null)
         {
             OnDialogueEnd();
