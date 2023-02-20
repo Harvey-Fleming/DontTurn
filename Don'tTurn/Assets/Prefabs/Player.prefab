@@ -228,7 +228,7 @@ MonoBehaviour:
   attackCirclePoint: {fileID: 6541144399207451490}
   attackRadius: 1.75
   attackDamage: 5
-  attackCooldownTime: 1
+  attackCooldownTime: 0.5
   canAttack: 1
 --- !u!114 &6541144399509697046
 MonoBehaviour:
@@ -284,8 +284,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db2c98ead217d594bbf1d2533c60a083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlocked: 0
   dashSpeed: 30
   dashTime: 0.15
+  dashCooldown: 2
   BulletObj: {fileID: 8039790173044934362, guid: c3f3a976f4cb61e42a64acbb3be2f806, type: 3}
   bulletSpawnObj: {fileID: 9184892614237827191}
   autoBulletDestroyTime: 0.25
