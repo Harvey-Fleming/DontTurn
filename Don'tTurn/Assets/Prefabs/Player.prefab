@@ -223,7 +223,7 @@ MonoBehaviour:
   attackCirclePoint: {fileID: 6541144399207451490}
   attackRadius: 1.75
   attackDamage: 5
-  attackCooldownTime: 1
+  attackCooldownTime: 0.5
   canAttack: 1
 --- !u!114 &6541144399509697046
 MonoBehaviour:

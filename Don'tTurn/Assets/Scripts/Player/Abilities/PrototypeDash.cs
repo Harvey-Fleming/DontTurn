@@ -20,7 +20,7 @@ public class PrototypeDash : MonoBehaviour
     [SerializeField] private float dashTime;
     float dashDirection;
     int dashCount = 0;
-    [SerializeField] private int dashCooldown = 2;
+    [SerializeField] private float dashCooldown = 2;
 
     //Bullet Variables
     [Header("Bullet Variables")]
@@ -58,7 +58,7 @@ public class PrototypeDash : MonoBehaviour
 
         if (!isDashing && dashCount > 0)
         {
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 dashCount--;
                 isDashing = true; 
@@ -106,6 +106,5 @@ public class PrototypeDash : MonoBehaviour
             currentBulletObj.GetComponent<Rigidbody2D>().AddRelativeForce((transform.right * -dashDirection) * bulletSpeed, ForceMode2D.Impulse);
             Destroy(currentBulletObj, autoBulletDestroyTime);
         }
-
     }
 }
