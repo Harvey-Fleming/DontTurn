@@ -19,14 +19,14 @@ public class FallDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerMovement.IsGrounded() == true && rb2D.velocity.y == 0)
+        if(PlayerMovement.isGrounded == true && rb2D.velocity.y == 0)
         {
             if(maxYVel <= -15)
             {
                 TakeFallDamage(); 
             }
         }
-        else if(PlayerMovement.IsGrounded() == false)
+        else if(PlayerMovement.isGrounded == false)
         {
             if(rb2D.velocity.y < maxYVel)
             {
@@ -34,7 +34,7 @@ public class FallDamage : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Space) && PlayerMovement.IsGrounded() == true)
+        if(Input.GetKeyDown(KeyCode.Space) && PlayerMovement.isGrounded == true)
         {
             maxYVel = 0; 
         }

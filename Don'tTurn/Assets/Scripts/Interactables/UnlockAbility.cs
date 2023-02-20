@@ -1,62 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class UnlockAbility : MonoBehaviour
 {
     [SerializeField] private string NPCAbility;
-    [SerializeField] private GameObject playerObj;
 
-    private void Awake() 
+    private void OnTriggerEnter2D(Collider2D other) 
     {
-        playerObj = GameObject.FindWithTag("Player");
-    }
-
-    private void OnAbilityUnlock() 
-    {
-        if (playerObj != null)
+        if (other.gameObject.tag == "Player")
         {
             switch(NPCAbility)
             {
                 case("Dash"):
-                playerObj.GetComponent<PrototypeDash>().isUnlocked = true;
+                other.gameObject.GetComponent<PrototypeDash>().isUnlocked = true;
                 break;
                 case("Double Jump"):
-                playerObj.GetComponent<PlayerMovement>().maxAerialJumpCount = 1;
-                break;
-                case("GrappleHook"):
-                playerObj.GetComponent<GrappleAbility>().isUnlocked = true;
-                break;
-                default:
+                other.gameObject.GetComponent<PlayerMovement>().maxAerialJumpCount = 1;
                 break;
             }
         }
         
     }
-
-    private void OnEnable() 
-    {
-        DialogueTrigger.OnDialogueEnd += OnAbilityUnlock;
-    }
-
-    private void OnDisable() 
-    {
-        DialogueTrigger.OnDialogueEnd -= OnAbilityUnlock;
-    }
-
-    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (playerObj == null)
-        {
-            playerObj = GameObject.FindWithTag("Player");
-        }
-    }
-
-    public void OnSceneUnloaded(Scene scene)
-    {
-        playerObj = null;
-    }
-
 }
 

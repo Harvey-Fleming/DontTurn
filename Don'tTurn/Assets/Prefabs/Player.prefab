@@ -44,14 +44,12 @@ GameObject:
   - component: {fileID: 6541144399509697047}
   - component: {fileID: 6541144399509697045}
   - component: {fileID: 6541144399509697042}
-  - component: {fileID: 5236031296000980964}
   - component: {fileID: 6541144399509697032}
   - component: {fileID: 6541144399509697033}
   - component: {fileID: 6541144399509697046}
   - component: {fileID: 6541144399509697044}
   - component: {fileID: 6541144399509697043}
   - component: {fileID: 1169889154146458830}
-  - component: {fileID: 1288422871}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -117,7 +115,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a199f747dcdf9a94990fcff69adddac8, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -141,18 +139,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0000019073486, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 1}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5122032, y: 1}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &6541144399509697045
 Rigidbody2D:
@@ -188,39 +186,19 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0064640045, y: -0.45289508}
+  m_Offset: {x: -0.009799957, y: -0.45289508}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 1}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.43003464, y: 0.09864372}
+  m_Size: {x: 0.867012, y: 0.09864372}
   m_EdgeRadius: 0
---- !u!95 &5236031296000980964
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6541144399509697038}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &6541144399509697032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +245,7 @@ MonoBehaviour:
   moveSpeed: 4.5
   isGrounded: 0
   jumpForce: 13.5
-  maxAerialJumpCount: 0
+  maxAerialJumpCount: 1
 --- !u!114 &6541144399509697044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,26 +284,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db2c98ead217d594bbf1d2533c60a083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlocked: 0
   dashSpeed: 30
   dashTime: 0.15
-  dashCooldown: 2
   BulletObj: {fileID: 8039790173044934362, guid: c3f3a976f4cb61e42a64acbb3be2f806, type: 3}
   bulletSpawnObj: {fileID: 9184892614237827191}
   autoBulletDestroyTime: 0.25
---- !u!114 &1288422871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6541144399509697038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05ec75809ab84fc45865863d35c5285d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isUnlocked: 0
 --- !u!1 &9184892614237827191
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +313,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9184892614237827191}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.584, y: 0, z: 0}
+  m_LocalPosition: {x: 0.77, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
