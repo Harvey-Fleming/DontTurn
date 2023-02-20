@@ -10,8 +10,15 @@ public class DialogueManager : MonoBehaviour
     public Animator animator; 
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText; 
+    [SerializeField] private GameObject textboxObj;
 
     private Queue<string> sentences; 
+
+    private void Awake() 
+    {
+        textboxObj.SetActive(true);
+    }
+    
     // Start is called before the first frame update
     void Start()
     {

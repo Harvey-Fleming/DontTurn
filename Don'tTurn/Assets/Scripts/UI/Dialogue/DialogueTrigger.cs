@@ -6,7 +6,12 @@ public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
     public GameObject buttonToPress;
-    private bool isActive; 
+    public GameObject currentDialogueNPC;
+    private bool isActive;
+
+    public delegate void DialogueEndAction();
+    public static event DialogueEndAction OnDialogueEnd; 
+
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -29,6 +34,7 @@ public class DialogueTrigger : MonoBehaviour
         if(isActive == true && Input.GetKeyDown(KeyCode.E))
         {
             TriggerDialogue(); 
+            currentDialogueNPC = this.gameObject;
         }
     }
 
@@ -36,6 +42,10 @@ public class DialogueTrigger : MonoBehaviour
     public void TriggerDialogue()
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        if (OnDialogueEnd != null)
+        {
+            OnDialogueEnd();
+        }
     }    
 
 }
