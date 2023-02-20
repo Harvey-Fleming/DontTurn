@@ -5,7 +5,8 @@ using UnityEngine;
 public class CurseAttacks : MonoBehaviour
 {
     public GameObject bomb;
-    public Transform firePoint; 
+    public Transform firePoint;
+    public GameObject eatTrigger; 
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +20,23 @@ public class CurseAttacks : MonoBehaviour
         {
             Shoot(); 
         }
+        if(Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            StartCoroutine(EatEnemy()); 
+        }
     }
 
     public void Shoot()
     {
         Instantiate(bomb, firePoint.position, firePoint.rotation); 
+    }
+
+    public IEnumerator EatEnemy()
+    {
+        eatTrigger.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        eatTrigger.SetActive(false); 
     }
 }
