@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
     public static PlayerStats instance {get; private set;}
     private float maxHealth = 100f;
     public float health = 100f;
+    [SerializeField] private CorruptionScript corruptionScript;
     private Vector3 playerPosition;
     public Transform spawnPointTransform; 
 
@@ -48,6 +49,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
             Debug.Log("You Died!");
             transform.position = spawnPointTransform.position; 
             health = maxHealth;
+            corruptionScript.time = 0f;
         }    
     }
 
