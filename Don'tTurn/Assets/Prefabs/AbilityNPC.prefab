@@ -212,9 +212,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     sentences:
-    - Take this with you! It should help you across this gap.
+    - Take this with you! It should help you across this gap. Press Z to use Sawed-Off
+      Shotgun.
     name: Jeremy
   buttonToPress: {fileID: 268567485066246355}
+  currentDialogueNPC: {fileID: 0}
 --- !u!114 &6234985225192785774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,3 +230,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NPCAbility: Dash
+  playerObj: {fileID: 0}

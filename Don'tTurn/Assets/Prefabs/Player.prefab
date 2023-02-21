@@ -244,7 +244,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   jumpForce: 13.5
-  maxAerialJumpCount: 1
+  maxAerialJumpCount: 0
   animator: {fileID: 5236031296000980964}
   facingright: 1
 --- !u!114 &6541144399509697044
