@@ -167,7 +167,7 @@ public class EnemyMovement : MonoBehaviour
 
         rb.velocity = new Vector2(moveDirection * moveSpeed, rb.velocity.y);
 
-        moveSpeed = 4f;
+        moveSpeed = 3.5f;
     }
 
     IEnumerator Damage()

@@ -10,8 +10,12 @@ public class DialogueTrigger : MonoBehaviour
     private bool isActive;
 
     public delegate void DialogueEndAction();
-    public static event DialogueEndAction OnDialogueEnd; 
+    public static event DialogueEndAction OnDialogueEnd;
 
+    private void Start()
+    {
+        currentDialogueNPC = this.gameObject;
+    }
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -33,8 +37,8 @@ public class DialogueTrigger : MonoBehaviour
     {
         if(isActive == true && Input.GetKeyDown(KeyCode.E))
         {
-            TriggerDialogue(); 
-            currentDialogueNPC = this.gameObject;
+            TriggerDialogue();
+            //currentDialogueNPC = this.gameObject;
         }
     }
 
