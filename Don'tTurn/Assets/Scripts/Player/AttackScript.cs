@@ -4,59 +4,56 @@ using UnityEngine;
 
 public class AttackScript : MonoBehaviour
 {
+    [Header("Component References")]
+    [SerializeField] private CorruptionScript corruptionScript;
+    [SerializeField] private Animator animator;
 
     [Header("Melee Attack Stats")]
 
-    [SerializeField] private Transform attackCirclePoint;
+    [SerializeField] private Transform attackPointTrans;
     [SerializeField] private float attackRadius;
     [SerializeField] private int attackDamage;
-    [SerializeField] private float attackCooldownTime = 1.0f;
+    [SerializeField] private float attackCooldownTime = 2.0f;
     [SerializeField] private bool canAttack = true;
 
     [Header("Corruption Effect")]
-    //[SerializeField] private CorruptionScript corruptionScript;
     private float attackSpeedMultiplier;
 
     // Update is called once per frame
     void Update()
     {
-        MeleeAttackCooldown();
-    }
-
-    private void MeleeAttackCooldown()
-    {
-        if (Input.GetKeyDown(KeyCode.X))
         if (Input.GetKeyDown(KeyCode.X))
         {
-            attackSpeedMultiplier = (1);
+            attackSpeedMultiplier = (1 + (corruptionScript.time / 100));
             StartCoroutine(AttackCooldown());
         }
-
     }
 
     void MeleeAttack()
     {
-        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackCirclePoint.position, attackRadius);
+        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackPointTrans.position, attackRadius);
 
         foreach(Collider2D Enemy in enemiesHit)
         {
             Enemy.GetComponent<EnemyStats>()?.OnHit(attackDamage);
         } 
-        Debug.Log("Attacked");
     }
 
     void OnDrawGizmosSelected() 
     {
-        Gizmos.DrawWireSphere(attackCirclePoint.position, attackRadius);
+        Gizmos.DrawWireSphere(attackPointTrans.position, attackRadius);
     }
 
     IEnumerator AttackCooldown()
     {
         while (canAttack == true)
         {
+            
             MeleeAttack();
+            animator.SetBool("IsAttacking", true);
             canAttack = false;
-            yield return new WaitForSeconds(attackCooldownTime * attackSpeedMultiplier);
+            yield return new WaitForSeconds(attackCooldownTime / attackSpeedMultiplier);
+            animator.SetBool("IsAttacking", false);
             canAttack = true;   
             yield break;
         }
