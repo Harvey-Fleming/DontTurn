@@ -13,7 +13,7 @@ public class UnlockAbility : MonoBehaviour
         playerObj = GameObject.FindWithTag("Player");
     }
 
-    private void OnAbilityUnlock() 
+    public void OnAbilityUnlock() 
     {
         if (playerObj != null)
         {
@@ -33,16 +33,6 @@ public class UnlockAbility : MonoBehaviour
             }
         }
         
-    }
-
-    private void OnEnable() 
-    {
-        DialogueTrigger.OnDialogueEnd += OnAbilityUnlock;
-    }
-
-    private void OnDisable() 
-    {
-        DialogueTrigger.OnDialogueEnd -= OnAbilityUnlock;
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
