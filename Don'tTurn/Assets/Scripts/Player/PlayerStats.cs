@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerStats : MonoBehaviour, IDataPersistence
+public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
 {
+    //Component References
     public static PlayerStats instance {get; private set;}
-    private float maxHealth = 100f;
-    public float health = 100f;
     [SerializeField] private CorruptionScript corruptionScript;
+
+    //Stats
+    public float maxHealth = 100f;
+    [Range(0, 100)] public float health = 100f;
+    private float cursePoints;
+    
     private Vector3 playerPosition;
     public Transform spawnPointTransform; 
-
-
 
     private void Awake() 
     {
@@ -27,7 +30,6 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
         {
             instance = this;
         }
-
     }
 
     private void Start() 
@@ -41,31 +43,25 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
         SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(health <= 0)
         {
-            Debug.Log("You Died!");
-            transform.position = spawnPointTransform.position; 
-            health = maxHealth;
-            corruptionScript.time = 0f;
-        }    
+            OnDeath();
+        }
     }
 
-
-    public void LoadData(GameData data)
+    public void OnHit(int attackDamage)
     {
-        this.transform.position = data.playerPosition;
-        this.health = data.playerHealth;
-        this.spawnPointTransform = data.spawnPointTransform;
+        health -= attackDamage;
     }
 
-    public void SaveData(GameData data)
+    public void OnDeath()
     {
-        data.playerPosition = this.transform.position;
-        data.playerHealth = this.health;
-        data.spawnPointTransform = this.spawnPointTransform;
+        Debug.Log("You Died!");
+        transform.position = spawnPointTransform.position; 
+        health = maxHealth;
+        corruptionScript.time = 0f;
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -88,4 +84,22 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
     {
         spawnPointTransform = null;        
     }
+
+
+    /*--------------------------------------------------------------------------------------------*/
+    //Save and Loading Data
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.playerPosition;
+        this.health = data.playerHealth;
+        this.spawnPointTransform = data.spawnPointTransform;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.playerPosition = this.transform.position;
+        data.playerHealth = this.health;
+        data.spawnPointTransform = this.spawnPointTransform;
+    }
+
 }

@@ -5,19 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class CheckPoint : MonoBehaviour
 {
-    [SerializeField] private PlayerStats playerStatsScript;
+    [Header("Component References")]
+    [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private PlayerCollision playercollision;
+
     private bool isTriggerOn = false; 
     
 
     private void Awake() 
     {
-        playerStatsScript = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        playerStats = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
+        playercollision = GameObject.FindWithTag("Player")?.GetComponent<PlayerCollision>();
     }
 
     // Update is called once per frame
@@ -25,9 +23,8 @@ public class CheckPoint : MonoBehaviour
     {
         if (isTriggerOn == true)
         {
-            playerStatsScript.spawnPointTransform = this.gameObject.transform;
+            playerStats.spawnPointTransform = this.gameObject.transform;
             DataPersistenceManager.instance.OnCheckPointReached();
-            
         }
     }
 
@@ -35,10 +32,10 @@ public class CheckPoint : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player") == true)
         {
-            Debug.Log("Collision");
+            Debug.Log("CheckPoint Reached");
             isTriggerOn = true;
+            playercollision.OnEnterCheckpoint();
         }
-    
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -48,15 +45,20 @@ public class CheckPoint : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (playerStatsScript == null)
+        if (playerStats == null)
         {
-            playerStatsScript = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
+            playerStats = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
+        }
+        else if (playercollision == null)
+        {
+            playercollision = GameObject.FindWithTag("Player")?.GetComponent<PlayerCollision>();
         }
     }
 
     public void OnSceneUnloaded(Scene scene)
     {
-        playerStatsScript = null;
+        playerStats = null;
+        playercollision = null;
     }
 
 }

@@ -9,6 +9,10 @@ public class FollowCamera : MonoBehaviour
     [SerializeField] private float smoothTime = 0.25f;
     private Vector3 velocity = Vector3.zero;
 
+    private void Awake() 
+    {
+        playerTransform = GameObject.FindWithTag("Player").transform;
+    }
     void FixedUpdate()
     {
         Vector3 newPos = new Vector3(playerTransform.position.x, playerTransform.position.y, -10f);

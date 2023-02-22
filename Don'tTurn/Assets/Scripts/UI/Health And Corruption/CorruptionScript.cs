@@ -7,20 +7,25 @@ using TMPro;
 
 public class CorruptionScript : MonoBehaviour
 {
-    public float time = 0; 
+    //Component References
     [SerializeField] private PlayerStats playerStats;
-    public float areaTick = 0.0048f; 
-    public float metre; 
-    public Image corruptionMetre;
-    private bool hasBeenPressedOnce;
     public TextMeshProUGUI curseText;
     private HealthBarScript healthScript; 
+    public Image corruptionMetre;
+
+    [Range(0, 100)]public float time = 0; 
+    public float maxCursePoints = 100; 
+    public float areaTick = 0.0048f; 
+    public float metre; 
+    private bool hasBeenPressedOnce;
+
 
 
     private void Awake() 
     {
         playerStats = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +40,6 @@ public class CorruptionScript : MonoBehaviour
         corruptionMetre.fillAmount = metre;
         curseText.text = "Curse Points: " + time.ToString(); 
 
-
-
         if(Input.GetKeyDown(KeyCode.P))
         {
             if(time > 35)
@@ -49,7 +52,11 @@ public class CorruptionScript : MonoBehaviour
             }
            
         }
-
+        
+        if (time < 0)
+        {
+            time = 0;
+        }
     }
 
     public IEnumerator Timer(float tick)
@@ -73,8 +80,5 @@ public class CorruptionScript : MonoBehaviour
             playerStats = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
         }
     }
-
-
-
 
 }

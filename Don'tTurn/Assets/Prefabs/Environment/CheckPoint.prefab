@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: c4a355b2ba475ac408c020cbfec67786, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5647059, g: 0.27450982, b: 0.27450982, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 6143868321689010220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -11.24, y: -3.3, z: 0}
-  m_LocalScale: {x: 0.5983947, y: 0.5102719, z: 0.5858}
+  m_LocalScale: {x: 0.74117166, y: 0.6320228, z: 0.7255719}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6822916668977526087}
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: c4a355b2ba475ac408c020cbfec67786, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5660378, g: 0.2803489, b: 0.2803489, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -183,7 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f241ae99eec4e54ebf762e9cabed3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatsScript: {fileID: 0}
+  playerStats: {fileID: 0}
+  playercollision: {fileID: 0}
 --- !u!61 &6143868321689010208
 BoxCollider2D:
   m_ObjectHideFlags: 0

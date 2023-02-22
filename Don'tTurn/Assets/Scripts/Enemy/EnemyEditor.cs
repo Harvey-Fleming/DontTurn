@@ -1,4 +1,4 @@
-#if UNITY_EDTIOR
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,4 +20,4 @@ public class EnemyEditor : Editor
         }
     }
 }
-#endif
+

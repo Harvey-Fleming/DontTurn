@@ -6,18 +6,52 @@ public class PlayerCollision : MonoBehaviour
 {
 
     [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private CorruptionScript corruptionScript;
+    private int attackDamage = 10;
+    private float timebetweenRegens = 1;
+
+    private bool canRegen = true;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            playerStats.health -= 10f;
+            playerStats.OnHit(attackDamage);
         }      
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnEnterCheckpoint()
     {
+        StartCoroutine("Regenerate");
 
+    }
+
+    IEnumerator Regenerate()
+    {
+        while (canRegen == true)
+        {
+        canRegen = false;
+        if (playerStats.health < playerStats.maxHealth)
+        {
+        playerStats.health += 20;
+        }
+        else if (playerStats.health > playerStats.maxHealth)
+        {
+            playerStats.health = playerStats.maxHealth;
+        }
+
+        if (corruptionScript.time > 0)
+        {
+            corruptionScript.time -= 10;
+        }
+        else if (corruptionScript.time < 0)
+        {
+            corruptionScript.time = 0f;
+        }
+        yield return new WaitForSeconds(timebetweenRegens);
+        canRegen = true;
+        yield break;
+        }
     }
 
 }
