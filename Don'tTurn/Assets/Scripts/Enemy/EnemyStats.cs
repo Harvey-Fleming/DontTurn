@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 {
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private string id;
 
     public bool isDead = false;
@@ -20,6 +21,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         Respawn();
     }
 
@@ -46,7 +48,9 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
     public void OnHit(int damageTaken)
     {
+
         currentHealth = currentHealth - damageTaken;
+        StartCoroutine(ChangeColour());
         if (currentHealth <= 0)
         {
             OnDeath();
@@ -71,6 +75,17 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
             gameObject.SetActive(true);
             currentHealth = maxHealth;
         }
+    }
+
+    IEnumerator ChangeColour()
+    {
+        Color normalColour = Color.white;
+        Color hitColour = Color.red;
+        spriteRenderer.color = hitColour;
+        yield return new WaitForSeconds(0.5f);
+        spriteRenderer.color = normalColour;
+
+        yield break;
     }
 
 }

@@ -17,7 +17,11 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             playerStats.OnHit(attackDamage);
-        }      
+        }    
+        if (collision.gameObject.CompareTag("DeathBox"))
+        {
+            playerStats.OnDeath();
+        } 
     }
 
     public void OnEnterCheckpoint()
@@ -34,6 +38,10 @@ public class PlayerCollision : MonoBehaviour
         if (playerStats.health < playerStats.maxHealth)
         {
         playerStats.health += 20;
+            if (playerStats.health > playerStats.maxHealth)
+            {
+                playerStats.health = playerStats.maxHealth;
+            }
         }
         else if (playerStats.health > playerStats.maxHealth)
         {
