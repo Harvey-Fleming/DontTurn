@@ -51,17 +51,17 @@ public class DataPersistenceManager : MonoBehaviour
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
-        LoadGame();
     }
 
     public void OnSceneUnloaded(Scene scene)
     {
-        SaveGame();
+
     }
 
     public void NewGame()
     {
         this.gameData = new GameData();
+
     }
 
     public void LoadGame()
@@ -104,6 +104,7 @@ public class DataPersistenceManager : MonoBehaviour
         
         //save that data to a file using the data handler
         dataHandler.Save(gameData);
+       Debug.Log("Saved Game");
     }
 
     public void OnCheckPointReached() 
