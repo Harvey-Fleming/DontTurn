@@ -891,7 +891,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 465956781}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.73, y: -3.76, z: 0}
+  m_LocalPosition: {x: -0.444, y: -3.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -947,6 +947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2318deac161c440bed5328928d77ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
   id: 
   isDead: 0
 --- !u!1 &569043842
@@ -1771,7 +1772,6 @@ MonoBehaviour:
     - Good for you
     name: Joe Mama
   buttonToPress: {fileID: 0}
-  currentDialogueNPC: {fileID: 0}
 --- !u!114 &956379273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1913,6 +1913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: Punch
   enemy: {fileID: 0}
+  enemyRigidBody: {fileID: 0}
   player: {fileID: 1776263208}
 --- !u!61 &993715200
 BoxCollider2D:
@@ -2139,6 +2140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: Eat
   enemy: {fileID: 0}
+  enemyRigidBody: {fileID: 0}
   player: {fileID: 1776263208}
 --- !u!1 &1106891873
 GameObject:
@@ -2562,7 +2564,6 @@ MonoBehaviour:
     - 'I love you '
     name: 'Jeremy '
   buttonToPress: {fileID: 24306483}
-  currentDialogueNPC: {fileID: 0}
 --- !u!1 &1604953025
 GameObject:
   m_ObjectHideFlags: 0
@@ -3423,12 +3424,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be951d0ae2583834b90f30b786dae911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
   playerStats: {fileID: 1776263215}
+  curseText: {fileID: 1703789604}
+  corruptionMetre: {fileID: 1604953027}
+  time: 0
+  maxCursePoints: 100
   areaTick: 2.4
   metre: 1000
-  corruptionMetre: {fileID: 1604953027}
-  curseText: {fileID: 1703789604}
 --- !u!114 &1776263215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3441,6 +3443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9f4b2def25b7547ad6ea9c967a5b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  corruptionScript: {fileID: 0}
+  maxHealth: 100
   health: 100
   spawnPointTransform: {fileID: 0}
 --- !u!114 &1776263216
@@ -3632,7 +3636,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f241ae99eec4e54ebf762e9cabed3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatsScript: {fileID: 0}
+  playerStats: {fileID: 0}
+  playercollision: {fileID: 0}
 --- !u!61 &1887383627
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3704,7 +3709,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f241ae99eec4e54ebf762e9cabed3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatsScript: {fileID: 0}
+  playerStats: {fileID: 0}
+  playercollision: {fileID: 0}
 --- !u!61 &2039480168
 BoxCollider2D:
   m_ObjectHideFlags: 0
