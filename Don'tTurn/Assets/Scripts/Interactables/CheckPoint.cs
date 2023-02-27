@@ -11,7 +11,6 @@ public class CheckPoint : MonoBehaviour
 
     private bool isTriggerOn = false; 
     
-
     private void Awake() 
     {
         playerStats = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();

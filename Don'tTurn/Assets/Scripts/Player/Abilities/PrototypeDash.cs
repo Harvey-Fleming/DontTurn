@@ -48,19 +48,12 @@ public class PrototypeDash : MonoBehaviour
 
     private void CheckDash()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0f)
-        {
-            if (!isDashing)
-            {
-                dashDirection = Input.GetAxisRaw("Horizontal");
-            }
-        }
-
         if (!isDashing && dashCount > 0)
         {
             if (Input.GetKeyDown(KeyCode.Z))
             {
                 dashCount--;
+
                 isDashing = true; 
             }
         }
@@ -79,21 +72,22 @@ public class PrototypeDash : MonoBehaviour
 
     IEnumerator DashAbility()
     {
-        while (canDash == false && canShoot == true)
+        if (canDash == false && canShoot == true)
         {
-        animator.SetBool("IsDashing", true);
-        movement.enabled = false;
-        SpawnBullet();
-        rb.velocity = new Vector2(dashDirection * dashSpeed, 0f);  
-        yield return new WaitForSeconds(dashTime);
-        rb.velocity = new Vector2(0, 0);
-        movement.enabled = true; 
-        isDashing = false;
-        animator.SetBool("IsDashing", false);
-        yield return new WaitForSeconds(dashCooldown);
-        canDash = true;
-        canShoot = true;
-        yield break;
+            dashDirection = gameObject.transform.localScale.x;
+            animator.SetBool("IsDashing", true);
+            movement.enabled = false;
+            SpawnBullet();
+            rb.velocity = new Vector2(dashDirection * dashSpeed, 0f);  
+            yield return new WaitForSeconds(dashTime);
+            rb.velocity = new Vector2(0, 0);
+            movement.enabled = true; 
+            isDashing = false;
+            animator.SetBool("IsDashing", false);
+            yield return new WaitForSeconds(dashCooldown);
+            canDash = true;
+            canShoot = true;
+            yield break;
         }
     }
 

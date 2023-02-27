@@ -51,17 +51,19 @@ public class DataPersistenceManager : MonoBehaviour
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+        LoadGame();
     }
 
     public void OnSceneUnloaded(Scene scene)
     {
-
     }
 
     public void NewGame()
     {
         this.gameData = new GameData();
-
+        Debug.Log(this.gameData.playerHealth);
+        SaveGame();
+        Debug.Log(this.gameData.playerHealth);
     }
 
     public void LoadGame()

@@ -64,6 +64,8 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         corruptionScript.time = 0f;
     }
 
+
+
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (spawnPointTransform == null)
@@ -90,14 +92,12 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     //Save and Loading Data
     public void LoadData(GameData data)
     {
-        this.transform.position = data.playerPosition;
         this.health = data.playerHealth;
         this.spawnPointTransform = data.spawnPointTransform;
     }
 
     public void SaveData(GameData data)
     {
-        data.playerPosition = this.transform.position;
         data.playerHealth = this.health;
         data.spawnPointTransform = this.spawnPointTransform;
     }

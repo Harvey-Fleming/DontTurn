@@ -21,13 +21,14 @@ public class BulletScript : MonoBehaviour
         Debug.Log(rb2D.velocity.x);
     }
 
-    private void OnCollisionEnter(Collision other) 
+    private void OnCollisionEnter2D(Collision2D other) 
     {
         if(other.gameObject.tag == "Enemy")
         {
             Debug.Log("Enter Collision");
             CalculateBulletDamage();
             other.gameObject.GetComponent<EnemyStats>()?.OnHit(bulletDamage);
+            Destroy(this.gameObject);
         }
         else
         {

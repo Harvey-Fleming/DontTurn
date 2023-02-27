@@ -6,7 +6,6 @@ using UnityEngine;
 public class GameData
 {
     public float playerHealth;
-    public Vector3 playerPosition;
     public Transform spawnPointTransform;
     public SerializableDictionary<string, bool> isEnemyDead;
 
@@ -14,7 +13,7 @@ public class GameData
     public GameData()
     {
         this.playerHealth = 100f;
-        this.playerPosition = Vector3.zero;
+        this.spawnPointTransform = null;
         isEnemyDead = new SerializableDictionary<string, bool>();
     }
 
