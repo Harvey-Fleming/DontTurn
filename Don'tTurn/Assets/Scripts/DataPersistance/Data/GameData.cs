@@ -6,14 +6,14 @@ using UnityEngine;
 public class GameData
 {
     public float playerHealth;
-    public Transform spawnPointTransform;
+    public Vector3 spawnPoint;
     public SerializableDictionary<string, bool> isEnemyDead;
 
     //These will be the default values for when a new game is initialised
     public GameData()
     {
         this.playerHealth = 100f;
-        this.spawnPointTransform = null;
+        this.spawnPoint = Vector3.zero;
         isEnemyDead = new SerializableDictionary<string, bool>();
     }
 

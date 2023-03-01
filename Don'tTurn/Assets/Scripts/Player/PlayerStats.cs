@@ -15,7 +15,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     private float cursePoints;
     
     private Vector3 playerPosition;
-    public Transform spawnPointTransform; 
+    public Vector3 spawnPoint; 
 
     private void Awake() 
     {
@@ -30,17 +30,12 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         {
             instance = this;
         }
+        this.gameObject.transform.position = spawnPoint;
     }
 
     private void Start() 
     {
-        this.gameObject.transform.position = spawnPointTransform.position;
-    }
-
-    private void OnEnable() 
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.sceneUnloaded += OnSceneUnloaded;
+        this.gameObject.transform.position = spawnPoint;
     }
 
     void Update()
@@ -59,47 +54,58 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     public void OnDeath()
     {
         Debug.Log("You Died!");
-        transform.position = spawnPointTransform.position; 
+        transform.position = spawnPoint; 
         health = maxHealth;
         corruptionScript.time = 0f;
     }
 
+//Subscribing to on scene loaded and on scene unloaded events.
+    private void OnEnable() 
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
 
+    private void OnDisable() 
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    }
 
+//Checks where to spawn the player when the Scene is loaded, if one cannot be found. Location Defaults to start of Level
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (spawnPointTransform == null)
+        if (spawnPoint == Vector3.zero)
         {
-            spawnPointTransform = GameObject.FindWithTag("SpawnPoint")?.GetComponent<Transform>();
-            if(spawnPointTransform != null)
+            spawnPoint = GameObject.FindWithTag("SpawnPoint").GetComponent<Transform>().position;
+            if(spawnPoint != null)
             {
-                this.gameObject.transform.position = spawnPointTransform.position;      
+                this.gameObject.transform.position = spawnPoint;      
             }  
         }
-        else if (spawnPointTransform != null)
+        else if (spawnPoint != Vector3.zero)
         {
-        this.gameObject.transform.position = spawnPointTransform.position;    
+        this.gameObject.transform.position = spawnPoint;    
         }
     }
 
     public void OnSceneUnloaded(Scene scene)
     {
-        spawnPointTransform = null;        
+        spawnPoint = Vector3.zero;        
     }
 
 
-    /*--------------------------------------------------------------------------------------------*/
-    //Save and Loading Data
+//Save and Loading Data
     public void LoadData(GameData data)
     {
         this.health = data.playerHealth;
-        this.spawnPointTransform = data.spawnPointTransform;
+        this.spawnPoint = data.spawnPoint;
     }
 
     public void SaveData(GameData data)
     {
         data.playerHealth = this.health;
-        data.spawnPointTransform = this.spawnPointTransform;
+        data.spawnPoint = this.spawnPoint;
     }
 
 }

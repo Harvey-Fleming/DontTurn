@@ -5,17 +5,22 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Ground Movement")]
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private BoxCollider2D boxCollider2D;
+    private Rigidbody2D rb;
+    private BoxCollider2D boxCollider2D;
     float moveValue = 0;
     public float moveSpeed = 3f;
     float moveMultiplier = 100f;
 
     [Header("Jump Movement")]
     [SerializeField] private LayerMask GroundLayerMask;
-    public float jumpForce = 1f;
-    int aerialJumpCount;
+    [SerializeField] private float jumpForce = 1f;
     public int maxAerialJumpCount;
+    int aerialJumpCount;
+
+
+    //"Coyote Jump" Variables
+    [SerializeField] private float coyoteTimer = 0.1f;
+    private float currentcoyoteTimer;
 
     [Header("Player")]
     [SerializeField] Animator animator;
@@ -36,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
         GroundMovement();
     }
 
@@ -49,24 +53,25 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-            //Basic Jump
-            if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
-            {
-                
-                rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                
-            }
+        //Basic Jump
+        if (currentcoyoteTimer > 0f && Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetBool("IsJumping", true);
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
 
-            if(IsGrounded())
+        if (IsGrounded())
             {
                 //Reset aerial jumps when on ground
                 aerialJumpCount = maxAerialJumpCount;
                 animator.SetBool("IsJumping", false);
+                currentcoyoteTimer = coyoteTimer;
             }
             else if (!IsGrounded())
             {
                 animator.SetBool("IsJumping", true);
+                currentcoyoteTimer -= Time.deltaTime;
             }
     }
 
@@ -112,5 +117,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    //calls when the script is loaded or a value changes in the Inspector. Allows us to free up space in the inspector by assigning references automatically
+    private void OnValidate() 
+    {
+        rb = this.gameObject.GetComponent<Rigidbody2D>();
+        boxCollider2D = this.gameObject.GetComponent<BoxCollider2D>();
+    }
+
 
 }

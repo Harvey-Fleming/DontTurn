@@ -5,12 +5,13 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
 
-    [SerializeField] private PlayerStats playerStats;
-    [SerializeField] private CorruptionScript corruptionScript;
+    private PlayerStats playerStats;
+    private CorruptionScript corruptionScript;
     private int attackDamage = 10;
     private float timebetweenRegens = 1;
 
     private bool canRegen = true;
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -18,26 +19,21 @@ public class PlayerCollision : MonoBehaviour
         {
             playerStats.OnHit(attackDamage);
         }    
-        if (collision.gameObject.CompareTag("DeathBox"))
-        {
-            playerStats.OnDeath();
-        } 
     }
 
     public void OnEnterCheckpoint()
     {
         StartCoroutine("Regenerate");
-
     }
 
     IEnumerator Regenerate()
     {
-        while (canRegen == true)
+        while(canRegen)
         {
         canRegen = false;
         if (playerStats.health < playerStats.maxHealth)
         {
-        playerStats.health += 20;
+            playerStats.health += 20;
             if (playerStats.health > playerStats.maxHealth)
             {
                 playerStats.health = playerStats.maxHealth;
@@ -60,6 +56,13 @@ public class PlayerCollision : MonoBehaviour
         canRegen = true;
         yield break;
         }
+    }
+
+    //calls when the script is loaded or a value changes in the Inspector. Allows us to free up space in the inspector by assigning references automatically
+    private void OnValidate() 
+    {
+        playerStats = this.gameObject.GetComponent<PlayerStats>();
+        corruptionScript = GameObject.FindObjectOfType<CorruptionScript>();
     }
 
 }

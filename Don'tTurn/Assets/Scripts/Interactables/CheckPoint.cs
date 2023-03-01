@@ -8,8 +8,6 @@ public class CheckPoint : MonoBehaviour
     [Header("Component References")]
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private PlayerCollision playercollision;
-
-    private bool isTriggerOn = false; 
     
     private void Awake() 
     {
@@ -17,30 +15,17 @@ public class CheckPoint : MonoBehaviour
         playercollision = GameObject.FindWithTag("Player")?.GetComponent<PlayerCollision>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (isTriggerOn == true)
-        {
-            playerStats.spawnPointTransform = this.gameObject.transform;
-            DataPersistenceManager.instance.OnCheckPointReached();
-        }
-    }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Player") == true)
         {
+            playerStats.spawnPoint = this.gameObject.transform.position;
+            DataPersistenceManager.instance.OnCheckPointReached();
             Debug.Log("CheckPoint Reached");
-            isTriggerOn = true;
             playercollision.OnEnterCheckpoint();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        isTriggerOn = false; 
-    }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
