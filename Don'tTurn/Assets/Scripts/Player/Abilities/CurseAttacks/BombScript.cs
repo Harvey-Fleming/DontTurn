@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BombScript : MonoBehaviour
 {
-    public GameObject[] spores; 
+    public GameObject sporePrefab; 
     bool isCollidingTrue; 
     Transform enemy; 
     public float speed = 20f;
@@ -33,15 +33,16 @@ public class BombScript : MonoBehaviour
 
         rb.velocity = Vector3.zero;
         rb.angularVelocity = 0f;
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
 
-
-        for (int i = 0; i < spores.Length; i++)
+        for (int i = 0; i < 6; i++)
         {
-            GameObject spore = spores[i];
-            spore.gameObject.SetActive(true); 
+            Vector3 randomSpawnPosition = new Vector3(Random.Range(0, 1), Random.Range(0, 3), Random.Range(0, 1));
+            Instantiate(sporePrefab, randomSpawnPosition, Quaternion.identity); 
         }
+
         
-        gameObject.SetActive(false); 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -22,6 +22,8 @@ public class SporesScript : MonoBehaviour
         {
             case "Enemy":
                 Debug.Log("Hit enemy");
+                //do damage 
+                Destroy(gameObject); 
                 break;
             case "Ground":
                 gameObject.SetActive(false); 

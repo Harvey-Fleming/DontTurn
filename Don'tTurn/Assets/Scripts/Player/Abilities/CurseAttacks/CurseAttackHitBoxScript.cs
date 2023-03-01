@@ -10,7 +10,7 @@ public class CurseAttackHitBoxScript : MonoBehaviour
    [SerializeField] GameObject enemy;
     [SerializeField] Rigidbody2D enemyRigidBody; 
     public GameObject player;
-    bool isColliding = false; 
+    [SerializeField] bool isColliding = false; 
     // Start is called before the first frame update
     void Start()
     {
@@ -25,32 +25,7 @@ public class CurseAttackHitBoxScript : MonoBehaviour
         }
     }
 
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if(collision.gameObject.CompareTag("Enemy") && isColliding == false)
-    //    {
-    //        isColliding = true; 
-    //        enemy = collision.gameObject;
-
-    //        switch (attackType)
-    //        {
-    //            case "Eat":
-    //                Debug.Log("Entering Coroutine"); 
-    //                StartCoroutine(EatEnemy());
-    //                break;
-    //            case "Punch":
-    //                PunchEnemy(); 
-    //                break; 
-    //        }
-    //    }
-    //    else
-    //    {
-    //        isColliding = false; 
-    //    }
-        
-    //}
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && isColliding == false)
         {
@@ -59,11 +34,38 @@ public class CurseAttackHitBoxScript : MonoBehaviour
 
             switch (attackType)
             {
+                //case "Eat":
+                //    Debug.Log("Entering Coroutine");
+                //    StartCoroutine(EatEnemy());
+                //    break;
+                case "Punch":
+                    PunchEnemy();
+                    break;
+            }
+        }
+        else
+        {
+            isColliding = false;
+        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") && isColliding == false)
+        {
+            isColliding = true;
+            enemy = collision.gameObject;
+            enemyRigidBody = enemy.GetComponent<Rigidbody2D>();
+
+            switch (attackType)
+            {
                 case "Eat":
                     Debug.Log("Entering Coroutine");
                     StartCoroutine(EatEnemy());
                     break;
                 case "Punch":
+                    Debug.Log("Entering Coroutine for Punch"); 
                     PunchEnemy();
                     break;
             }
@@ -121,6 +123,7 @@ public class CurseAttackHitBoxScript : MonoBehaviour
    public void PunchEnemy()
     {
         enemy.GetComponent<Rigidbody2D>().velocity = transform.right * 5f;
-        gameObject.SetActive(false); 
+        //gameObject.SetActive(false);
+        isColliding = false; 
     }
 }
