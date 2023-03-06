@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class FallDamage : MonoBehaviour
 {
-    PlayerMovement PlayerMovement;
-    Rigidbody2D rb2D;
-    PlayerStats playerStats;
+    private PlayerMovement PlayerMovement;
+    private Rigidbody2D rb2D;
+    private PlayerStats playerStats;
     public float maxYVel; 
-    // Start is called before the first frame update
-    void Start()
+
+    void OnValidate()
     {
         rb2D = GetComponent<Rigidbody2D>(); 
         PlayerMovement = GetComponent<PlayerMovement>();

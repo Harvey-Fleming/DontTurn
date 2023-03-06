@@ -11,9 +11,8 @@ public class AttackScript : MonoBehaviour
     [Header("Melee Attack Stats")]
 
     [SerializeField] private Transform attackPointTrans;
-    [SerializeField] private float attackRadius;
+    [SerializeField] private float attackRadius, attackCooldownTime = 2.0f;
     [SerializeField] private int attackDamage;
-    [SerializeField] private float attackCooldownTime = 2.0f;
     [SerializeField] private bool canAttack = true;
 
     [Header("Corruption Effect")]
@@ -51,9 +50,10 @@ public class AttackScript : MonoBehaviour
             
             MeleeAttack();
             animator.SetBool("IsAttacking", true);
+            yield return 0;
+            animator.SetBool("IsAttacking", false);
             canAttack = false;
             yield return new WaitForSeconds(attackCooldownTime / attackSpeedMultiplier);
-            animator.SetBool("IsAttacking", false);
             canAttack = true;   
             yield break;
         }

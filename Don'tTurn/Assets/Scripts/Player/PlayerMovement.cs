@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         //the horizontal movement value
         moveValue = Input.GetAxisRaw("Horizontal");
 
-        Jump();
+        CheckJump();
 
         AerialJump();
     }
@@ -51,14 +51,12 @@ public class PlayerMovement : MonoBehaviour
         CheckFlip();
     }
 
-    void Jump()
+    void CheckJump()
     {
         //Basic Jump
         if (currentcoyoteTimer > 0f && Input.GetKeyDown(KeyCode.Space))
         {
-            animator.SetBool("IsJumping", true);
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            Jump();;
         }
 
         if (IsGrounded())
@@ -75,9 +73,16 @@ public class PlayerMovement : MonoBehaviour
             }
     }
 
+    private void Jump()
+    {
+        animator.SetBool("IsJumping", true);
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+
     public bool IsGrounded()
     {
-        float extraHeightTest = 0.1f;
+        float extraHeightTest = 0.05f;
         RaycastHit2D raycastHit = Physics2D.Raycast(boxCollider2D.bounds.center, Vector2.down, boxCollider2D.bounds.extents.y + extraHeightTest, GroundLayerMask);
         return raycastHit.collider != null;
     }

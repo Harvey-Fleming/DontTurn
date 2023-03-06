@@ -21,7 +21,6 @@ public class CheckPoint : MonoBehaviour
         {
             playerStats.spawnPoint = this.gameObject.transform.position;
             DataPersistenceManager.instance.OnCheckPointReached();
-            Debug.Log("CheckPoint Reached");
             playercollision.OnEnterCheckpoint();
         }
     }

@@ -8,9 +8,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     [SerializeField] private string id;
 
     public bool isDead = false;
-
-    private int maxHealth = 15;
-    private int currentHealth = 15;
+    private int maxHealth = 15, currentHealth = 15;
 
     [ContextMenu("Generate Unique Guid for id")]
     private void GenerateGuid()
@@ -21,14 +19,12 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         Respawn();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnValidate() 
     {
- 
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void SaveData(GameData data)

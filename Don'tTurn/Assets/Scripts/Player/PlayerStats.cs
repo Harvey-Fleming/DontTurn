@@ -10,8 +10,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     [SerializeField] private CorruptionScript corruptionScript;
 
     //Stats
-    public float maxHealth = 100f;
-    [Range(0, 100)] public float health = 100f;
+    [Range(0, 100)] public float maxHealth = 100f, health = 100f;
     private float cursePoints;
     
     private Vector3 playerPosition;

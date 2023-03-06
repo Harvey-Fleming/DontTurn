@@ -9,7 +9,6 @@ public class PlayerCollision : MonoBehaviour
     private CorruptionScript corruptionScript;
     private int attackDamage = 10;
     private float timebetweenRegens = 1;
-
     private bool canRegen = true;
 
 
