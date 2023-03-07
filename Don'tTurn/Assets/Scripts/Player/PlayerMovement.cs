@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground Movement")]
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider2D;
-    float moveValue = 0;
+    private DebugButtonsEditor debugButtonsEditor;
+    float hmoveValue = 0, vmoveValue = 0;
     public float moveSpeed = 3f;
     float moveMultiplier = 100f;
 
@@ -26,13 +28,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Animator animator;
     SpriteRenderer playerSprite;
     public bool facingright = true;
+    public bool isGodEnabled;
 
 
 
     void Update()
     {
         //the horizontal movement value
-        moveValue = Input.GetAxisRaw("Horizontal");
+        hmoveValue = Input.GetAxisRaw("Horizontal");
+        vmoveValue = Input.GetAxisRaw("Vertical");
 
         CheckJump();
 
@@ -41,14 +45,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isGodEnabled)
+        {
+            DebugMovement();
+        }
         GroundMovement();
+    }
+
+    public void DebugMovement()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, vmoveValue * (moveSpeed * moveMultiplier) * Time.deltaTime);
     }
 
     void GroundMovement()
     {
-        rb.velocity = new Vector2(moveValue * (moveSpeed * moveMultiplier) * Time.deltaTime, rb.velocity.y);
+        rb.velocity = new Vector2(hmoveValue * (moveSpeed * moveMultiplier) * Time.deltaTime, rb.velocity.y);
         animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
         CheckFlip();
+
     }
 
     void CheckJump()
@@ -90,11 +104,11 @@ public class PlayerMovement : MonoBehaviour
     void CheckFlip()
     {
         //flips the sprite depending on their direction of movement
-        if(moveValue < 0 && facingright)
+        if(hmoveValue < 0 && facingright)
         {
             Flip();
         }
-        if(moveValue > 0 && !facingright)
+        if(hmoveValue > 0 && !facingright)
         {
             Flip();
         }  

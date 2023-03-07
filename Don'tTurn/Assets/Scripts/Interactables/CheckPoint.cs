@@ -7,12 +7,12 @@ public class CheckPoint : MonoBehaviour
 {
     [Header("Component References")]
     [SerializeField] private PlayerStats playerStats;
-    [SerializeField] private PlayerCollision playercollision;
+    [SerializeField] private PlayerCollision playerCollision;
     
     private void Awake() 
     {
         playerStats = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
-        playercollision = GameObject.FindWithTag("Player")?.GetComponent<PlayerCollision>();
+        playerCollision = GameObject.FindWithTag("Player")?.GetComponent<PlayerCollision>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -21,7 +21,7 @@ public class CheckPoint : MonoBehaviour
         {
             playerStats.spawnPoint = this.gameObject.transform.position;
             DataPersistenceManager.instance.OnCheckPointReached();
-            playercollision.OnEnterCheckpoint();
+            playerCollision.OnEnterCheckpoint();
         }
     }
 
@@ -32,16 +32,16 @@ public class CheckPoint : MonoBehaviour
         {
             playerStats = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
         }
-        else if (playercollision == null)
+        else if (playerCollision == null)
         {
-            playercollision = GameObject.FindWithTag("Player")?.GetComponent<PlayerCollision>();
+            playerCollision = GameObject.FindWithTag("Player")?.GetComponent<PlayerCollision>();
         }
     }
 
     public void OnSceneUnloaded(Scene scene)
     {
         playerStats = null;
-        playercollision = null;
+        playerCollision = null;
     }
 
 }
