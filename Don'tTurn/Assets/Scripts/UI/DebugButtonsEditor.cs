@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
+using System;
 
 public class DebugButtonsEditor : EditorWindow
 {
@@ -11,6 +11,7 @@ public class DebugButtonsEditor : EditorWindow
     [SerializeField] private GameObject playerObj;
     private Rigidbody2D playerRB2D;
     private BoxCollider2D playerBoxCollider2D;
+    private PlayerMovement playerMovement;
 
     private float gravityScale;
 
@@ -36,10 +37,28 @@ public class DebugButtonsEditor : EditorWindow
         GUILayout.Label("Unlocks All Abilities", EditorStyles.miniBoldLabel);
         if(GUILayout.Button("Unlock Abilities"))
         {
-            GetReferences();
             UnlockAllAbilities();
         }
 
+        GUILayout.Label("Respawns All Enemies in the Level", EditorStyles.miniBoldLabel);
+        if(GUILayout.Button("Respawn Enemies"))
+        {
+            RespawnAllEnemies();
+        }
+
+    }
+
+    public void RespawnAllEnemies()
+    {
+        object[] allEnemies = Resources.FindObjectsOfTypeAll(typeof(EnemyStats));
+        Debug.Log("allEnemies array has " + allEnemies.Length + "Items");
+
+        foreach (EnemyStats enemyStats in allEnemies)
+        {
+            enemyStats.gameObject.SetActive(true);
+            enemyStats.isDead = false;
+            enemyStats.Respawn();
+        }
     }
 
     public void GetReferences()
@@ -47,6 +66,7 @@ public class DebugButtonsEditor : EditorWindow
         playerObj = GameObject.FindGameObjectWithTag("Player");
         playerRB2D = playerObj.GetComponent<Rigidbody2D>();
         playerBoxCollider2D = playerObj.GetComponent<BoxCollider2D>();
+        playerMovement = playerObj.GetComponent<PlayerMovement>();
     }
 
     public void GodMode()
@@ -58,7 +78,8 @@ public class DebugButtonsEditor : EditorWindow
 
             playerBoxCollider2D.enabled = false;
 
-            playerObj.GetComponent<PlayerMovement>().isGodEnabled = true;
+            playerMovement.isGodEnabled = true;
+            playerMovement.moveSpeed *= 2;
         }
         else
         {
@@ -66,7 +87,8 @@ public class DebugButtonsEditor : EditorWindow
 
             playerBoxCollider2D.enabled = true;
 
-            playerObj.GetComponent<PlayerMovement>().isGodEnabled = false;
+            playerMovement.isGodEnabled = false;
+            playerMovement.moveSpeed /= 2;
         }
 
 
@@ -74,9 +96,9 @@ public class DebugButtonsEditor : EditorWindow
 
     public void UnlockAllAbilities()
     {
-        UnlockAbility[] AllUnlockAbilityScript = FindObjectsOfType<UnlockAbility>();
+        UnlockAbility[] allUnlockAbilityScript = FindObjectsOfType<UnlockAbility>();
 
-        foreach (UnlockAbility unlockAbility in AllUnlockAbilityScript)
+        foreach (UnlockAbility unlockAbility in allUnlockAbilityScript)
         {
             unlockAbility.OnAbilityUnlock();
         }

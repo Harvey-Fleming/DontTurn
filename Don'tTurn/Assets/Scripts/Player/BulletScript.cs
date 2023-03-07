@@ -7,27 +7,38 @@ public class BulletScript : MonoBehaviour
 {
     private Rigidbody2D rb2D;
 
-    [SerializeField] private int bulletDamage;
+    [SerializeField] private int basebulletDamage = 10, minbulletDamage = 1;
+    [SerializeField] private float bulletDamage, bulletTravelTime, bulletTravelFalloff = 0.25f;
     
+
+    private void Awake() 
+    {
+        bulletTravelTime = 0f;
+    }
+
+    private void Update() 
+    {
+        bulletTravelTime += Time.deltaTime;
+    }
     // Start is called before the first frame update
-    void Start()
+    void OnValidate()
     {
         rb2D = GetComponent<Rigidbody2D>();
     }
 
-    private void CalculateBulletDamage()
+    private float CalculateBulletDamage()
     {
-        bulletDamage = 2 * Mathf.RoundToInt(rb2D.velocity.x);
-        Debug.Log(rb2D.velocity.x);
+        bulletDamage = Mathf.Lerp(basebulletDamage, minbulletDamage, bulletTravelTime/bulletTravelFalloff);
+        Debug.Log("Damage Dealt to enemy: " + basebulletDamage);
+        return bulletDamage;
     }
 
     private void OnCollisionEnter2D(Collision2D other) 
     {
         if(other.gameObject.tag == "Enemy")
         {
-            Debug.Log("Enter Collision");
             CalculateBulletDamage();
-            other.gameObject.GetComponent<EnemyStats>()?.OnHit(bulletDamage);
+            other.gameObject.GetComponent<EnemyStats>()?.OnHit(Mathf.RoundToInt(bulletDamage));
             Destroy(this.gameObject);
         }
         else

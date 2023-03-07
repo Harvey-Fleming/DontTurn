@@ -22,11 +22,6 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         Respawn();
     }
 
-    private void OnValidate() 
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
     public void SaveData(GameData data)
     {
         if(data.isEnemyDead.ContainsKey(id))
@@ -44,7 +39,6 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
     public void OnHit(int damageTaken)
     {
-
         currentHealth = currentHealth - damageTaken;
         StartCoroutine(ChangeColour());
         if (currentHealth <= 0)
@@ -62,6 +56,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
     public void Respawn()
     {
+        Debug.Log("Enemy Respawn Triggered");
         if(isDead)
         {
             gameObject.SetActive(false);
@@ -83,5 +78,11 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
         yield break;
     }
+
+    private void OnValidate() 
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
 
 }

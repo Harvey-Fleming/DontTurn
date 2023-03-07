@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3470492031642900374, guid: 2978f8b6173784746b2addf27c60c21f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6169534223625190664, guid: 2978f8b6173784746b2addf27c60c21f, type: 3}
       propertyPath: m_Name
       value: StaticEnemy
