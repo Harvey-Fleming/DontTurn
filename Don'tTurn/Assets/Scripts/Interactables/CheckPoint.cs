@@ -19,6 +19,14 @@ public class CheckPoint : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player") == true)
         {
+            
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        if(other.gameObject.CompareTag("Player") == true)
+        {
             playerStats.spawnPoint = this.gameObject.transform.position;
             DataPersistenceManager.instance.OnCheckPointReached();
             playerCollision.OnEnterCheckpoint();

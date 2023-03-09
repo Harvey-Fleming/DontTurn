@@ -30,30 +30,31 @@ public class PlayerCollision : MonoBehaviour
         while(canRegen)
         {
         canRegen = false;
-        if (playerStats.health < playerStats.maxHealth)
+        if (playerStats.health < playerStats.maxHealth || corruptionScript.time > 0)
         {
             playerStats.health += 20;
+            corruptionScript.time -= 10;
+
             if (playerStats.health > playerStats.maxHealth)
             {
                 playerStats.health = playerStats.maxHealth;
             }
-        }
-        else if (playerStats.health > playerStats.maxHealth)
-        {
-            playerStats.health = playerStats.maxHealth;
-        }
-
-        if (corruptionScript.time > 0)
-        {
-            corruptionScript.time -= 10;
-        }
-        else if (corruptionScript.time < 0)
-        {
-            corruptionScript.time = 0f;
+            else if(corruptionScript.time < 0)
+            {
+                corruptionScript.time = 0f;
+            }
         }
         yield return new WaitForSeconds(timebetweenRegens);
-        canRegen = true;
-        yield break;
+        if (playerStats.health != playerStats.maxHealth || corruptionScript.time != 0)
+        {
+            canRegen = true;
+            StartCoroutine("Regenerate");
+        }
+        else
+        {
+            canRegen = true;
+            yield break;
+        }
         }
     }
 
