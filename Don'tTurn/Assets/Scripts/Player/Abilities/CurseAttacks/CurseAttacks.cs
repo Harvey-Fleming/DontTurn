@@ -7,7 +7,8 @@ public class CurseAttacks : MonoBehaviour
     public GameObject bomb;
     public Transform firePoint;
     public GameObject eatTrigger;
-    public GameObject PunchHitbox; 
+    public GameObject PunchHitbox;
+    private PlayerStats playerStats; 
     // Start is called before the first frame update
     void Start()
     {

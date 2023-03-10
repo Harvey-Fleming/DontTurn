@@ -130,14 +130,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5308605655298488586, guid: 6fe276ab925621f418bb235006036b25, type: 3}
-      propertyPath: m_Name
-      value: Mini Spore Prefab
+    - target: {fileID: 5308605656498336128, guid: 6fe276ab925621f418bb235006036b25, type: 3}
+      propertyPath: m_Icon
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5308605656498336135, guid: 6fe276ab925621f418bb235006036b25, type: 3}
-      propertyPath: sporePrefab
-      value: 
-      objectReference: {fileID: 7485452715614996366, guid: 76a0cbdc7d8dc3f4b9d03d1f13cadea5, type: 3}
+      propertyPath: radius
+      value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5308605656498336155, guid: 6fe276ab925621f418bb235006036b25, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5308605656498336155, guid: 6fe276ab925621f418bb235006036b25, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5308605656713169971, guid: 6fe276ab925621f418bb235006036b25, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -183,8 +191,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5308605656713169980, guid: 6fe276ab925621f418bb235006036b25, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 5308605656713169980, guid: 6fe276ab925621f418bb235006036b25, type: 3}
       propertyPath: m_Name
       value: BombParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 5308605656713169980, guid: 6fe276ab925621f418bb235006036b25, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fe276ab925621f418bb235006036b25, type: 3}
@@ -843,7 +859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &465956782
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1012,7 +1028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2318deac161c440bed5328928d77ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 465956784}
   id: 
   isDead: 0
 --- !u!1 &569043842
@@ -1026,6 +1042,7 @@ GameObject:
   - component: {fileID: 569043845}
   - component: {fileID: 569043844}
   - component: {fileID: 569043843}
+  - component: {fileID: 569043846}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1099,6 +1116,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &569043846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569043842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &623467422
 GameObject:
   m_ObjectHideFlags: 0
@@ -3448,7 +3498,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1776263208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8, y: -3.78, z: 0}
+  m_LocalPosition: {x: 2.12, y: -3.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3473,7 +3523,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.09
+  m_GravityScale: 0.83
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -3513,7 +3563,7 @@ MonoBehaviour:
   corruptionScript: {fileID: 0}
   maxHealth: 100
   health: 100
-  spawnPointTransform: {fileID: 0}
+  spawnPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &1776263216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3542,16 +3592,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3573ee7de46fee849954923c52a3d318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 1776263213}
-  boxCollider2D: {fileID: 1776263210}
   moveSpeed: 3
   GroundLayerMask:
     serializedVersion: 2
     m_Bits: 128
   jumpForce: 1
   maxAerialJumpCount: 0
+  coyoteTimer: 0.1
   animator: {fileID: 0}
   facingright: 1
+  isGodEnabled: 0
 --- !u!114 &1776263218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3704,7 +3754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
-  playercollision: {fileID: 0}
+  playerCollision: {fileID: 0}
 --- !u!61 &1887383627
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3777,7 +3827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
-  playercollision: {fileID: 0}
+  playerCollision: {fileID: 0}
 --- !u!61 &2039480168
 BoxCollider2D:
   m_ObjectHideFlags: 0

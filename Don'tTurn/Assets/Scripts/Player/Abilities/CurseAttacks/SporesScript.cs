@@ -7,7 +7,7 @@ public class SporesScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(DestroyAfterTime());
     }
 
     // Update is called once per frame
@@ -26,9 +26,16 @@ public class SporesScript : MonoBehaviour
                 Destroy(gameObject); 
                 break;
             case "Ground":
-                gameObject.SetActive(false); 
+                Destroy(gameObject);
                 break; 
+                
 
         }
+    }
+
+    public IEnumerator DestroyAfterTime()
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
     }
 }

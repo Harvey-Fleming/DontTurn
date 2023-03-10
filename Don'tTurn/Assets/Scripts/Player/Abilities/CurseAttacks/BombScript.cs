@@ -8,12 +8,14 @@ public class BombScript : MonoBehaviour
     bool isCollidingTrue; 
     Transform enemy; 
     public float speed = 20f;
-    public Rigidbody2D rb; 
+    public Rigidbody2D rb;
+    public float radius = 1f; 
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(Move());
-      
+        Debug.Log(transform.position); 
     }
 
     // Update is called once per frame
@@ -22,6 +24,7 @@ public class BombScript : MonoBehaviour
         if(isCollidingTrue == true)
         {
             transform.position = enemy.position;
+            
         }
     }
 
@@ -34,16 +37,20 @@ public class BombScript : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = 0f;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        Debug.Log("Not rolling" + transform.position);
         gameObject.GetComponent<CircleCollider2D>().enabled = false;
-
+        SpawnObjectAtRandom();
         for (int i = 0; i < 6; i++)
         {
-            Vector3 randomSpawnPosition = new Vector3(Random.Range(0, 1), Random.Range(0, 3), Random.Range(0, 1));
-            Instantiate(sporePrefab, randomSpawnPosition, Quaternion.identity); 
+            //Vector3 randomSpawnPosition = new Vector3(Random.Range(0, 1), Random.Range(0, 3), Random.Range(0, 1));
+            //Instantiate(sporePrefab, randomSpawnPosition, Quaternion.identity); 
+            //SpawnObjectAtRandom(); 
         }
 
         
     }
+
+   
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -53,5 +60,18 @@ public class BombScript : MonoBehaviour
             isCollidingTrue = true;
 
         }
+    }
+
+    void SpawnObjectAtRandom()
+    {
+        Vector3 randomPos = Random.insideUnitCircle * radius;
+        Debug.Log(randomPos);
+        Instantiate(sporePrefab, randomPos, Quaternion.identity);
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+        Gizmos.DrawWireSphere(this.transform.position, radius);
     }
 }
