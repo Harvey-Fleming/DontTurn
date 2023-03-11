@@ -30,8 +30,6 @@ public class PlayerMovement : MonoBehaviour
     public bool facingright = true;
     public bool isGodEnabled;
 
-
-
     void Update()
     {
         //the horizontal movement value

@@ -16,7 +16,7 @@ public class PlayerCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            playerStats.OnHit(attackDamage);
+            playerStats.OnHit(attackDamage, collision.gameObject);
         }    
     }
 

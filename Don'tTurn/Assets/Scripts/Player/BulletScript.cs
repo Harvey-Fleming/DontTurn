@@ -38,7 +38,7 @@ public class BulletScript : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {
             CalculateBulletDamage();
-            other.gameObject.GetComponent<EnemyStats>()?.OnHit(Mathf.RoundToInt(bulletDamage));
+            other.gameObject.GetComponent<EnemyStats>()?.OnHit(Mathf.RoundToInt(bulletDamage), this.gameObject);
             Destroy(this.gameObject);
         }
         else

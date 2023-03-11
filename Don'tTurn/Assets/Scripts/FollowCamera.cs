@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class FollowCamera : MonoBehaviour
 {
     public Transform playerTransform;
-    [SerializeField] private float smoothTime = 0.25f;
+    [SerializeField] private float smoothTime = 0.25f, yOffset = 0f;
     private Vector3 velocity = Vector3.zero;
 
     private void Awake() 
@@ -15,7 +15,7 @@ public class FollowCamera : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Vector3 newPos = new Vector3(playerTransform.position.x, playerTransform.position.y, -10f);
+        Vector3 newPos = new Vector3(playerTransform.position.x, playerTransform.position.y + yOffset, -10f);
         transform.position = Vector3.SmoothDamp(transform.position, newPos,ref velocity, smoothTime);
     }
 

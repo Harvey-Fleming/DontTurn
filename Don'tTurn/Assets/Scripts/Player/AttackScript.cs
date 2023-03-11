@@ -34,7 +34,7 @@ public class AttackScript : MonoBehaviour
 
         foreach(Collider2D Enemy in enemiesHit)
         {
-            Enemy.GetComponent<EnemyStats>()?.OnHit(attackDamage);
+            Enemy.GetComponent<EnemyStats>()?.OnHit(attackDamage, this.gameObject);
         } 
     }
 
