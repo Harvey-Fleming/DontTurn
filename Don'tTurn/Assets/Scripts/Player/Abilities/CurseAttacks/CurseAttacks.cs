@@ -8,11 +8,13 @@ public class CurseAttacks : MonoBehaviour
     public Transform firePoint;
     public GameObject eatTrigger;
     public GameObject PunchHitbox;
-    private PlayerStats playerStats; 
+    private PlayerStats playerStats;
+    private CorruptionScript CorruptionScript; 
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerStats = GetComponent<PlayerStats>(); 
+        CorruptionScript = GetComponent<CorruptionScript>(); 
     }
 
     // Update is called once per frame
@@ -20,6 +22,7 @@ public class CurseAttacks : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
+            playerStats.OnHit(15, gameObject); 
             Shoot(); 
         }
         if(Input.GetKeyDown(KeyCode.Mouse1))
@@ -28,7 +31,8 @@ public class CurseAttacks : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            PunchEnemy(); 
+            CorruptionScript.time += 10; 
+           PunchEnemy(); 
         }
     }
 

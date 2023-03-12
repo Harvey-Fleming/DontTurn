@@ -78,8 +78,7 @@ public class CurseAttackHitBoxScript : MonoBehaviour
 
     public IEnumerator EatEnemy()
     {
-        int random = 0; 
-        Debug.Log("In coroutine" + random); 
+        Debug.Log("In coroutine"); 
         if(isColliding == true)
         {
             enemy.transform.position = player.transform.position;
@@ -90,9 +89,20 @@ public class CurseAttackHitBoxScript : MonoBehaviour
             enemyRigidBody.constraints = RigidbodyConstraints2D.FreezePositionY;
             Debug.Log("Waiting 0.1 second");
             yield return new WaitForSeconds(0.1f);
-            Debug.Log("Time has gone"); 
-            if (random == 0)
+            enemy.GetComponent<EnemyStats>().OnHit(20, player); 
+            if(enemy.GetComponent<EnemyStats>().isDead == true)
             {
+               
+                player.GetComponent<CorruptionScript>().time -= 20f;
+                Debug.Log("Healed!");
+                enemy.GetComponent<BoxCollider2D>().enabled = true;
+                enemyRigidBody.constraints = RigidbodyConstraints2D.None;
+                enemyRigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+                enemy.GetComponent<SpriteRenderer>().enabled = true;
+            }
+            else
+            {
+                Debug.Log("Time has gone");
                 Debug.Log("Will Spit out");
                 enemy.GetComponent<BoxCollider2D>().enabled = true;
                 enemyRigidBody.constraints = RigidbodyConstraints2D.None;
@@ -104,7 +114,9 @@ public class CurseAttackHitBoxScript : MonoBehaviour
                 //enemy.GetComponent<Rigidbody2D>().velocity = transform.right * 0f;
                 enemy = null;
             }
+           
 
+            enemy = null;
             gameObject.SetActive(false);
             isColliding = false; 
         }
@@ -122,8 +134,18 @@ public class CurseAttackHitBoxScript : MonoBehaviour
 
    public void PunchEnemy()
     {
+        if(player.GetComponent<CorruptionScript>().time >= 10)
+        {
+            player.GetComponent<CorruptionScript>().time += 10f;
+        }
+        else
+        {
+            player.GetComponent<PlayerStats>().OnHit(10, gameObject); 
+        }
+       
         enemy.GetComponent<Rigidbody2D>().velocity = transform.right * 5f;
         //gameObject.SetActive(false);
-        isColliding = false; 
+        isColliding = false;
+        enemy = null; 
     }
 }

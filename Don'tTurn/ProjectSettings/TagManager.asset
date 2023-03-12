@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - SpawnPoint
   - DeathBox
+  - Obstacle
+  - Hitbox
   layers:
   - Default
   - TransparentFX
