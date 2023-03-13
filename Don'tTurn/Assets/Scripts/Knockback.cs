@@ -8,11 +8,11 @@ public class Knockback : MonoBehaviour
     [SerializeField] private EnemyMovement enemyMovementScript;
     private Rigidbody2D rb2D;
     
-    [SerializeField] private float baseKnockback = 30f, KnockbackDelay = 0.5f;
+    [SerializeField] private float baseKnockback = 30f, KnockbackDelay = 0.3f;
 
     public void ApplyKnockBack(GameObject attacker)
     {
-        if (rb2D != null)
+        /*if (rb2D != null)
         {
         Vector2 knockbackposdiff =  (gameObject.transform.position - attacker.transform.position).normalized;
         StartCoroutine("Reset");
@@ -21,7 +21,19 @@ public class Knockback : MonoBehaviour
         else
         {
             return;
+        } */
+
+        if (rb2D != null)
+        {
+        Vector2 knockbackposdiff =  (gameObject.transform.position - attacker.transform.position).normalized;
+        StartCoroutine("Reset");
+        rb2D.velocity = new Vector2(knockbackposdiff.x * baseKnockback, baseKnockback);
         }
+        else
+        {
+            return;
+        }
+
     }
 
     IEnumerator Reset()
@@ -30,6 +42,7 @@ public class Knockback : MonoBehaviour
         {
             enemyMovementScript.enabled = false;
             yield return new WaitForSeconds(KnockbackDelay);
+            rb2D.velocity = new Vector2(0,0);
             enemyMovementScript.enabled = true;
             yield break;
         }
@@ -37,6 +50,7 @@ public class Knockback : MonoBehaviour
         {
             playerMovementScript.enabled = false;
             yield return new WaitForSeconds(KnockbackDelay);
+            rb2D.velocity = new Vector2(0,0);
             playerMovementScript.enabled = true;
             yield break;
         }

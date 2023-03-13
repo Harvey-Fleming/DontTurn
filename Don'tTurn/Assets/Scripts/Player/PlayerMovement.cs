@@ -17,8 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask GroundLayerMask;
     [SerializeField] private float jumpForce = 1f;
     public int maxAerialJumpCount;
-    int aerialJumpCount;
-
+    private int aerialJumpCount;
 
     //"Coyote Jump" Variables
     [SerializeField] private float coyoteTimer = 0.1f;
@@ -60,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(hmoveValue * (moveSpeed * moveMultiplier) * Time.deltaTime, rb.velocity.y);
         animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
         CheckFlip();
-
     }
 
     void CheckJump()

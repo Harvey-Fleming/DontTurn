@@ -13,7 +13,7 @@ public class PlayerCollision : MonoBehaviour
     private GameObject incomingAttacker;
     private int attackDamage = 10;
     private float timebetweenRegens = 1, iframeflicker = 0.1f;
-    private bool canTakeDamage = true;
+    [SerializeField] private bool canTakeDamage = true;
     private bool canRegen = true;
 
 
