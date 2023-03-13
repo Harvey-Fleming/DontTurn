@@ -48,6 +48,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     public void OnHit(int attackDamage, GameObject attacker)
     {
         health -= attackDamage;
+
     }
 
     public void OnDeath()
@@ -92,7 +93,6 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     {
         spawnPoint = Vector3.zero;        
     }
-
 
 //Save and Loading Data
     public void LoadData(GameData data)

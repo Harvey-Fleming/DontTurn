@@ -5,15 +5,16 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 {
+    private EnemyMovement enemyMovementScript;
+    private Knockback knockbackScript;
+
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb2D;
-    private EnemyMovement enemyMovement;
+
 
     [SerializeField] private string id;
-    [SerializeField] private float baseKnockback = 500f, KnockbackDelay = 0.5f;
     public bool isDead = false;
     private int maxHealth = 15, currentHealth = 15;
-    private GameObject attacker;
 
     [ContextMenu("Generate Unique Guid for id")]
     private void GenerateGuid()
@@ -45,37 +46,13 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     public void OnHit(int damageTaken, GameObject incomingAttacker)
     {
         currentHealth = currentHealth - damageTaken;
-        attacker = incomingAttacker;
         StartCoroutine(ChangeColour());
-        ApplyKnockBack();
+        knockbackScript.ApplyKnockBack(incomingAttacker);
         if (currentHealth <= 0)
         {
             OnDeath();
         }
         Debug.Log(currentHealth);
-    }
-
-    private void ApplyKnockBack()
-    {
-        if (rb2D != null)
-        {
-        Vector2 knockbackposdiff =  (gameObject.transform.position - attacker.transform.position).normalized;
-
-        StartCoroutine("Reset");
-        rb2D.AddForce(( knockbackposdiff * baseKnockback), ForceMode2D.Impulse);
-        }
-        else
-        {
-            return;
-        }
-    }
-
-    IEnumerator Reset()
-    {
-        enemyMovement.enabled = false;
-        yield return new WaitForSeconds(KnockbackDelay);
-        enemyMovement.enabled = true;
-        yield break;
     }
 
     public void OnDeath()
@@ -113,7 +90,8 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
-        enemyMovement = GetComponent<EnemyMovement>();
+        enemyMovementScript = GetComponent<EnemyMovement>();
+        knockbackScript = GetComponent<Knockback>();
     }
 
 

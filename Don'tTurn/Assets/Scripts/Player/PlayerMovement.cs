@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded()
     {
         float extraHeightTest = 0.05f;
-        RaycastHit2D raycastHit = Physics2D.Raycast(boxCollider2D.bounds.center, Vector2.down, boxCollider2D.bounds.extents.y + extraHeightTest, GroundLayerMask);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0, Vector2.down, boxCollider2D.bounds.extents.y + extraHeightTest, GroundLayerMask);
         return raycastHit.collider != null;
     }
 
