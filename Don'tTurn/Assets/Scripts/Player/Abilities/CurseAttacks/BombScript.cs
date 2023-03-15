@@ -44,8 +44,12 @@ public class BombScript : MonoBehaviour
         {
             //Vector3 randomSpawnPosition = new Vector3(Random.Range(0, 1), Random.Range(0, 3), Random.Range(0, 1));
             //Instantiate(sporePrefab, randomSpawnPosition, Quaternion.identity); 
-            //SpawnObjectAtRandom(); 
+            SpawnObjectAtRandom(); 
         }
+
+        yield return new WaitForSeconds(1f);
+
+        Destroy(gameObject); 
 
         
     }
@@ -65,7 +69,8 @@ public class BombScript : MonoBehaviour
     void SpawnObjectAtRandom()
     {
         Vector3 randomPos = Random.insideUnitCircle * radius;
-        Debug.Log(randomPos);
+        randomPos += transform.position; 
+        Debug.Log("Random pos is" + randomPos);
         Instantiate(sporePrefab, randomPos, Quaternion.identity);
     }
     private void OnDrawGizmos()

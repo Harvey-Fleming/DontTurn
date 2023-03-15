@@ -19,13 +19,20 @@ public class BeingPunchedScript : MonoBehaviour
             isPunched = true;
         }
 
-        if (isPunched == true && collision.gameObject.CompareTag("Obstacle"))
+        if (isPunched == true && collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject);
             enemyStats.OnHit(5, gameObject);
             isPunched = false; 
         }
         
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Hitbox"))
+        {
+            isPunched = true;
+        }
     }
 
     // Update is called once per frame

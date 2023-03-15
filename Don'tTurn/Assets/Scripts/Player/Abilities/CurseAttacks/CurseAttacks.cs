@@ -20,19 +20,28 @@ public class CurseAttacks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if(Input.GetKeyDown(KeyCode.E))
         {
             playerStats.OnHit(15, gameObject); 
             Shoot(); 
         }
-        if(Input.GetKeyDown(KeyCode.Mouse1))
+        if(Input.GetKeyDown(KeyCode.Q))
         {
             EatEnemyFunction(); 
         }
-        if(Input.GetKeyDown(KeyCode.Return))
+        if(Input.GetKeyDown(KeyCode.LeftShift))
         {
-            CorruptionScript.time += 10; 
-           PunchEnemy(); 
+            if(CorruptionScript.time >= 10f)
+            {
+                CorruptionScript.time -= 10;
+                
+            }
+            else
+            {
+                playerStats.OnHit(10, gameObject);
+            }
+
+            PunchEnemy();
         }
     }
 

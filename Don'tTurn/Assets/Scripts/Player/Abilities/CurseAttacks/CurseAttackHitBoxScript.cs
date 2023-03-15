@@ -134,15 +134,7 @@ public class CurseAttackHitBoxScript : MonoBehaviour
 
    public void PunchEnemy()
     {
-        if(player.GetComponent<CorruptionScript>().time >= 10)
-        {
-            player.GetComponent<CorruptionScript>().time += 10f;
-        }
-        else
-        {
-            player.GetComponent<PlayerStats>().OnHit(10, gameObject); 
-        }
-       
+        enemy.GetComponent<EnemyStats>().OnHit(10, gameObject); 
         enemy.GetComponent<Rigidbody2D>().velocity = transform.right * 5f;
         //gameObject.SetActive(false);
         isColliding = false;

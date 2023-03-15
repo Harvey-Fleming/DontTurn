@@ -136,12 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5187cbc0db4d643b5ca2370aa506b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  sporePrefab: {fileID: 0}
   speed: 4.1
   rb: {fileID: 8285041470975832365}
+  radius: 1.75
