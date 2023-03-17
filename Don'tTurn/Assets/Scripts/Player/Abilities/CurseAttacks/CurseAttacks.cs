@@ -9,12 +9,11 @@ public class CurseAttacks : MonoBehaviour
     public GameObject eatTrigger;
     public GameObject PunchHitbox;
     private PlayerStats playerStats;
-    private CorruptionScript CorruptionScript; 
+    public CorruptionScript CorruptionScript; 
     // Start is called before the first frame update
     void Start()
     {
-        playerStats = GetComponent<PlayerStats>(); 
-        CorruptionScript = GetComponent<CorruptionScript>(); 
+        playerStats = GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame
@@ -31,17 +30,19 @@ public class CurseAttacks : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.LeftShift))
         {
+            Debug.Log("Left shift!!"); 
             if(CorruptionScript.time >= 10f)
             {
                 CorruptionScript.time -= 10;
-                
+                PunchEnemy();
             }
             else
             {
                 playerStats.OnHit(10, gameObject);
+                PunchEnemy();
             }
 
-            PunchEnemy();
+            
         }
     }
 
