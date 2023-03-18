@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CurseAttacks : MonoBehaviour
 {
+    [SerializeField] bool isOnCooldown; 
     public GameObject bomb;
     public Transform firePoint;
     public GameObject eatTrigger;
@@ -19,31 +20,47 @@ public class CurseAttacks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if(isOnCooldown == false)
         {
-            playerStats.OnHit(15, gameObject); 
-            Shoot(); 
-        }
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            EatEnemyFunction(); 
-        }
-        if(Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            Debug.Log("Left shift!!"); 
-            if(CorruptionScript.time >= 10f)
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                CorruptionScript.time -= 10;
-                PunchEnemy();
+                isOnCooldown = true;
+                playerStats.OnHit(15, gameObject);
+                Shoot();
+                
+                
             }
-            else
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                playerStats.OnHit(10, gameObject);
-                PunchEnemy();
+                isOnCooldown = true;
+                EatEnemyFunction();
+               
             }
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                isOnCooldown = true;
+                Debug.Log("Left shift!!");
+                if (CorruptionScript.time >= 10f)
+                {
+                    CorruptionScript.time -= 10;
+                    PunchEnemy();
+                }
+                else
+                {
+                    playerStats.OnHit(10, gameObject);
+                    PunchEnemy();
 
-            
+                }
+                
+
+
+            }
         }
+        else
+        {
+            StartCoroutine(Cooldown()); 
+        }
+       
     }
 
     public void Shoot()
@@ -68,5 +85,11 @@ public class CurseAttacks : MonoBehaviour
     public void PunchEnemy()
     {
         PunchHitbox.SetActive(true); 
+    }
+
+    public IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(1f);
+        isOnCooldown = false; 
     }
 }

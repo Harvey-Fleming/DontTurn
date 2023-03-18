@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueTrigger : MonoBehaviour
 {
+    public bool isChoiceNPC; //checks if the NPC has a choice; 
     public Dialogue dialogue;
+    public Button[] choiceButtons;
     public GameObject buttonToPress;
     private GameObject currentDialogueNPC;
     private bool isActive;
@@ -39,8 +42,18 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
+        if(isChoiceNPC == true)
+        {
+
+                FindObjectOfType<DialogueManager>().choiceButtons  = choiceButtons;
+
+               
+        }
+        FindObjectOfType<DialogueManager>().isChoiceNPC = isChoiceNPC;
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
         currentDialogueNPC.GetComponent<UnlockAbility>().OnAbilityUnlock();
+       
+        
     }    
 
 }
