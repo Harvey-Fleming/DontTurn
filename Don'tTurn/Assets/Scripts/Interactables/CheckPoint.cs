@@ -29,9 +29,12 @@ public class CheckPoint : MonoBehaviour
         {
             playerStats.spawnPoint = this.gameObject.transform.position;
             DataPersistenceManager.instance.OnCheckPointReached();
+            playerCollision.isInsideTrigger = true;
             playerCollision.OnEnterCheckpoint();
         }
     }
+
+    private void OnTriggerExit2D(Collider2D other) => playerCollision.isInsideTrigger = false;
 
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)

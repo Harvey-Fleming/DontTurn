@@ -17,7 +17,7 @@ public class Interactables : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if(Input.GetKeyDown(KeyCode.E) && isActive == true)
+       if(Input.GetKeyDown(KeyCode.W) && isActive == true)
         {
             if(isPressedOnce == false)
             {

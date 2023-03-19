@@ -15,17 +15,21 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump Movement")]
     [SerializeField] private LayerMask GroundLayerMask;
-    [SerializeField] private float jumpForce = 1f;
+    [SerializeField] private float jumpForce = 1f, maxJumpTime = 0.1f;
+    private float jumpTime = 0;
     public int maxAerialJumpCount;
-    private int aerialJumpCount;
+    private int aerialJumpCount, gravityScale = 4, fallingGravityScale = 6;
+    private bool IsJumping = false;
+
 
     //"Coyote Jump" Variables
     [SerializeField] private float coyoteTimer = 0.1f;
     private float currentcoyoteTimer;
 
     [Header("Player")]
-    [SerializeField] Animator animator;
-    SpriteRenderer playerSprite;
+    private Animator animator;
+    [SerializeField] private Cursor cursorScript;
+    private Vector2 cursorPos;
     public bool facingright = true;
     public bool isGodEnabled;
 
@@ -34,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
         //the horizontal movement value
         hmoveValue = Input.GetAxisRaw("Horizontal");
         vmoveValue = Input.GetAxisRaw("Vertical");
+        cursorPos = cursorScript.newCursorPos;
 
         CheckJump();
 
@@ -49,10 +54,7 @@ public class PlayerMovement : MonoBehaviour
         GroundMovement();
     }
 
-    public void DebugMovement()
-    {
-        rb.velocity = new Vector2(rb.velocity.x, vmoveValue * (moveSpeed * moveMultiplier) * Time.deltaTime);
-    }
+    public void DebugMovement() => rb.velocity = new Vector2(rb.velocity.x, vmoveValue * (moveSpeed * moveMultiplier) * Time.deltaTime);
 
     void GroundMovement()
     {
@@ -66,8 +68,24 @@ public class PlayerMovement : MonoBehaviour
         //Basic Jump
         if (currentcoyoteTimer > 0f && Input.GetKeyDown(KeyCode.Space))
         {
-            Jump();;
+            IsJumping = true; jumpTime = 0;
         }
+
+        if (IsJumping)
+        {
+            animator.SetBool("IsJumping", true);
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);  
+            jumpTime += Time.deltaTime;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space) | jumpTime > maxJumpTime)
+        {
+            IsJumping = false;
+        }
+
+        if (rb.velocity.y >= 0) { rb.gravityScale = gravityScale;}
+        if (rb.velocity.y < 0) { rb.gravityScale = fallingGravityScale;}
 
         if (IsGrounded())
             {
@@ -83,13 +101,6 @@ public class PlayerMovement : MonoBehaviour
             }
     }
 
-    private void Jump()
-    {
-        animator.SetBool("IsJumping", true);
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-    }
-
     public bool IsGrounded()
     {
         float extraHeightTest = 0.05f;
@@ -100,23 +111,22 @@ public class PlayerMovement : MonoBehaviour
     void CheckFlip()
     {
         //flips the sprite depending on their direction of movement
-        if(hmoveValue < 0 && facingright)
+        if((cursorPos.x < gameObject.transform.position.x) && facingright)
         {
-            Flip();
+            Vector2 currentScale = gameObject.transform.localScale;
+            currentScale.x *= -1;
+            gameObject.transform.localScale = currentScale;
+
+            facingright = !facingright;
         }
-        if(hmoveValue > 0 && !facingright)
+        else if((cursorPos.x > gameObject.transform.position.x) && !facingright)
         {
-            Flip();
+            Vector2 currentScale = gameObject.transform.localScale;
+            currentScale.x *= -1;
+            gameObject.transform.localScale = currentScale;
+
+            facingright = !facingright;
         }  
-    }
-
-    private void Flip()
-    {
-        Vector2 currentScale = gameObject.transform.localScale;
-        currentScale.x *= -1;
-        gameObject.transform.localScale = currentScale;
-
-        facingright = !facingright;
     }
 
     void AerialJump()
@@ -136,8 +146,9 @@ public class PlayerMovement : MonoBehaviour
     //calls when the script is loaded or a value changes in the Inspector. Allows us to free up space in the inspector by assigning references automatically
     private void OnValidate() 
     {
-        rb = this.gameObject.GetComponent<Rigidbody2D>();
-        boxCollider2D = this.gameObject.GetComponent<BoxCollider2D>();
+        rb = GetComponent<Rigidbody2D>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
     }
 
 

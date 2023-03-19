@@ -21,7 +21,7 @@ public class AttackScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             attackSpeedMultiplier = (1 + (corruptionScript.time / 100));
             StartCoroutine(AttackCooldown());
