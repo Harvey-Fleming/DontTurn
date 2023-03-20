@@ -6,11 +6,13 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    public Button[] choiceButtons; 
     //this script manages 
     public Animator animator; 
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText; 
     [SerializeField] private GameObject textboxObj;
+    public bool isChoiceNPC; //checks if the NPC has a choice; 
 
     private Queue<string> sentences; 
 
@@ -55,8 +57,21 @@ public class DialogueManager : MonoBehaviour
     {
         if(sentences.Count == 0)
         {
-            EndDialogue();
-            return; 
+            Debug.Log(isChoiceNPC); 
+            if(isChoiceNPC == true)
+            {
+                Debug.Log("Enters thingy!"); 
+                for (int i = 0; i < choiceButtons.Length; i++)
+                {
+                    choiceButtons[i].gameObject.SetActive(true); 
+                }
+            }
+            else
+            {
+                EndDialogue();
+                return;
+            }
+           
         }
 
         string sentence = sentences.Dequeue();
