@@ -11,10 +11,11 @@ public class RangeEnemy : MonoBehaviour
     public GameObject projectile;
     public float projectileSpeed;
     public float lineOfSite;
-
+    private Animator anim;
     // Start is called before the first frame update
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         InSite = false;
     }
     void Start()
@@ -44,7 +45,14 @@ public class RangeEnemy : MonoBehaviour
             InSite = true;
             Instantiate(projectile, transform.position, Quaternion.identity);
             timeBtwShots = Time.time + startTimeBtwShots;
+            anim.SetBool("Awaken", true);
         }
+
+       // else if (distanceFromPlayer > lineOfSite && timeBtwShots < Time.time)
+      //  {
+         //   InSite = false;
+         //  anim.SetBool("Awaken", false);
+       // }
 
     }
 }
