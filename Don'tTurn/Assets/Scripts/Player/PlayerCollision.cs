@@ -22,6 +22,7 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") && canTakeDamage)
         {
             playerStats.OnHit(attackDamage, collision.gameObject);
+            corruptionScript.OnHitCorruption(attackDamage);
             knockbackScript.ApplyKnockBack(collision.gameObject);
             StartCoroutine("IFrames");
         }    

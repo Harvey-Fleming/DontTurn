@@ -53,9 +53,14 @@ public class CorruptionScript : MonoBehaviour
            
         }
         
-        if (time < 0)
+        if (time <= 0)
         {
             time = 0;
+        }
+
+        if( time >= 100)
+        {
+            time = 100;
         }
     }
 
@@ -71,6 +76,11 @@ public class CorruptionScript : MonoBehaviour
             playerStats.health--;
             yield return new WaitForSeconds(tick/4);
         }
+    }
+
+    public void OnHitCorruption(int attackDamage)
+    {
+        time += attackDamage;
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
