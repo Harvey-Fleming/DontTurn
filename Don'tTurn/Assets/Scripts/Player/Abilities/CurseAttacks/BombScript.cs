@@ -62,8 +62,6 @@ public class BombScript : MonoBehaviour
         {
             enemy = collision.gameObject.transform;
             isCollidingTrue = true;
-            gameObject.GetComponent<CircleCollider2D>().enabled = false;
-            
 
         }
     }

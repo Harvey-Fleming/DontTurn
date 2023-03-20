@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 770229748}
   - component: {fileID: 770229745}
   - component: {fileID: 770229750}
-  - component: {fileID: 5117277713559649207}
+  - component: {fileID: 6234985225192785774}
   m_Layer: 0
   m_Name: AbilityNPC
   m_TagString: Untagged
@@ -210,15 +210,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35a7932463b0e8041b58ddc8b4847561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isChoiceNPC: 0
   dialogue:
     sentences:
     - Take this with you! It should help you across this gap. Press Z to use Sawed-Off
       Shotgun.
     name: Jeremy
-  choiceButtons: []
   buttonToPress: {fileID: 268567485066246355}
---- !u!114 &5117277713559649207
+  currentDialogueNPC: {fileID: 0}
+--- !u!114 &6234985225192785774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,5 +229,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba59a0b251e8d6442a5f6a3d0dc589c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NPCAbility: 
+  NPCAbility: Dash
   playerObj: {fileID: 0}

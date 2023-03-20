@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SporesScript : MonoBehaviour
 {
-
-    private GameObject enemy; 
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +21,8 @@ public class SporesScript : MonoBehaviour
         switch(collision.gameObject.tag)
         {
             case "Enemy":
-                enemy = collision.gameObject; 
                 Debug.Log("Hit enemy");
-                gameObject.GetComponent<SpriteRenderer>().enabled = false;
-                StartCoroutine(DamageAfterTime()); 
+                //do damage 
                 Destroy(gameObject); 
                 break;
             case "Ground":
@@ -39,18 +35,7 @@ public class SporesScript : MonoBehaviour
 
     public IEnumerator DestroyAfterTime()
     {
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(3f);
         Destroy(gameObject);
-    }
-
-    public IEnumerator DamageAfterTime()
-    {
-        for(int i = 0; i < 5; i++)
-        {
-            enemy.GetComponent<EnemyStats>().OnHit(1, gameObject); 
-            yield return new WaitForSeconds(1f);
-        }
-       
-      
     }
 }

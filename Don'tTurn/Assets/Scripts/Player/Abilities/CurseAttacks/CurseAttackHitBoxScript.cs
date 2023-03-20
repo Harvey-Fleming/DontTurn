@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class CurseAttackHitBoxScript : MonoBehaviour
 {
-
     [SerializeField] 
     public string attackType;
     //2 attack types "Eat" and "Punch"
    [SerializeField] GameObject enemy;
     [SerializeField] Rigidbody2D enemyRigidBody; 
     public GameObject player;
-    [SerializeField] bool isColliding = false;
-    public CorruptionScript corruptionScript; 
+    [SerializeField] bool isColliding = false; 
     // Start is called before the first frame update
     void Start()
     {
@@ -29,26 +27,26 @@ public class CurseAttackHitBoxScript : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        //if (collision.gameObject.CompareTag("Enemy") && isColliding == false)
-        //{
-        //    isColliding = true;
-        //    enemy = collision.gameObject;
+        if (collision.gameObject.CompareTag("Enemy") && isColliding == false)
+        {
+            isColliding = true;
+            enemy = collision.gameObject;
 
-        //    switch (attackType)
-        //    {
-        //        //case "Eat":
-        //        //    Debug.Log("Entering Coroutine");
-        //        //    StartCoroutine(EatEnemy());
-        //        //    break;
-        //        //case "Punch":
-        //        //    PunchEnemy();
-        //        //    break;
-        //    }
-        //}
-        //else
-        //{
-        //    isColliding = false;
-        //}
+            switch (attackType)
+            {
+                //case "Eat":
+                //    Debug.Log("Entering Coroutine");
+                //    StartCoroutine(EatEnemy());
+                //    break;
+                case "Punch":
+                    PunchEnemy();
+                    break;
+            }
+        }
+        else
+        {
+            isColliding = false;
+        }
 
     }
 
@@ -95,7 +93,7 @@ public class CurseAttackHitBoxScript : MonoBehaviour
             if(enemy.GetComponent<EnemyStats>().isDead == true)
             {
                
-                corruptionScript.time += 20f;
+                player.GetComponent<CorruptionScript>().time -= 20f;
                 Debug.Log("Healed!");
                 enemy.GetComponent<BoxCollider2D>().enabled = true;
                 enemyRigidBody.constraints = RigidbodyConstraints2D.None;
@@ -111,15 +109,7 @@ public class CurseAttackHitBoxScript : MonoBehaviour
                 enemyRigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
                 enemy.GetComponent<SpriteRenderer>().enabled = true;
                 //enemy.GetComponent<Rigidbody2D>().velocity = transform.right * 5f;
-                if (player.GetComponent<PlayerMovement>().facingright == true)
-                {
-                    enemy.GetComponent<Rigidbody2D>().velocity = transform.right * 5f;
-                }
-                else
-                {
-                    enemy.GetComponent<Rigidbody2D>().velocity = transform.right * -5f;
-                }
-                
+                enemy.GetComponent<Rigidbody2D>().velocity = transform.right * 5f;
                 //Enemy on hit Function :D
                 //enemy.GetComponent<Rigidbody2D>().velocity = transform.right * 0f;
                 enemy = null;
@@ -144,15 +134,8 @@ public class CurseAttackHitBoxScript : MonoBehaviour
 
    public void PunchEnemy()
     {
-        enemy.GetComponent<EnemyStats>().OnHit(10, gameObject);
-        if (player.GetComponent<PlayerMovement>().facingright == true)
-        {
-            enemy.GetComponent<Rigidbody2D>().velocity = transform.right * 5f;
-        }
-        else
-        {
-            enemy.GetComponent<Rigidbody2D>().velocity = transform.right * -5f;
-        }
+        enemy.GetComponent<EnemyStats>().OnHit(10, gameObject); 
+        enemy.GetComponent<Rigidbody2D>().velocity = transform.right * 5f;
         //gameObject.SetActive(false);
         isColliding = false;
         enemy = null; 

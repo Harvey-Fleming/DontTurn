@@ -56,9 +56,53 @@ PrefabInstance:
       propertyPath: m_Name
       value: SporeBombTest
       objectReference: {fileID: 0}
+    - target: {fileID: 8285041470975832367, guid: 21cfebd1c9408d041a9974db4a328df3, type: 3}
+      propertyPath: radius
+      value: 0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285041470975832367, guid: 21cfebd1c9408d041a9974db4a328df3, type: 3}
+      propertyPath: sporePrefab
+      value: 
+      objectReference: {fileID: 7485452715614996366, guid: 76a0cbdc7d8dc3f4b9d03d1f13cadea5, type: 3}
+    - target: {fileID: 8285041470975832367, guid: 21cfebd1c9408d041a9974db4a328df3, type: 3}
+      propertyPath: spores.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285041470975832367, guid: 21cfebd1c9408d041a9974db4a328df3, type: 3}
+      propertyPath: spores.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285041470975832367, guid: 21cfebd1c9408d041a9974db4a328df3, type: 3}
+      propertyPath: spores.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285041470975832367, guid: 21cfebd1c9408d041a9974db4a328df3, type: 3}
+      propertyPath: spores.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285041470975832367, guid: 21cfebd1c9408d041a9974db4a328df3, type: 3}
+      propertyPath: spores.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285041470975832367, guid: 21cfebd1c9408d041a9974db4a328df3, type: 3}
+      propertyPath: spores.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8285041470975832371, guid: 21cfebd1c9408d041a9974db4a328df3, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285041470975832371, guid: 21cfebd1c9408d041a9974db4a328df3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285041470975832371, guid: 21cfebd1c9408d041a9974db4a328df3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285041470975832371, guid: 21cfebd1c9408d041a9974db4a328df3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 8285041470975832371, guid: 21cfebd1c9408d041a9974db4a328df3, type: 3}
       propertyPath: m_LocalPosition.x

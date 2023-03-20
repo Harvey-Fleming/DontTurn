@@ -15,7 +15,6 @@ public class PlayerCollision : MonoBehaviour
     private float timebetweenRegens = 1, iframeflicker = 0.1f;
     [SerializeField] private bool canTakeDamage = true;
     private bool canRegen = true;
-    public bool isInsideTrigger = false;
 
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -36,7 +35,7 @@ public class PlayerCollision : MonoBehaviour
 
     IEnumerator Regenerate()
     {
-        while(canRegen && isInsideTrigger)
+        while(canRegen)
         {
         canRegen = false;
         if (playerStats.health < playerStats.maxHealth || corruptionScript.time > 0)

@@ -4,63 +4,45 @@ using UnityEngine;
 
 public class CurseAttacks : MonoBehaviour
 {
-    [SerializeField] bool isOnCooldown; 
     public GameObject bomb;
     public Transform firePoint;
     public GameObject eatTrigger;
     public GameObject PunchHitbox;
     private PlayerStats playerStats;
-    public CorruptionScript CorruptionScript; 
+    private CorruptionScript CorruptionScript; 
     // Start is called before the first frame update
     void Start()
     {
-        playerStats = GetComponent<PlayerStats>();
+        playerStats = GetComponent<PlayerStats>(); 
+        CorruptionScript = GetComponent<CorruptionScript>(); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(isOnCooldown == false)
+        if(Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                isOnCooldown = true;
-                playerStats.OnHit(15, gameObject);
-                Shoot();
-                
-                
-            }
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                isOnCooldown = true;
-                EatEnemyFunction();
-               
-            }
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                isOnCooldown = true;
-                Debug.Log("Left shift!!");
-                if (CorruptionScript.time >= 10f)
-                {
-                    CorruptionScript.time -= 10;
-                    PunchEnemy();
-                }
-                else
-                {
-                    playerStats.OnHit(10, gameObject);
-                    PunchEnemy();
-
-                }
-                
-
-
-            }
+            playerStats.OnHit(15, gameObject); 
+            Shoot(); 
         }
-        else
+        if(Input.GetKeyDown(KeyCode.Q))
         {
-            StartCoroutine(Cooldown()); 
+            EatEnemyFunction(); 
         }
-       
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if(CorruptionScript.time >= 10f)
+            {
+                CorruptionScript.time -= 10;
+                
+            }
+            else
+            {
+                playerStats.OnHit(10, gameObject);
+            }
+
+            PunchEnemy();
+        }
     }
 
     public void Shoot()
@@ -85,11 +67,5 @@ public class CurseAttacks : MonoBehaviour
     public void PunchEnemy()
     {
         PunchHitbox.SetActive(true); 
-    }
-
-    public IEnumerator Cooldown()
-    {
-        yield return new WaitForSeconds(1f);
-        isOnCooldown = false; 
     }
 }
