@@ -4,23 +4,37 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public PlayerStats playerStats;
     GameObject Target;
     [SerializeField] private float Speed;
     Rigidbody2D ProjectileRb;
     Vector2 move;
+    void Awake()
+    {
+        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
+    }
     void Start()
     {
         ProjectileRb = GetComponent<Rigidbody2D>();
         Target = GameObject.FindGameObjectWithTag("Player");
-        move = (Target.transform.position - transform.position).normalized * Speed;
+        Vector2 move = (Target.transform.position - transform.position).normalized * Speed;
         ProjectileRb.velocity = new Vector2(move.x, move.y);
+        Destroy(gameObject, 5f);
 
 
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Player")
+        {
+            playerStats.health -= 10f;
+            Destroy(gameObject);
+            print("Collision made");
+        }
+        void Update()
+        {
 
+        }
     }
 }

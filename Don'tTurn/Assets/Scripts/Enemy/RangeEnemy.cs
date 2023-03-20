@@ -10,7 +10,7 @@ public class RangeEnemy : MonoBehaviour
     public Transform player;
     public GameObject projectile;
     public float projectileSpeed;
-    public float lineOfSite;
+    [SerializeField] private float lineOfSite;
     private Animator anim;
     // Start is called before the first frame update
     private void Awake()
