@@ -32,9 +32,5 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
             print("Collision made");
         }
-        void Update()
-        {
-
-        }
     }
 }

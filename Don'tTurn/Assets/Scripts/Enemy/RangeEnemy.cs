@@ -20,13 +20,14 @@ public class RangeEnemy : MonoBehaviour
     }
     void Start()
     {
-        void OnDrawGismos()
-        {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    void OnDrawGizmosSelected() 
+    {
             print("on draw gizmos");
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, lineOfSite);
-        }
-        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame

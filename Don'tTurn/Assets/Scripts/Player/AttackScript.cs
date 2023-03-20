@@ -4,26 +4,21 @@ using UnityEngine;
 
 public class AttackScript : MonoBehaviour
 {
-    [Header("Component References")]
-    [SerializeField] private CorruptionScript corruptionScript;
-    [SerializeField] private Animator animator;
+    private CorruptionScript corruptionScript;
+    private Animator animator;
 
     [Header("Melee Attack Stats")]
 
     [SerializeField] private Transform attackPointTrans;
-    [SerializeField] private float attackRadius, attackCooldownTime = 2.0f;
-    [SerializeField] private int attackDamage;
-    [SerializeField] private bool canAttack = true;
-
-    [Header("Corruption Effect")]
-    private float attackSpeedMultiplier;
+    [SerializeField] private float attackRadius, attackCooldownTime = 0.5f;
+    [SerializeField] private int baseAttackDamage, UpgradeDamage;
+    private bool canAttack = true;
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            attackSpeedMultiplier = (1 + (corruptionScript.time / 100));
             StartCoroutine(AttackCooldown());
         }
     }
@@ -34,7 +29,7 @@ public class AttackScript : MonoBehaviour
 
         foreach(Collider2D Enemy in enemiesHit)
         {
-            Enemy.GetComponent<EnemyStats>()?.OnHit(attackDamage, this.gameObject);
+            Enemy.GetComponent<EnemyStats>()?.OnHit(baseAttackDamage + UpgradeDamage, this.gameObject);
         } 
     }
 
@@ -53,10 +48,21 @@ public class AttackScript : MonoBehaviour
             yield return 0;
             animator.SetBool("IsAttacking", false);
             canAttack = false;
-            yield return new WaitForSeconds(attackCooldownTime / attackSpeedMultiplier);
+            yield return new WaitForSeconds(attackCooldownTime);
             canAttack = true;   
             yield break;
         }
     
+    }
+
+    public void OnMeleeUpgrade()
+    {
+        UpgradeDamage += 5;
+    }
+
+    private void OnValidate() 
+    {
+        corruptionScript = FindObjectOfType<CorruptionScript>();
+        animator = GetComponent<Animator>();
     }
 }
