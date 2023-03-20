@@ -20,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private bool isAggro;
     [SerializeField] private bool isDamaging;
     [SerializeField] private bool canJump;
+    private bool facingright;
 
     private void Start()
     {
@@ -74,6 +75,8 @@ public class EnemyMovement : MonoBehaviour
         {
             WanderMovement();
         }
+
+        CheckFlip();
     }
 
     void WanderMovement()
@@ -174,6 +177,28 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(1f);
         isDamaging = false;
 
+    }
+
+    void CheckFlip()
+    {
+        //flips the sprite depending on their direction of movement
+        if( moveDirection < 0 && facingright)
+        {
+            Flip();
+        }
+        if( moveDirection > 0 && !facingright)
+        {
+            Flip();
+        }  
+    }
+
+    private void Flip()
+    {
+        Vector2 currentScale = gameObject.transform.localScale;
+        currentScale.x *= -1;
+        gameObject.transform.localScale = currentScale;
+
+        facingright = !facingright;
     }
 
     private void OnValidate() {

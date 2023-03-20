@@ -15,12 +15,11 @@ public class PrototypeDash : MonoBehaviour
     [Header("Dash Variables")]
     public bool isUnlocked  = false;
     [SerializeField] private float dashSpeed;
-    bool isDashing;
-    bool canDash = true;
-    [SerializeField] private float dashTime;
-    float dashDirection;
-    int dashCount = 0;
-    [SerializeField] private float dashCooldown = 2;
+    private bool isDashing;
+    private bool canDash = true;
+    [SerializeField] private float dashTime, dashCooldown = 2;
+    private float dashDirection;
+    private int dashCount = 0;
 
     //Bullet Variables
     [Header("Bullet Variables")]
@@ -29,13 +28,6 @@ public class PrototypeDash : MonoBehaviour
     [SerializeField] private float autoBulletDestroyTime = 0.25f;
     private float bulletSpeed = 25f;
     private bool canShoot = true;
-
-    private void Start()
-    {
-        movement = GetComponent<PlayerMovement>();
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-    }
 
     void Update()
     {
@@ -50,24 +42,16 @@ public class PrototypeDash : MonoBehaviour
     {
         if (!isDashing && dashCount > 0)
         {
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 dashCount--;
-
                 isDashing = true; 
             }
         }
 
-        if (movement.IsGrounded() && canDash)
-        {
-            dashCount = 1;          
-        }
-
-        if (isDashing)
-        {
-            canDash = false;
-            StartCoroutine(DashAbility());        
-        }
+        if (movement.IsGrounded() && canDash) { dashCount = 1; }       
+        
+        if (isDashing) { canDash = false; StartCoroutine(DashAbility()); }
     }
 
     IEnumerator DashAbility()
@@ -100,5 +84,12 @@ public class PrototypeDash : MonoBehaviour
             currentBulletObj.GetComponent<Rigidbody2D>().AddRelativeForce((transform.right * -dashDirection) * bulletSpeed, ForceMode2D.Impulse);
             Destroy(currentBulletObj, autoBulletDestroyTime);
         }
+    }
+
+    private void OnValidate()
+    {
+        movement = GetComponent<PlayerMovement>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 }
