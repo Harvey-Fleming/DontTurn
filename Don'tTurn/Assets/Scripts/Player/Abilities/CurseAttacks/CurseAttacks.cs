@@ -11,6 +11,10 @@ public class CurseAttacks : MonoBehaviour
     public GameObject PunchHitbox;
     private PlayerStats playerStats;
     public CorruptionScript CorruptionScript; 
+
+    public bool isCursePunchUnlocked;
+    public bool isBombUnlocked;
+    public bool isEatUnlocked;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +26,7 @@ public class CurseAttacks : MonoBehaviour
     {
         if(isOnCooldown == false)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && isBombUnlocked)
             {
                 isOnCooldown = true;
                 playerStats.OnHit(15, gameObject);
@@ -30,13 +34,13 @@ public class CurseAttacks : MonoBehaviour
                 
                 
             }
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Q) && isEatUnlocked)
             {
                 isOnCooldown = true;
                 EatEnemyFunction();
                
             }
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift) && isCursePunchUnlocked)
             {
                 isOnCooldown = true;
                 Debug.Log("Left shift!!");

@@ -25,10 +25,20 @@ public class UnlockAbility : MonoBehaviour
                 case("Double Jump"):
                 playerObj.GetComponent<PlayerMovement>().maxAerialJumpCount = 1;
                 break;
-                case("GrappleHook"):
+                case("Grapple"):
                 playerObj.GetComponent<GrappleAbility>().isUnlocked = true;
                 break;
+                case("Bomb"):
+                playerObj.GetComponent<CurseAttacks>().isBombUnlocked = true;
+                break;
+                case("CursePunch"):
+                playerObj.GetComponent<CurseAttacks>().isCursePunchUnlocked = true;
+                break;
+                case("Eat"):
+                playerObj.GetComponent<CurseAttacks>().isEatUnlocked = true;
+                break;
                 default:
+                Debug.LogError("No ability: " + NPCAbility + " Found, Please check spelling");
                 break;
             }
         }

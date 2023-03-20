@@ -12,8 +12,6 @@ public class DialogueTrigger : MonoBehaviour
     private GameObject currentDialogueNPC;
     private bool isActive;
 
-
-
     private void OnTriggerStay2D(Collider2D other)
     {
         if(other.gameObject.tag == "Player")
@@ -32,7 +30,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Update()
     {
-        if(isActive == true && Input.GetKeyDown(KeyCode.E))
+        if(isActive == true && Input.GetKeyDown(KeyCode.W))
         {
             currentDialogueNPC = this.gameObject;
             TriggerDialogue();
@@ -46,12 +44,11 @@ public class DialogueTrigger : MonoBehaviour
         {
 
                 FindObjectOfType<DialogueManager>().choiceButtons  = choiceButtons;
-
-               
+     
         }
         FindObjectOfType<DialogueManager>().isChoiceNPC = isChoiceNPC;
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
-        currentDialogueNPC.GetComponent<UnlockAbility>().OnAbilityUnlock();
+        currentDialogueNPC.GetComponent<UnlockAbility>()?.OnAbilityUnlock();
        
         
     }    

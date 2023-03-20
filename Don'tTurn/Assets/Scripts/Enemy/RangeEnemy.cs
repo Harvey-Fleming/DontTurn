@@ -6,7 +6,7 @@ public class RangeEnemy : MonoBehaviour
 {
     public float timeBtwShots;
     [SerializeField] private float startTimeBtwShots = 1f;
-    [SerializeField] private bool InSite;
+    //[SerializeField] private bool InSite;
     public Transform player;
     public GameObject projectile;
     public float projectileSpeed;
@@ -16,7 +16,7 @@ public class RangeEnemy : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        InSite = false;
+        //InSite = false;
     }
     void Start()
     {
@@ -40,10 +40,10 @@ public class RangeEnemy : MonoBehaviour
         // and timeBtwShot less than start time than spawn projectile (this will aslo add delay from initial start time
         // timebtwshots should fire every secound
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
-        Debug.Log("DistanceFromPlayer" + distanceFromPlayer.ToString());
+        //Debug.Log("DistanceFromPlayer" + distanceFromPlayer.ToString());
         if (distanceFromPlayer < lineOfSite && timeBtwShots < Time.time)
         {
-            InSite = true;
+            //InSite = true;
             Instantiate(projectile, transform.position, Quaternion.identity);
             timeBtwShots = Time.time + startTimeBtwShots;
             anim.SetBool("Awaken", true);
