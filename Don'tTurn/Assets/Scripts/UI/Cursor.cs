@@ -12,7 +12,7 @@ public class Cursor : MonoBehaviour
     {
         mousePos = Input.mousePosition;
 
-        newCursorPos = maincamera.ScreenToWorldPoint(mousePos);
+        newCursorPos = maincamera.ScreenToWorldPoint(new Vector3 (mousePos.x,mousePos.y, 0f));
 
         transform.position = newCursorPos;
 
