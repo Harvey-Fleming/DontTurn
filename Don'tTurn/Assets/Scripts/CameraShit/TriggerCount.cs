@@ -4,37 +4,59 @@ using UnityEngine;
 
 public class TriggerCount : MonoBehaviour
 {
-    FollowCamera Cam;
-    public int countDown;
- 
+    CamZoom Cam;
+    public static int countDown;
+
     // Start is called before the first frame update
     void Start()
     {
-        Cam = GameObject.FindGameObjectWithTag("Cam").GetComponent<FollowCamera>();
+        Cam = GameObject.FindGameObjectWithTag("Cam").GetComponent<CamZoom>();
+
+        //static  CallCheck();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+
+    
+
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "CamTrigger")
         {
             countDown++;
 
             Debug.Log(countDown);
 
-            _ = countDown % 2;
+            countDown = countDown % 2;
+
+            Debug.Log(countDown);
+
+            CallCheck();
         }
 
     }
-    // Update is called once per frame
-    void Update()
+    
+
+     void CallCheck()
     {
-        if (countDown % 2 == 0)
+        if (countDown != 0)
         {
             Cam.ZoomIn();
+          
+
         }
 
-        else if (countDown % 2 != 0)
+        else if (countDown == 0)
         {
-            Cam.ZoomIn();
+            Cam.ZoomOut();
+           
         }
+
+        
+    }
+    
+    // Update is called once per frame
+    public void Update()
+    {
+     
     }
 }

@@ -10,6 +10,8 @@ TagManager:
   - DeathBox
   - Obstacle
   - Hitbox
+  - Cam
+  - CamTrigger
   layers:
   - Default
   - TransparentFX

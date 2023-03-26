@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class FollowCamera : MonoBehaviour
 {
-    private int divNumber;
+   
     public TriggerCount TriggerCount;
     public Transform playerTransform;
     [SerializeField] private float smoothTime = 0.25f, yOffset = 0f;
@@ -14,7 +14,7 @@ public class FollowCamera : MonoBehaviour
 
     private void Awake()
     {
-        divNumber = 2;
+        
         TriggerCount = GameObject.FindWithTag("Cam").GetComponent<TriggerCount>();
         playerTransform = GameObject.FindWithTag("Player").transform;
     }
@@ -25,24 +25,12 @@ public class FollowCamera : MonoBehaviour
 
     }
 
-    internal void ZoomIn(GameObject gameObject)
-    {
-        throw new NotImplementedException();
-    }
+    
 
     void OnSceneLoaded()
     {
         playerTransform = GameObject.FindWithTag("Player").transform;
     }
     
-    public void ZoomIn()
-    {
-        GetComponent<Camera>().fieldOfView--;
-    }
-
-
-    public void ZoomOut()
-    {
-        GetComponent<Camera>().fieldOfView++;
-    }
+    
 }
