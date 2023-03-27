@@ -5,13 +5,14 @@ using UnityEngine;
 public class TriggerCount : MonoBehaviour
 {
     CamZoom Cam;
+    FollowCamera FollowCamera;
     public static int countDown;
 
     // Start is called before the first frame update
     void Start()
     {
         Cam = GameObject.FindGameObjectWithTag("Cam").GetComponent<CamZoom>();
-
+        FollowCamera = GameObject.FindGameObjectWithTag("Cam").GetComponent<FollowCamera>();
         //static  CallCheck();
     }
 
@@ -40,15 +41,13 @@ public class TriggerCount : MonoBehaviour
     {
         if (countDown != 0)
         {
-            Cam.ZoomIn();
-          
-
+            Cam.ZoomOut();
         }
 
         else if (countDown == 0)
         {
-            Cam.ZoomOut();
-           
+            Cam.ZoomIn();
+
         }
 
         

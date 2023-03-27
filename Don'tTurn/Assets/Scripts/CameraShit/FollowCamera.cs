@@ -18,7 +18,7 @@ public class FollowCamera : MonoBehaviour
         TriggerCount = GameObject.FindWithTag("Cam").GetComponent<TriggerCount>();
         playerTransform = GameObject.FindWithTag("Player").transform;
     }
-    void FixedUpdate()
+   public void FixedUpdate()
     {
         Vector3 newPos = new Vector3(playerTransform.position.x, playerTransform.position.y + yOffset, -10f);
         transform.position = Vector3.SmoothDamp(transform.position, newPos, ref velocity, smoothTime);
