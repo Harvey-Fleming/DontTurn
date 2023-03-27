@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider2D;
     private DebugButtonsEditor debugButtonsEditor;
+    private Transform moveToTargetTrans;
     float hmoveValue = 0, vmoveValue = 0;
     public float moveSpeed = 3f;
     float moveMultiplier = 100f;
@@ -52,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
             DebugMovement();
         }
         GroundMovement();
+
     }
 
     public void DebugMovement() => rb.velocity = new Vector2(rb.velocity.x, vmoveValue * (moveSpeed * moveMultiplier) * Time.deltaTime);

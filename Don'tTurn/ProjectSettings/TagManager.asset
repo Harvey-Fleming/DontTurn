@@ -12,6 +12,7 @@ TagManager:
   - Hitbox
   - Cam
   - CamTrigger
+  - GrapplePoint
   layers:
   - Default
   - TransparentFX
