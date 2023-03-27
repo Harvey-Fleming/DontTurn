@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-
+    //Component References
     private PlayerStats playerStats;
+    private PlayerMovement playerMovement;
     private CorruptionScript corruptionScript;
+    private CheckPoint checkPointScript;
     private Knockback knockbackScript;
-
     private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rb2D;
+    private Animator animator;
+
     private GameObject incomingAttacker;
+    private Transform restTrans;
     private int attackDamage = 10;
-    private float timebetweenRegens = 1, iframeflicker = 0.1f;
-    [SerializeField] private bool canTakeDamage = true;
-    private bool canRegen = true;
-    public bool isInsideTrigger = false;
+    private float timebetweenRegens = 1, iframeflicker = 0.1f, lerpSpeed = 4f;
+    private bool canTakeDamage = true, interactPressed = false;
+    public bool isInsideTrigger = false, IsMovingToTarget = false;
 
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -29,16 +33,46 @@ public class PlayerCollision : MonoBehaviour
         }    
     }
 
-    public void OnEnterCheckpoint()
+    private void Update()
     {
-        StartCoroutine("Regenerate");
+        OnBeginRest();
     }
+
+    private void OnBeginRest()
+    {
+        if (isInsideTrigger && Input.GetKeyDown(KeyCode.W))
+        {
+            Debug.Log("Interact Pressed");
+            interactPressed = !interactPressed;
+            if (interactPressed == true)
+            {
+                checkPointScript.RespawnAllEnemies();
+                Debug.Log("Interact Pressed is true");
+                playerMovement.enabled = false;
+                rb2D.velocity = Vector2.zero;
+                MoveToTarget(restTrans);
+                StartCoroutine("Regenerate");
+            }
+            else if (interactPressed == false)
+            {
+                Debug.Log("Interact Pressed is false");
+                animator.SetBool("IsResting", false);
+
+                playerMovement.enabled = true;
+                IsMovingToTarget = false;
+            }
+
+        }
+    }
+
+    public void OnEnterCheckpoint(Transform restPointTrans, GameObject checkPoint) { isInsideTrigger = true; restTrans = restPointTrans; checkPointScript = checkPoint.GetComponent<CheckPoint>();}
+
+    public void OnLeaveCheckpoint() => isInsideTrigger = false;
 
     IEnumerator Regenerate()
     {
-        while(canRegen && isInsideTrigger)
+        while(interactPressed && isInsideTrigger)
         {
-        canRegen = false;
         if (playerStats.health < playerStats.maxHealth || corruptionScript.time > 0)
         {
             playerStats.health += 20;
@@ -54,16 +88,6 @@ public class PlayerCollision : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(timebetweenRegens);
-        if (playerStats.health != playerStats.maxHealth || corruptionScript.time != 0)
-        {
-            canRegen = true;
-            StartCoroutine("Regenerate");
-        }
-        else
-        {
-            canRegen = true;
-            yield break;
-        }
         }
     }
 
@@ -81,6 +105,30 @@ public class PlayerCollision : MonoBehaviour
         yield break;
     }
 
+    private void FixedUpdate() {
+        if(IsMovingToTarget)
+        {
+            if(Mathf.Abs(transform.position.x - restTrans.position.x) > 0.01f)
+            {
+                animator.SetFloat("Speed", 1);
+                transform.position = Vector2.Lerp(transform.position, new Vector2(restTrans.position.x, transform.position.y), Time.deltaTime * lerpSpeed);
+            }
+            else if (Mathf.Abs(transform.position.x - restTrans.position.x) < 0.05f)
+            {
+                transform.position = restTrans.position;
+                animator.SetBool("IsResting", true);
+                animator.Play("player_Rest", 0);
+                IsMovingToTarget = false;
+            }
+        }
+    }
+
+    private void MoveToTarget(Transform targetTrans)
+    {
+        restTrans = targetTrans;
+        IsMovingToTarget = !IsMovingToTarget;
+    }
+
     //calls when the script is loaded or a value changes in the Inspector. Allows us to free up space in the inspector by assigning references automatically
     private void OnValidate() 
     {
@@ -88,6 +136,9 @@ public class PlayerCollision : MonoBehaviour
         playerStats = GetComponent<PlayerStats>();
         corruptionScript = GameObject.FindObjectOfType<CorruptionScript>();
         knockbackScript = GetComponent<Knockback>();
+        playerMovement = GetComponent<PlayerMovement>();
+        rb2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
 }

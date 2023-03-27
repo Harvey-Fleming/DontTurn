@@ -5,10 +5,12 @@ using UnityEngine;
 public class GrappleAbility : MonoBehaviour
 {
     [SerializeField] private Cursor cursorScript;
+    private SpringJoint2D joint2D;
+    private PlayerMovement playerMovement;
     private LineRenderer grappleLine;
     public bool isUnlocked = false, isGrappling = false;
 
-    private float hookRange = 200f, hookAngle;
+    private float hookRange = 10f, hookAngle;
     private Vector2 hookAcceptanceRadius, hookDirection;
     private Vector3 mouseWorldPos, grapplePointPos;
 
@@ -33,6 +35,10 @@ public class GrappleAbility : MonoBehaviour
         if(isGrappling)
         {
             DrawLine();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                StopGrapple();
+            }
         }
     }
 
@@ -44,7 +50,7 @@ public class GrappleAbility : MonoBehaviour
         RaycastHit2D grapplehit = Physics2D.Raycast(gameObject.transform.position, hookDirection, hookRange);
         Debug.Log(grapplehit.collider);
         
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && joint2D == null)
         {
             if (grapplehit.collider.tag == "Enemy")
             {
@@ -59,8 +65,12 @@ public class GrappleAbility : MonoBehaviour
                 grapplePointPos = grapplehit.collider.transform.position;
                 isGrappling = true;
                 DrawLine();
-                //OnGrapple();
+                OnGrapple();
                 Debug.Log("Grappled Point");
+            }
+            else if (Input.GetMouseButtonDown(0) && joint2D != null)
+            {
+                StopGrapple();
             }
         }
 
@@ -69,35 +79,48 @@ public class GrappleAbility : MonoBehaviour
 
     private void OnEnemyGrapple()
     {
-        DrawLine();
-        //TODO - Line Render from player pos to hook.
-        //Slerp? to point?
+        playerMovement.enabled = false;
+        //Line renderer
         //Disable player movement apart from jump
     }
 
     private void OnGrapple()
     {
-        DrawLine();
-        //TODO - Line Render from player pos to hook.
-        //Slerp? to point?
+        playerMovement.enabled = false;
+
+        joint2D = gameObject.AddComponent<SpringJoint2D>();
+        joint2D.autoConfigureConnectedAnchor = false;
+        joint2D.autoConfigureDistance = false;
+        joint2D.connectedAnchor = grapplePointPos;
+
+        joint2D.distance = Vector3.Distance(grapplePointPos, transform.position) - 5;
+
+        joint2D.dampingRatio = 0;
+        joint2D.frequency = 17;
+
         //Disable player movement apart from jump
+    }
+
+    private void StopGrapple()
+    {
+        Destroy(GetComponent<SpringJoint2D>());
+        isGrappling = false;
+        grappleLine.positionCount = 0;
+        playerMovement.enabled = true;
     }
 
     private void DrawLine()
     {
         grappleLine.enabled = true;
+        grappleLine.positionCount = 2;
 
         grappleLine.SetPosition(0, transform.position);
         grappleLine.SetPosition(1, grapplePointPos);
     }
 
-    private void OnDrawGizmosSelected() {
-        Color rayColour = Color.blue;
-        Debug.DrawRay(gameObject.transform.position, hookDirection, rayColour);
-    }
-
     private void OnValidate() {
         grappleLine = GetComponent<LineRenderer>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
 }
