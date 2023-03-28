@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground Movement")]
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider2D;
-    private DebugButtonsEditor debugButtonsEditor;
+    
     private Transform moveToTargetTrans;
     float hmoveValue = 0, vmoveValue = 0;
     public float moveSpeed = 3f;
