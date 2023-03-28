@@ -5,14 +5,15 @@ using UnityEngine;
 public class MedicKit : MonoBehaviour
 {
     public bool isActive;
-    public string type; 
+    public string type;
+    GameObject player; 
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            Debug.Log("Press E!"); 
             isActive = true;
+            player = collision.gameObject; 
             //get player's health script or curse script here 
         }
         
@@ -25,17 +26,16 @@ public class MedicKit : MonoBehaviour
 
     private void Update()
     {
-        if(isActive && Input.GetKeyDown(KeyCode.E))
+        if(isActive)
         {
             switch (type)
             {
                 case "Medic":
-                    Debug.Log("Took Med Kit!"); 
-                    //add health or minus curse 
+                    player.GetComponent<Inventory>().medicAmount++; 
                     Destroy(gameObject);
                     break;
                 case "Mushroom":
-                    Debug.Log("Took Mushroom!");
+                    player.GetComponent<Inventory>().mushroomAmount++;
                     Destroy(gameObject);
                     break; 
 

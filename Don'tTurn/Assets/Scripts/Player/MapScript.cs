@@ -21,11 +21,13 @@ public class MapScript : MonoBehaviour
             {
                 case 0:
                     ToggleMap(timesPressed);
-                    timesPressed++; 
+                    timesPressed++;
+                    Time.timeScale = 0; 
                     break;
                 case 1:
                     ToggleMap(timesPressed);
                     timesPressed--;
+                    Time.timeScale = 1;
                     break; 
             }
         }
