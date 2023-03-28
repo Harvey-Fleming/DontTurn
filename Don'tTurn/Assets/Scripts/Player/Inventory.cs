@@ -46,11 +46,11 @@ public class Inventory : MonoBehaviour
             mushroom.gameObject.SetActive(true);
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetKeyDown(KeyCode.Alpha1) && medicAmount >= 1)
         {
             UseMedKit(); 
         }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
+        if(Input.GetKeyDown(KeyCode.Alpha2) && mushroomAmount >= 1)
         {
             UseMushroom(); 
         }
