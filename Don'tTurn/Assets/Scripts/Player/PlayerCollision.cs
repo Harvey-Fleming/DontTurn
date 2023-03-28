@@ -21,7 +21,16 @@ public class PlayerCollision : MonoBehaviour
     private bool canTakeDamage = true, interactPressed = false;
     public bool isInsideTrigger = false, IsMovingToTarget = false;
 
-
+     private void Start() 
+     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerStats = GetComponent<PlayerStats>();
+        corruptionScript = GameObject.FindObjectOfType<CorruptionScript>();
+        knockbackScript = GetComponent<Knockback>();
+        playerMovement = GetComponent<PlayerMovement>();
+        rb2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && canTakeDamage)
@@ -127,18 +136,6 @@ public class PlayerCollision : MonoBehaviour
     {
         restTrans = targetTrans;
         IsMovingToTarget = !IsMovingToTarget;
-    }
-
-    //calls when the script is loaded or a value changes in the Inspector. Allows us to free up space in the inspector by assigning references automatically
-    private void OnValidate() 
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        playerStats = GetComponent<PlayerStats>();
-        corruptionScript = GameObject.FindObjectOfType<CorruptionScript>();
-        knockbackScript = GetComponent<Knockback>();
-        playerMovement = GetComponent<PlayerMovement>();
-        rb2D = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
     }
 
 }

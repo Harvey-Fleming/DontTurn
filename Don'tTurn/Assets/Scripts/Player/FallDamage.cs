@@ -9,7 +9,7 @@ public class FallDamage : MonoBehaviour
     private PlayerStats playerStats;
     public float maxYVel; 
 
-    void OnValidate()
+    private void Start()
     {
         rb2D = GetComponent<Rigidbody2D>(); 
         PlayerMovement = GetComponent<PlayerMovement>();

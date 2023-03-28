@@ -10,6 +10,13 @@ public class Knockback : MonoBehaviour
     
     [SerializeField] private float baseKnockback = 30f, KnockbackDelay = 0.3f;
 
+
+    private void Start() 
+    {
+        enemyMovementScript = GetComponent<EnemyMovement>();
+        playerMovementScript = GetComponent<PlayerMovement>();
+        rb2D = GetComponent<Rigidbody2D>();
+    }
     public void ApplyKnockBack(GameObject attacker)
     {
         /*if (rb2D != null)
@@ -59,9 +66,6 @@ public class Knockback : MonoBehaviour
 
     private void OnValidate() 
     {
-        enemyMovementScript = GetComponent<EnemyMovement>();
-        playerMovementScript = GetComponent<PlayerMovement>();
-        rb2D = GetComponent<Rigidbody2D>();
-        
+      
     }
 }

@@ -24,6 +24,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").transform;
         isWandering = true;
 
@@ -202,7 +204,6 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void OnValidate() {
-        animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+
     }
 }

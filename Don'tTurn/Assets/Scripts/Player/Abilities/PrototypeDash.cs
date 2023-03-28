@@ -29,6 +29,13 @@ public class PrototypeDash : MonoBehaviour
     private float bulletSpeed = 25f;
     private bool canShoot = true;
 
+    private void Start() 
+    {
+        movement = GetComponent<PlayerMovement>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+    }
+    
     void Update()
     {
         //Only allows Dash to be performed if it has been picked up from NPC
@@ -88,8 +95,6 @@ public class PrototypeDash : MonoBehaviour
 
     private void OnValidate()
     {
-        movement = GetComponent<PlayerMovement>();
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+
     }
 }

@@ -34,6 +34,13 @@ public class PlayerMovement : MonoBehaviour
     public bool facingright = true;
     public bool isGodEnabled;
 
+    private void Start() 
+    {
+        rb = GetComponent<Rigidbody2D>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
         //the horizontal movement value
@@ -148,9 +155,7 @@ public class PlayerMovement : MonoBehaviour
     //calls when the script is loaded or a value changes in the Inspector. Allows us to free up space in the inspector by assigning references automatically
     private void OnValidate() 
     {
-        rb = GetComponent<Rigidbody2D>();
-        boxCollider2D = GetComponent<BoxCollider2D>();
-        animator = GetComponent<Animator>();
+
     }
 
 

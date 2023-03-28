@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AttackScript : MonoBehaviour
 {
-    private CorruptionScript corruptionScript;
-    private Animator animator;
+    [SerializeField] private CorruptionScript corruptionScript;
+    [SerializeField] private Animator animator;
 
     [Header("Melee Attack Stats")]
 
@@ -13,6 +13,13 @@ public class AttackScript : MonoBehaviour
     [SerializeField] private float attackRadius, attackCooldownTime = 0.5f;
     [SerializeField] private int baseAttackDamage, UpgradeDamage;
     private bool canAttack = true;
+
+
+    private void Start() 
+    {
+        corruptionScript = FindObjectOfType<CorruptionScript>();
+        animator = GetComponent<Animator>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -60,9 +67,5 @@ public class AttackScript : MonoBehaviour
         UpgradeDamage += 5;
     }
 
-    private void OnValidate() 
-    {
-        corruptionScript = FindObjectOfType<CorruptionScript>();
-        animator = GetComponent<Animator>();
-    }
+
 }

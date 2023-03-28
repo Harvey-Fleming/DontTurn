@@ -26,6 +26,11 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     void Start()
     {
         Respawn();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        rb2D = GetComponent<Rigidbody2D>();
+        enemyMovementScript = GetComponent<EnemyMovement>();
+        knockbackScript = GetComponent<Knockback>();
     }
 
     public void SaveData(GameData data)
@@ -88,10 +93,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
     private void OnValidate() 
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        rb2D = GetComponent<Rigidbody2D>();
-        enemyMovementScript = GetComponent<EnemyMovement>();
-        knockbackScript = GetComponent<Knockback>();
+
     }
 
 
