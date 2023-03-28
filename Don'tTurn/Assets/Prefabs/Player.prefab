@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 6541144399509697044}
   - component: {fileID: 8260895285767689153}
   - component: {fileID: 1288422878}
+  - component: {fileID: 7407100595419681316}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -533,13 +534,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a5ac9162cc65364ba5f5e506b514b51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  corruptionScript: {fileID: 0}
-  animator: {fileID: 5236031296000980964}
   attackPointTrans: {fileID: 6541144399207451490}
   attackRadius: 0.8
   attackCooldownTime: 0.5
-  attackDamage: 5
-  canAttack: 1
+  baseAttackDamage: 0
+  UpgradeDamage: 0
 --- !u!114 &1169889154146458830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,7 +570,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ec75809ab84fc45865863d35c5285d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursorScript: {fileID: 0}
   isUnlocked: 0
+  isGrappling: 0
 --- !u!114 &6541144399509697043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,7 +585,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c0a4461026f3b4fb0ff2036e15d1dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canTakeDamage: 1
+  isInsideTrigger: 0
+  IsMovingToTarget: 0
 --- !u!114 &6541144399509697044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,6 +634,23 @@ MonoBehaviour:
   eatTrigger: {fileID: 1950655165}
   PunchHitbox: {fileID: 791394907}
   CorruptionScript: {fileID: 0}
+  isCursePunchUnlocked: 0
+  isBombUnlocked: 0
+  isEatUnlocked: 0
+--- !u!114 &7407100595419681316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6541144399509697038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06fc0ed24a8576a49a1e32fe51ce5007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  medkitAmount: 0
+  medkitText: {fileID: 0}
 --- !u!1 &9184892614237827191
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,6 +35,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     private void Start() 
     {
         this.gameObject.transform.position = spawnPoint;
+        health = 30f;
     }
 
     void Update()

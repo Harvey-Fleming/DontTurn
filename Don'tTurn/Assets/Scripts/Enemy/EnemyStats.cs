@@ -64,7 +64,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     //Used by Debug Buttons to respawn enemies and when Loading save data
     public void Respawn()
     {
-        Debug.Log("Enemy Respawn Triggered");
+        //Debug.Log("Enemy Respawn Triggered");
         if(isDead)
         {
             gameObject.SetActive(false);
