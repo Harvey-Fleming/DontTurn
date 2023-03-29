@@ -30,7 +30,10 @@ public class CorruptionScript : MonoBehaviour
     void Start()
     {
         healthScript = GetComponent<HealthBarScript>();
-        StartCoroutine(Timer(areaTick)); 
+        StartCoroutine(Timer(areaTick));
+
+        time = 53;
+        //start game with 53 curse
     }
 
     // Update is called once per frame

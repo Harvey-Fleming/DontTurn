@@ -43,6 +43,15 @@ public class PrototypeDash : MonoBehaviour
         {
             CheckDash();
         }
+
+        if (isDashing)
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
     }
 
     private void CheckDash()
@@ -69,7 +78,7 @@ public class PrototypeDash : MonoBehaviour
             animator.SetBool("IsDashing", true);
             movement.enabled = false;
             SpawnBullet();
-            rb.velocity = new Vector2(dashDirection * dashSpeed, 0f);  
+            rb.velocity = new Vector2(-dashDirection * dashSpeed, 0f);  
             yield return new WaitForSeconds(dashTime);
             rb.velocity = new Vector2(0, 0);
             movement.enabled = true; 
@@ -88,7 +97,7 @@ public class PrototypeDash : MonoBehaviour
         {
             canShoot = false;
             GameObject  currentBulletObj = Instantiate(BulletObj, bulletSpawnObj.transform.position, transform.rotation);
-            currentBulletObj.GetComponent<Rigidbody2D>().AddRelativeForce((transform.right * -dashDirection) * bulletSpeed, ForceMode2D.Impulse);
+            currentBulletObj.GetComponent<Rigidbody2D>().AddRelativeForce((-transform.right * -dashDirection) * bulletSpeed, ForceMode2D.Impulse);
             Destroy(currentBulletObj, autoBulletDestroyTime);
         }
     }

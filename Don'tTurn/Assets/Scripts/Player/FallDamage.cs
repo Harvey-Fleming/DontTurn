@@ -21,7 +21,7 @@ public class FallDamage : MonoBehaviour
     {
         if(PlayerMovement.IsGrounded() == true && rb2D.velocity.y == 0)
         {
-            if(maxYVel <= -20f && maxYVel >= -40f)
+            if(maxYVel <= -30f && maxYVel >= -40f)
             {
                 TakeFallDamage(10); 
             }
