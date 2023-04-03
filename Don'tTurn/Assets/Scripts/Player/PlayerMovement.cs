@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (rb.velocity.y >= 0) { rb.gravityScale = gravityScale;}
-        if (rb.velocity.y < 0) { rb.gravityScale = fallingGravityScale;}
+        if (rb.velocity.y < 0 && IsJumping == false) { rb.gravityScale = fallingGravityScale;}
 
         if (IsGrounded())
             {

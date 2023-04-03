@@ -9166,6 +9166,10 @@ PrefabInstance:
       propertyPath: corruptionScript
       value: 
       objectReference: {fileID: 7060473052148132379}
+    - target: {fileID: 356385529447284907, guid: 2f259cfd660d16e4699c9efd8c7d2914, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 3724284503064482097, guid: 2f259cfd660d16e4699c9efd8c7d2914, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.584

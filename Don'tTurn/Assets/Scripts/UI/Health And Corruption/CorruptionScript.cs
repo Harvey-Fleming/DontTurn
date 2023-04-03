@@ -86,6 +86,11 @@ public class CorruptionScript : MonoBehaviour
         time += attackDamage;
     }
 
+    public void OnReduceCorruption(int reduceAmount)
+    {
+        time -= reduceAmount;
+    }
+
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (playerStats == null)

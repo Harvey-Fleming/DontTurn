@@ -32,7 +32,7 @@ public class PlayerInput : MonoBehaviour
     {
         dashSelected = true;
     }
-    
+
     private void Update() {
         moveLeft = Input.GetKeyDown(KeyCode.A);
         moveRight = Input.GetKeyDown(KeyCode.D);
@@ -64,8 +64,5 @@ public class PlayerInput : MonoBehaviour
             grappleSelected = !grappleSelected;
             dashSelected = !dashSelected;
         }
-
-
-
     }
 }
