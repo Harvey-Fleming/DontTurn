@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Ground Movement")]
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider2D;
-    
+    private DebugButtonsEditor debugButtonsEditor;
+    private PlayerInput playerInput;
     private Transform moveToTargetTrans;
     float hmoveValue = 0, vmoveValue = 0;
     public float moveSpeed = 3f;
@@ -19,23 +21,23 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 1f, maxJumpTime = 0.1f;
     private float jumpTime = 0;
     public int maxAerialJumpCount;
-    private int aerialJumpCount, gravityScale = 4, fallingGravityScale = 6;
+    private int aerialJumpCount, gravityScale = 4, fallingGravityScale = 10;
     private bool IsJumping = false;
-
 
     //"Coyote Jump" Variables
     [SerializeField] private float coyoteTimer = 0.1f;
     private float currentcoyoteTimer;
 
     [Header("Player")]
-    private Animator animator;
     [SerializeField] private Cursor cursorScript;
+    private Animator animator;
     private Vector2 cursorPos;
     public bool facingright = true;
     public bool isGodEnabled;
 
     private void Start() 
     {
+        playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
@@ -59,8 +61,8 @@ public class PlayerMovement : MonoBehaviour
         {
             DebugMovement();
         }
-        GroundMovement();
 
+        GroundMovement();
     }
 
     public void DebugMovement() => rb.velocity = new Vector2(rb.velocity.x, vmoveValue * (moveSpeed * moveMultiplier) * Time.deltaTime);
@@ -75,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
     void CheckJump()
     {
         //Basic Jump
-        if (currentcoyoteTimer > 0f && Input.GetKeyDown(KeyCode.Space))
+        if (currentcoyoteTimer > 0f && playerInput.jumpKey)
         {
             IsJumping = true; jumpTime = 0;
         }
@@ -88,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
             jumpTime += Time.deltaTime;
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) | jumpTime > maxJumpTime)
+        if (playerInput.jumpKeyReleased | jumpTime > maxJumpTime)
         {
             IsJumping = false;
         }
@@ -143,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
         //Can perform as many aerial jumps as there are max aerial jumps
         if (aerialJumpCount > 0 && !IsGrounded())
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (playerInput.jumpKey)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -151,12 +153,5 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
-    //calls when the script is loaded or a value changes in the Inspector. Allows us to free up space in the inspector by assigning references automatically
-    private void OnValidate() 
-    {
-
-    }
-
 
 }

@@ -2,22 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerInput))]
 public class GrappleAbility : MonoBehaviour
 {
     [SerializeField] private Cursor cursorScript;
     private SpringJoint2D joint2D;
     private PlayerMovement playerMovement;
     private LineRenderer grappleLine;
+    private PlayerInput playerInput;
     public bool isUnlocked = false, isGrappling = false;
 
-    private float hookRange = 10f, hookAngle;
-    private Vector2 hookAcceptanceRadius, hookDirection;
+    [SerializeField] private float hookRange = 5f;
+    private float hookAngle, IndicatorlerpPercent;
+    private Vector2 hookDirection;
     private Vector3 mouseWorldPos, grapplePointPos;
-
 
     private void Awake() 
     {
         cursorScript = GameObject.Find("Cursor").GetComponent<Cursor>();
+        grappleLine = GetComponent<LineRenderer>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     // Update is called once per frame
@@ -26,16 +31,22 @@ public class GrappleAbility : MonoBehaviour
         mouseWorldPos = cursorScript.newCursorPos;
         if(isUnlocked)
         {
-           if (Input.GetMouseButton(1))
+           if (playerInput.moveAbilityInput && playerInput.grappleSelected)
            {
+            IndicatorlerpPercent = (hookRange/Vector3.Distance(transform.position, mouseWorldPos));
+            DrawLine(transform.position, Vector3.Lerp(transform.localPosition, mouseWorldPos, IndicatorlerpPercent));
             FindGrapplePoint();
            } 
+           else if (playerInput.moveAbilityInputRelease)
+           {
+            grappleLine.positionCount = 0;
+           }
         }
 
         if(isGrappling)
         {
-            DrawLine();
-            if (Input.GetKeyDown(KeyCode.Space))
+            DrawLine(transform.position, grapplePointPos);
+            if (playerInput.jumpKey)
             {
                 StopGrapple();
             }
@@ -44,19 +55,18 @@ public class GrappleAbility : MonoBehaviour
 
     private void FindGrapplePoint()
     {
-        hookAcceptanceRadius = new Vector2(5,5);
         hookDirection = mouseWorldPos - transform.position;
         hookAngle = Mathf.Atan2(hookDirection.y, hookDirection.x);
         RaycastHit2D grapplehit = Physics2D.Raycast(gameObject.transform.position, hookDirection, hookRange);
         Debug.Log(grapplehit.collider);
         
-        if (Input.GetMouseButtonDown(0) && joint2D == null)
+        if (playerInput.meleeInput && joint2D == null)
         {
             if (grapplehit.collider.tag == "Enemy")
             {
                 grapplePointPos = grapplehit.collider.transform.position;
                 isGrappling = true;
-                DrawLine();
+                DrawLine(transform.position, grapplePointPos);
                 //OnEnemyGrapple();
                 Debug.Log("Grappled Enemy");
             }
@@ -64,23 +74,25 @@ public class GrappleAbility : MonoBehaviour
             {
                 grapplePointPos = grapplehit.collider.transform.position;
                 isGrappling = true;
-                DrawLine();
+                DrawLine(transform.position, grapplePointPos);
                 OnGrapple();
                 Debug.Log("Grappled Point");
             }
-            else if (Input.GetMouseButtonDown(0) && joint2D != null)
+            else if (grapplehit.collider.tag == null)
+            {
+                return;
+            }
+            else if (playerInput.meleeInput && joint2D != null)
             {
                 StopGrapple();
             }
         }
-
-        //TODO - Display distance to player somehow
     }
 
     private void OnEnemyGrapple()
     {
         playerMovement.enabled = false;
-        //Line renderer
+
         //Disable player movement apart from jump
     }
 
@@ -93,8 +105,7 @@ public class GrappleAbility : MonoBehaviour
         joint2D.autoConfigureDistance = false;
         joint2D.connectedAnchor = grapplePointPos;
 
-        joint2D.distance = Vector3.Distance(grapplePointPos, transform.position) - 5;
-
+        joint2D.distance = Vector3.Distance(grapplePointPos, transform.position);
         joint2D.dampingRatio = 0;
         joint2D.frequency = 17;
 
@@ -109,18 +120,13 @@ public class GrappleAbility : MonoBehaviour
         playerMovement.enabled = true;
     }
 
-    private void DrawLine()
+    private void DrawLine(Vector3 Pos1, Vector3 Pos2)
     {
         grappleLine.enabled = true;
         grappleLine.positionCount = 2;
 
-        grappleLine.SetPosition(0, transform.position);
-        grappleLine.SetPosition(1, grapplePointPos);
-    }
-
-    private void OnValidate() {
-        grappleLine = GetComponent<LineRenderer>();
-        playerMovement = GetComponent<PlayerMovement>();
+        grappleLine.SetPosition(0, Pos1);
+        grappleLine.SetPosition(1, Pos2);
     }
 
 }

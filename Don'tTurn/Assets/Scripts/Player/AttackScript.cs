@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerInput))]
 public class AttackScript : MonoBehaviour
 {
+
     [SerializeField] private CorruptionScript corruptionScript;
     [SerializeField] private Animator animator;
+    private PlayerInput playerInput;
 
     [Header("Melee Attack Stats")]
-
     [SerializeField] private Transform attackPointTrans;
     [SerializeField] private float attackRadius, attackCooldownTime = 0.5f;
     [SerializeField] private int baseAttackDamage, UpgradeDamage;
@@ -17,6 +19,7 @@ public class AttackScript : MonoBehaviour
 
     private void Start() 
     {
+        playerInput = GetComponent<PlayerInput>();
         corruptionScript = FindObjectOfType<CorruptionScript>();
         animator = GetComponent<Animator>();
     }
@@ -24,7 +27,7 @@ public class AttackScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (playerInput.meleeInput)
         {
             StartCoroutine(AttackCooldown());
         }

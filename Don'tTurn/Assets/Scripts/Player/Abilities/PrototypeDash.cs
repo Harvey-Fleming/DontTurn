@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerInput))]
 public class PrototypeDash : MonoBehaviour
 {
 
     //Component References
-    PlayerMovement movement;
-    Rigidbody2D rb;
-    Animator animator;
+    private PlayerMovement movement;
+    private Rigidbody2D rb;
+    private Animator animator;
+    private PlayerInput playerInput;
 
     //Dash Variables
     [Header("Dash Variables")]
@@ -34,6 +36,7 @@ public class PrototypeDash : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        playerInput = GetComponent<PlayerInput>();
     }
     
     void Update()
@@ -58,7 +61,7 @@ public class PrototypeDash : MonoBehaviour
     {
         if (!isDashing && dashCount > 0)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse1))
+            if (playerInput.moveAbilityInput && playerInput.dashSelected)
             {
                 dashCount--;
                 isDashing = true; 
@@ -102,8 +105,4 @@ public class PrototypeDash : MonoBehaviour
         }
     }
 
-    private void OnValidate()
-    {
-
-    }
 }

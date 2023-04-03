@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerInput))]
 public class CurseAttacks : MonoBehaviour
 {
     [SerializeField] bool isOnCooldown; 
     public GameObject bomb;
     public Transform firePoint;
-    public GameObject eatTrigger;
-    public GameObject PunchHitbox;
+    public GameObject eatTrigger, PunchHitbox;
     private PlayerStats playerStats;
     public CorruptionScript CorruptionScript; 
+    private PlayerInput playerInput;
 
     public bool isCursePunchUnlocked;
     public bool isBombUnlocked;
@@ -18,6 +19,7 @@ public class CurseAttacks : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerInput = GetComponent<PlayerInput>();
         playerStats = GetComponent<PlayerStats>();
     }
 
@@ -26,7 +28,7 @@ public class CurseAttacks : MonoBehaviour
     {
         if(isOnCooldown == false)
         {
-            if (Input.GetKeyDown(KeyCode.E) && isBombUnlocked)
+            if (playerInput.bombAbilityInput && isBombUnlocked)
             {
                 isOnCooldown = true;
                 playerStats.OnHit(15, gameObject);
@@ -34,13 +36,13 @@ public class CurseAttacks : MonoBehaviour
                 
                 
             }
-            if (Input.GetKeyDown(KeyCode.Q) && isEatUnlocked)
+            if (playerInput.eatAbilityInput && isEatUnlocked)
             {
                 isOnCooldown = true;
                 EatEnemyFunction();
                
             }
-            if (Input.GetKeyDown(KeyCode.LeftShift) && isCursePunchUnlocked)
+            if (playerInput.punchAbilityInput && isCursePunchUnlocked)
             {
                 isOnCooldown = true;
                 Debug.Log("Left shift!!");
