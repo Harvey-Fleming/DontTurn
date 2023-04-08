@@ -11,7 +11,8 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
 
     //Stats
     [Range(0, 100)] public float maxHealth = 100f, health = 100f;
-    private float cursePoints;
+    [Range(0,100)] private float cursePoints;
+
     
     private Vector3 playerPosition;
     public Vector3 spawnPoint; 
@@ -40,6 +41,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
 
     void Update()
     {
+
         if(health <= 0)
         {
             OnDeath();

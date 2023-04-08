@@ -15,6 +15,7 @@ public class AttackScript : MonoBehaviour
     [SerializeField] private float attackRadius, attackCooldownTime = 0.5f;
     [SerializeField] private int baseAttackDamage, UpgradeDamage;
     private bool canAttack = true;
+    public GameObject corruptionImage;
 
 
     private void Start() 
@@ -27,6 +28,8 @@ public class AttackScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        attackCooldownTime = 0.05f + (0.3f / corruptionImage.GetComponent<CorruptionScript>().curseMutliplier);
+
         if (playerInput.meleeInput)
         {
             StartCoroutine(AttackCooldown());

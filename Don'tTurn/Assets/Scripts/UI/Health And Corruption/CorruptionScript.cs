@@ -19,6 +19,8 @@ public class CorruptionScript : MonoBehaviour
     public float metre; 
     private bool hasBeenPressedOnce;
 
+    public float curseMutliplier;
+
 
 
     private void Awake() 
@@ -41,7 +43,9 @@ public class CorruptionScript : MonoBehaviour
     {
         metre = time / 100;
         corruptionMetre.fillAmount = metre;
-        curseText.text = "Curse Points: " + time.ToString(); 
+        curseText.text = "Curse Points: " + time.ToString();
+
+        curseMutliplier = 1f + (time / 100);
 
         if(Input.GetKeyDown(KeyCode.P))
         {

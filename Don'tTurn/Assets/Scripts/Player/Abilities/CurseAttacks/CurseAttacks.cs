@@ -16,6 +16,7 @@ public class CurseAttacks : MonoBehaviour
     public bool isCursePunchUnlocked;
     public bool isBombUnlocked;
     public bool isEatUnlocked;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +34,6 @@ public class CurseAttacks : MonoBehaviour
                 isOnCooldown = true;
                 playerStats.OnHit(15, gameObject);
                 Shoot();
-                
                 
             }
             if (playerInput.eatAbilityInput && isEatUnlocked)
