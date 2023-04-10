@@ -28,7 +28,7 @@ public class AttackScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        attackCooldownTime = 0.05f + (0.3f / corruptionImage.GetComponent<CorruptionScript>().curseMutliplier);
+        attackCooldownTime = 0.05f + (0.3f / corruptionScript.curseMutliplier);
 
         if (playerInput.meleeInput)
         {

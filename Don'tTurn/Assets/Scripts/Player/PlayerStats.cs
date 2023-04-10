@@ -48,7 +48,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         }
     }
 
-    public void OnHit(int attackDamage, GameObject attacker)
+    public void OnHit(float attackDamage, GameObject attacker)
     {
         health -= attackDamage;
 

@@ -14,7 +14,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
     [SerializeField] private string id;
     public bool isDead = false;
-    private int maxHealth = 15, currentHealth = 15;
+    private float maxHealth = 15, currentHealth = 15;
 
     [ContextMenu("Generate Unique Guid for id")]
     private void GenerateGuid()
@@ -48,7 +48,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         Respawn();
     }
 
-    public void OnHit(int damageTaken, GameObject incomingAttacker)
+    public void OnHit(float damageTaken, GameObject incomingAttacker)
     {
         currentHealth = currentHealth - damageTaken;
         StartCoroutine(ChangeColour());

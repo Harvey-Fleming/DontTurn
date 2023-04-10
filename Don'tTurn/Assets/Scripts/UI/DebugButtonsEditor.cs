@@ -51,7 +51,6 @@ public class DebugButtonsEditor : EditorWindow
     public void RespawnAllEnemies()
     {
         object[] allEnemies = Resources.FindObjectsOfTypeAll(typeof(EnemyStats));
-        Debug.Log("allEnemies array has " + allEnemies.Length + "Items");
 
         foreach (EnemyStats enemyStats in allEnemies)
         {

@@ -11,6 +11,7 @@ public class PlayerInput : MonoBehaviour
 
     //Movement Ability
     public bool moveAbilityInput {get; private set;}
+    public bool moveAbilityInputHeld {get; private set;}
     public bool moveAbilityInputRelease {get; private set;}
     public bool grappleSelected {get; private set;}
     public bool dashSelected {get; private set;}
@@ -34,14 +35,15 @@ public class PlayerInput : MonoBehaviour
     }
 
     private void Update() {
-        moveLeft = Input.GetKeyDown(KeyCode.A);
-        moveRight = Input.GetKeyDown(KeyCode.D);
+        moveLeft = Input.GetKey(KeyCode.A);
+        moveRight = Input.GetKey(KeyCode.D);
 
         jumpKey = Input.GetKeyDown(KeyCode.Space);
         jumpKeyReleased = Input.GetKeyUp(KeyCode.Space);
 
         meleeInput = Input.GetMouseButtonDown(0);
-        moveAbilityInput = Input.GetMouseButton(1);
+        moveAbilityInput = Input.GetMouseButtonDown(1);
+        moveAbilityInputHeld = Input.GetMouseButton(1);
         moveAbilityInputRelease = Input.GetMouseButtonUp(1);
 
         punchAbilityInput = Input.GetKeyDown(KeyCode.LeftShift);

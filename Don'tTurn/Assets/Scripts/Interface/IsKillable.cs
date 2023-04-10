@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IsKillable
 {
-    void OnHit(int damageTaken, GameObject attacker);
+    void OnHit(float damageTaken, GameObject attacker);
 
     void OnDeath();
 }

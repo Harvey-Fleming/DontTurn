@@ -18,11 +18,10 @@ public class PlayerCollision : MonoBehaviour
     private Transform restTrans;
     private int attackDamage = 10;
     private float timebetweenRegens = 1, iframeflicker = 0.1f, lerpSpeed = 4f;
-    private bool canTakeDamage = true, interactPressed = false;
-    public bool isInsideTrigger = false, IsMovingToTarget = false;
+    private bool canTakeDamage = true, interactPressed = false, isInsideTrigger = false, IsMovingToTarget = false;
 
-     private void Start() 
-     {
+    private void Start() 
+    {
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerStats = GetComponent<PlayerStats>();
         corruptionScript = GameObject.FindObjectOfType<CorruptionScript>();
@@ -30,7 +29,8 @@ public class PlayerCollision : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-     }
+    }
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && canTakeDamage)
@@ -40,6 +40,10 @@ public class PlayerCollision : MonoBehaviour
             knockbackScript.ApplyKnockBack(collision.gameObject);
             StartCoroutine("IFrames");
         }    
+        else if (collision.gameObject.CompareTag("GrapplePoint"))
+        {
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<BoxCollider2D>());
+        }
     }
 
     private void Update()
@@ -60,7 +64,6 @@ public class PlayerCollision : MonoBehaviour
                 playerMovement.enabled = false;
                 rb2D.velocity = Vector2.zero;
                 MoveToTarget(restTrans);
-                StartCoroutine("Regenerate");
             }
             else if (interactPressed == false)
             {
@@ -70,7 +73,6 @@ public class PlayerCollision : MonoBehaviour
                 playerMovement.enabled = true;
                 IsMovingToTarget = false;
             }
-
         }
     }
 
@@ -128,6 +130,7 @@ public class PlayerCollision : MonoBehaviour
                 animator.SetBool("IsResting", true);
                 animator.Play("player_Rest", 0);
                 IsMovingToTarget = false;
+                StartCoroutine("Regenerate");
             }
         }
     }

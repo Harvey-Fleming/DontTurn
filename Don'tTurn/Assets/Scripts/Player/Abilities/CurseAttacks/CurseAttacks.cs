@@ -55,7 +55,6 @@ public class CurseAttacks : MonoBehaviour
                 {
                     playerStats.OnHit(10, gameObject);
                     PunchEnemy();
-
                 }
                 
 

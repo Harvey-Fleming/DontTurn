@@ -12,6 +12,9 @@ public class PrototypeDash : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private PlayerInput playerInput;
+    private Cursor cursorScript;
+
+    private Vector2 cursorPos;
 
     //Dash Variables
     [Header("Dash Variables")]
@@ -25,8 +28,8 @@ public class PrototypeDash : MonoBehaviour
 
     //Bullet Variables
     [Header("Bullet Variables")]
-    [SerializeField] GameObject BulletObj;
-    [SerializeField] private GameObject bulletSpawnObj;
+    [SerializeField] GameObject Bullet;
+    [SerializeField] private GameObject bulletSpawnObj, rightSpawn, leftSpawn;
     [SerializeField] private float autoBulletDestroyTime = 0.25f;
     private float bulletSpeed = 25f;
     private bool canShoot = true;
@@ -37,6 +40,9 @@ public class PrototypeDash : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
+        cursorScript = GameObject.Find("Cursor").GetComponent<Cursor>();
+        rightSpawn = bulletSpawnObj.transform.GetChild(0).gameObject;
+        leftSpawn = bulletSpawnObj.transform.GetChild(1).gameObject;
     }
     
     void Update()
@@ -55,13 +61,15 @@ public class PrototypeDash : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().flipX = true;
         }
+
+        cursorPos = cursorScript.newCursorPos;
     }
 
     private void CheckDash()
     {
         if (!isDashing && dashCount > 0)
         {
-            if (playerInput.moveAbilityInput && playerInput.dashSelected)
+            if (playerInput.moveAbilityInput && playerInput.dashSelected && canDash)
             {
                 dashCount--;
                 isDashing = true; 
@@ -70,27 +78,66 @@ public class PrototypeDash : MonoBehaviour
 
         if (movement.IsGrounded() && canDash) { dashCount = 1; }       
         
-        if (isDashing) { canDash = false; StartCoroutine(DashAbility()); }
+        if (isDashing) {  StartCoroutine(DashAbility()); }
     }
 
     IEnumerator DashAbility()
     {
-        if (canDash == false && canShoot == true)
+        if (canDash == true && canShoot == true)
         {
-            dashDirection = gameObject.transform.localScale.x;
+            //Changes where the bullet will spawn based on the direction the player is facing due to x Scale also affecting bullet spawns
+            //For example, when the player is facing left, the x scale is -1 and the 'right' bullet spawn location will actually be on the left, leaing to bullet and player colliding and nothing happening.
+            DecideBulletSpawn();
+
+            canDash = false;
+            GetComponent<SpriteRenderer>().flipX = false;
             animator.SetBool("IsDashing", true);
             movement.enabled = false;
             SpawnBullet();
-            rb.velocity = new Vector2(-dashDirection * dashSpeed, 0f);  
+            rb.velocity = new Vector2(-dashDirection * dashSpeed, 0f);
             yield return new WaitForSeconds(dashTime);
             rb.velocity = new Vector2(0, 0);
-            movement.enabled = true; 
+            movement.enabled = true;
             isDashing = false;
+            GetComponent<SpriteRenderer>().flipX = true;
             animator.SetBool("IsDashing", false);
+
+            //Initiate Dash Cooldown
             yield return new WaitForSeconds(dashCooldown);
             canDash = true;
             canShoot = true;
             yield break;
+        }
+    }
+
+    private void DecideBulletSpawn()
+    {
+        switch (movement.facingright)
+        {
+            case true:
+                if (cursorPos.x < transform.position.x && movement.facingright)
+                {
+                    dashDirection = -1;
+                    bulletSpawnObj = leftSpawn;
+                }
+                else if (cursorPos.x > transform.position.x && movement.facingright)
+                {
+                    dashDirection = 1;
+                    bulletSpawnObj = rightSpawn;
+                }
+                break;
+            case false:
+                if (cursorPos.x < transform.position.x && !movement.facingright)
+                {
+                    dashDirection = -1;
+                    bulletSpawnObj = rightSpawn;
+                }
+                else if (cursorPos.x > transform.position.x && !movement.facingright)
+                {
+                    dashDirection = 1;
+                    bulletSpawnObj = leftSpawn;
+                }
+                break;
         }
     }
 
@@ -99,7 +146,7 @@ public class PrototypeDash : MonoBehaviour
         if (canShoot == true)
         {
             canShoot = false;
-            GameObject  currentBulletObj = Instantiate(BulletObj, bulletSpawnObj.transform.position, transform.rotation);
+            GameObject  currentBulletObj = Instantiate(Bullet, bulletSpawnObj.transform.position, transform.rotation);
             currentBulletObj.GetComponent<Rigidbody2D>().AddRelativeForce((-transform.right * -dashDirection) * bulletSpeed, ForceMode2D.Impulse);
             Destroy(currentBulletObj, autoBulletDestroyTime);
         }

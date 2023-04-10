@@ -18,7 +18,6 @@ public class MeleeUpgradeScript : MonoBehaviour, IDataPersistence
 
     private void OnTriggerStay2D(Collider2D other) 
     {
-        Debug.Log("entered triggers");
         if(Input.GetKeyDown(KeyCode.W) && other.gameObject.tag == "Player")
         {
             meleeAttackScript.OnMeleeUpgrade();
