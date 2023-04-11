@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerInput))]
 public class PrototypeDash : MonoBehaviour
@@ -34,6 +35,12 @@ public class PrototypeDash : MonoBehaviour
     private float bulletSpeed = 25f;
     private bool canShoot = true;
 
+    [Header("UI")]
+    public GameObject shotgunUI;
+    public Image circle;
+    float timer;
+    public Camera mainCamera;
+
     private void Start() 
     {
         movement = GetComponent<PlayerMovement>();
@@ -63,6 +70,18 @@ public class PrototypeDash : MonoBehaviour
         }
 
         cursorPos = cursorScript.newCursorPos;
+
+        if (!canDash)
+        {
+            shotgunUI.SetActive(true);
+            timer += Time.deltaTime;
+            circle.fillAmount = (dashCooldown - timer) / dashCooldown;
+        }
+        else
+        {
+            shotgunUI.SetActive(false);
+            timer = 0;
+        }
     }
 
     private void CheckDash()

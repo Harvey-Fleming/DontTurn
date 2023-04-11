@@ -592,7 +592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUnlocked: 0
-  dashSpeed: 30
+  dashSpeed: 33
   dashTime: 0.15
   dashCooldown: 1
   Bullet: {fileID: 8039790173044934362, guid: c3f3a976f4cb61e42a64acbb3be2f806, type: 3}
@@ -615,11 +615,11 @@ MonoBehaviour:
   hookRange: 8
   enemySlerpSpeed: 4
   LerpSpeed: 8
-  launchSpeed: 20
   grappleCooldown: 1
   launchType: 0
+  launchSpeed: 20
   isUnlocked: 0
-  isGrappling: 0
+  isLaunchToPoint: 0
   isEnemyGrappled: 0
   canGrapple: 1
 --- !u!114 &6541144399509697043
@@ -836,11 +836,11 @@ MonoBehaviour:
   hookRange: 5
   enemySlerpSpeed: 4
   LerpSpeed: 4
-  launchSpeed: 5
   grappleCooldown: 1
   launchType: 0
+  launchSpeed: 5
   isUnlocked: 0
-  isGrappling: 0
+  isLaunchToPoint: 0
   isEnemyGrappled: 0
   canGrapple: 1
 --- !u!1 &8411878258669787868
