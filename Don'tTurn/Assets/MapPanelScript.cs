@@ -17,7 +17,9 @@ public class MapPanelScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        images[MapScript.checkpointNumber].gameObject.SetActive(false); 
+            images[MapScript.checkpointNumber].gameObject.SetActive(false);
+
+       
 
     }
 }

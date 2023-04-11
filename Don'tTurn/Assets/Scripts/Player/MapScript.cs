@@ -7,7 +7,8 @@ public class MapScript : MonoBehaviour
     public GameObject panel;
     int timesPressed;
     public GameObject checkpoint;
-    public int checkpointNumber; 
+    public int checkpointNumber;
+    public bool isCheckpoint; 
     // Start is called before the first frame update
     void Start()
     {
@@ -55,8 +56,10 @@ public class MapScript : MonoBehaviour
         if(collision.GetComponent<CheckPoint>())
         {
             checkpoint = collision.gameObject;
+            isCheckpoint = true; 
             checkpointNumber = checkpoint.GetComponent<CheckPoint>().checkpointNumber;
-            checkpoint = null; 
+            checkpoint = null;
+            isCheckpoint = false; 
         }
 
        

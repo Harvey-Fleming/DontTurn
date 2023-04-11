@@ -5060,6 +5060,7 @@ MonoBehaviour:
   panel: {fileID: 1136176444}
   checkpoint: {fileID: 0}
   checkpointNumber: 0
+  isCheckpoint: 0
 --- !u!114 &1629629362 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6541144399509697032, guid: 2f259cfd660d16e4699c9efd8c7d2914, type: 3}
