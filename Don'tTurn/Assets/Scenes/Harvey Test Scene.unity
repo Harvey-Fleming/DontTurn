@@ -9019,6 +9019,14 @@ PrefabInstance:
       propertyPath: corruptionScript
       value: 
       objectReference: {fileID: 7060473052148132379}
+    - target: {fileID: 1306405472416453906, guid: 2f259cfd660d16e4699c9efd8c7d2914, type: 3}
+      propertyPath: launchSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843665436220802106, guid: 2f259cfd660d16e4699c9efd8c7d2914, type: 3}
+      propertyPath: launchType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6541144399509697032, guid: 2f259cfd660d16e4699c9efd8c7d2914, type: 3}
       propertyPath: corruptionScript
       value: 

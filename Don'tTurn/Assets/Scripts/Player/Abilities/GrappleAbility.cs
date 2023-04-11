@@ -8,7 +8,6 @@ public class GrappleAbility : MonoBehaviour
 {
     //Component / Object references
     private GameObject enemyObj;
-    private SpringJoint2D joint2D;
     private LineRenderer grappleLine;
     private Rigidbody2D rb2D;
 
@@ -20,20 +19,21 @@ public class GrappleAbility : MonoBehaviour
 
     [Header("Hook Variables")]
     [SerializeField] private float hookRange = 5f;
-    [SerializeField] private float enemySlerpSpeed = 4f, LerpSpeed = 8f, launchSpeed = 5f;
+    [SerializeField] private float enemySlerpSpeed = 4f, LerpSpeed = 8f;
     [SerializeField] private float grappleCooldown = 1f;
-    [SerializeField] private int launchType;
+
     private float hookAngle, IndicatorlerpPercent;
     private Vector3 mouseWorldPos, grapplePointPos, hookDirection;
     private Vector2 initialGrappleDirection;
 
-    [Header("Hanging Variables")]
-    private bool isHanging;
-    private float jointdampingRatio, jointfrequency;
+    [Header("Launch Variables")]
+    [SerializeField] private int launchType;
+    [SerializeField] private float launchSpeed = 5f;
+    private Vector2 launchMomentum;
 
     [Header("Hook States")]
     public bool isUnlocked = false;
-    [SerializeField] private bool isGrappling = false;
+    [SerializeField] private bool isLaunchToPoint = false;
     [SerializeField] private bool isEnemyGrappled = false;
     [SerializeField] private bool canGrapple = true;
 
@@ -74,7 +74,7 @@ public class GrappleAbility : MonoBehaviour
     {
         if (isUnlocked)
         {
-            if (playerInput.moveAbilityInput && playerInput.grappleSelected)
+            if (playerInput.moveAbilityInputHeld && playerInput.grappleSelected)
             {
                 //Draws a line from the player towards the cursor but stops at max distance(Hook Range) to show the player how far away they can hook from
                 IndicatorlerpPercent = (hookRange / Vector3.Distance(transform.position, mouseWorldPos));
@@ -107,8 +107,8 @@ public class GrappleAbility : MonoBehaviour
             else if (grapplehit.collider.tag == "GrapplePoint")
             {
                 grapplePointPos = grapplehit.collider.transform.position;
-                isGrappling = true;
-                initialGrappleDirection = (transform.position - grapplePointPos).normalized;
+                isLaunchToPoint = true;
+                initialGrappleDirection = (grapplePointPos - transform.position).normalized;
                 DrawLine(transform.position, grapplePointPos);
                 Debug.Log("Grappled Point");
             }
@@ -116,17 +116,13 @@ public class GrappleAbility : MonoBehaviour
             {
                 return;
             }
-            else if (playerInput.meleeInput && joint2D != null)
-            {
-                StopGrapple();
-            }
         }
     }
 
     
     private void OnPointGrapple()
     {
-        if (isGrappling)
+        if (isLaunchToPoint)
         {
             playerMovement.enabled = false;
             DrawLine(transform.position, grapplePointPos);
@@ -135,24 +131,6 @@ public class GrappleAbility : MonoBehaviour
             if (Vector3.Distance(transform.position, grapplePointPos) < 1f)
             {
                 StopGrapple();
-                switch (launchType)
-                {
-                    case 1:
-                    Debug.Log("LaunchType is velocity");
-                    rb2D.velocity = -initialGrappleDirection * launchSpeed;
-                    break;
-                    case 2:
-                    Debug.Log("LaunchType is Hang");
-                    HangOn();
-                    break;
-                    case 3:
-                    Debug.Log("LaunchType is None");
-
-                    break;
-                }
-                
-                
-
             }
             else if (Vector3.Distance(transform.position, grapplePointPos) > 1f)
             {
@@ -163,23 +141,11 @@ public class GrappleAbility : MonoBehaviour
             if (playerInput.jumpKey)
             {
                 StopGrapple();
+                launchMomentum = initialGrappleDirection * launchSpeed;
+                rb2D.velocity += launchMomentum;
             }
         }
-    }
 
-    private void HangOn()
-    {
-        joint2D = gameObject.AddComponent<SpringJoint2D>();
-
-        joint2D.autoConfigureDistance = false;
-        joint2D.autoConfigureConnectedAnchor = false;
-
-        joint2D.connectedAnchor = grapplePointPos;
-
-        joint2D.distance = Vector2.Distance(transform.position, grapplePointPos);
-
-        joint2D.dampingRatio = jointdampingRatio;
-        joint2D.frequency = jointfrequency;
 
     }
 
@@ -193,10 +159,10 @@ public class GrappleAbility : MonoBehaviour
 
     private void StopGrapple()
     {
-        playerMovement.ResetAirJump();
-        isGrappling = false;
+        isLaunchToPoint = false;
         grappleLine.positionCount = 0;
         playerMovement.enabled = true;
+        playerMovement.ResetAirJump();
         StartCoroutine("Cooldown");
     }
 
