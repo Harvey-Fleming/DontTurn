@@ -5,7 +5,9 @@ using UnityEngine;
 public class MapScript : MonoBehaviour
 {
     public GameObject panel;
-    int timesPressed; 
+    int timesPressed;
+    public GameObject checkpoint;
+    public int checkpointNumber; 
     // Start is called before the first frame update
     void Start()
     {
@@ -46,5 +48,17 @@ public class MapScript : MonoBehaviour
                 break; 
 
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.GetComponent<CheckPoint>())
+        {
+            checkpoint = collision.gameObject;
+            checkpointNumber = checkpoint.GetComponent<CheckPoint>().checkpointNumber;
+            checkpoint = null; 
+        }
+
+       
     }
 }

@@ -10,6 +10,9 @@ public class CheckPoint : MonoBehaviour
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private PlayerCollision playerCollision;
     [SerializeField] private Transform restPointTrans;
+
+
+    [SerializeField] public int checkpointNumber; 
     
     private void Awake() 
     {
