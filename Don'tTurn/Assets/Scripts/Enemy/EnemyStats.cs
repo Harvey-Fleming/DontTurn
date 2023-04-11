@@ -16,6 +16,9 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     public bool isDead = false;
     private float maxHealth = 15, currentHealth = 15;
 
+    public GameObject MedKit;
+    public GameObject Mushroom; 
+
     [ContextMenu("Generate Unique Guid for id")]
     private void GenerateGuid()
     {
@@ -62,6 +65,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
     public void OnDeath()
     {
+        RandomDrop(); 
         gameObject.SetActive(false);
         isDead = true;
     }
@@ -93,6 +97,21 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
     private void OnValidate() 
     {
+
+    }
+
+    public void RandomDrop()
+    {
+        float medkitDropRate = UnityEngine.Random.Range(1, 1); 
+        if(medkitDropRate == 1)
+        {
+            Instantiate(MedKit, transform.position, transform.rotation); 
+        }
+        float mushroomDropRate = UnityEngine.Random.Range(1, 5);
+        if (mushroomDropRate == 1)
+        {
+            Instantiate(Mushroom, transform.position, transform.rotation);
+        }
 
     }
 
