@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 7252567567924622519}
   - component: {fileID: 7252567567924622516}
   - component: {fileID: 7252567567924622517}
-  - component: {fileID: 140245997}
-  - component: {fileID: 140245996}
   m_Layer: 0
   m_Name: RangeEnemy
   m_TagString: Untagged
@@ -117,44 +115,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBtwShots: 0
-  startTimeBtwShots: 3
+  startTimeBtwShots: 1
+  InSite: 0
   player: {fileID: 0}
-  projectile: {fileID: 8318804451217814138, guid: 9ed0f4a5b76d2a74d9d70ed2cc3efed0, type: 3}
-  projectileSpeed: 2
-  lineOfSite: 8
---- !u!95 &140245997
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7252567567924622522}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 66fb3d53146466045b2e6e58814d0209, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &140245996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7252567567924622522}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a2318deac161c440bed5328928d77ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 17af403b-b017-4af4-9e48-e76ccadbd16f
-  isDead: 0
-  MedKit: {fileID: 4434094149941433332, guid: 9420b61a1538b404baa37a230d5bd351, type: 3}
-  Mushroom: {fileID: 2530261606103758872, guid: 88ee35955c062964ab9f6829397e98d2, type: 3}
+  projectile: {fileID: 0}
+  projectileSpeed: 0
+  lineOfSite: 0
