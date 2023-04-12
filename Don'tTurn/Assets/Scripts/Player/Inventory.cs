@@ -12,13 +12,13 @@ public class Inventory : MonoBehaviour
     public TextMeshProUGUI mushroomText;
     public int medicAmount;
     public int mushroomAmount;
-    CorruptionScript corruptionScript;
+    public CorruptionScript corruptionScript;
     PlayerStats playerStats; 
 
     // Start is called before the first frame update
     void Start()
     {
-        corruptionScript = GetComponent<CorruptionScript>();
+     
         playerStats = GetComponent<PlayerStats>(); 
     }
 

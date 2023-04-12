@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 929781160}
   - component: {fileID: 6169534223625190669}
   - component: {fileID: 6406451567839429295}
+  - component: {fileID: 307167705}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -150,7 +151,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 4
   m_Material: {fileID: 6200000, guid: 3be9318967f8dd44db1ee23dc6e02a4a, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -170,6 +171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: f08c9115-fdbe-4d72-80f8-8e001a493de7
   isDead: 0
+  MedKit: {fileID: 4434094149941433332, guid: 9420b61a1538b404baa37a230d5bd351, type: 3}
+  Mushroom: {fileID: 2530261606103758872, guid: 88ee35955c062964ab9f6829397e98d2, type: 3}
 --- !u!114 &6406451567839429295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +190,7 @@ MonoBehaviour:
   damageRange: 1.5
   maxRange: 10
   wanderDistance: 25
-  jumpForce: 8
+  jumpForce: 10
   jumpCooldown: 0.5
   layerMask:
     serializedVersion: 2
@@ -199,3 +202,19 @@ MonoBehaviour:
   isAggro: 0
   isDamaging: 0
   canJump: 0
+--- !u!114 &307167705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6169534223625190664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffde10b351e1bf4b83ed1e8fe5ed90e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovementScript: {fileID: 0}
+  enemyMovementScript: {fileID: 6406451567839429295}
+  baseKnockback: 5
+  KnockbackDelay: 0.5
