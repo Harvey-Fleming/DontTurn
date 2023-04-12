@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: player_Attack
+  m_Name: player_Attack3
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -19,8 +19,8 @@ AnimationClip:
   m_FloatCurves: []
   m_PPtrCurves:
   - curve:
-    - time: 0.2
-      value: {fileID: 21300000, guid: 26c67b44777f7c843afd0b886d863b5d, type: 3}
+    - time: 0
+      value: {fileID: 21300000, guid: ce553f40b77e08643927ec2f1b6f4b20, type: 3}
     - time: 0.4
       value: {fileID: 21300000, guid: 32bb73928b4960f428d21ac70399f4b7, type: 3}
     - time: 2
@@ -44,7 +44,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 26c67b44777f7c843afd0b886d863b5d, type: 3}
+    - {fileID: 21300000, guid: ce553f40b77e08643927ec2f1b6f4b20, type: 3}
     - {fileID: 21300000, guid: 32bb73928b4960f428d21ac70399f4b7, type: 3}
     - {fileID: 21300000, guid: 32bb73928b4960f428d21ac70399f4b7, type: 3}
   m_AnimationClipSettings:

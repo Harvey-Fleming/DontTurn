@@ -5,9 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInput))]
 public class AttackScript : MonoBehaviour
 {
-
-    [SerializeField] private CorruptionScript corruptionScript;
-    [SerializeField] private Animator animator;
+    //Component References
+    private CorruptionScript corruptionScript;
+    private Animator animator;
     private PlayerInput playerInput;
 
     [Header("Melee Attack Stats")]
@@ -17,6 +17,10 @@ public class AttackScript : MonoBehaviour
     private bool canAttack = true;
     public GameObject corruptionImage;
 
+    [Header("Melee Attack Combo Variables")]
+    [SerializeField] private int currentAttackNumber;
+    [SerializeField] private float comboTimer, maxcomboTimer = 0.4f;
+    [SerializeField] private bool inComboWindow;
 
     private void Start() 
     {
@@ -30,9 +34,13 @@ public class AttackScript : MonoBehaviour
     {
         attackCooldownTime = 0.05f + (0.3f / corruptionScript.curseMutliplier);
 
-        if (playerInput.meleeInput)
+        HandleComboTimer();
+
+        //Trigger first attack in the combo
+        if (playerInput.meleeInput && canAttack && comboTimer <= 0)
         {
-            StartCoroutine(AttackCooldown());
+            currentAttackNumber = 1;
+            animator.SetBool("IsAttacking", true);
         }
     }
 
@@ -44,33 +52,71 @@ public class AttackScript : MonoBehaviour
         {
             Enemy.GetComponent<EnemyStats>()?.OnHit(baseAttackDamage + UpgradeDamage, this.gameObject);
         } 
+
+        comboTimer = maxcomboTimer;
+        inComboWindow = true;
+
+        //starts combo attack timer
+        //if attack input during timer, next attack plays.
     }
 
-    void OnDrawGizmosSelected() 
+    private void HandleComboTimer()
     {
-        Gizmos.DrawWireSphere(attackPointTrans.position, attackRadius);
-    }
-
-    IEnumerator AttackCooldown()
-    {
-        while (canAttack == true)
+        if(inComboWindow == true)
         {
-            
-            MeleeAttack();
-            animator.SetBool("IsAttacking", true);
-            yield return 0;
-            animator.SetBool("IsAttacking", false);
-            canAttack = false;
-            yield return new WaitForSeconds(attackCooldownTime);
-            canAttack = true;   
-            yield break;
+            if (comboTimer >= 0)
+            {
+                comboTimer -= 1 * Time.deltaTime;
+
+                if(playerInput.meleeInput)
+                {
+                    if (currentAttackNumber < 3)
+                    {
+                        currentAttackNumber ++;
+                        inComboWindow = false;
+                        animator.SetInteger("AttackNumber", currentAttackNumber);
+                    }
+                    else if (currentAttackNumber ==  3)
+                    {
+                        comboTimer = 0;
+                        StartCoroutine(MeleeCooldown());
+                    }
+                }
+            }
+            else if (comboTimer <= 0)
+            {
+                currentAttackNumber = 1;
+                animator.SetInteger("AttackNumber", currentAttackNumber);
+                animator.SetBool("IsAttacking", false);
+                StartCoroutine(MeleeCooldown());
+                inComboWindow = false;
+                Debug.Log("Combo Ended");
+            }
         }
-    
+    }
+
+    private void AttackAnimationEvent()
+    {
+        canAttack = false;
+        Debug.Log("This Attack is: " + currentAttackNumber);
+        MeleeAttack();
+    }
+
+    IEnumerator MeleeCooldown()
+    {
+        yield return new WaitForSeconds(attackCooldownTime);
+        canAttack = true;   
+        yield break;
     }
 
     public void OnMeleeUpgrade()
     {
         UpgradeDamage += 5;
+    }
+
+    void OnDrawGizmosSelected() 
+    {
+        Gizmos.DrawWireSphere(attackPointTrans.position, attackRadius);
     }
 
 

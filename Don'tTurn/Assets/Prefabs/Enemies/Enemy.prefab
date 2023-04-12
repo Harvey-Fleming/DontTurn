@@ -170,6 +170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: f08c9115-fdbe-4d72-80f8-8e001a493de7
   isDead: 0
+  MedKit: {fileID: 0}
+  Mushroom: {fileID: 0}
 --- !u!114 &6406451567839429295
 MonoBehaviour:
   m_ObjectHideFlags: 0
