@@ -6,10 +6,13 @@ public class SporesScript : MonoBehaviour
 {
 
     private GameObject enemy; 
+    private CorruptionScript corruptionScript;
     // Start is called before the first frame update
     void Start()
     {
+        corruptionScript = GameObject.FindObjectOfType<CorruptionScript>();
         StartCoroutine(DestroyAfterTime());
+        
     }
 
     // Update is called once per frame
@@ -47,7 +50,7 @@ public class SporesScript : MonoBehaviour
     {
         for(int i = 0; i < 5; i++)
         {
-            enemy.GetComponent<EnemyStats>().OnHit(1, gameObject); 
+            enemy.GetComponent<EnemyStats>().OnHit(1 * corruptionScript.curseMutliplier, gameObject); 
             yield return new WaitForSeconds(1f);
         }
        

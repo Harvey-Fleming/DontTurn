@@ -71,6 +71,14 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 2.52
       objectReference: {fileID: 0}
+    - target: {fileID: 6169534223625190669, guid: 2978f8b6173784746b2addf27c60c21f, type: 3}
+      propertyPath: MedKit
+      value: 
+      objectReference: {fileID: 4434094149941433332, guid: 9420b61a1538b404baa37a230d5bd351, type: 3}
+    - target: {fileID: 6169534223625190669, guid: 2978f8b6173784746b2addf27c60c21f, type: 3}
+      propertyPath: Mushroom
+      value: 
+      objectReference: {fileID: 2530261606103758872, guid: 88ee35955c062964ab9f6829397e98d2, type: 3}
     - target: {fileID: 6406451567839429295, guid: 2978f8b6173784746b2addf27c60c21f, type: 3}
       propertyPath: m_Enabled
       value: 0

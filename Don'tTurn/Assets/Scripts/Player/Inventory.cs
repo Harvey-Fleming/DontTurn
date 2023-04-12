@@ -18,7 +18,7 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        corruptionScript = GetComponent<CorruptionScript>();
+        corruptionScript = GameObject.FindObjectOfType<CorruptionScript>();
         playerStats = GetComponent<PlayerStats>(); 
     }
 

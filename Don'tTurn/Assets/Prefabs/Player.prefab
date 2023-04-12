@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 4893503697784435487}
   - component: {fileID: 356385529447284907}
   - component: {fileID: 3039935803857740443}
-  - component: {fileID: 1306405472416453906}
+  - component: {fileID: 1587455484115900411}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -600,6 +600,9 @@ MonoBehaviour:
   rightSpawn: {fileID: 0}
   leftSpawn: {fileID: 0}
   autoBulletDestroyTime: 0.25
+  shotgunUI: {fileID: 0}
+  circle: {fileID: 0}
+  mainCamera: {fileID: 0}
 --- !u!114 &2843665436220802106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,11 +618,11 @@ MonoBehaviour:
   hookRange: 8
   enemySlerpSpeed: 4
   LerpSpeed: 8
+  launchSpeed: 20
   grappleCooldown: 1
   launchType: 0
-  launchSpeed: 20
   isUnlocked: 0
-  isLaunchToPoint: 0
+  isGrappling: 0
   isEnemyGrappled: 0
   canGrapple: 1
 --- !u!114 &6541144399509697043
@@ -821,7 +824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16dd5c3f8a1a0d5428990136adea4cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1306405472416453906
+--- !u!114 &1587455484115900411
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -830,19 +833,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6541144399509697038}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe6194926d8253042b03cbe2ccad679e, type: 3}
+  m_Script: {fileID: 11500000, guid: 9feabe5c633d05342b5fae87bcba81e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hookRange: 5
-  enemySlerpSpeed: 4
-  LerpSpeed: 4
-  grappleCooldown: 1
-  launchType: 0
-  launchSpeed: 5
-  isUnlocked: 0
-  isLaunchToPoint: 0
-  isEnemyGrappled: 0
-  canGrapple: 1
+  panel: {fileID: 0}
+  checkpoint: {fileID: 0}
+  checkpointNumber: 0
+  isCheckpoint: 0
 --- !u!1 &8411878258669787868
 GameObject:
   m_ObjectHideFlags: 0

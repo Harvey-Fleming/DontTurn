@@ -140,13 +140,13 @@ public class CurseAttackHitBoxScript : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false); 
-    }
+    } 
 
    public void PunchEnemy()
     {
-        enemy.GetComponent<EnemyStats>().OnHit(10, gameObject);
+        enemy.GetComponent<EnemyStats>().OnHit(10 * corruptionScript.curseMutliplier, gameObject);
         if (player.GetComponent<PlayerMovement>().facingright == true)
-        {
+        { 
             enemy.GetComponent<Rigidbody2D>().velocity = transform.right * 5f;
         }
         else
