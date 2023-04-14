@@ -40,6 +40,7 @@ public class PrototypeDash : MonoBehaviour
     public Image circle;
     float timer;
     public Camera mainCamera;
+    bool startCooldown;
 
     private void Start() 
     {
@@ -71,7 +72,7 @@ public class PrototypeDash : MonoBehaviour
 
         cursorPos = cursorScript.newCursorPos;
 
-        if (!canDash)
+        if (startCooldown)
         {
             shotgunUI.SetActive(true);
             timer += Time.deltaTime;
@@ -115,6 +116,7 @@ public class PrototypeDash : MonoBehaviour
             SpawnBullet();
             rb.velocity = new Vector2(-dashDirection * dashSpeed, 0f);
             yield return new WaitForSeconds(dashTime);
+            startCooldown = true;
             rb.velocity = new Vector2(0, 0);
             movement.enabled = true;
             isDashing = false;
@@ -123,6 +125,7 @@ public class PrototypeDash : MonoBehaviour
 
             //Initiate Dash Cooldown
             yield return new WaitForSeconds(dashCooldown);
+            startCooldown = false;
             canDash = true;
             canShoot = true;
             yield break;

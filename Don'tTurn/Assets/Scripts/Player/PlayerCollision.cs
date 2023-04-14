@@ -7,7 +7,7 @@ public class PlayerCollision : MonoBehaviour
     //Component References
     private PlayerStats playerStats;
     private PlayerMovement playerMovement;
-    private CorruptionScript corruptionScript;
+    public CorruptionScript corruptionScript;
     private CheckPoint checkPointScript;
     private Knockback knockbackScript;
     private SpriteRenderer spriteRenderer;
@@ -24,7 +24,6 @@ public class PlayerCollision : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerStats = GetComponent<PlayerStats>();
-        corruptionScript = GameObject.FindObjectOfType<CorruptionScript>();
         knockbackScript = GetComponent<Knockback>();
         playerMovement = GetComponent<PlayerMovement>();
         rb2D = GetComponent<Rigidbody2D>();

@@ -8,7 +8,8 @@ public class MapScript : MonoBehaviour
     int timesPressed;
     public GameObject checkpoint;
     public int checkpointNumber;
-    public bool isCheckpoint; 
+    public bool isCheckpoint;
+    public MapManager mapManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,12 +26,14 @@ public class MapScript : MonoBehaviour
                 case 0:
                     ToggleMap(timesPressed);
                     timesPressed++;
-                    Time.timeScale = 0; 
+                    Time.timeScale = 0;
+                    mapManager.isOpen = true;
                     break;
                 case 1:
                     ToggleMap(timesPressed);
                     timesPressed--;
                     Time.timeScale = 1;
+                    mapManager.isOpen = false;
                     break; 
             }
         }
