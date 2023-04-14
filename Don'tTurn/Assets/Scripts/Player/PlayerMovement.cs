@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
+
 
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerMovement : MonoBehaviour
@@ -35,12 +37,17 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 cursorPos;
     public bool facingright = true, isGodEnabled;
 
-    private void Start() 
+    //audio
+    public EventInstance playerFootsteps;
+
+    private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        //initialise footsteps audio instance
+        playerFootsteps = AudioManager.instance.CreateEventInstance(FMODEvents.instance.playerFootsteps);
     }
 
     void Update()
@@ -63,6 +70,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         GroundMovement();
+
+        UpdateSound();
     }
 
     public void DebugMovement() => rb.velocity = new Vector2(rb.velocity.x, vmoveValue * (moveSpeed * moveMultiplier) * Time.deltaTime);
@@ -87,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
             jumpEndEarly = false;
             animator.SetBool("IsJumping", true);
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);  
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             jumpTime += Time.deltaTime;
         }
 
@@ -97,22 +106,22 @@ public class PlayerMovement : MonoBehaviour
             jumpEndEarly = true;
         }
 
-        if (rb.velocity.y >= 0) { rb.gravityScale = gravityScale;}
-        if (rb.velocity.y < 0 && jumpEndEarly == true) { rb.gravityScale = fallingGravityScale;}
+        if (rb.velocity.y >= 0) { rb.gravityScale = gravityScale; }
+        if (rb.velocity.y < 0 && jumpEndEarly == true) { rb.gravityScale = fallingGravityScale; }
 
         if (IsGrounded())
-            {
-                //Reset aerial jumps when on ground
-                aerialJumpCount = maxAerialJumpCount;
-                jumpEndEarly = false;
-                animator.SetBool("IsJumping", false);
-                currentcoyoteTimer = coyoteTimer;
-            }
-            else if (!IsGrounded())
-            {
-                animator.SetBool("IsJumping", true);
-                currentcoyoteTimer -= Time.deltaTime;
-            }
+        {
+            //Reset aerial jumps when on ground
+            aerialJumpCount = maxAerialJumpCount;
+            jumpEndEarly = false;
+            animator.SetBool("IsJumping", false);
+            currentcoyoteTimer = coyoteTimer;
+        }
+        else if (!IsGrounded())
+        {
+            animator.SetBool("IsJumping", true);
+            currentcoyoteTimer -= Time.deltaTime;
+        }
     }
 
     public bool IsGrounded()
@@ -128,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetAxis("Mouse Y") != 0 && Input.GetAxis("Mouse X") != 0)
         {
             flipTimer = maxflipTimer;
-            if((cursorPos.x < gameObject.transform.position.x) && facingright)
+            if ((cursorPos.x < gameObject.transform.position.x) && facingright)
             {
                 Vector2 currentScale = gameObject.transform.localScale;
                 currentScale.x *= -1;
@@ -136,19 +145,19 @@ public class PlayerMovement : MonoBehaviour
 
                 facingright = !facingright;
             }
-            else if((cursorPos.x > gameObject.transform.position.x) && !facingright)
+            else if ((cursorPos.x > gameObject.transform.position.x) && !facingright)
             {
                 Vector2 currentScale = gameObject.transform.localScale;
                 currentScale.x *= -1;
                 gameObject.transform.localScale = currentScale;
 
                 facingright = !facingright;
-            }  
+            }
         }
         else if (Input.GetAxis("Mouse Y") == 0 && Input.GetAxis("Mouse X") == 0)
         {
             flipTimer -= 1 * Time.deltaTime;
-            if(hmoveValue < 0  && facingright && flipTimer <= 0)
+            if (hmoveValue < 0 && facingright && flipTimer <= 0)
             {
                 Vector2 currentScale = gameObject.transform.localScale;
                 currentScale.x *= -1;
@@ -156,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
 
                 facingright = !facingright;
             }
-            else if(hmoveValue > 0  && !facingright && flipTimer <= 0)
+            else if (hmoveValue > 0 && !facingright && flipTimer <= 0)
             {
                 Vector2 currentScale = gameObject.transform.localScale;
                 currentScale.x *= -1;
@@ -187,4 +196,23 @@ public class PlayerMovement : MonoBehaviour
         aerialJumpCount = maxAerialJumpCount;
     }
 
+    private void UpdateSound()
+    {
+        //start footsteps event if the player has an x velocity and is on the ground
+        if (rb.velocity.x != 0 && IsGrounded() == true)
+        {
+            // get the playback state
+            PLAYBACK_STATE playbackState;
+            playerFootsteps.getPlaybackState(out playbackState);
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                playerFootsteps.start();
+            }
+        }
+        //otherwise, stop the footsteps event
+        else
+        {
+            playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+    }
 }
