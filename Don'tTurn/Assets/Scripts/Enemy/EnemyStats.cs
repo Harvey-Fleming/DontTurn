@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
+using FMODUnity;
 
 public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 {
@@ -17,7 +19,9 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     private float maxHealth = 15, currentHealth = 15;
 
     public GameObject MedKit;
-    public GameObject Mushroom; 
+    public GameObject Mushroom;
+
+    private StudioEventEmitter emitter;
 
     [ContextMenu("Generate Unique Guid for id")]
     private void GenerateGuid()
@@ -34,6 +38,11 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         rb2D = GetComponent<Rigidbody2D>();
         enemyMovementScript = GetComponent<EnemyMovement>();
         knockbackScript = GetComponent<Knockback>();
+
+        //audio
+        emitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.duoSkellyVoice, this.gameObject);
+        emitter.Play();
+        Debug.Log("enemy sound play");
     }
 
     public void SaveData(GameData data)
@@ -68,6 +77,8 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         RandomDrop(); 
         gameObject.SetActive(false);
         isDead = true;
+        emitter.Stop();
+        Debug.Log("enemy sound stop");
     }
 
     //Used by Debug Buttons to respawn enemies and when Loading save data

@@ -9,11 +9,17 @@ public class FMODEvents : MonoBehaviour
     [field: Header("Menu Transition SFX")]
     [field: SerializeField] public EventReference menuTransition { get; private set; }
     
-    [field: Header("Menu Start Click SFX")]
     [field: SerializeField] public EventReference menuStartClick { get; private set; }
 
-    [field: Header("Menu Start Click SFX")]
+    [field: Header("Player SFX")]
     [field: SerializeField] public EventReference playerFootsteps { get; private set; }
+
+    [field: Header("Ambiance SFX")]
+    [field: SerializeField] public EventReference cityAmbiance { get; private set; }
+
+    [field: Header("Enemy SFX")]
+    [field: SerializeField] public EventReference duoSkellyVoice { get; private set; }
+
     public static FMODEvents instance { get; private set; }
     
     private void Awake()

@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using FMOD.Studio;
 
 public class IntroTutorialManager : MonoBehaviour
 {
     public float fadeOutTime;
+    public EventInstance playerFootsteps;
 
     [Header("Movement Icon")]
     public GameObject movementIcon;
@@ -44,6 +46,7 @@ public class IntroTutorialManager : MonoBehaviour
         spaceBarIconStartPos = spaceBarIcon.transform.position;
         mouseIconStartPos = mouseIcon.transform.position;
         player = GameObject.Find("Player");
+        playerFootsteps = AudioManager.instance.CreateEventInstance(FMODEvents.instance.playerFootsteps);
     }
 
     void Update()
@@ -80,6 +83,7 @@ public class IntroTutorialManager : MonoBehaviour
         if(medkitCounter.medkitAmount == 1 && !pauseFinished)
         {
             Time.timeScale = 0;
+            PlayerMovement.StopPlayerFootsteps();
             medkitPrompt.SetActive(true);
             pauseFinished = true;
         }
@@ -125,6 +129,7 @@ public class IntroTutorialManager : MonoBehaviour
         if (curseStringNum < curseStrings.Length)
         {
             Time.timeScale = 0;
+            PlayerMovement.StopPlayerFootsteps();
             curseTutorial.SetActive(true);
             curseText.text = curseStrings[curseStringNum];
             if (Input.GetKeyDown(KeyCode.Return))

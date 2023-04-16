@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 public class AudioManager : MonoBehaviour
 {
     private List<EventInstance> eventInstances;
+    private List<StudioEventEmitter> eventEmitters;
     public static AudioManager instance { get; private set; }
 
     private void Awake()
@@ -19,6 +20,7 @@ public class AudioManager : MonoBehaviour
         instance = this;
 
         eventInstances = new List<EventInstance>();
+        eventEmitters = new List<StudioEventEmitter>();
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
@@ -33,6 +35,14 @@ public class AudioManager : MonoBehaviour
         return eventInstance;
     }
 
+    public StudioEventEmitter InitializeEventEmitter(EventReference eventReference, GameObject emitterGameObject)
+    {
+        StudioEventEmitter emitter = emitterGameObject.GetComponent<StudioEventEmitter>();
+        emitter.EventReference = eventReference;
+        eventEmitters.Add(emitter);
+        return emitter;
+    }
+
     private void CleanUp()
     {
         //stop and release any created instances
@@ -40,6 +50,11 @@ public class AudioManager : MonoBehaviour
         {
             eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             eventInstance.release();
+        }
+
+        foreach (StudioEventEmitter emitter in eventEmitters)
+        {
+            emitter.Stop();
         }
     }
 

@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     public bool facingright = true, isGodEnabled;
 
     //audio
-    public EventInstance playerFootsteps;
+    public static EventInstance playerFootsteps;
 
     private void Start()
     {
@@ -199,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateSound()
     {
         //start footsteps event if the player has an x velocity and is on the ground
-        if (rb.velocity.x != 0 && IsGrounded() == true)
+        if (rb.velocity.x != 0 && IsGrounded() == true && Time.timeScale == 1)
         {
             // get the playback state
             PLAYBACK_STATE playbackState;
@@ -212,7 +212,13 @@ public class PlayerMovement : MonoBehaviour
         //otherwise, stop the footsteps event
         else
         {
-            playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+            playerFootsteps.stop(STOP_MODE.IMMEDIATE);
         }
     }
+
+    public static void StopPlayerFootsteps()
+    {
+        playerFootsteps.stop(STOP_MODE.IMMEDIATE);
+    }
+
 }
