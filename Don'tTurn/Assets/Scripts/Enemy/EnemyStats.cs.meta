@@ -3,7 +3,9 @@ guid: 1a2318deac161c440bed5328928d77ca
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - MedKit: {fileID: 4434094149941433332, guid: 9420b61a1538b404baa37a230d5bd351, type: 3}
+  - Mushroom: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -27,6 +27,9 @@ public class MainMenu : MonoBehaviour
     {
         DataPersistenceManager.instance.NewGame();
         SceneManager.LoadSceneAsync("Game");
+         
+        //play audio One-Shot
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuStartClick, this.transform.position);
     }
 
     public void onLoadGameClicked()

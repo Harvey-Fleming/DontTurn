@@ -1,88 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
-using System;
+using FMODUnity;
+using FMOD.Studio;
+using System.Runtime.CompilerServices;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager AudioManagerInstance {get; private set;}
+    private List<EventInstance> eventInstances;
+    private List<StudioEventEmitter> eventEmitters;
+    public static AudioManager instance { get; private set; }
 
-    [SerializeField] private AudioMixerGroup MainMixerGroup;
-    [SerializeField] private AudioMixerGroup SFXMixerGroup;
-    [SerializeField] private AudioMixerGroup MusicMixerGroup;
-
-    [SerializeField] private Sound[] sounds; 
-
-    private void Awake() 
+    private void Awake()
     {
-        DontDestroyOnLoad(this);
-
-        //Checks to see if there is already an instance of the audiomanager in the scene.
-        if (AudioManagerInstance != null && AudioManagerInstance != this)
+        if (instance != null)
         {
-            Destroy(this.gameObject);
-            return;
-        } 
-        else
-        {
-            AudioManagerInstance = this; //if no other instance of AudioManager, this object is the instance
+            Debug.LogError("Found more than one Audio Manager in the scene");
         }
-        
+        instance = this;
 
-        foreach (Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.audioClip;
-            s.source.volume = s.volume;
-            s.source.loop = s.isLoop;
-
-            switch (s.audiotype)
-            {
-                case Sound.AudioTypes.soundEffect:
-                s.source.outputAudioMixerGroup = SFXMixerGroup;
-                break;
-
-                case Sound.AudioTypes.music:
-                s.source.outputAudioMixerGroup = MusicMixerGroup;
-                break;
-            }
-        }
-
-        
+        eventInstances = new List<EventInstance>();
+        eventEmitters = new List<StudioEventEmitter>();
     }
 
-    //Searches the sound array for a clipName with exact match to play and returns error if no sound file found.
-    public void Play(string clipName)
+    public void PlayOneShot(EventReference sound, Vector3 worldPos)
     {
-        Sound s = Array.Find(sounds, dummySound => dummySound.clipName == clipName);
-        if (s == null)
+        RuntimeManager.PlayOneShot(sound, worldPos);
+    }
+
+    public EventInstance CreateEventInstance(EventReference eventReference)
+    {
+        EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
+        eventInstances.Add(eventInstance);
+        return eventInstance;
+    }
+
+    public StudioEventEmitter InitializeEventEmitter(EventReference eventReference, GameObject emitterGameObject)
+    {
+        StudioEventEmitter emitter = emitterGameObject.GetComponent<StudioEventEmitter>();
+        emitter.EventReference = eventReference;
+        eventEmitters.Add(emitter);
+        return emitter;
+    }
+
+    private void CleanUp()
+    {
+        //stop and release any created instances
+        foreach (EventInstance eventInstance in eventInstances)
         {
-            Debug.LogError("Sound: " + clipName + " Not Found");
-            return;
+            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            eventInstance.release();
         }
-        s.source.Play();  
-    }
 
-    //Searches for if a specific clip is playing and stops it.
-    public void Stop(string clipName)
-    {
-        Sound s = Array.Find(sounds, dummySound => dummySound.clipName == clipName);
-        if (s == null)
+        foreach (StudioEventEmitter emitter in eventEmitters)
         {
-            Debug.Log("Sound: " + clipName + " Not Found");
-            return;
+            emitter.Stop();
         }
-        s.source.Stop();  
     }
 
-    //Updates volume mixers with value from sliders in options menu.
-    public void UpdateMixerVolume()
+    private void OnDestroy()
     {
-        MusicMixerGroup.audioMixer.SetFloat("MusicVolume", Mathf.Log10(AudioOptionsManager.musicVolume) * 20);
-        SFXMixerGroup.audioMixer.SetFloat("SFXVolume", Mathf.Log10(AudioOptionsManager.soundEffectsVolume) * 20);
-        MainMixerGroup.audioMixer.SetFloat("MasterVolume", Mathf.Log10(AudioOptionsManager.mainVolume) * 20);
+        CleanUp();
     }
-
-
 }
+

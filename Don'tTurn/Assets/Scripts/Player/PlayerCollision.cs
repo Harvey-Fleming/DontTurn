@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -62,6 +63,7 @@ public class PlayerCollision : MonoBehaviour
                 Debug.Log("Interact Pressed is true");
                 playerMovement.enabled = false;
                 rb2D.velocity = Vector2.zero;
+                PlayerMovement.StopPlayerFootsteps();
                 MoveToTarget(restTrans);
             }
             else if (interactPressed == false)
