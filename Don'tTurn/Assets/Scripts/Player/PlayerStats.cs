@@ -57,9 +57,8 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     public void OnDeath()
     {
         Debug.Log("You Died!");
-        transform.position = spawnPoint; 
-        health = maxHealth;
-        corruptionScript.time = 0f;
+        StartCoroutine(DeathWait()); 
+       
     }
 
 //Subscribing to on scene loaded and on scene unloaded events.
@@ -108,6 +107,18 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     {
         data.playerHealth = this.health;
         data.spawnPoint = this.spawnPoint;
+    }
+
+    public IEnumerator DeathWait()
+    {
+        Time.timeScale = 0; 
+        health = maxHealth;
+        corruptionScript.time = 0f;
+        yield return new WaitForSeconds(0.5f);
+        Time.timeScale = 1;
+        GetComponent<SpriteRenderer>().enabled = true;
+        transform.position = spawnPoint;
+        corruptionScript.StartCoroutine(corruptionScript.Timer(corruptionScript.areaTick));
     }
 
 }
