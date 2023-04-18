@@ -16,6 +16,7 @@ public class FMODEvents : MonoBehaviour
 
     [field: Header("Ambiance SFX")]
     [field: SerializeField] public EventReference cityAmbiance { get; private set; }
+    [field: SerializeField] public EventReference mushForestAmbiance { get; private set; }
 
     [field: Header("Enemy SFX")]
     [field: SerializeField] public EventReference duoSkellyVoice { get; private set; }
