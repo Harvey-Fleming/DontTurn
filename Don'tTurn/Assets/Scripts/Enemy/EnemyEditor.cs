@@ -6,6 +6,7 @@ using UnityEditor;
 
 [CustomEditor(typeof(EnemyStats))]
 [RequireComponent(typeof(EnemyStats))]
+[CanEditMultipleObjects]
 public class EnemyEditor : Editor
 {
     public override void OnInspectorGUI()

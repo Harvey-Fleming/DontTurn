@@ -9,10 +9,12 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float Speed;
     Rigidbody2D ProjectileRb;
     Vector2 move;
+
     void Awake()
     {
         playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
     }
+
     void Start()
     {
         ProjectileRb = GetComponent<Rigidbody2D>();
@@ -21,18 +23,23 @@ public class Projectile : MonoBehaviour
         ProjectileRb.velocity = new Vector2(move.x, move.y);
         Destroy(gameObject, 5f);
 
-
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerStats.health -= 10f;
+            playerStats.OnHit(10, this.gameObject) ;
             Destroy(gameObject);
             print("Collision made");
         }
+        else if (collision.gameObject.tag == "Tiles")
+        {
+            Destroy(gameObject);
+        }
     }
+
+    
 
     
 }
