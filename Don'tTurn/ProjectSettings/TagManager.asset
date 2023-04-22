@@ -15,6 +15,7 @@ TagManager:
   - GrapplePoint
   - Medkit
   - Mushroom
+  - Choice
   layers:
   - Default
   - TransparentFX
