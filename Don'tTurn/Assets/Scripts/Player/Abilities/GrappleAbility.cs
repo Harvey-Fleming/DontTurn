@@ -22,7 +22,6 @@ public class GrappleAbility : MonoBehaviour
     [SerializeField] private float hookRange = 5f;
     [SerializeField] private float enemySlerpSpeed = 4f, LerpSpeed = 8f, launchSpeed = 5f;
     [SerializeField] private float grappleCooldown = 1f;
-    [SerializeField] private int launchType;
     private float hookAngle, IndicatorlerpPercent;
     private Vector3 mouseWorldPos, grapplePointPos, hookDirection;
     private Vector2 initialGrappleDirection;
@@ -74,7 +73,7 @@ public class GrappleAbility : MonoBehaviour
     {
         if (isUnlocked)
         {
-            if (playerInput.moveAbilityInput && playerInput.grappleSelected)
+            if (playerInput.moveAbilityInputHeld && playerInput.grappleSelected)
             {
                 //Draws a line from the player towards the cursor but stops at max distance(Hook Range) to show the player how far away they can hook from
                 IndicatorlerpPercent = (hookRange / Vector3.Distance(transform.position, mouseWorldPos));
@@ -135,24 +134,7 @@ public class GrappleAbility : MonoBehaviour
             if (Vector3.Distance(transform.position, grapplePointPos) < 1f)
             {
                 StopGrapple();
-                switch (launchType)
-                {
-                    case 1:
-                    Debug.Log("LaunchType is velocity");
-                    rb2D.velocity = -initialGrappleDirection * launchSpeed;
-                    break;
-                    case 2:
-                    Debug.Log("LaunchType is Hang");
-                    HangOn();
-                    break;
-                    case 3:
-                    Debug.Log("LaunchType is None");
-
-                    break;
-                }
-                
-                
-
+                rb2D.velocity = -initialGrappleDirection * launchSpeed;
             }
             else if (Vector3.Distance(transform.position, grapplePointPos) > 1f)
             {
