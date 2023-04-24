@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Runtime.CompilerServices;
 
 [RequireComponent(typeof(PlayerInput))]
 public class PrototypeDash : MonoBehaviour
@@ -19,7 +20,7 @@ public class PrototypeDash : MonoBehaviour
 
     //Dash Variables
     [Header("Dash Variables")]
-    public bool isUnlocked  = false;
+    public bool isUnlocked = false;
     [SerializeField] private float dashSpeed;
     private bool isDashing;
     private bool canDash = true;
@@ -34,6 +35,7 @@ public class PrototypeDash : MonoBehaviour
     [SerializeField] private float autoBulletDestroyTime = 0.25f;
     private float bulletSpeed = 25f;
     private bool canShoot = true;
+
 
     [Header("UI")]
     public GameObject shotgunUI;
@@ -51,6 +53,7 @@ public class PrototypeDash : MonoBehaviour
         cursorScript = GameObject.Find("Cursor").GetComponent<Cursor>();
         rightSpawn = bulletSpawnObj.transform.GetChild(0).gameObject;
         leftSpawn = bulletSpawnObj.transform.GetChild(1).gameObject;
+
     }
     
     void Update()
@@ -92,7 +95,8 @@ public class PrototypeDash : MonoBehaviour
             if (playerInput.moveAbilityInput && playerInput.dashSelected && canDash)
             {
                 dashCount--;
-                isDashing = true; 
+                isDashing = true;
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.shotgunFire, this.transform.position);
             }
         }
 

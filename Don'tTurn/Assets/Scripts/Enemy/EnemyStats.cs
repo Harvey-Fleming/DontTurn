@@ -42,7 +42,6 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         //audio
         emitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.duoSkellyVoice, this.gameObject);
         emitter.Play();
-        Debug.Log("enemy sound play");
     }
 
     public void SaveData(GameData data)
