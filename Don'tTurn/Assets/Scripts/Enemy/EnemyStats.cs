@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
+using TMPro; 
 
 public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 {
@@ -22,6 +23,8 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     public GameObject Mushroom;
 
     private StudioEventEmitter emitter;
+
+    public TextMeshProUGUI damageIndicatorText;
 
     [ContextMenu("Generate Unique Guid for id")]
     private void GenerateGuid()
@@ -61,6 +64,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
     public void OnHit(float damageTaken, GameObject incomingAttacker)
     {
+        StartCoroutine(DamageIndication(damageTaken)); 
         currentHealth = currentHealth - damageTaken;
         StartCoroutine(ChangeColour());
         knockbackScript.ApplyKnockBack(incomingAttacker);
@@ -123,6 +127,14 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
             Instantiate(Mushroom, transform.position, transform.rotation);
         }
 
+    }
+
+    public IEnumerator DamageIndication(float attackDamage)
+    {
+        damageIndicatorText.text = attackDamage.ToString();
+        damageIndicatorText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        damageIndicatorText.gameObject.SetActive(false);
     }
 
 

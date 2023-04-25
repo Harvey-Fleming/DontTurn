@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro; 
 
 public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
 {
@@ -15,7 +16,8 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
 
     
     private Vector3 playerPosition;
-    public Vector3 spawnPoint; 
+    public Vector3 spawnPoint;
+    public TextMeshProUGUI damageIndicatorText; 
 
     private void Awake() 
     {
@@ -51,6 +53,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     public void OnHit(float attackDamage, GameObject attacker)
     {
         health -= attackDamage;
+        StartCoroutine(DamageIndication(attackDamage));
 
     }
 
@@ -121,5 +124,12 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         data.spawnPoint = this.spawnPoint;
     }
 
+    public IEnumerator DamageIndication(float attackDamage)
+    {
+        damageIndicatorText.text = attackDamage.ToString(); 
+        damageIndicatorText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        damageIndicatorText.gameObject.SetActive(false);
+    }
 
 }
