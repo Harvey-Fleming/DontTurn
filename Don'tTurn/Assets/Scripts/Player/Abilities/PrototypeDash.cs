@@ -100,7 +100,7 @@ public class PrototypeDash : MonoBehaviour
             }
         }
 
-        if (movement.IsGrounded() && canDash) { dashCount = 1; }       
+        if (canDash) { dashCount = 1; }       
         
         if (isDashing) {  StartCoroutine(DashAbility()); }
     }

@@ -61,7 +61,7 @@ public class PlayerInput : MonoBehaviour
 
     private void NextAbilityScroll()
     {
-        if (Input.mouseScrollDelta.y != 0)
+        if (Input.GetKeyDown(KeyCode.C))
         {
             grappleSelected = !grappleSelected;
             dashSelected = !dashSelected;
