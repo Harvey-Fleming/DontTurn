@@ -19,7 +19,8 @@ public class PlayerCollision : MonoBehaviour
     private Transform restTrans;
     private int attackDamage = 10;
     private float timebetweenRegens = 1, iframeflicker = 0.1f, lerpSpeed = 4f;
-    private bool canTakeDamage = true, interactPressed = false, isInsideTrigger = false, IsMovingToTarget = false;
+    public bool canTakeDamage = true, interactPressed = false, isInsideTrigger = false, IsMovingToTarget = false;
+    private CureManager cureManager;
 
     private void Start() 
     {
@@ -29,6 +30,7 @@ public class PlayerCollision : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        cureManager = GameObject.Find("CureManager").GetComponent<CureManager>();
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
@@ -43,6 +45,15 @@ public class PlayerCollision : MonoBehaviour
         else if (collision.gameObject.CompareTag("GrapplePoint"))
         {
             Physics2D.IgnoreCollision(collision.collider, GetComponent<BoxCollider2D>());
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Cure")
+        {
+            cureManager.cureAmount++;
+            Destroy(collision.gameObject);
         }
     }
 

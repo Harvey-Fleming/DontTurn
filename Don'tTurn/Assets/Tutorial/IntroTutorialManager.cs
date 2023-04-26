@@ -17,7 +17,7 @@ public class IntroTutorialManager : MonoBehaviour
     float elapsedTime;
 
     [Header("Medkit")]
-    public MedkitCounter medkitCounter;
+    public Inventory inventory;
     public GameObject medkitPrompt;
     public bool pauseFinished = false;
 
@@ -39,6 +39,14 @@ public class IntroTutorialManager : MonoBehaviour
     public Text curseText;
     public string[] curseStrings;
     int curseStringNum = 0;
+
+    [Header("Checkpoint")]
+    bool hasUsedCheckpoint;
+    public PlayerCollision playerCollision;
+    public GameObject checkpointTutorial;
+    public Text checkpointText;
+    public string[] checkpointStrings;
+    int checkpointStringNum;
 
     void Start()
     {
@@ -68,6 +76,8 @@ public class IntroTutorialManager : MonoBehaviour
         {
             CurseTutorial();
         }
+
+        CheckpointTutorial();
     }
 
     void MovementIconBob()
@@ -80,7 +90,7 @@ public class IntroTutorialManager : MonoBehaviour
 
     void MedkitTutorial()
     {
-        if(medkitCounter.medkitAmount == 1 && !pauseFinished)
+        if(inventory.medicAmount >= 1 && !pauseFinished)
         {
             Time.timeScale = 0;
             PlayerMovement.StopPlayerFootsteps();
@@ -88,13 +98,11 @@ public class IntroTutorialManager : MonoBehaviour
             pauseFinished = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && pauseFinished && medkitCounter.medkitAmount > 0)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && pauseFinished)
         {
             Time.timeScale = 1;
             medkitPrompt.SetActive(false);
             player.GetComponent<PlayerStats>().health += 25;
-            medkitCounter.medkitAmount--;
-            medkitCounter.medkitText.text = medkitCounter.medkitAmount.ToString();
         }
     }
     
@@ -143,6 +151,32 @@ public class IntroTutorialManager : MonoBehaviour
             {
                 Time.timeScale = 1;
                 curseTutorial.SetActive(false);
+            }
+        }
+    }
+
+    void CheckpointTutorial()
+    {
+        if(!hasUsedCheckpoint && playerCollision.isInsideTrigger && !playerCollision.IsMovingToTarget && playerCollision.interactPressed)
+        {
+            if(checkpointStringNum < checkpointStrings.Length)
+            {
+                Time.timeScale = 0;
+                checkpointTutorial.SetActive(true);
+                checkpointText.text = checkpointStrings[checkpointStringNum];
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    checkpointStringNum++;
+                }
+            }
+            if (checkpointStringNum >= checkpointStrings.Length)
+            {
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    Time.timeScale = 1;
+                    checkpointTutorial.SetActive(false);
+                    hasUsedCheckpoint = true;
+                }
             }
         }
     }
