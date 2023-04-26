@@ -166,7 +166,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6169534223625190664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 118.32, y: -6.0299997, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -305,11 +305,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2318deac161c440bed5328928d77ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: f08c9115-fdbe-4d72-80f8-8e001a493de7
-  isDead: 0
+  spriteRenderer: {fileID: 0}
   MedKit: {fileID: 0}
   Mushroom: {fileID: 0}
   damageIndicatorText: {fileID: 0}
+  id: f08c9115-fdbe-4d72-80f8-8e001a493de7
+  isDead: 0
 --- !u!114 &6406451567839429295
 MonoBehaviour:
   m_ObjectHideFlags: 0

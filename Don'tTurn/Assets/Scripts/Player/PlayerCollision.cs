@@ -117,7 +117,8 @@ public class PlayerCollision : MonoBehaviour
         yield break;
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate() 
+    {
         if(IsMovingToTarget)
         {
             if(Mathf.Abs(transform.position.x - restTrans.position.x) > 0.01f)
