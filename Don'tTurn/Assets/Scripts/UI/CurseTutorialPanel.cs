@@ -8,12 +8,13 @@ public class CurseTutorialPanel : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
     public VideoClip[] videoClips;
-    int tutorialNumber; 
+    public int tutorialNumber;
+    public GameObject videoPlayerMaterial; 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        videoPlayerMaterial.SetActive(true);
     }
 
     // Update is called once per frame
@@ -40,5 +41,13 @@ public class CurseTutorialPanel : MonoBehaviour
                 videoPlayer.clip = videoClips[5];
                 break;
         }
+    }
+
+
+    public void close()
+    {
+        Time.timeScale = 1;
+        videoPlayerMaterial.SetActive(false); 
+        this.gameObject.SetActive(false); 
     }
 }

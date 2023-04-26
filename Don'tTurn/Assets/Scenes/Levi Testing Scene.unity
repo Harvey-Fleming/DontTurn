@@ -2128,6 +2128,7 @@ MonoBehaviour:
   isDead: 0
   MedKit: {fileID: 0}
   Mushroom: {fileID: 0}
+  damageIndicatorText: {fileID: 0}
 --- !u!114 &465956789
 MonoBehaviour:
   m_ObjectHideFlags: 0
