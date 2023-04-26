@@ -8,23 +8,22 @@ using TMPro;
 
 public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 {
+    //Component References
     private EnemyMovement enemyMovementScript;
     private Knockback knockbackScript;
-
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb2D;
+    [SerializeField] private GameObject MedKit;
+    [SerializeField] private GameObject Mushroom;
+    private StudioEventEmitter emitter;
+    public TextMeshProUGUI damageIndicatorText;
 
-
+    //Stats Variables
     [SerializeField] private string id;
     public bool isDead = false;
     private float maxHealth = 15, currentHealth = 15;
-
-    public GameObject MedKit;
-    public GameObject Mushroom;
-
-    private StudioEventEmitter emitter;
-
-    public TextMeshProUGUI damageIndicatorText;
+    private Vector2 respawnPos;
+    Color normalColour = Color.white;
 
     [ContextMenu("Generate Unique Guid for id")]
     private void GenerateGuid()
@@ -32,35 +31,27 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         id = System.Guid.NewGuid().ToString();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake() 
     {
-        Respawn();
-
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
         enemyMovementScript = GetComponent<EnemyMovement>();
         knockbackScript = GetComponent<Knockback>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        respawnPos = gameObject.transform.position;
+        Respawn();
+
 
         //audio
         emitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.duoSkellyVoice, this.gameObject);
         emitter.Play();
     }
 
-    public void SaveData(GameData data)
-    {
-        if(data.isEnemyDead.ContainsKey(id))
-        {
-            data.isEnemyDead.Remove(id);
-        }
-        data.isEnemyDead.Add(id, isDead);
-    }
 
-    public void LoadData(GameData data)
-    {
-        data.isEnemyDead.TryGetValue(id, out isDead);
-        Respawn();
-    }
 
     public void OnHit(float damageTaken, GameObject incomingAttacker)
     {
@@ -77,6 +68,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
     public void OnDeath()
     {
+        spriteRenderer.color = normalColour;
         RandomDrop(); 
         gameObject.SetActive(false);
         isDead = true;
@@ -95,23 +87,18 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         else if (!isDead)
         {
             gameObject.SetActive(true);
+            gameObject.transform.position = respawnPos;
             currentHealth = maxHealth;
         }
     }
 
     IEnumerator ChangeColour()
     {
-        Color normalColour = Color.white;
         Color hitColour = Color.red;
         spriteRenderer.color = hitColour;
         yield return new WaitForSeconds(0.5f);
         spriteRenderer.color = normalColour;
         yield break;
-    }
-
-    private void OnValidate() 
-    {
-
     }
 
     public void RandomDrop()
@@ -136,6 +123,24 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         yield return new WaitForSeconds(0.1f);
         damageIndicatorText.gameObject.SetActive(false);
     }
+
+    #region SaveRegion
+    public void SaveData(GameData data)
+    {
+        if(data.isEnemyDead.ContainsKey(id))
+        {
+            data.isEnemyDead.Remove(id);
+        }
+        data.isEnemyDead.Add(id, isDead);
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.isEnemyDead.TryGetValue(id, out isDead);
+        Respawn();
+    }
+
+    #endregion
 
 
 }

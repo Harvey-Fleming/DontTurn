@@ -173,7 +173,7 @@ public class GrappleAbility : MonoBehaviour
         //Disable player movement
     }
 
-    private void StopGrapple()
+    public void StopGrapple()
     {
         playerMovement.ResetAirJump();
         isGrappling = false;

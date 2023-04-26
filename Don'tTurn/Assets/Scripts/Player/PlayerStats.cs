@@ -60,6 +60,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     public void OnDeath()
     {
         Debug.Log("You Died!");
+        GetComponent<GrappleAbility>().StopGrapple();
         StartCoroutine(DeathWait()); 
     }
 
@@ -73,6 +74,14 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         GetComponent<SpriteRenderer>().enabled = true;
         transform.position = spawnPoint;
         corruptionScript.StartCoroutine(corruptionScript.Timer(corruptionScript.areaTick));
+    }
+
+    public IEnumerator DamageIndication(float attackDamage)
+    {
+        damageIndicatorText.text = attackDamage.ToString(); 
+        damageIndicatorText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        damageIndicatorText.gameObject.SetActive(false);
     }
 
 
@@ -124,12 +133,6 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         data.spawnPoint = this.spawnPoint;
     }
 
-    public IEnumerator DamageIndication(float attackDamage)
-    {
-        damageIndicatorText.text = attackDamage.ToString(); 
-        damageIndicatorText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        damageIndicatorText.gameObject.SetActive(false);
-    }
+
 
 }
