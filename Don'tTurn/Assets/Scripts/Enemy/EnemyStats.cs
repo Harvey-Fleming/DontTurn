@@ -10,20 +10,26 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 {
     //Component References
     private EnemyMovement enemyMovementScript;
+    private PlayerStats playerStats;
     private Knockback knockbackScript;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb2D;
-    [SerializeField] private GameObject MedKit;
-    [SerializeField] private GameObject Mushroom;
+    private BoxCollider2D boxCollider2D;
+
     private StudioEventEmitter emitter;
     public TextMeshProUGUI damageIndicatorText;
 
     //Stats Variables
     [SerializeField] private string id;
     public bool isDead = false;
-    private float maxHealth = 15, currentHealth = 15;
+    [SerializeField] private float maxHealth = 15, collisionDamageDealt = 10;
+    private float currentHealth = 15;
     private Vector2 respawnPos;
     Color normalColour = Color.white;
+
+    //Drop item references
+    [SerializeField] private GameObject MedKit;
+    [SerializeField] private GameObject Mushroom;
 
     [ContextMenu("Generate Unique Guid for id")]
     private void GenerateGuid()
@@ -37,6 +43,8 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         rb2D = GetComponent<Rigidbody2D>();
         enemyMovementScript = GetComponent<EnemyMovement>();
         knockbackScript = GetComponent<Knockback>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
+        playerStats = GameObject.FindObjectOfType<PlayerStats>();
     }
 
     // Start is called before the first frame update
@@ -52,7 +60,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     }
 
 
-
+    #region TakingDamage
     public void OnHit(float damageTaken, GameObject incomingAttacker)
     {
         StartCoroutine(DamageIndication(damageTaken)); 
@@ -123,6 +131,16 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         yield return new WaitForSeconds(0.1f);
         damageIndicatorText.gameObject.SetActive(false);
     }
+    #endregion
+
+    #region DealingDamage
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.tag == "Player")
+        {
+            playerStats.OnHit(collisionDamageDealt, gameObject);
+        }
+    }
+    #endregion
 
     #region SaveRegion
     public void SaveData(GameData data)

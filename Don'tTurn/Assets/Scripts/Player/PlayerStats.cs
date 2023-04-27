@@ -9,15 +9,20 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     //Component References
     public static PlayerStats instance {get; private set;}
     [SerializeField] private CorruptionScript corruptionScript;
+    private Knockback knockbackScript;
+    private SpriteRenderer spriteRenderer;
 
     //Stats
     [Range(0, 100)] public float maxHealth = 100f, health = 100f;
     [Range(0,100)] private float cursePoints;
+    private float iframeflicker = 0.1f;
+    private bool canTakeDamage = true;
 
     
     private Vector3 playerPosition;
     public Vector3 spawnPoint;
     public TextMeshProUGUI damageIndicatorText; 
+
 
     private void Awake() 
     {
@@ -33,6 +38,9 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
             instance = this;
         }
         this.gameObject.transform.position = spawnPoint;
+
+        knockbackScript = GetComponent<Knockback>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start() 
@@ -52,9 +60,14 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
 
     public void OnHit(float attackDamage, GameObject attacker)
     {
-        health -= attackDamage;
-        StartCoroutine(DamageIndication(attackDamage));
-
+        if(canTakeDamage == true)
+        {
+            health -= attackDamage;
+            StartCoroutine(DamageIndication(attackDamage));
+            corruptionScript.OnHitCorruption(attackDamage);
+            knockbackScript.ApplyKnockBack(attacker);
+            StartCoroutine("IFrames");
+        }
     }
 
     public void OnDeath()
@@ -83,6 +96,21 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         yield return new WaitForSeconds(0.1f);
         damageIndicatorText.gameObject.SetActive(false);
     }
+
+    IEnumerator IFrames()
+    {
+        canTakeDamage = false;
+        for (int i = 3; i > 0; i--)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(iframeflicker);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(iframeflicker);
+        }
+        canTakeDamage = true;
+        yield break;
+    }
+    
 
 
 //Subscribing to on scene loaded and on scene unloaded events.

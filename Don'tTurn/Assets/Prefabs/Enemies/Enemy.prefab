@@ -305,12 +305,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2318deac161c440bed5328928d77ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
-  MedKit: {fileID: 0}
-  Mushroom: {fileID: 0}
   damageIndicatorText: {fileID: 0}
   id: f08c9115-fdbe-4d72-80f8-8e001a493de7
   isDead: 0
+  maxHealth: 15
+  collisionDamageDealt: 10
+  MedKit: {fileID: 0}
+  Mushroom: {fileID: 0}
 --- !u!114 &6406451567839429295
 MonoBehaviour:
   m_ObjectHideFlags: 0

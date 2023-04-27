@@ -21,8 +21,6 @@ public class CorruptionScript : MonoBehaviour
 
     public float curseMutliplier;
 
-
-
     private void Awake() 
     {
         playerStats = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
@@ -85,12 +83,12 @@ public class CorruptionScript : MonoBehaviour
         }
     }
 
-    public void OnHitCorruption(int attackDamage)
+    public void OnHitCorruption(float attackDamage)
     {
         time += attackDamage;
     }
 
-    public void OnReduceCorruption(int reduceAmount)
+    public void OnReduceCorruption(float reduceAmount)
     {
         time -= reduceAmount;
     }
