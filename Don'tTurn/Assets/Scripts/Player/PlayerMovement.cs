@@ -89,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
         if (currentcoyoteTimer > 0f && playerInput.jumpKey)
         {
             IsJumping = true; jumpTime = 0;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerJump, this.transform.position);
         }
 
         if (IsJumping)
