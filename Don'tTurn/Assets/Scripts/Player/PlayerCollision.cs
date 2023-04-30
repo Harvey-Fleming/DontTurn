@@ -17,9 +17,8 @@ public class PlayerCollision : MonoBehaviour
 
     private GameObject incomingAttacker;
     private Transform restTrans;
-    private int attackDamage = 10;
-    private float timebetweenRegens = 1, iframeflicker = 0.1f, lerpSpeed = 4f;
-    public bool canTakeDamage = true, interactPressed = false, isInsideTrigger = false, IsMovingToTarget = false;
+    private float timebetweenRegens = 1, lerpSpeed = 4f;
+    public bool interactPressed = false, isInsideTrigger = false, IsMovingToTarget = false;
     private CureManager cureManager;
 
     private void Start() 
@@ -35,14 +34,7 @@ public class PlayerCollision : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") && canTakeDamage)
-        {
-            playerStats.OnHit(attackDamage, collision.gameObject);
-            corruptionScript.OnHitCorruption(attackDamage);
-            knockbackScript.ApplyKnockBack(collision.gameObject);
-            StartCoroutine("IFrames");
-        }    
-        else if (collision.gameObject.CompareTag("GrapplePoint"))
+        if (collision.gameObject.CompareTag("GrapplePoint"))
         {
             Physics2D.IgnoreCollision(collision.collider, GetComponent<BoxCollider2D>());
         }
@@ -112,20 +104,6 @@ public class PlayerCollision : MonoBehaviour
         }
         yield return new WaitForSeconds(timebetweenRegens);
         }
-    }
-
-    IEnumerator IFrames()
-    {
-        canTakeDamage = false;
-        for (int i = 3; i > 0; i--)
-        {
-            spriteRenderer.enabled = false;
-            yield return new WaitForSeconds(iframeflicker);
-            spriteRenderer.enabled = true;
-            yield return new WaitForSeconds(iframeflicker);
-        }
-        canTakeDamage = true;
-        yield break;
     }
 
     private void FixedUpdate() 
