@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInput))]
-public class CurseAttacks : MonoBehaviour
+public class CurseAttacks : MonoBehaviour, IDataPersistence
 {
     [SerializeField] bool isOnCooldown; 
     public GameObject bomb;
@@ -96,5 +96,21 @@ public class CurseAttacks : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         isOnCooldown = false; 
+    }
+
+    //Save and Loading Data
+    public void LoadData(GameData data)
+    {
+        this.isBombUnlocked = data.isBombUnlocked;
+        this.isCursePunchUnlocked = data.isCursePunchUnlocked;
+        this.isEatUnlocked = data.isEatUnlocked;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.isBombUnlocked = this.isBombUnlocked;
+        data.isCursePunchUnlocked = this.isCursePunchUnlocked;
+        data.isEatUnlocked = this.isEatUnlocked;
+        
     }
 }

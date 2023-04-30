@@ -6,7 +6,7 @@ using FMOD.Studio;
 
 
 [RequireComponent(typeof(PlayerInput))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IDataPersistence
 {
     [Header("Ground Movement")]
     private Rigidbody2D rb;
@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask GroundLayerMask;
     [SerializeField] private float jumpForce = 1f, maxJumpTime = 0.1f;
     private float jumpTime = 0;
-    public int maxAerialJumpCount;
+    public int maxAerialJumpCount = 1;
     private int aerialJumpCount, gravityScale = 4, fallingGravityScale = 10;
     private bool IsJumping = false, jumpEndEarly = false;
 
@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float flipTimer, maxflipTimer = 0.5f;
     private Animator animator;
     private Vector2 cursorPos;
-    public bool facingright = true, isGodEnabled;
+    public bool facingright = true, isGodEnabled, isDoubleJumpUnlocked;
 
     //audio
     public static EventInstance playerFootsteps;
@@ -181,7 +181,7 @@ public class PlayerMovement : MonoBehaviour
     void AerialJump()
     {
         //Can perform as many aerial jumps as there are max aerial jumps
-        if (aerialJumpCount > 0 && !IsGrounded())
+        if (aerialJumpCount > 0 && !IsGrounded() && isDoubleJumpUnlocked)
         {
             if (playerInput.jumpKey)
             {
@@ -220,6 +220,17 @@ public class PlayerMovement : MonoBehaviour
     public static void StopPlayerFootsteps()
     {
         playerFootsteps.stop(STOP_MODE.IMMEDIATE);
+    }
+
+    //Save and Loading Data
+    public void LoadData(GameData data)
+    {
+        this.isDoubleJumpUnlocked = data.isDoubleJumpUnlocked;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.isDoubleJumpUnlocked = this.isDoubleJumpUnlocked;
     }
 
 }

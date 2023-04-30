@@ -7,8 +7,8 @@ public class BulletScript : MonoBehaviour
 {
     private Rigidbody2D rb2D;
 
-    [SerializeField] private int basebulletDamage = 10, minbulletDamage = 1;
-    [SerializeField] private float bulletDamage, bulletTravelTime, bulletTravelFalloff = 0.25f;
+    [SerializeField] private int basebulletDamage = 6, minbulletDamage = 1;
+    [SerializeField] private float bulletDamage, bulletTravelTime, bulletTravelFalloff = 0.1f;
     
 
     private void Awake() 

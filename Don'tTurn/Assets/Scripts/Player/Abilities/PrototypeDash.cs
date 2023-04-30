@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using System.Runtime.CompilerServices;
 
 [RequireComponent(typeof(PlayerInput))]
-public class PrototypeDash : MonoBehaviour
+public class PrototypeDash : MonoBehaviour, IDataPersistence
 {
 
     //Component References
@@ -178,4 +178,14 @@ public class PrototypeDash : MonoBehaviour
         }
     }
 
+    //Save and Loading Data
+    public void LoadData(GameData data)
+    {
+        this.isUnlocked = data.isShotgunUnlocked;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.isShotgunUnlocked = this.isUnlocked;
+    }
 }

@@ -18,7 +18,6 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     private float iframeflicker = 0.1f;
     private bool canTakeDamage = true;
 
-    
     private Vector3 playerPosition;
     public Vector3 spawnPoint;
     public TextMeshProUGUI damageIndicatorText; 

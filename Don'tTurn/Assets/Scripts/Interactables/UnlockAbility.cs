@@ -23,7 +23,7 @@ public class UnlockAbility : MonoBehaviour
                 playerObj.GetComponent<PrototypeDash>().isUnlocked = true;
                 break;
                 case("Double Jump"):
-                playerObj.GetComponent<PlayerMovement>().maxAerialJumpCount = 1;
+                playerObj.GetComponent<PlayerMovement>().isDoubleJumpUnlocked = true;
                 break;
                 case("Grapple"):
                 playerObj.GetComponent<GrappleAbility>().isUnlocked = true;

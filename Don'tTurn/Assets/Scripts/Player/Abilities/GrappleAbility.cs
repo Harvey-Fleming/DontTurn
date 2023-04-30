@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInput))]
-public class GrappleAbility : MonoBehaviour
+public class GrappleAbility : MonoBehaviour, IDataPersistence
 {
     //Component / Object references
     private GameObject enemyObj;
@@ -197,6 +197,17 @@ public class GrappleAbility : MonoBehaviour
 
         grappleLine.SetPosition(0, Pos1);
         grappleLine.SetPosition(1, Pos2);
+    }
+
+    //Save and Loading Data
+    public void LoadData(GameData data)
+    {
+        this.isUnlocked = data.isGrappleUnlocked;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.isGrappleUnlocked = this.isUnlocked;
     }
 
 }
