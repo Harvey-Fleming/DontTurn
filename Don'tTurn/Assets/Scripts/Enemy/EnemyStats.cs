@@ -95,7 +95,16 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         else if (!isDead)
         {
             gameObject.SetActive(true);
-            gameObject.transform.position = respawnPos;
+            if(respawnPos == Vector2.zero)
+            {
+                respawnPos = gameObject.transform.position;
+                return;
+            }
+            else
+            {
+                gameObject.transform.position = respawnPos;
+            }
+            
             currentHealth = maxHealth;
         }
     }

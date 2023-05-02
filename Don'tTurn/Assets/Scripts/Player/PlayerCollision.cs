@@ -73,7 +73,7 @@ public class PlayerCollision : MonoBehaviour
             {
                 Debug.Log("Interact Pressed is false");
                 animator.SetBool("IsResting", false);
-
+                DataPersistenceManager.instance?.SaveGame();
                 playerMovement.enabled = true;
                 IsMovingToTarget = false;
             }

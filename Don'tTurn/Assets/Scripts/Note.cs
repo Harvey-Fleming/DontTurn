@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Note : MonoBehaviour
+public class Note : MonoBehaviour, IDataPersistence
 {
     public Transform noteGraphic;
     float y;
@@ -11,10 +11,20 @@ public class Note : MonoBehaviour
     public float bobAmount;
     public int noteNum;
     public NoteManager noteManager;
+    public bool hasCollectedNote;
 
     private void Start()
     {
         startY = noteGraphic.position.y;
+
+        if(hasCollectedNote == true)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            return;
+        }
     }
 
     private void Update()
@@ -29,7 +39,24 @@ public class Note : MonoBehaviour
         if(collision.tag == "Player")
         {
             noteManager.notesObtained[noteNum] = true;
+            hasCollectedNote = true;
             Destroy(gameObject);
         } 
     }
+
+    #region SaveRegion
+    public void SaveData(GameData data)
+    {
+        if(data.hasCollectedNote.ContainsKey(noteNum))
+        {
+            data.hasCollectedNote.Remove(noteNum);
+        }
+        data.hasCollectedNote.Add(noteNum, hasCollectedNote);
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.hasCollectedNote.TryGetValue(noteNum, out hasCollectedNote);
+    }
+    #endregion
 }

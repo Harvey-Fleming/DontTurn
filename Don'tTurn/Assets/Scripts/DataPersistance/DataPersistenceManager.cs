@@ -109,11 +109,6 @@ public class DataPersistenceManager : MonoBehaviour
        Debug.Log("Saved Game");
     }
 
-    public void OnCheckPointReached() 
-    {
-        SaveGame();
-    }
-    
     private List<IDataPersistence> FindAllDataPersistenceObjects()
     {
         IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();

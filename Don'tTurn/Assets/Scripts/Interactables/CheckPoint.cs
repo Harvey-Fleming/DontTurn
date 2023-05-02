@@ -26,7 +26,6 @@ public class CheckPoint : MonoBehaviour
         if(other.gameObject.CompareTag("Player") == true)
         {
             playerStats.spawnPoint = this.gameObject.transform.position;
-            DataPersistenceManager.instance?.OnCheckPointReached();
             playerCollision.OnEnterCheckpoint(restPointTrans, this.gameObject);
         }
     }
