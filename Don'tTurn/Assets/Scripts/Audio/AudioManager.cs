@@ -8,8 +8,14 @@ using System.Runtime.CompilerServices;
 public class AudioManager : MonoBehaviour
 {
     private List<EventInstance> eventInstances;
+    
     private List<StudioEventEmitter> eventEmitters;
+
+    private EventInstance ambienceEventInstance;
     public static AudioManager instance { get; private set; }
+
+    public GameObject Player;
+    
 
     private void Awake()
     {
@@ -21,6 +27,27 @@ public class AudioManager : MonoBehaviour
 
         eventInstances = new List<EventInstance>();
         eventEmitters = new List<StudioEventEmitter>();
+    }
+
+    private void Start()
+    {
+        InitialiseAmbience(FMODEvents.instance.cityAmbience);
+        //InitialiseAmbience(FMODEvents.instance.sewerAmbience);
+        //SetAmbienceParameter("Sewer_ambience_intensity", 1);
+        SetAmbienceParameter("City_ambience_intensity", 0);
+    }
+
+    public void SetAmbienceParameter(string parameterName, float parameterValue)
+    {
+        ambienceEventInstance.setParameterByName(parameterName, parameterValue);
+    }
+
+    public void InitialiseAmbience(EventReference ambienceEventReference)
+    {
+        ambienceEventInstance = CreateEventInstance(ambienceEventReference);
+        ambienceEventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(Player.transform.position));
+        ambienceEventInstance.start();
+
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)

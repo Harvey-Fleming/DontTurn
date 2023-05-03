@@ -16,7 +16,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     private Rigidbody2D rb2D;
     private BoxCollider2D boxCollider2D;
 
-    private StudioEventEmitter emitter;
+    //private StudioEventEmitter emitter;
     public TextMeshProUGUI damageIndicatorText;
 
     //Stats Variables
@@ -55,14 +55,15 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
 
         //audio
-        emitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.duoSkellyVoice, this.gameObject);
-        emitter.Play();
+        //emitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.duoSkellyVoice, this.gameObject);
+        //emitter.Play();
     }
 
-
+    
     #region TakingDamage
     public void OnHit(float damageTaken, GameObject incomingAttacker)
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.duoSkellyDmg, this.transform.position);
         StartCoroutine(DamageIndication(damageTaken)); 
         currentHealth = currentHealth - damageTaken;
         StartCoroutine(ChangeColour());
@@ -80,7 +81,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         RandomDrop(); 
         gameObject.SetActive(false);
         isDead = true;
-        emitter.Stop();
+        //emitter.Stop();
         Debug.Log("enemy sound stop");
     }
 

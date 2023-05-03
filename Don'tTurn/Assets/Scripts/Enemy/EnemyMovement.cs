@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
+using FMODUnity;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Transform player;
     [SerializeField] private LayerMask layerMask, jumpMask;
+    private StudioEventEmitter emitter;
+    private StudioEventEmitter aggroEmitter;
 
     [Header("States")]
     [SerializeField] private bool isWandering;
@@ -28,15 +32,30 @@ public class EnemyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").transform;
         isWandering = true;
+        emitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.duoSkellyVoice, this.gameObject);
+        emitter.Play();
+        aggroEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.duoSkellyAggro, this.gameObject);
 
         StartCoroutine(WanderDelay());
+
     }
 
     private void Update()
     {
+        //UpdateSound();
+
         if (!isAggro)
         {
             isWandering = true;
+            //emitter.Play();
+            //aggroEmitter.Stop();
+
+        }
+
+        //if (gameObject.GetComponent<EnemyStats>().isDead == true)
+        {
+            //emitter.Stop();
+            //aggroEmitter.Stop();
         }
 
         if (!canJump)
@@ -71,6 +90,8 @@ public class EnemyMovement : MonoBehaviour
         if (isAggro)
         {
             AggroMovement();
+            //emitter.Stop();
+            //aggroEmitter.Play();
         }
 
         if (isWandering)
@@ -201,6 +222,33 @@ public class EnemyMovement : MonoBehaviour
         gameObject.transform.localScale = currentScale;
 
         facingright = !facingright;
+    }
+
+    private void UpdateSound()
+    {
+        if (isAggro)
+        {
+            if (!aggroEmitter.IsPlaying())
+            {
+                Debug.Log("enemyAggro");
+                emitter.Stop();
+                aggroEmitter.Play();
+            }
+        }
+        else if (isWandering)
+        {
+            if (!emitter.IsPlaying())
+            {
+                aggroEmitter.Stop();
+                emitter.Play();
+            }
+        else
+            {
+                //aggroEmitter.Stop();
+                //emitter.Stop();
+            }
+        }
+
     }
 
     private void OnValidate() {

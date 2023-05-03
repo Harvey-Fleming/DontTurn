@@ -39,6 +39,7 @@ public class AttackScript : MonoBehaviour
         //Trigger first attack in the combo
         if (playerInput.meleeInput && canAttack && comboTimer <= 0)
         {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.Melee1, this.transform.position);
             currentAttackNumber = 1;
             animator.SetBool("IsAttacking", true);
         }
@@ -70,6 +71,7 @@ public class AttackScript : MonoBehaviour
 
                 if(playerInput.meleeInput)
                 {
+
                     if (currentAttackNumber < 3)
                     {
                         currentAttackNumber ++;
@@ -80,6 +82,16 @@ public class AttackScript : MonoBehaviour
                     {
                         comboTimer = 0;
                         StartCoroutine(MeleeCooldown());
+                    }
+
+                    if (currentAttackNumber == 2)
+                    {
+                        AudioManager.instance.PlayOneShot(FMODEvents.instance.Melee2, this.transform.position);
+                    }
+
+                    if (currentAttackNumber == 3 && comboTimer != 0)
+                    {
+                        AudioManager.instance.PlayOneShot(FMODEvents.instance.Melee3, this.transform.position);
                     }
                 }
             }

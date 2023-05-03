@@ -54,7 +54,6 @@ public class IntroTutorialManager : MonoBehaviour
         spaceBarIconStartPos = spaceBarIcon.transform.position;
         mouseIconStartPos = mouseIcon.transform.position;
         player = GameObject.Find("Player");
-        playerFootsteps = AudioManager.instance.CreateEventInstance(FMODEvents.instance.playerFootsteps);
     }
 
     void Update()
