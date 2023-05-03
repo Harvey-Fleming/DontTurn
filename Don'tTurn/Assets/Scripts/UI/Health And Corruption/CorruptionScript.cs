@@ -44,19 +44,6 @@ public class CorruptionScript : MonoBehaviour
         curseText.text = "Curse Points: " + time.ToString();
 
         curseMutliplier = 1f + (time / 100);
-
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            if(time > 35)
-            {
-                time -= 35;
-            }
-            else if (time < 50)
-            {
-                playerStats.health -= 35; 
-            }
-           
-        }
         
         if (time <= 0)
         {

@@ -11,15 +11,14 @@ public class MapPanelScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        for (int i = 0; i < images.Length; i++)
+        {
+            images[i].gameObject.SetActive(false);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShowMap(int mapNum)
     {
-            images[MapScript.checkpointNumber].gameObject.SetActive(false);
-
-       
-
+        images[mapNum - 1].gameObject.SetActive(true);
     }
 }

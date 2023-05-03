@@ -15,6 +15,8 @@ public class PlayerCollision : MonoBehaviour
     private Rigidbody2D rb2D;
     private Animator animator;
 
+    public MapPanelScript mapPanelScript;
+
     private GameObject incomingAttacker;
     private Transform restTrans;
     private float timebetweenRegens = 1, lerpSpeed = 4f;
@@ -63,6 +65,7 @@ public class PlayerCollision : MonoBehaviour
             if (interactPressed == true)
             {
                 checkPointScript.RespawnAllEnemies();
+                mapPanelScript.ShowMap(checkPointScript.checkpointNumber);
                 Debug.Log("Interact Pressed is true");
                 playerMovement.enabled = false;
                 rb2D.velocity = Vector2.zero;
