@@ -59,7 +59,12 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         //emitter.Play();
     }
 
-    
+    private void Update()
+    {
+        damageIndicatorText.transform.localScale = new Vector3(1, damageIndicatorText.transform.localScale.y, damageIndicatorText.transform.localScale.z); 
+    }
+
+
     #region TakingDamage
     public void OnHit(float damageTaken, GameObject incomingAttacker)
     {
@@ -96,7 +101,16 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         else if (!isDead)
         {
             gameObject.SetActive(true);
-            gameObject.transform.position = respawnPos;
+            if(respawnPos == Vector2.zero)
+            {
+                respawnPos = gameObject.transform.position;
+                return;
+            }
+            else
+            {
+                gameObject.transform.position = respawnPos;
+            }
+            
             currentHealth = maxHealth;
         }
     }

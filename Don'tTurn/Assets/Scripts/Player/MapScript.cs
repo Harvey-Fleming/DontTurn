@@ -64,6 +64,14 @@ public class MapScript : MonoBehaviour
             checkpoint = null;
             isCheckpoint = false; 
         }
+        if(collision.GetComponent<MapTriggerScript>())
+        {
+            checkpoint = collision.gameObject;
+            isCheckpoint = true;
+            checkpointNumber = checkpoint.GetComponent<MapTriggerScript>().checkpointNumber;
+            checkpoint = null;
+            isCheckpoint = false;
+        }
 
        
     }

@@ -9,15 +9,20 @@ public class GameData
     public Vector3 spawnPoint;
     public SerializableDictionary<string, bool> isEnemyDead;
     public SerializableDictionary<string, bool> hasCollectedUpgrade;
+    public SerializableDictionary<int, bool> hasCollectedNote;
     public bool isGrappleUnlocked, isShotgunUnlocked, isDoubleJumpUnlocked, isBombUnlocked, isCursePunchUnlocked, isEatUnlocked;
 
     //These will be the default values for when a new game is initialised
     public GameData()
     {
         this.playerHealth = 100f;
-        this.spawnPoint = Vector3.zero;
-        isEnemyDead = new SerializableDictionary<string, bool>();
+        this.spawnPoint = new Vector3(58,-1,0.5f);
+        
         hasCollectedUpgrade = new SerializableDictionary<string, bool>();
+        hasCollectedNote = new SerializableDictionary<int, bool>();
+
+        //Enemy Save Variables
+        isEnemyDead = new SerializableDictionary<string, bool>();
 
         //Abilities
         isGrappleUnlocked = false;

@@ -128,10 +128,10 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
 //Checks where to spawn the player when the Scene is loaded, if one cannot be found. Location Defaults to start of Level
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (spawnPoint == Vector3.zero)
+        if (spawnPoint == null)
         {
             spawnPoint = GameObject.FindWithTag("SpawnPoint").GetComponent<Transform>().position;
-            if(spawnPoint != null)
+            if(spawnPoint != Vector3.zero)
             {
                 this.gameObject.transform.position = spawnPoint;      
             }  
