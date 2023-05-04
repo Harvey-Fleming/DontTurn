@@ -13,8 +13,6 @@ public class CheckPoint : MonoBehaviour
 
 
     [SerializeField] public int checkpointNumber;
-
-    public MapPanelScript mapPanelScript;
     
     private void Awake() 
     {
@@ -29,7 +27,6 @@ public class CheckPoint : MonoBehaviour
         {
             playerStats.spawnPoint = this.gameObject.transform.position;
             playerCollision.OnEnterCheckpoint(restPointTrans, this.gameObject);
-            mapPanelScript.ShowMap(checkpointNumber);
         }
     }
 
