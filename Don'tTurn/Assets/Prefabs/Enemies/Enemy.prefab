@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 6169534223625190669}
   - component: {fileID: 6406451567839429295}
   - component: {fileID: 3508981245913353212}
+  - component: {fileID: 8150049965107957854}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -372,6 +373,20 @@ MonoBehaviour:
   OverrideAttenuation: 1
   OverrideMinDistance: 1
   OverrideMaxDistance: 15
+--- !u!114 &8150049965107957854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6169534223625190664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e5d3772c12342458e9789d6c20bdf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  TheOtherCollider: {fileID: 0}
 --- !u!1 &6695791592114769592
 GameObject:
   m_ObjectHideFlags: 0
