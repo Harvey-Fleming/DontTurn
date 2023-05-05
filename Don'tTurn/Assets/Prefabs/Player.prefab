@@ -648,7 +648,7 @@ MonoBehaviour:
   moveSpeed: 4.5
   GroundLayerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
   jumpForce: 13.5
   maxJumpTime: 0.025
   maxAerialJumpCount: 0
@@ -658,6 +658,7 @@ MonoBehaviour:
   maxflipTimer: 0.5
   facingright: 1
   isGodEnabled: 0
+  isDoubleJumpUnlocked: 0
 --- !u!114 &6541144399509697033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -738,7 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   corruptionScript: {fileID: 0}
-  canTakeDamage: 1
+  mapPanelScript: {fileID: 0}
   interactPressed: 0
   isInsideTrigger: 0
   IsMovingToTarget: 0

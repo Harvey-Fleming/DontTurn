@@ -29,6 +29,8 @@ public class PlayerInput : MonoBehaviour
     public bool toggleMapInput {get; private set;}
     public bool inventoryInput {get; private set;}
 
+    public ToggleAbilityImage toggleAbil;
+
     private void Start() 
     {
         dashSelected = true;
@@ -65,6 +67,14 @@ public class PlayerInput : MonoBehaviour
         {
             grappleSelected = !grappleSelected;
             dashSelected = !dashSelected;
+            if (grappleSelected)
+            {
+                toggleAbil.SwitchToGrapple();
+            }
+            else
+            {
+                toggleAbil.SwitchToShotgun();
+            }
         }
     }
 }
