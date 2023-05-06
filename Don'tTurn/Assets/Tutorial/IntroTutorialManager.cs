@@ -101,7 +101,6 @@ public class IntroTutorialManager : MonoBehaviour
         {
             Time.timeScale = 1;
             medkitPrompt.SetActive(false);
-            player.GetComponent<PlayerStats>().health += 25;
         }
     }
     

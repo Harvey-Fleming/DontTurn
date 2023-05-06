@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class PlayerFlashlight : MonoBehaviour
 {
-    bool flashlightEnabled;
     public GameObject flashlight;
+    public BoxCollider2D flashlightCollider;
 
-    private void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            flashlightEnabled = !flashlightEnabled;
-        }
-
-        if (flashlightEnabled)
+        if(collision == flashlightCollider)
         {
             flashlight.SetActive(true);
         }
-        if (!flashlightEnabled)
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision == flashlightCollider)
         {
             flashlight.SetActive(false);
         }

@@ -61,11 +61,15 @@ public class Inventory : MonoBehaviour
     {
         playerStats.health += 10;
         medicAmount--; 
+        if(playerStats.health >= 100)
+        {
+            playerStats.health = 100;
+        }
     } 
     public void UseMushroom()
     {
         corruptionScript.time -= 10;
-        mushroomAmount--; 
+        mushroomAmount--;
     }
 
 

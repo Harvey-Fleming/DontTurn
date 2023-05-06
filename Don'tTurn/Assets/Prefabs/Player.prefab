@@ -701,7 +701,7 @@ MonoBehaviour:
   bulletSpawnObj: {fileID: 9184892614237827191}
   rightSpawn: {fileID: 0}
   leftSpawn: {fileID: 0}
-  autoBulletDestroyTime: 0.25
+  autoBulletDestroyTime: 0.04
   shotgunUI: {fileID: 0}
   circle: {fileID: 0}
   mainCamera: {fileID: 0}
@@ -805,6 +805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0141cd37c8147e479a75adce378908f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggleAbil: {fileID: 0}
 --- !u!114 &3039935803857740443
 MonoBehaviour:
   m_ObjectHideFlags: 0
