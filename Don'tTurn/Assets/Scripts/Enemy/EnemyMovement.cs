@@ -16,13 +16,14 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Transform player;
     [SerializeField] private LayerMask layerMask, jumpMask;
+    private EnemyAttack enemyAttackScript;
     private StudioEventEmitter emitter;
     private StudioEventEmitter aggroEmitter;
 
     [Header("States")]
     [SerializeField] private bool isWandering;
     [SerializeField] private bool isAggro;
-    [SerializeField] private bool isDamaging;
+    [SerializeField] private bool isAttacking;
     [SerializeField] private bool canJump;
     private bool facingright;
 
@@ -31,6 +32,7 @@ public class EnemyMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").transform;
+        enemyAttackScript = GetComponent<EnemyAttack>();
         isWandering = true;
         emitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.duoSkellyVoice, this.gameObject);
         emitter.Play();
@@ -144,7 +146,7 @@ public class EnemyMovement : MonoBehaviour
 
     void AggroMovement()
     {
-        if (!isDamaging)
+        if (!isAttacking)
         {
             if (Vector2.Distance(transform.position, player.position) > damageRange)
             {
@@ -181,7 +183,7 @@ public class EnemyMovement : MonoBehaviour
             }
             else
             {
-                StartCoroutine(Damage());
+                Damage();
             }
         }
 
@@ -191,15 +193,20 @@ public class EnemyMovement : MonoBehaviour
         moveSpeed = 3.5f;                       
     }
 
-    IEnumerator Damage()
+    void Damage()
     {
-        //hit
-
-        isDamaging = true;
+        isAttacking = true;
         moveDirection = 0;
-        yield return new WaitForSeconds(1f);
-        isDamaging = false;
+        if(isAttacking)
+        {
+            animator.SetBool("IsAttacking", true);
+        }
+    }
 
+    public void ResetAttack()
+    {
+        animator.SetBool("IsAttacking", false);
+        isAttacking = false;
     }
 
     void CheckFlip()
@@ -251,7 +258,4 @@ public class EnemyMovement : MonoBehaviour
 
     }
 
-    private void OnValidate() {
-
-    }
 }
