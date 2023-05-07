@@ -427,6 +427,7 @@ MonoBehaviour:
   isAggro: 0
   isAttacking: 0
   canJump: 0
+  canMove: 0
 --- !u!114 &3202428093087440981
 MonoBehaviour:
   m_ObjectHideFlags: 0

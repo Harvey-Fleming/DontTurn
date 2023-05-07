@@ -25,6 +25,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private bool isAggro;
     [SerializeField] private bool isAttacking;
     [SerializeField] private bool canJump;
+    [SerializeField] private bool canMove;
+
     private bool facingright;
 
     private void Start()
@@ -106,7 +108,7 @@ public class EnemyMovement : MonoBehaviour
 
     void WanderMovement()
     {
-        if (Vector2.Distance(transform.position, player.position) < wanderDistance)
+        if (Vector2.Distance(transform.position, player.position) < wanderDistance && canMove)
         {
             rb.velocity = new Vector2(moveDirection * moveSpeed, rb.velocity.y);
             animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
@@ -187,10 +189,12 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
+        if(canMove)
+        {
         rb.velocity = new Vector2(moveDirection * moveSpeed, rb.velocity.y);
         animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
-
-        moveSpeed = 3.5f;                       
+        moveSpeed = 3.5f;      
+        }                 
     }
 
     void Damage()

@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,12 +12,15 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     [Header("Ground Movement")]
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider2D;
-    private DebugButtonsEditor debugButtonsEditor;
     private PlayerInput playerInput;
     private Transform moveToTargetTrans;
     float hmoveValue = 0, vmoveValue = 0;
     public float moveSpeed = 3f;
     float moveMultiplier = 100f;
+
+    #if UNITY_EDITOR
+    private DebugButtonsEditor debugButtonsEditor;
+    #endif
 
     [Header("Jump Movement")]
     [SerializeField] private LayerMask GroundLayerMask;
