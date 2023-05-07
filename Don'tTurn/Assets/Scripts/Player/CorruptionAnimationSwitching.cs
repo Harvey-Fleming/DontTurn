@@ -20,5 +20,9 @@ public class CorruptionAnimationSwitching : MonoBehaviour
         {
             animator.SetBool("IsCorrupt", true); 
         }
+        else
+        {
+            animator.SetBool("IsCorrupt", false);
+        }
     }
 }

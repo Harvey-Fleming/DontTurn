@@ -2126,12 +2126,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2318deac161c440bed5328928d77ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
-  MedKit: {fileID: 0}
-  Mushroom: {fileID: 0}
   damageIndicatorText: {fileID: 0}
   id: 
   isDead: 0
+  maxHealth: 15
+  collisionDamageDealt: 10
+  MedKit: {fileID: 0}
+  Mushroom: {fileID: 0}
 --- !u!114 &465956789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4824,6 +4825,7 @@ GameObject:
   - component: {fileID: 1604953026}
   - component: {fileID: 1604953028}
   - component: {fileID: 1604953027}
+  - component: {fileID: 1604953029}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -4890,6 +4892,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604953025}
   m_CullTransparentMesh: 1
+--- !u!114 &1604953029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604953025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be951d0ae2583834b90f30b786dae911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 1629629362}
+  curseText: {fileID: 1703789604}
+  corruptionMetre: {fileID: 1604953027}
+  time: 0
+  maxCursePoints: 100
+  areaTick: 0.0048
+  metre: 0
+  curseMutliplier: 0
 --- !u!1 &1610066504
 GameObject:
   m_ObjectHideFlags: 0
@@ -5041,7 +5063,7 @@ PrefabInstance:
     - target: {fileID: 6541144399509697032, guid: 2f259cfd660d16e4699c9efd8c7d2914, type: 3}
       propertyPath: corruptionScript
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1604953029}
     - target: {fileID: 6541144399509697032, guid: 2f259cfd660d16e4699c9efd8c7d2914, type: 3}
       propertyPath: spawnPointTransform
       value: 
