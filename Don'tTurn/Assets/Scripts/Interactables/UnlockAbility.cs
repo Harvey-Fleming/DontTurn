@@ -7,6 +7,7 @@ public class UnlockAbility : MonoBehaviour
 {
     [SerializeField] private string NPCAbility;
     [SerializeField] private GameObject playerObj;
+    public ToggleAbilityImage toggleAbil;
 
     private void Awake() 
     {
@@ -21,13 +22,19 @@ public class UnlockAbility : MonoBehaviour
             {
                 case("Dash"):
                 playerObj.GetComponent<PrototypeDash>().isUnlocked = true;
+                playerObj.GetComponent<PlayerInput>().dashSelected = true;
+                playerObj.GetComponent<PlayerInput>().grappleSelected = false;
+                    toggleAbil.SwitchToShotgun();
                 break;
                 case("Double Jump"):
                 playerObj.GetComponent<PlayerMovement>().isDoubleJumpUnlocked = true;
                 break;
                 case("Grapple"):
                 playerObj.GetComponent<GrappleAbility>().isUnlocked = true;
-                break;
+                playerObj.GetComponent<PlayerInput>().dashSelected = false;
+                playerObj.GetComponent<PlayerInput>().grappleSelected = true;
+                    toggleAbil.SwitchToGrapple();
+                    break;
                 case("Bomb"):
                 playerObj.GetComponent<CurseAttacks>().isBombUnlocked = true;
                 break;

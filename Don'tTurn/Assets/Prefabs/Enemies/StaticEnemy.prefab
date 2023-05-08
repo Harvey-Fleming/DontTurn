@@ -132,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: 0
   moveSpeed: 2
-  damageRange: 1.5
+  damageRange: 3
   maxRange: 10
   wanderDistance: 25
   jumpForce: 0

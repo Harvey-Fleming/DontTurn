@@ -13,8 +13,8 @@ public class PlayerInput : MonoBehaviour
     public bool moveAbilityInput {get; private set;}
     public bool moveAbilityInputHeld {get; private set;}
     public bool moveAbilityInputRelease {get; private set;}
-    public bool grappleSelected {get; private set;}
-    public bool dashSelected {get; private set;}
+    public bool grappleSelected {get; set;}
+    public bool dashSelected {get; set;}
 
     //Combat Abilities
     public bool meleeInput {get; private set;}

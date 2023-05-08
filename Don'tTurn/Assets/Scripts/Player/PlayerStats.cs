@@ -25,6 +25,10 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     [SerializeField] private GameObject indicatorCanvas;
     private TextMeshProUGUI damageIndicatorText; 
     private TextMeshProUGUI leftdamageIndicatorText;
+    public ParticleSystem damageFX;
+    public ParticleSystem deathFX;
+
+    public PlayerDeathHandler deathHandler;
  
 
 
@@ -69,6 +73,8 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     {
         if(canTakeDamage == true)
         {
+            ParticleSystem currentParticleFX = Instantiate(damageFX);
+            currentParticleFX.transform.position = transform.position;
             health -= attackDamage;
             StartCoroutine(DamageIndication(attackDamage));
             corruptionScript.OnHitCorruption(attackDamage);
@@ -79,21 +85,17 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
 
     public void OnDeath()
     {
-        Debug.Log("You Died!");
+        ParticleSystem currentDeathFX = Instantiate(deathFX);
+        currentDeathFX.transform.position = transform.position;
         GetComponent<GrappleAbility>().StopGrapple();
-        StartCoroutine(DeathWait()); 
+        DeathWait();
     }
 
-        public IEnumerator DeathWait()
+        public void DeathWait()
     {
-        Time.timeScale = 0; 
         health = maxHealth;
         corruptionScript.time = 0f;
-        yield return new WaitForSecondsRealtime(0.5f);
-        Time.timeScale = 1;
-        GetComponent<SpriteRenderer>().enabled = true;
-        transform.position = spawnPoint;
-        corruptionScript.StartCoroutine(corruptionScript.Timer(corruptionScript.areaTick));
+        deathHandler.Die();
     }
 
     public IEnumerator DamageIndication(float attackDamage)
