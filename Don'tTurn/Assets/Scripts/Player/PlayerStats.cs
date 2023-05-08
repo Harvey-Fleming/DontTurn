@@ -12,6 +12,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     private PlayerMovement playerMovement;
     private Knockback knockbackScript;
     private SpriteRenderer spriteRenderer;
+    private DamageIndicator damageIndicatorScript;
 
     //Stats
     [Range(0, 100)] public float maxHealth = 100f, health = 100f;
@@ -21,13 +22,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
 
     private Vector3 playerPosition;
     public Vector3 spawnPoint;
-
-    [SerializeField] private GameObject indicatorCanvas;
-    private TextMeshProUGUI damageIndicatorText; 
-    private TextMeshProUGUI leftdamageIndicatorText;
  
-
-
     private void Awake() 
     {
 
@@ -45,10 +40,8 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         playerMovement = GetComponent<PlayerMovement>();
         knockbackScript = GetComponent<Knockback>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        damageIndicatorScript = GetComponent<DamageIndicator>();
 
-        indicatorCanvas = transform.GetChild(4).gameObject;
-        damageIndicatorText = indicatorCanvas.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-        leftdamageIndicatorText = indicatorCanvas.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
     }
 
     private void Start() 
@@ -70,7 +63,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         if(canTakeDamage == true)
         {
             health -= attackDamage;
-            StartCoroutine(DamageIndication(attackDamage));
+            damageIndicatorScript.SpawnIndicator(attackDamage, Color.red);
             corruptionScript.OnHitCorruption(attackDamage);
             knockbackScript.ApplyKnockBack(attacker);
             StartCoroutine("IFrames");
@@ -94,28 +87,6 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         GetComponent<SpriteRenderer>().enabled = true;
         transform.position = spawnPoint;
         corruptionScript.StartCoroutine(corruptionScript.Timer(corruptionScript.areaTick));
-    }
-
-    public IEnumerator DamageIndication(float attackDamage)
-    {
-        Vector2 currentPos = leftdamageIndicatorText.transform.localPosition;
-        Vector2 currentScale = leftdamageIndicatorText.transform.localScale;
-        if(playerMovement.facingright)
-        {
-            currentPos.x = 0.9f;
-            currentScale.x = -1;
-        }
-        else if(!playerMovement.facingright)
-        {
-            currentPos.x = -0.9f;
-            currentScale.x = 1;
-        } 
-
-        leftdamageIndicatorText.text = attackDamage.ToString(); 
-        leftdamageIndicatorText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        leftdamageIndicatorText.gameObject.SetActive(false);
-        yield break; 
     }
 
     IEnumerator IFrames()

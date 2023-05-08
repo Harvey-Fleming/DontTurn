@@ -12,6 +12,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     private EnemyMovement enemyMovementScript;
     private PlayerStats playerStats;
     private Knockback knockbackScript;
+    private DamageIndicator damageIndicatorScript;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb2D;
     private BoxCollider2D boxCollider2D;
@@ -44,6 +45,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         enemyMovementScript = GetComponent<EnemyMovement>();
         knockbackScript = GetComponent<Knockback>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        damageIndicatorScript = GetComponent<DamageIndicator>();
         playerStats = GameObject.FindObjectOfType<PlayerStats>();
     }
 
@@ -61,7 +63,6 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
     private void Update()
     {
-        damageIndicatorText.transform.localScale = new Vector3(1, damageIndicatorText.transform.localScale.y, damageIndicatorText.transform.localScale.z); 
     }
 
 
@@ -69,7 +70,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     public void OnHit(float damageTaken, GameObject incomingAttacker)
     {
         AudioManager.instance.PlayOneShot(FMODEvents.instance.duoSkellyDmg, this.transform.position);
-        StartCoroutine(DamageIndication(damageTaken)); 
+        damageIndicatorScript.SpawnIndicator(damageTaken, Color.white);
         currentHealth = currentHealth - damageTaken;
         StartCoroutine(ChangeColour());
         knockbackScript.ApplyKnockBack(incomingAttacker);
@@ -137,14 +138,6 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
             Instantiate(Mushroom, transform.position, transform.rotation);
         }
 
-    }
-
-    public IEnumerator DamageIndication(float attackDamage)
-    {
-        damageIndicatorText.text = attackDamage.ToString();
-        damageIndicatorText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        damageIndicatorText.gameObject.SetActive(false);
     }
     #endregion
 

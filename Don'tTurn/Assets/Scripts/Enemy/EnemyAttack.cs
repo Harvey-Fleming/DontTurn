@@ -15,13 +15,7 @@ public class EnemyAttack : MonoBehaviour
         attackPointTrans = transform.GetChild(1);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void MeleeAttack()
+    public void MeleeAttack() //Triggered by the attack animation
     {
         Collider2D[] Hit = Physics2D.OverlapCircleAll(attackPointTrans.position, attackRadius);
 
