@@ -5,15 +5,18 @@ using UnityEngine;
 public class MapScript : MonoBehaviour
 {
     public GameObject panel;
-    int timesPressed;
+    public int timesPressed;
     public GameObject checkpoint;
     public int checkpointNumber;
     public bool isCheckpoint;
     public MapManager mapManager;
+    private GameObject pMenu; 
+    [SerializeField] private GameObject pMenuCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        pMenu = pMenuCanvas.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -27,12 +30,14 @@ public class MapScript : MonoBehaviour
                     ToggleMap(timesPressed);
                     timesPressed++;
                     Time.timeScale = 0;
+                    pMenu.SetActive(false);
                     mapManager.isOpen = true;
                     break;
                 case 1:
                     ToggleMap(timesPressed);
                     timesPressed--;
                     Time.timeScale = 1;
+                    pMenuCanvas.GetComponent<PauseMenu>().resume();
                     mapManager.isOpen = false;
                     break; 
             }

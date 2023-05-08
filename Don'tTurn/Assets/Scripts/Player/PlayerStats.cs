@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     //Component References
     public static PlayerStats instance {get; private set;}
     [SerializeField] private CorruptionScript corruptionScript;
+    private PlayerMovement playerMovement;
     private Knockback knockbackScript;
     private SpriteRenderer spriteRenderer;
 
@@ -20,12 +21,15 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
 
     private Vector3 playerPosition;
     public Vector3 spawnPoint;
-    public TextMeshProUGUI damageIndicatorText; 
+
+    [SerializeField] private GameObject indicatorCanvas;
+    private TextMeshProUGUI damageIndicatorText; 
+    private TextMeshProUGUI leftdamageIndicatorText;
+ 
 
 
     private void Awake() 
     {
-        DontDestroyOnLoad(this);
 
         if (instance != null)
         {
@@ -38,8 +42,13 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         }
         this.gameObject.transform.position = spawnPoint;
 
+        playerMovement = GetComponent<PlayerMovement>();
         knockbackScript = GetComponent<Knockback>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        indicatorCanvas = transform.GetChild(4).gameObject;
+        damageIndicatorText = indicatorCanvas.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        leftdamageIndicatorText = indicatorCanvas.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
     }
 
     private void Start() 
@@ -50,7 +59,6 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
 
     void Update()
     {
-
         if(health <= 0)
         {
             OnDeath();
@@ -90,10 +98,24 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
 
     public IEnumerator DamageIndication(float attackDamage)
     {
-        damageIndicatorText.text = attackDamage.ToString(); 
-        damageIndicatorText.gameObject.SetActive(true);
+        Vector2 currentPos = leftdamageIndicatorText.transform.localPosition;
+        Vector2 currentScale = leftdamageIndicatorText.transform.localScale;
+        if(playerMovement.facingright)
+        {
+            currentPos.x = 0.9f;
+            currentScale.x = -1;
+        }
+        else if(!playerMovement.facingright)
+        {
+            currentPos.x = -0.9f;
+            currentScale.x = 1;
+        } 
+
+        leftdamageIndicatorText.text = attackDamage.ToString(); 
+        leftdamageIndicatorText.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        damageIndicatorText.gameObject.SetActive(false);
+        leftdamageIndicatorText.gameObject.SetActive(false);
+        yield break; 
     }
 
     IEnumerator IFrames()
