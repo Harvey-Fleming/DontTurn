@@ -46,6 +46,18 @@ public class DebugButtonsEditor : EditorWindow
             RespawnAllEnemies();
         }
 
+        GUILayout.Label("Teleport to Mushroom Area", EditorStyles.miniBoldLabel);
+        if(GUILayout.Button("Mushroom TP"))
+        {
+            TeleportPlayer();
+        }
+
+    }
+
+    private void TeleportPlayer()
+    {
+        GetReferences();
+        playerObj.transform.position = new Vector3(355, 25.54f, 0);
     }
 
     public void RespawnAllEnemies()
