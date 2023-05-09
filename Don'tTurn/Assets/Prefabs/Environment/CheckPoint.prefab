@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 6143868321689010222}
   - component: {fileID: 6143868321689010221}
   - component: {fileID: 6143868321689010208}
+  - component: {fileID: 1856580999}
   m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Untagged
@@ -218,7 +219,7 @@ MonoBehaviour:
   playerStats: {fileID: 0}
   playerCollision: {fileID: 0}
   restPointTrans: {fileID: 0}
-  checkpointNumber: 0
+  checkpointNumber: 1
 --- !u!61 &6143868321689010208
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -245,3 +246,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 4.4066877}
   m_EdgeRadius: 0
+--- !u!114 &1856580999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6143868321689010220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2030378403
+      Data2: 1301802224
+      Data3: -1051848775
+      Data4: -1689322276
+    Path: event:/Interactables/CheckpointLight
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 10

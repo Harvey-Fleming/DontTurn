@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     private List<StudioEventEmitter> eventEmitters;
 
     private EventInstance ambienceEventInstance;
+    private EventInstance whispersEventInstance;
     public static AudioManager instance { get; private set; }
 
     public GameObject Player;
@@ -31,15 +32,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        InitialiseAmbience(FMODEvents.instance.cityAmbience);
-        //InitialiseAmbience(FMODEvents.instance.sewerAmbience);
-        //SetAmbienceParameter("Sewer_ambience_intensity", 1);
-        SetAmbienceParameter("City_ambience_intensity", 0);
-    }
-
-    public void SetAmbienceParameter(string parameterName, float parameterValue)
-    {
-        ambienceEventInstance.setParameterByName(parameterName, parameterValue);
+        InitialiseAmbience(FMODEvents.instance.levelAmbience);
+        InitialiseWhispers(FMODEvents.instance.curseWhispers);
     }
 
     public void InitialiseAmbience(EventReference ambienceEventReference)
@@ -49,6 +43,29 @@ public class AudioManager : MonoBehaviour
         ambienceEventInstance.start();
 
     }
+
+    public void InitialiseWhispers(EventReference whispersEventReference)
+    {
+        whispersEventInstance = CreateEventInstance(whispersEventReference);
+        whispersEventInstance.start();
+    }
+
+    public void SetWhispersParameter(float parameterValue)
+    {
+        whispersEventInstance.setParameterByName("WhisperVolume", parameterValue);
+    }
+
+    public void SetAmbienceArea(AmbienceArea area)
+    {
+        ambienceEventInstance.setParameterByName("area", (float) area);
+        ambienceEventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(Player.transform.position));
+    }
+
+    public void SetFootstepsSurface(FootstepTypes area)
+    {
+        Player.GetComponent<PlayerMovement>().playerFootsteps.setParameterByName("Surface", (float)area);
+    }
+
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
     {

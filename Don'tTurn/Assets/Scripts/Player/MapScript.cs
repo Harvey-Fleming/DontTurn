@@ -51,9 +51,11 @@ public class MapScript : MonoBehaviour
         {
             case 0:
                 panel.SetActive(true);
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.notebookOpen, this.transform.position);
                 break; 
             case 1:
                 panel.SetActive(false);
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.notebookClose, this.transform.position);
                 break; 
 
         }

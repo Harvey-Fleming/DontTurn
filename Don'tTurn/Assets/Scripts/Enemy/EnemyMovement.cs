@@ -37,9 +37,8 @@ public class EnemyMovement : MonoBehaviour
         player = GameObject.Find("Player").transform;
         enemyAttackScript = GetComponent<EnemyAttack>();
         isWandering = true;
-        emitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.duoSkellyVoice, this.gameObject);
+        emitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.duoSkellySounds, this.gameObject);
         emitter.Play();
-        aggroEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.duoSkellyAggro, this.gameObject);
 
         startMoveSpeed = moveSpeed;
 

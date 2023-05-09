@@ -48,11 +48,13 @@ public class Inventory : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Alpha1) && medicAmount >= 1)
         {
-            UseMedKit(); 
+            UseMedKit();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.MedkitHeal, this.transform.position);
         }
         if(Input.GetKeyDown(KeyCode.Alpha2) && mushroomAmount >= 1)
         {
-            UseMushroom(); 
+            UseMushroom();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.MushroomHeal, this.transform.position);
         }
 
     }

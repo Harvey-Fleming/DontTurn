@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     public bool facingright = true, isGodEnabled, isDoubleJumpUnlocked;
 
     //audio
-    public static EventInstance playerFootsteps;
+    public EventInstance playerFootsteps;
 
     private void Start()
     {
@@ -219,11 +219,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
         {
             playerFootsteps.stop(STOP_MODE.IMMEDIATE);
         }
-    }
-
-    public static void StopPlayerFootsteps()
-    {
-        playerFootsteps.stop(STOP_MODE.IMMEDIATE);
     }
 
     //Save and Loading Data

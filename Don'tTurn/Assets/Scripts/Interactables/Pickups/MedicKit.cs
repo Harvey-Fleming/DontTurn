@@ -13,7 +13,8 @@ public class MedicKit : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             isActive = true;
-            player = collision.gameObject; 
+            player = collision.gameObject;
+            
             //get player's health script or curse script here 
         }
         
@@ -31,11 +32,13 @@ public class MedicKit : MonoBehaviour
             switch (type)
             {
                 case "Medic":
-                    player.GetComponent<Inventory>().medicAmount++; 
+                    player.GetComponent<Inventory>().medicAmount++;
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.ItemPickup, this.transform.position);
                     Destroy(gameObject);
                     break;
                 case "Mushroom":
                     player.GetComponent<Inventory>().mushroomAmount++;
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.ItemPickup, this.transform.position);
                     Destroy(gameObject);
                     break; 
 

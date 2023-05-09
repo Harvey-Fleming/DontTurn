@@ -66,6 +66,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         {
             health -= attackDamage;
             ParticleSystem currentHitFX = Instantiate(hitFX);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerDmg, this.transform.position);
             currentHitFX.transform.position = transform.position;
             damageIndicatorScript.SpawnIndicator(attackDamage, Color.red);
             corruptionScript.OnHitCorruption(attackDamage);

@@ -12,6 +12,7 @@ public class CurseFX : MonoBehaviour
     private CorruptionScript corruptionScript;
     private ColorAdjustments colorAdjustments;
     public float caContrastMax = 50f;
+    private float whisperVolume; 
 
     private void Start()
     {
@@ -26,6 +27,8 @@ public class CurseFX : MonoBehaviour
             chromaticAberation.intensity.value = corruptionScript.metre;
             filmGrain.intensity.value = corruptionScript.metre;
             colorAdjustments.contrast.value = corruptionScript.metre * caContrastMax;
+            whisperVolume = corruptionScript.metre;
+            AudioManager.instance.SetWhispersParameter(whisperVolume);
         }
     }
 }

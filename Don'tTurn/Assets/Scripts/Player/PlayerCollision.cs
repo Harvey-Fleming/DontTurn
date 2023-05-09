@@ -69,7 +69,7 @@ public class PlayerCollision : MonoBehaviour
                 Debug.Log("Interact Pressed is true");
                 playerMovement.enabled = false;
                 rb2D.velocity = Vector2.zero;
-                PlayerMovement.StopPlayerFootsteps();
+                GetComponent<PlayerMovement>().playerFootsteps.stop(STOP_MODE.IMMEDIATE);
                 MoveToTarget(restTrans);
             }
             else if (interactPressed == false)

@@ -40,6 +40,7 @@ public class Note : MonoBehaviour, IDataPersistence
         {
             noteManager.notesObtained[noteNum] = true;
             hasCollectedNote = true;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.NotePickup, this.transform.position);
             Destroy(gameObject);
         } 
     }

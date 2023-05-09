@@ -112,6 +112,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
                 enemyObj = grapplehit.collider.gameObject;
                 OnEnemyGrapple();
                 Debug.Log("Grappled Enemy");
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.grappleHook, this.transform.position);
             }
             else if (grapplehit.collider.tag == "GrapplePoint")
             {
@@ -120,6 +121,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
                 initialGrappleDirection = (transform.position - grapplePointPos).normalized;
                 DrawLine(transform.position, grapplePointPos);
                 Debug.Log("Grappled Point");
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.grappleHook, this.transform.position);
             }
             else if (grapplehit.collider.tag == null)
             {

@@ -32,6 +32,7 @@ public class MapManager : MonoBehaviour
         notesPanel.SetActive(false);
         mapButton.interactable = false;
         notesButton.interactable = true;
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.notebookTurn, this.transform.position);
     }
 
     public void ClickNotes()
@@ -40,6 +41,7 @@ public class MapManager : MonoBehaviour
         mapPanel.SetActive(false);
         notesButton.interactable = false;
         mapButton.interactable = true;
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.notebookTurn, this.transform.position);
     }
 
     private void Update()
@@ -78,10 +80,12 @@ public class MapManager : MonoBehaviour
     public void Right()
     {
         pageNum += 1;
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.notebookTurn, this.transform.position);
     }
 
     public void Left()
     {
         pageNum -= 1;
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.notebookTurn, this.transform.position);
     }
 }

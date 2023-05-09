@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using FMODUnity;
 
 public class CheckPoint : MonoBehaviour
 {
@@ -11,9 +12,15 @@ public class CheckPoint : MonoBehaviour
     [SerializeField] private PlayerCollision playerCollision;
     [SerializeField] private Transform restPointTrans;
 
-
     [SerializeField] public int checkpointNumber;
-    
+
+    private StudioEventEmitter emitter;
+
+    private void Start()
+    {
+        emitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.CheckpointLight, this.gameObject);
+        emitter.Play();
+    }
     private void Awake() 
     {
         playerStats = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();

@@ -7,7 +7,7 @@ using FMOD.Studio;
 public class IntroTutorialManager : MonoBehaviour
 {
     public float fadeOutTime;
-    public EventInstance playerFootsteps;
+    public GameObject Player;
 
     [Header("Movement Icon")]
     public GameObject movementIcon;
@@ -92,7 +92,7 @@ public class IntroTutorialManager : MonoBehaviour
         if(inventory.medicAmount >= 1 && !pauseFinished)
         {
             Time.timeScale = 0;
-            PlayerMovement.StopPlayerFootsteps();
+            Player.GetComponent<PlayerMovement>().playerFootsteps.stop(STOP_MODE.IMMEDIATE);
             medkitPrompt.SetActive(true);
             pauseFinished = true;
         }
@@ -135,7 +135,7 @@ public class IntroTutorialManager : MonoBehaviour
         if (curseStringNum < curseStrings.Length)
         {
             Time.timeScale = 0;
-            PlayerMovement.StopPlayerFootsteps();
+            Player.GetComponent<PlayerMovement>().playerFootsteps.stop(STOP_MODE.IMMEDIATE);
             curseTutorial.SetActive(true);
             curseText.text = curseStrings[curseStringNum];
             if (Input.GetKeyDown(KeyCode.F))
