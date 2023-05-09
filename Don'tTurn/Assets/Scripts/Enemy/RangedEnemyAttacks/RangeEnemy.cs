@@ -12,7 +12,7 @@ public class RangeEnemy : MonoBehaviour
     public float projectileSpeed;
     [SerializeField] private float lineOfSite;
     private Animator anim;
-    // Start is called before the first frame update
+    public int count;
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -20,6 +20,7 @@ public class RangeEnemy : MonoBehaviour
     }
     void Start()
     {
+        count = 0;
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -44,9 +45,17 @@ public class RangeEnemy : MonoBehaviour
         if (distanceFromPlayer < lineOfSite && timeBtwShots < Time.time)
         {
             //InSite = true;
+            anim.SetBool("Awaken", true);
+            count++;
             Instantiate(projectile, transform.position, Quaternion.identity);
             timeBtwShots = Time.time + startTimeBtwShots;
-            anim.SetBool("Awaken", true);
+            
+            
+        }
+
+        if(count == 5)
+        {
+           Destroy(gameObject);
         }
 
        // else if (distanceFromPlayer > lineOfSite && timeBtwShots < Time.time)
