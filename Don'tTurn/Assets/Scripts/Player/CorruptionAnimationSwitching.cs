@@ -5,9 +5,7 @@ using UnityEngine;
 public class CorruptionAnimationSwitching : MonoBehaviour
 {
     Animator animator;
-    public CorruptionScript corruptionScript;
-    public RuntimeAnimatorController normalAnimationController;
-    public RuntimeAnimatorController corruptedAnimationController; 
+    public CorruptionScript corruptionScript; 
 
     // Start is called before the first frame update
     void Start()
@@ -18,16 +16,13 @@ public class CorruptionAnimationSwitching : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(corruptionScript.time == 100)
+        if(corruptionScript.time >= 50)
         {
-  
-            animator.SetBool("IsCorrupt", true);
-            animator.runtimeAnimatorController = corruptedAnimationController; 
+            animator.SetBool("IsCorrupt", true); 
         }
         else
         {
             animator.SetBool("IsCorrupt", false);
-            animator.runtimeAnimatorController = normalAnimationController;
         }
     }
 }

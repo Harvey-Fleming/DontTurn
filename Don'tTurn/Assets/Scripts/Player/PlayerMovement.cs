@@ -27,8 +27,8 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     [SerializeField] private float jumpForce = 1f, maxJumpTime = 0.1f;
     private float jumpTime = 0;
     public int maxAerialJumpCount = 1;
-    private int aerialJumpCount;
-    private bool IsJumping = false;
+    private int aerialJumpCount, gravityScale = 4, fallingGravityScale = 10;
+    private bool IsJumping = false, jumpEndEarly = false;
 
     //"Coyote Jump" Variables
     [SerializeField] private float coyoteTimer = 0.1f;
@@ -98,6 +98,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
 
         if (IsJumping)
         {
+            jumpEndEarly = false;
             animator.SetBool("IsJumping", true);
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -107,12 +108,17 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
         if (playerInput.jumpKeyReleased | jumpTime > maxJumpTime)
         {
             IsJumping = false;
+            jumpEndEarly = true;
         }
+
+        if (rb.velocity.y >= 0) { rb.gravityScale = gravityScale; }
+        if (rb.velocity.y < 0 && jumpEndEarly == true) { rb.gravityScale = fallingGravityScale; }
 
         if (IsGrounded())
         {
             //Reset aerial jumps when on ground
             aerialJumpCount = maxAerialJumpCount;
+            jumpEndEarly = false;
             animator.SetBool("IsJumping", false);
             currentcoyoteTimer = coyoteTimer;
         }

@@ -11,7 +11,6 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     private SpringJoint2D joint2D;
     private LineRenderer grappleLine;
     private Rigidbody2D rb2D;
-    private Animator animator;
 
     //Script References
     private PlayerInput playerInput;
@@ -21,19 +20,20 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     private FallDamage fallDamage;
     public FollowCamera followCam;
     public Vector2 camPoint;
-    private Transform grappleLineSpawn;
 
     [Header("Hook Variables")]
     [SerializeField] private float hookRange = 5f;
     [SerializeField] private float enemySlerpSpeed = 4f, LerpSpeed = 8f, launchSpeed = 5f;
     [SerializeField] private float grappleCooldown = 1f;
-    private float hookAngle, IndicatorlerpPercent, gravityScale = 4f;
+    private float hookAngle, IndicatorlerpPercent;
     private Vector3 mouseWorldPos, grapplePointPos, hookDirection;
     private Vector2 initialGrappleDirection;
     public float hookDistance;
     public Vector2 endPoint;
-    [SerializeField] private Material aimMaterial;
-    [SerializeField] private Material grappleMaterial;
+
+    [Header("Hanging Variables")]
+    private bool isHanging;
+    private float jointdampingRatio, jointfrequency;
 
     [Header("Hook States")]
     public bool isUnlocked = false;
@@ -47,7 +47,6 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
         corruptionScript = GameObject.FindObjectOfType<CorruptionScript>();
         grappleLine = GetComponent<LineRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>(); 
         playerMovement = GetComponent<PlayerMovement>();
         playerInput = GetComponent<PlayerInput>();
         fallDamage = GetComponent<FallDamage>();
@@ -84,12 +83,10 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
             {
                 //Draws a line from the player towards the cursor but stops at max distance(Hook Range) to show the player how far away they can hook from
                 followCam.followPlayer = false;
-                animator.SetBool("IsAttacking", false);
                 IndicatorlerpPercent = (hookRange / Vector3.Distance(transform.position, mouseWorldPos));
                 endPoint = Vector3.Lerp(transform.localPosition, mouseWorldPos, IndicatorlerpPercent);
                 camPoint = Vector3.Lerp(transform.localPosition, endPoint, 0.5f);
                 DrawLine(transform.position, endPoint);
-                grappleLine.material = aimMaterial;
                 FindGrapplePoint();
             }
             else if (playerInput.moveAbilityInputRelease)
@@ -111,7 +108,6 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
             if (grapplehit.collider.tag == "Enemy")
             {
                 grapplePointPos = grapplehit.collider.transform.position;
-                grappleLine.material = grappleMaterial;
                 DrawLine(transform.position, grapplePointPos);
                 enemyObj = grapplehit.collider.gameObject;
                 OnEnemyGrapple();
@@ -143,12 +139,8 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     {
         if (isGrappling)
         {
-            animator.SetBool("IsAttacking", false);
-            animator.SetBool("IsGrappling", true);
             playerMovement.enabled = false;
-            grappleLineSpawn = transform.GetChild(6);
-            grappleLine.material = grappleMaterial;
-            DrawLine(grappleLineSpawn.position, grapplePointPos);
+            DrawLine(transform.position, grapplePointPos);
             rb2D.gravityScale = 0;
             
             if (Vector3.Distance(transform.position, grapplePointPos) < hookDistance)
@@ -170,6 +162,22 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
         }
     }
 
+    private void HangOn()
+    {
+        joint2D = gameObject.AddComponent<SpringJoint2D>();
+
+        joint2D.autoConfigureDistance = false;
+        joint2D.autoConfigureConnectedAnchor = false;
+
+        joint2D.connectedAnchor = grapplePointPos;
+
+        joint2D.distance = Vector2.Distance(transform.position, grapplePointPos);
+
+        joint2D.dampingRatio = jointdampingRatio;
+        joint2D.frequency = jointfrequency;
+
+    }
+
     private void OnEnemyGrapple()
     {
         playerMovement.enabled = false;
@@ -181,9 +189,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     public void StopGrapple()
     {
         fallDamage.maxYVel = 0;
-        animator.SetBool("IsGrappling", false);
         playerMovement.ResetAirJump();
-        rb2D.gravityScale = gravityScale;
         isGrappling = false;
         grappleLine.positionCount = 0;
         playerMovement.enabled = true;
