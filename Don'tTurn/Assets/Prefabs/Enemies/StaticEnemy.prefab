@@ -142,52 +142,7 @@ MonoBehaviour:
   wanderDistance: 25
   jumpForce: 0
   jumpCooldown: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  jumpMask:
-    serializedVersion: 2
-    m_Bits: 128
-  isWandering: 0
-  isAggro: 0
-  isAttacking: 0
-  canJump: 0
-  canMove: 0
---- !u!114 &5363752836557537630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8946481779949403316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fffde10b351e1bf4b83ed1e8fe5ed90e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerMovementScript: {fileID: 0}
-  enemyMovementScript: {fileID: 0}
-  baseKnockback: 0
-  KnockbackDelay: 0.3
---- !u!114 &9040532132286272091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8946481779949403316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfdf7c561d2367946a956bf8f3dbecc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveDirection: 0
-  moveSpeed: 2
-  damageRange: 1.5
-  maxRange: 10
-  wanderDistance: 25
-  jumpForce: 0
-  jumpCooldown: 0
+  startMoveSpeed: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -213,3 +168,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamageIndicatorPrefab: {fileID: 9218244153404965289, guid: 9574e2ded3e4a2e4a9edd56d5aa4b1d8, type: 3}
   damageIndicatorSpawnPos: {fileID: 4578787035501137329}
+--- !u!114 &5363752836557537630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8946481779949403316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffde10b351e1bf4b83ed1e8fe5ed90e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovementScript: {fileID: 0}
+  enemyMovementScript: {fileID: 0}
+  baseKnockback: 0
+  KnockbackDelay: 0.3

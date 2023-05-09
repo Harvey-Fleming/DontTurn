@@ -17,6 +17,9 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     private PlayerMovement playerMovement;
     private Cursor cursorScript;
     private CorruptionScript corruptionScript;
+    private FallDamage fallDamage;
+    public FollowCamera followCam;
+    public Vector2 camPoint;
 
     [Header("Hook Variables")]
     [SerializeField] private float hookRange = 5f;
@@ -25,6 +28,8 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     private float hookAngle, IndicatorlerpPercent;
     private Vector3 mouseWorldPos, grapplePointPos, hookDirection;
     private Vector2 initialGrappleDirection;
+    public float hookDistance;
+    public Vector2 endPoint;
 
     [Header("Hanging Variables")]
     private bool isHanging;
@@ -44,6 +49,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
         rb2D = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
         playerInput = GetComponent<PlayerInput>();
+        fallDamage = GetComponent<FallDamage>();
     }
 
     // Update is called once per frame
@@ -76,13 +82,17 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
             if (playerInput.moveAbilityInputHeld && playerInput.grappleSelected)
             {
                 //Draws a line from the player towards the cursor but stops at max distance(Hook Range) to show the player how far away they can hook from
+                followCam.followPlayer = false;
                 IndicatorlerpPercent = (hookRange / Vector3.Distance(transform.position, mouseWorldPos));
-                DrawLine(transform.position, Vector3.Lerp(transform.localPosition, mouseWorldPos, IndicatorlerpPercent));
+                endPoint = Vector3.Lerp(transform.localPosition, mouseWorldPos, IndicatorlerpPercent);
+                camPoint = Vector3.Lerp(transform.localPosition, endPoint, 0.5f);
+                DrawLine(transform.position, endPoint);
                 FindGrapplePoint();
             }
             else if (playerInput.moveAbilityInputRelease)
             {
                 grappleLine.positionCount = 0;
+                followCam.followPlayer = true;
             }
         }
     }
@@ -131,14 +141,15 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
             DrawLine(transform.position, grapplePointPos);
             rb2D.gravityScale = 0;
             
-            if (Vector3.Distance(transform.position, grapplePointPos) < 1f)
+            if (Vector3.Distance(transform.position, grapplePointPos) < hookDistance)
             {
                 StopGrapple();
                 rb2D.velocity = -initialGrappleDirection * launchSpeed;
             }
-            else if (Vector3.Distance(transform.position, grapplePointPos) > 1f)
+            else if (Vector3.Distance(transform.position, grapplePointPos) > hookDistance)
             {
                 transform.position = Vector2.Lerp(transform.position, grapplePointPos, Time.deltaTime * LerpSpeed);
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
 
             //Cancel Grapple
@@ -175,11 +186,13 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
 
     public void StopGrapple()
     {
+        fallDamage.maxYVel = 0;
         playerMovement.ResetAirJump();
         isGrappling = false;
         grappleLine.positionCount = 0;
         playerMovement.enabled = true;
         StartCoroutine("Cooldown");
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
     IEnumerator Cooldown()

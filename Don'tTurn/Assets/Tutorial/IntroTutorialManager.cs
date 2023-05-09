@@ -138,14 +138,14 @@ public class IntroTutorialManager : MonoBehaviour
             PlayerMovement.StopPlayerFootsteps();
             curseTutorial.SetActive(true);
             curseText.text = curseStrings[curseStringNum];
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 curseStringNum++;
             }
         }
         if(curseStringNum >= curseStrings.Length - 1)
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 Time.timeScale = 1;
                 curseTutorial.SetActive(false);
@@ -162,14 +162,14 @@ public class IntroTutorialManager : MonoBehaviour
                 Time.timeScale = 0;
                 checkpointTutorial.SetActive(true);
                 checkpointText.text = checkpointStrings[checkpointStringNum];
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.F))
                 {
                     checkpointStringNum++;
                 }
             }
             if (checkpointStringNum >= checkpointStrings.Length)
             {
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.F))
                 {
                     Time.timeScale = 1;
                     checkpointTutorial.SetActive(false);

@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
     public float moveSpeed, damageRange, maxRange, wanderDistance, jumpForce;
     private float jumpTimer;
     public float jumpCooldown;
+    public float startMoveSpeed;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -39,6 +40,8 @@ public class EnemyMovement : MonoBehaviour
         emitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.duoSkellyVoice, this.gameObject);
         emitter.Play();
         aggroEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.duoSkellyAggro, this.gameObject);
+
+        startMoveSpeed = moveSpeed;
 
         StartCoroutine(WanderDelay());
 
@@ -112,7 +115,7 @@ public class EnemyMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(moveDirection * moveSpeed, rb.velocity.y);
             animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
-            moveSpeed = 2f;
+            moveSpeed = startMoveSpeed;
 
             if (Physics2D.Raycast(transform.position, new Vector2(moveDirection , 0), 1, jumpMask))
             {
@@ -193,7 +196,7 @@ public class EnemyMovement : MonoBehaviour
         {
         rb.velocity = new Vector2(moveDirection * moveSpeed, rb.velocity.y);
         animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
-        moveSpeed = 3.5f;      
+            moveSpeed = startMoveSpeed * 1.75f;  
         }                 
     }
 

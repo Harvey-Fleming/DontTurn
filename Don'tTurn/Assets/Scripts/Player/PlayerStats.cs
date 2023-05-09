@@ -22,6 +22,8 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
 
     private Vector3 playerPosition;
     public Vector3 spawnPoint;
+    public PlayerDeathHandler deathHandler;
+    public ParticleSystem hitFX;
  
     private void Awake() 
     {
@@ -63,6 +65,8 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         if(canTakeDamage == true)
         {
             health -= attackDamage;
+            ParticleSystem currentHitFX = Instantiate(hitFX);
+            currentHitFX.transform.position = transform.position;
             damageIndicatorScript.SpawnIndicator(attackDamage, Color.red);
             corruptionScript.OnHitCorruption(attackDamage);
             knockbackScript.ApplyKnockBack(attacker);
@@ -72,9 +76,10 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
 
     public void OnDeath()
     {
-        Debug.Log("You Died!");
         GetComponent<GrappleAbility>().StopGrapple();
-        StartCoroutine(DeathWait()); 
+        health = maxHealth;
+        corruptionScript.time = 0f;
+        deathHandler.Die();
     }
 
         public IEnumerator DeathWait()

@@ -48,9 +48,10 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 3fc227076dccbba4b844bf5e52dc93f4, type: 3}
     - {fileID: 2800000, guid: 11c675d2c2f9eb6488f2f9c752b54179, type: 3}
     - {fileID: 2800000, guid: 58d439b0863b56d48a24a43bc2f9046b, type: 3}
-    - {fileID: 2800000, guid: 21771fecaafee244fa678f8432732b8a, type: 3}
+    - {fileID: 2800000, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
     - {fileID: 2800000, guid: f59f98e32bcf9c74fb371bc9ade09e9a, type: 3}
     - {fileID: 2800000, guid: 668a0b6a57f181543b08585c787ccfdb, type: 3}
+    - {fileID: 2800000, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -99,6 +100,36 @@ SpriteAtlas:
   - {fileID: 23089757, guid: 3fc227076dccbba4b844bf5e52dc93f4, type: 3}
   - {fileID: -1111960526, guid: 3fc227076dccbba4b844bf5e52dc93f4, type: 3}
   - {fileID: -1751302586, guid: 3fc227076dccbba4b844bf5e52dc93f4, type: 3}
+  - {fileID: 1136605494, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -1111492485, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -1305559535, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: 289520303, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -1949575142, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: 294536135, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -25188050, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -1752965637, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: 82549442, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -920929996, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -1698568548, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: 1308965567, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -936803041, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: 1376918396, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -1531458816, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -1361246942, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -196690055, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -1117389090, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -457884300, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: 1042358060, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: 1630038432, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: 528418703, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -961104498, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -1967366213, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: 1246277526, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -272950703, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: 511264559, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: -560620909, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: 1662129146, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
+  - {fileID: 583845716, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
   - {fileID: 7463842, guid: cdb07fa912df7034b8ee2904a4a36c05, type: 3}
   - {fileID: -469433416, guid: cdb07fa912df7034b8ee2904a4a36c05, type: 3}
   - {fileID: 429657008, guid: cdb07fa912df7034b8ee2904a4a36c05, type: 3}
@@ -109,10 +140,22 @@ SpriteAtlas:
   - {fileID: -128614797, guid: cdb07fa912df7034b8ee2904a4a36c05, type: 3}
   - {fileID: -1820948568, guid: cdb07fa912df7034b8ee2904a4a36c05, type: 3}
   - {fileID: 21300000, guid: 668a0b6a57f181543b08585c787ccfdb, type: 3}
-  - {fileID: -1339790163, guid: 21771fecaafee244fa678f8432732b8a, type: 3}
-  - {fileID: 1930609367, guid: 21771fecaafee244fa678f8432732b8a, type: 3}
-  - {fileID: 897359765, guid: 21771fecaafee244fa678f8432732b8a, type: 3}
-  - {fileID: 139471940, guid: 21771fecaafee244fa678f8432732b8a, type: 3}
+  - {fileID: -1240922417, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: -126665640, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: -2140164198, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: 1088847476, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: -701486169, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: -504904682, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: -2123569956, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: -730503905, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: 572605036, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: 1002212199, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: 1894429664, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: 1602097435, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: -1831123731, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: 893614703, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: -1649305789, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
+  - {fileID: 1739110763, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
   m_PackedSpriteNamesToIndex:
   - Sewer edges3_1
   - Sewer edges3_0
@@ -157,6 +200,36 @@ SpriteAtlas:
   - Sewer edges_5
   - Sewer edges_6
   - Sewer edges_7
+  - Inside walls 2_18
+  - Inside walls 2_19
+  - Inside walls 2_16
+  - Inside walls 2_17
+  - Inside walls 2_14
+  - Inside walls 2_15
+  - Inside walls 2_12
+  - Inside walls 2_13
+  - Inside walls 2_10
+  - Inside walls 2_11
+  - Inside walls 2_9
+  - Inside walls 2_8
+  - Inside walls 2_3
+  - Inside walls 2_2
+  - Inside walls 2_1
+  - Inside walls 2_0
+  - Inside walls 2_7
+  - Inside walls 2_6
+  - Inside walls 2_5
+  - Inside walls 2_4
+  - Inside walls 2_29
+  - Inside walls 2_28
+  - Inside walls 2_23
+  - Inside walls 2_22
+  - Inside walls 2_21
+  - Inside walls 2_20
+  - Inside walls 2_27
+  - Inside walls 2_26
+  - Inside walls 2_25
+  - Inside walls 2_24
   - Sewer back wall_8
   - Sewer back wall_5
   - Sewer back wall_4
@@ -167,10 +240,22 @@ SpriteAtlas:
   - Sewer back wall_3
   - Sewer back wall_2
   - SkyBackground
-  - Sewer outlet resize3_0
-  - Sewer outlet resize3_1
-  - Sewer outlet resize3_2
-  - Sewer outlet resize3_3
+  - Inside walls_14
+  - Inside walls_15
+  - Inside walls_10
+  - Inside walls_11
+  - Inside walls_12
+  - Inside walls_13
+  - Inside walls_9
+  - Inside walls_8
+  - Inside walls_5
+  - Inside walls_4
+  - Inside walls_7
+  - Inside walls_6
+  - Inside walls_1
+  - Inside walls_0
+  - Inside walls_3
+  - Inside walls_2
   m_RenderDataMap: {}
   m_Tag: New Sprite Atlas
   m_IsVariant: 0

@@ -315,6 +315,7 @@ MonoBehaviour:
   wanderDistance: 25
   jumpForce: 10
   jumpCooldown: 0.5
+  startMoveSpeed: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 64

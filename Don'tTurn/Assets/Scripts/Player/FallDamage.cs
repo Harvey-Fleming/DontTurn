@@ -21,47 +21,10 @@ public class FallDamage : MonoBehaviour
     {
         if(PlayerMovement.IsGrounded() == true && rb2D.velocity.y == 0)
         {
-            if(maxYVel <= -30f && maxYVel >= -40f)
+            if(maxYVel <= -40f)
             {
-                TakeFallDamage(10); 
+                TakeFallDamage(0.5f * -maxYVel); 
             }
-            if(maxYVel <= -40f && maxYVel >= -60f)
-            {
-                TakeFallDamage(20);
-            }
-            if(maxYVel <= -60f && maxYVel >= -80f)
-            {
-                TakeFallDamage(30);
-            }
-            if(maxYVel <= -80f && maxYVel >= -100f)
-            {
-                TakeFallDamage(40);
-            }
-            if(maxYVel <= -100f && maxYVel >= -120f)
-            {
-                TakeFallDamage(50);
-            }
-            if (maxYVel <= -120f && maxYVel >= -140f)
-            {
-                TakeFallDamage(60);
-            }
-            if (maxYVel <= -140f && maxYVel >= -160f)
-            {
-                TakeFallDamage(70);
-            }
-            if (maxYVel <= -160f && maxYVel >= -180f)
-            {
-                TakeFallDamage(80);
-            }
-            if (maxYVel <= -180f && maxYVel >= -200f)
-            {
-                TakeFallDamage(90);
-            }
-            if (maxYVel <= -200f && maxYVel >= -220f)
-            {
-                TakeFallDamage(100);
-            }
-
         }
         else if(PlayerMovement.IsGrounded() == false)
         {

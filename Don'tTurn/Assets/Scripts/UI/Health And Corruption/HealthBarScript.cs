@@ -10,7 +10,6 @@ public class HealthBarScript : MonoBehaviour
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private float health = 0f; 
     public Image healthBar;
-    public TextMeshProUGUI healthText;
 
 
     private void Awake() 
@@ -22,7 +21,6 @@ public class HealthBarScript : MonoBehaviour
     {
         health = playerStats.health;
         healthBar.fillAmount = health / 100;
-        healthText.text = health.ToString(); 
 
     }
 

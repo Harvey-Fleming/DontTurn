@@ -632,7 +632,8 @@ MonoBehaviour:
   maxHealth: 100
   health: 100
   spawnPoint: {x: 0, y: 0, z: 0}
-  indicatorCanvas: {fileID: 0}
+  deathHandler: {fileID: 0}
+  hitFX: {fileID: 0}
 --- !u!114 &6541144399509697046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,7 +702,7 @@ MonoBehaviour:
   bulletSpawnObj: {fileID: 9184892614237827191}
   rightSpawn: {fileID: 0}
   leftSpawn: {fileID: 0}
-  autoBulletDestroyTime: 0.04
+  autoBulletDestroyTime: 0.1
   shotgunUI: {fileID: 0}
   circle: {fileID: 0}
   mainCamera: {fileID: 0}

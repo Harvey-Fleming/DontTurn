@@ -9,7 +9,6 @@ public class CorruptionScript : MonoBehaviour
 {
     //Component References
     [SerializeField] private PlayerStats playerStats;
-    public TextMeshProUGUI curseText;
     private HealthBarScript healthScript; 
     public Image corruptionMetre;
 
@@ -41,7 +40,6 @@ public class CorruptionScript : MonoBehaviour
     {
         metre = time / 100;
         corruptionMetre.fillAmount = metre;
-        curseText.text = "Curse Points: " + time.ToString();
 
         curseMutliplier = 1f + (time / 100);
         
