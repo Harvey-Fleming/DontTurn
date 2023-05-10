@@ -17,7 +17,6 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     private PlayerInput playerInput;
     private PlayerMovement playerMovement;
     private Cursor cursorScript;
-    private CorruptionScript corruptionScript;
     private AttackScript attackScript;
     private FallDamage fallDamage;
     public FollowCamera followCam;
@@ -45,7 +44,6 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     private void Awake() 
     {
         cursorScript = GameObject.Find("Cursor").GetComponent<Cursor>();
-        corruptionScript = GameObject.FindObjectOfType<CorruptionScript>();
         attackScript = GetComponent<AttackScript>();
         grappleLine = GetComponent<LineRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
@@ -173,9 +171,9 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
 
     private void OnEnemyGrapple()
     {
+        animator.SetBool("IsGrappling", true);
         playerMovement.enabled = false;
         isEnemyGrappled = true;
-        corruptionScript.OnReduceCorruption(15);
         //Disable player movement
     }
 

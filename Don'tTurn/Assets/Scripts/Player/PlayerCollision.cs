@@ -15,6 +15,10 @@ public class PlayerCollision : MonoBehaviour
     private Rigidbody2D rb2D;
     private Animator animator;
 
+    private GrappleAbility grappleAbility;
+    private PrototypeDash DashAbility;
+    private CurseAttacks CursePunch;
+
     public MapPanelScript mapPanelScript;
 
     private GameObject incomingAttacker;
@@ -32,6 +36,9 @@ public class PlayerCollision : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         cureManager = GameObject.Find("CureManager").GetComponent<CureManager>();
+        grappleAbility = GetComponent<GrappleAbility>();
+        DashAbility = GetComponent<PrototypeDash>();
+        CursePunch = GetComponent<CurseAttacks>();
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
@@ -61,13 +68,11 @@ public class PlayerCollision : MonoBehaviour
     {
         if (isInsideTrigger && Input.GetKeyDown(KeyCode.W))
         {
-            Debug.Log("Interact Pressed");
             interactPressed = !interactPressed;
             if (interactPressed == true)
             {
                 checkPointScript.RespawnAllEnemies();
                 mapPanelScript.ShowMap(checkPointScript.checkpointNumber);
-                Debug.Log("Interact Pressed is true");
                 playerMovement.enabled = false;
                 rb2D.velocity = Vector2.zero;
                 GetComponent<PlayerMovement>().playerFootsteps.stop(STOP_MODE.IMMEDIATE);
@@ -75,7 +80,6 @@ public class PlayerCollision : MonoBehaviour
             }
             else if (interactPressed == false)
             {
-                Debug.Log("Interact Pressed is false");
                 animator.SetBool("IsResting", false);
                 DataPersistenceManager.instance?.SaveGame();
                 playerMovement.enabled = true;
@@ -123,7 +127,14 @@ public class PlayerCollision : MonoBehaviour
             {
                 transform.position = restTrans.position;
                 animator.SetBool("IsResting", true);
-                animator.Play("player_Rest", 0);
+                if(corruptionScript.time < 100)
+                {
+                    animator.Play("player_Rest", 0);
+                }
+                else if(corruptionScript.time >= 100)
+                {
+                    animator.Play("T2Player_Crouch", 0);
+                }
                 IsMovingToTarget = false;
                 StartCoroutine("Regenerate");
             }
@@ -134,6 +145,22 @@ public class PlayerCollision : MonoBehaviour
     {
         restTrans = targetTrans;
         IsMovingToTarget = !IsMovingToTarget;
+    }
+
+    private void DisableAbilities()
+    {
+        playerMovement.enabled = true;
+        grappleAbility.enabled = false;
+        DashAbility.enabled = false;
+        CursePunch.enabled = false;
+    }
+
+    private void EnableAbilities()
+    {
+        playerMovement.enabled = true;
+        grappleAbility.enabled = true;
+        DashAbility.enabled = true;
+        CursePunch.enabled = true;
     }
 
 }

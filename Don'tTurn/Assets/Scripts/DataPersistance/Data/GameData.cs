@@ -11,6 +11,7 @@ public class GameData
     public SerializableDictionary<string, bool> hasCollectedUpgrade;
     public SerializableDictionary<int, bool> hasCollectedNote;
     public SerializableDictionary<int, bool> hasCollectedCure;
+    public SerializableDictionary<int, bool> hasUnlockedMap;
     public bool isGrappleUnlocked, isShotgunUnlocked, isDoubleJumpUnlocked, isBombUnlocked, isCursePunchUnlocked, isEatUnlocked;
 
     //These will be the default values for when a new game is initialised

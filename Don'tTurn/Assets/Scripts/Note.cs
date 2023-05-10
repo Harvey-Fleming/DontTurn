@@ -19,6 +19,7 @@ public class Note : MonoBehaviour, IDataPersistence
 
         if(hasCollectedNote == true)
         {
+            noteManager.notesObtained[noteNum] = true;
             Destroy(gameObject);
         }
         else

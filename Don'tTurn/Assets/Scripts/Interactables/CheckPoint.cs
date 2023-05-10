@@ -13,6 +13,8 @@ public class CheckPoint : MonoBehaviour
     [SerializeField] private Transform restPointTrans;
 
     [SerializeField] public int checkpointNumber;
+    [SerializeField] public bool hasVisited;
+
 
     private StudioEventEmitter emitter;
 
