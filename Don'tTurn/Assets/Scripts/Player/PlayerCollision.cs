@@ -46,7 +46,7 @@ public class PlayerCollision : MonoBehaviour
     {
         if(collision.gameObject.tag == "Cure")
         {
-            cureManager.cureAmount++;
+            cureManager.IncreaseCureCount();
             Destroy(collision.gameObject);
         }
     }

@@ -6,13 +6,14 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-    public Button[] choiceButtons; 
-    //this script manages 
+    public Button[] choiceButtons;
     public Animator animator; 
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText; 
     [SerializeField] private GameObject textboxObj;
+    private CureNPC cureNPC;
     public bool isChoiceNPC; //checks if the NPC has a choice; 
+    public bool isFinalNPC;
 
     private Queue<string> sentences; 
 
@@ -25,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>(); 
+        cureNPC = FindObjectOfType<CureNPC>();
     }
 
     private void Update()
@@ -57,7 +59,6 @@ public class DialogueManager : MonoBehaviour
     {
         if(sentences.Count == 0)
         {
-            Debug.Log(isChoiceNPC); 
             if(isChoiceNPC == true)
             {
                 Debug.Log("Enters thingy!"); 
@@ -81,7 +82,11 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        Debug.Log("End of COnversation");
+        Debug.Log("End of Conversation");
+        if(isFinalNPC)
+        {
+            cureNPC.CheckWin();
+        }
         animator.SetBool("isOpen", false);
     }
 }

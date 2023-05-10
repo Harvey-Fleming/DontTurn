@@ -6,10 +6,12 @@ using UnityEngine.UI;
 public class DialogueTrigger : MonoBehaviour
 {
     public bool isChoiceNPC; //checks if the NPC has a choice; 
+    public bool isFinalNPC;
     public Dialogue dialogue;
     public Button[] choiceButtons;
     public GameObject buttonToPress;
     private GameObject currentDialogueNPC;
+    private CureNPC cureNPCScript;
     private bool isActive;
 
     private void OnTriggerStay2D(Collider2D other)
@@ -42,15 +44,21 @@ public class DialogueTrigger : MonoBehaviour
     {
         if(isChoiceNPC == true)
         {
-
-                FindObjectOfType<DialogueManager>().choiceButtons  = choiceButtons;
-     
+            FindObjectOfType<DialogueManager>().choiceButtons  = choiceButtons;
         }
         FindObjectOfType<DialogueManager>().isChoiceNPC = isChoiceNPC;
+        FindObjectOfType<DialogueManager>().isFinalNPC = isFinalNPC;
+        if (isFinalNPC)
+        {
+            cureNPCScript = GetComponent<CureNPC>();
+            if(cureNPCScript.cureGathered == 2)
+            {
+                cureNPCScript.CheckWin();
+            }
+            cureNPCScript.StartDialogue();
+        }
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
         currentDialogueNPC.GetComponent<UnlockAbility>()?.OnAbilityUnlock();
-       
-        
     }    
 
 }
