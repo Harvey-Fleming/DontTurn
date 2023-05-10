@@ -11,6 +11,7 @@ public class CureNPC : MonoBehaviour
     [SerializeField] private CureManager cureManager;
 
     private DialogueTrigger dialogueTrigger;
+    public CureChamberCode cureChamber;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,7 @@ public class CureNPC : MonoBehaviour
     {
         if(cureGathered == 2)
         {
-            SceneManager.LoadScene("WinScreen");
+            cureChamber.Fix();
         }
         else
         {

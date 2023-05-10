@@ -14,6 +14,10 @@ public class FollowCamera : MonoBehaviour
     public bool followPlayer = true;
     Vector3 newPos;
     public GrappleAbility grapple;
+    public CureChamberCode chamber;
+    bool canShake = false;
+    Vector3 originalPos;
+    public float shakeAmount;
 
     private void Awake()
     {
@@ -23,17 +27,42 @@ public class FollowCamera : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (followPlayer)
+        if (!chamber.zoomOnChamber)
         {
-            newPos = new Vector3(playerTransform.position.x, playerTransform.position.y + yOffset, -10f);
+            if (followPlayer)
+            {
+                newPos = new Vector3(playerTransform.position.x, playerTransform.position.y + yOffset, -10f);
+            }
+            else
+            {
+                newPos = grapple.camPoint;
+            }
+
+            transform.position = Vector3.SmoothDamp(transform.position, new Vector3(newPos.x, newPos.y, -10f), ref velocity, smoothTime);
         }
         else
         {
-            newPos = grapple.camPoint;
-        }
-        
-        transform.position = Vector3.SmoothDamp(transform.position, new Vector3(newPos.x, newPos.y, -10f), ref velocity, smoothTime);
+            if (!canShake)
+            {
+                transform.position = Vector3.SmoothDamp(transform.position, new Vector3(newPos.x, newPos.y, -10f), ref velocity, smoothTime);
+            }
+            else
+            {
+                transform.position = new Vector3(originalPos.x + UnityEngine.Random.Range(-0.1f * shakeAmount, 0.1f * shakeAmount), originalPos.y + UnityEngine.Random.Range(-0.1f * shakeAmount, 0.1f * shakeAmount), -10);
+            }
 
+            newPos = chamber.transform.position;
+            Camera cam = GetComponent<Camera>();
+            if (cam.orthographicSize > 4f)
+            {
+                cam.orthographicSize -= 0.3f * Time.deltaTime;
+            }
+        }
+    }
+
+    public void Shake()
+    {
+        StartCoroutine(StartShake());
     }
 
     
@@ -41,6 +70,15 @@ public class FollowCamera : MonoBehaviour
     void OnSceneLoaded()
     {
         playerTransform = GameObject.FindWithTag("Player").transform;
+    }
+
+    IEnumerator StartShake()
+    {
+        yield return new WaitForSeconds(3f);
+        originalPos = transform.position;
+        canShake = true;
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene("WinScreen");
     }
     
     
