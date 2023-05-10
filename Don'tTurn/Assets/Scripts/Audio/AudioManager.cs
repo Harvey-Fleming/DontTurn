@@ -7,6 +7,19 @@ using System.Runtime.CompilerServices;
 
 public class AudioManager : MonoBehaviour
 {
+    [Header("Volume")]
+    [Range(0, 1)]
+    public float masterVolume = 1;
+    [Range(0, 1)]
+    public float AmbienceVolume = 1;
+    [Range(0, 1)]
+    public float SFXVolume = 1;
+    [Range(0, 1)]
+
+    private Bus masterBus;
+    private Bus ambienceBus;
+    private Bus sfxBus;
+
     private List<EventInstance> eventInstances;
     
     private List<StudioEventEmitter> eventEmitters;
@@ -28,6 +41,17 @@ public class AudioManager : MonoBehaviour
 
         eventInstances = new List<EventInstance>();
         eventEmitters = new List<StudioEventEmitter>();
+
+        masterBus = RuntimeManager.GetBus("bus:/");
+        ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
+        sfxBus = RuntimeManager.GetBus("bus:/SFX");
+    }
+
+    private void Update()
+    {
+        masterBus.setVolume(masterVolume);
+        ambienceBus.setVolume(AmbienceVolume);
+        sfxBus.setVolume(SFXVolume);
     }
 
     private void Start()

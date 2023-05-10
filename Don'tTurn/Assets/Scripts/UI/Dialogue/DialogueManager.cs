@@ -33,7 +33,8 @@ public class DialogueManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.F))
         {
-            DisplayNextSentence(); 
+            DisplayNextSentence();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
         }
     }
 

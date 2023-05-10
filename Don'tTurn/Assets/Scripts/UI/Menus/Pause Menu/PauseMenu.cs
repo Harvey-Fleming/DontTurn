@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private MapScript mapScript;
     private GameObject mapMenu;
 
-    [SerializeField] private bool isPaused = false;
+    [SerializeField] public bool isPaused = false;
 
     private void Start() {
         mapMenu = mapCanvas.transform.GetChild(0).gameObject;
@@ -36,10 +36,12 @@ public class PauseMenu : MonoBehaviour
             if (isPaused)
             {
                 resume();
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
             }
             else
             {
-                openPauseMenu();   
+                openPauseMenu();
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
             }
         }
         

@@ -9,6 +9,7 @@ public class AttackScript : MonoBehaviour
     private CorruptionScript corruptionScript;
     private Animator animator;
     private PlayerInput playerInput;
+    private PauseMenu pauseMenu;
 
     [Header("Melee Attack Stats")]
     [SerializeField] private Transform attackPointTrans;
@@ -27,6 +28,7 @@ public class AttackScript : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         corruptionScript = FindObjectOfType<CorruptionScript>();
         animator = GetComponent<Animator>();
+        pauseMenu = GetComponent<PauseMenu>();
     }
 
     // Update is called once per frame
@@ -37,11 +39,11 @@ public class AttackScript : MonoBehaviour
         HandleComboTimer();
 
         //Trigger first attack in the combo
-        if (playerInput.meleeInput && canAttack && comboTimer <= 0)
+        if (playerInput.meleeInput && canAttack && comboTimer <= 0 && Time.timeScale != 0)
         {
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.Melee1, this.transform.position);
             currentAttackNumber = 1;
             animator.SetBool("IsAttacking", true);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.Melee1, this.transform.position);
         }
     }
 

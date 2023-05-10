@@ -141,6 +141,7 @@ public class IntroTutorialManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 curseStringNum++;
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
             }
         }
         if(curseStringNum >= curseStrings.Length - 1)
@@ -148,6 +149,7 @@ public class IntroTutorialManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Time.timeScale = 1;
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
                 curseTutorial.SetActive(false);
             }
         }
@@ -165,6 +167,7 @@ public class IntroTutorialManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     checkpointStringNum++;
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
                 }
             }
             if (checkpointStringNum >= checkpointStrings.Length)
@@ -172,6 +175,7 @@ public class IntroTutorialManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     Time.timeScale = 1;
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
                     checkpointTutorial.SetActive(false);
                     hasUsedCheckpoint = true;
                 }
