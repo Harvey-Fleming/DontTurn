@@ -104,7 +104,6 @@ public class AttackScript : MonoBehaviour
                 animator.SetBool("IsAttacking", false);
                 StartCoroutine(MeleeCooldown());
                 inComboWindow = false;
-                Debug.Log("Combo Ended");
             }
         }
     }
@@ -112,7 +111,6 @@ public class AttackScript : MonoBehaviour
     private void AttackAnimationEvent()
     {
         canAttack = false;
-        Debug.Log("This Attack is: " + currentAttackNumber);
         MeleeAttack();
     }
 
@@ -126,6 +124,14 @@ public class AttackScript : MonoBehaviour
     public void OnMeleeUpgrade()
     {
         UpgradeDamage += 5;
+    }
+
+    public void ResetWindow()
+    {
+        animator.SetBool("IsAttacking", false);
+        inComboWindow = true;
+        comboTimer = 0;
+        currentAttackNumber = 1;
     }
 
     void OnDrawGizmosSelected() 

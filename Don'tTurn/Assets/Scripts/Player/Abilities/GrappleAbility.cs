@@ -18,6 +18,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     private PlayerMovement playerMovement;
     private Cursor cursorScript;
     private CorruptionScript corruptionScript;
+    private AttackScript attackScript;
     private FallDamage fallDamage;
     public FollowCamera followCam;
     public Vector2 camPoint;
@@ -45,6 +46,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     {
         cursorScript = GameObject.Find("Cursor").GetComponent<Cursor>();
         corruptionScript = GameObject.FindObjectOfType<CorruptionScript>();
+        attackScript = GetComponent<AttackScript>();
         grappleLine = GetComponent<LineRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>(); 
@@ -83,6 +85,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
             if (playerInput.moveAbilityInputHeld && playerInput.grappleSelected)
             {
                 //Draws a line from the player towards the cursor but stops at max distance(Hook Range) to show the player how far away they can hook from
+                attackScript.ResetWindow();
                 followCam.followPlayer = false;
                 animator.SetBool("IsAttacking", false);
                 IndicatorlerpPercent = (hookRange / Vector3.Distance(transform.position, mouseWorldPos));
@@ -94,6 +97,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
             }
             else if (playerInput.moveAbilityInputRelease)
             {
+                attackScript.ResetWindow();
                 grappleLine.positionCount = 0;
                 followCam.followPlayer = true;
             }
@@ -104,7 +108,6 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     {
         hookDirection = mouseWorldPos - transform.position;
         RaycastHit2D grapplehit = Physics2D.Raycast(gameObject.transform.position, hookDirection, hookRange);
-        Debug.Log(grapplehit.collider);
         
         if (playerInput.meleeInput && grapplehit.collider != null && canGrapple)
         {
@@ -115,7 +118,6 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
                 DrawLine(transform.position, grapplePointPos);
                 enemyObj = grapplehit.collider.gameObject;
                 OnEnemyGrapple();
-                Debug.Log("Grappled Enemy");
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.grappleHook, this.transform.position);
             }
             else if (grapplehit.collider.tag == "GrapplePoint")
@@ -124,7 +126,6 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
                 isGrappling = true;
                 initialGrappleDirection = (transform.position - grapplePointPos).normalized;
                 DrawLine(transform.position, grapplePointPos);
-                Debug.Log("Grappled Point");
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.grappleHook, this.transform.position);
             }
             else if (grapplehit.collider.tag == null)
@@ -181,10 +182,10 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     public void StopGrapple()
     {
         fallDamage.maxYVel = 0;
+        isGrappling = false;
         animator.SetBool("IsGrappling", false);
         playerMovement.ResetAirJump();
         rb2D.gravityScale = gravityScale;
-        isGrappling = false;
         grappleLine.positionCount = 0;
         playerMovement.enabled = true;
         StartCoroutine("Cooldown");

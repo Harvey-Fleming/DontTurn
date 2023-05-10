@@ -112,7 +112,7 @@ public class PrototypeDash : MonoBehaviour, IDataPersistence
             //Changes where the bullet will spawn based on the direction the player is facing due to x Scale also affecting bullet spawns
             //For example, when the player is facing left, the x scale is -1 and the 'right' bullet spawn location will actually be on the left, leaing to bullet and player colliding and nothing happening.
             DecideBulletSpawn();
-
+            FindObjectOfType<AttackScript>().ResetWindow();
             canDash = false;
             GetComponent<SpriteRenderer>().flipX = false;
             animator.SetBool("IsDashing", true);
