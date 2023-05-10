@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class MapScript : MonoBehaviour
     public int checkpointNumber;
     public bool isCheckpoint;
     public MapManager mapManager;
-    private GameObject pMenu; 
+    private GameObject pMenu;
     [SerializeField] private GameObject pMenuCanvas;
 
     // Start is called before the first frame update
@@ -30,6 +31,7 @@ public class MapScript : MonoBehaviour
                     ToggleMap(timesPressed);
                     timesPressed++;
                     Time.timeScale = 0;
+                    GetComponent<PlayerMovement>().playerFootsteps.stop(STOP_MODE.IMMEDIATE);
                     pMenu.SetActive(false);
                     mapManager.isOpen = true;
                     break;

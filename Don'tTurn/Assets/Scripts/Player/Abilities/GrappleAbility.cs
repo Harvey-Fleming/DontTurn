@@ -40,6 +40,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     [SerializeField] private bool isGrappling = false;
     [SerializeField] private bool isEnemyGrappled = false;
     [SerializeField] private bool canGrapple = true;
+    public bool aimingGrapple = false;
 
     private void Awake() 
     {
@@ -83,6 +84,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
             if (playerInput.moveAbilityInputHeld && playerInput.grappleSelected)
             {
                 //Draws a line from the player towards the cursor but stops at max distance(Hook Range) to show the player how far away they can hook from
+                aimingGrapple = true;
                 attackScript.ResetWindow();
                 followCam.followPlayer = false;
                 animator.SetBool("IsAttacking", false);
@@ -98,6 +100,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
                 attackScript.ResetWindow();
                 grappleLine.positionCount = 0;
                 followCam.followPlayer = true;
+                aimingGrapple = false;
             }
         }
     }

@@ -10,6 +10,7 @@ public class AttackScript : MonoBehaviour
     private Animator animator;
     private PlayerInput playerInput;
     private PauseMenu pauseMenu;
+    private GrappleAbility grappleAbility;
 
     [Header("Melee Attack Stats")]
     [SerializeField] private Transform attackPointTrans;
@@ -28,6 +29,7 @@ public class AttackScript : MonoBehaviour
         corruptionScript = FindObjectOfType<CorruptionScript>();
         animator = GetComponent<Animator>();
         pauseMenu = GetComponent<PauseMenu>();
+        grappleAbility = GetComponent<GrappleAbility>();
     }
 
     // Update is called once per frame
@@ -42,7 +44,10 @@ public class AttackScript : MonoBehaviour
         {
             currentAttackNumber = 1;
             animator.SetBool("IsAttacking", true);
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.Melee1, this.transform.position);
+            if (grappleAbility.aimingGrapple == false)
+            {
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.Melee1, this.transform.position);
+            }
         }
     }
 
@@ -85,12 +90,12 @@ public class AttackScript : MonoBehaviour
                         StartCoroutine(MeleeCooldown());
                     }
 
-                    if (currentAttackNumber == 2)
+                    if (currentAttackNumber == 2 && grappleAbility.aimingGrapple == false)
                     {
                         AudioManager.instance.PlayOneShot(FMODEvents.instance.Melee2, this.transform.position);
                     }
 
-                    if (currentAttackNumber == 3 && comboTimer != 0)
+                    if (currentAttackNumber == 3 && comboTimer != 0 && grappleAbility.aimingGrapple == false)
                     {
                         AudioManager.instance.PlayOneShot(FMODEvents.instance.Melee3, this.transform.position);
                     }

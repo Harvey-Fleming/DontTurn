@@ -186,6 +186,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 --aerialJumpCount;
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.playerJump, this.transform.position);
             }
         }
     }

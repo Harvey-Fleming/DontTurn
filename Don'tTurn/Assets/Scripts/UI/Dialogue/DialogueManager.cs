@@ -34,7 +34,6 @@ public class DialogueManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F))
         {
             DisplayNextSentence();
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
         }
     }
 
@@ -75,7 +74,7 @@ public class DialogueManager : MonoBehaviour
             }
            
         }
-
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
         string sentence = sentences.Dequeue();
         dialogueText.text = sentence; 
     }

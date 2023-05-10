@@ -31,6 +31,7 @@ public class FMODEvents : MonoBehaviour
     [field: Header("Enemy SFX")]
     [field: SerializeField] public EventReference duoSkellySounds { get; private set; }
     [field: SerializeField] public EventReference duoSkellyDmg { get; private set; }
+    [field: SerializeField] public EventReference mushEnemy { get; private set; }
 
     [field: Header("Interactables")]
     [field: SerializeField] public EventReference ItemPickup { get; private set; }
