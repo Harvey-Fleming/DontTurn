@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInput))]
 public class CurseAttacks : MonoBehaviour, IDataPersistence
 {
+    Animator animator; 
     [SerializeField] bool isOnCooldown; 
     public GameObject bomb;
     public Transform firePoint;
@@ -22,6 +23,7 @@ public class CurseAttacks : MonoBehaviour, IDataPersistence
     {
         playerInput = GetComponent<PlayerInput>();
         playerStats = GetComponent<PlayerStats>();
+        animator = GetComponent<Animator>(); 
     }
 
     // Update is called once per frame
@@ -46,9 +48,9 @@ public class CurseAttacks : MonoBehaviour, IDataPersistence
             {
                 isOnCooldown = true;
                 Debug.Log("Left shift!!");
-                if (CorruptionScript.time >= 10f)
+                if (CorruptionScript.time < 100f)
                 {
-                    CorruptionScript.time -= 10;
+                    CorruptionScript.time += 10;
                     PunchEnemy();
                 }
                 else
@@ -56,8 +58,8 @@ public class CurseAttacks : MonoBehaviour, IDataPersistence
                     playerStats.OnHit(10, gameObject);
                     PunchEnemy();
                 }
-                
 
+                StartCoroutine(CursePunchAnimation()); 
 
             }
         }
@@ -112,5 +114,12 @@ public class CurseAttacks : MonoBehaviour, IDataPersistence
         data.isCursePunchUnlocked = this.isCursePunchUnlocked;
         data.isEatUnlocked = this.isEatUnlocked;
         
+    }
+
+    public IEnumerator CursePunchAnimation()
+    {
+        animator.SetBool("IsCursePunching", true);
+        yield return new WaitForSeconds(0.5f);
+        animator.SetBool("IsCursePunching", false);
     }
 }
