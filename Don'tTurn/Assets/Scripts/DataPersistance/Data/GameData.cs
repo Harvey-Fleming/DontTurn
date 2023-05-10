@@ -10,6 +10,7 @@ public class GameData
     public SerializableDictionary<string, bool> isEnemyDead;
     public SerializableDictionary<string, bool> hasCollectedUpgrade;
     public SerializableDictionary<int, bool> hasCollectedNote;
+    public SerializableDictionary<int, bool> hasCollectedCure;
     public bool isGrappleUnlocked, isShotgunUnlocked, isDoubleJumpUnlocked, isBombUnlocked, isCursePunchUnlocked, isEatUnlocked;
 
     //These will be the default values for when a new game is initialised
@@ -20,6 +21,7 @@ public class GameData
         
         hasCollectedUpgrade = new SerializableDictionary<string, bool>();
         hasCollectedNote = new SerializableDictionary<int, bool>();
+        hasCollectedCure = new SerializableDictionary<int, bool>();
 
         //Enemy Save Variables
         isEnemyDead = new SerializableDictionary<string, bool>();
