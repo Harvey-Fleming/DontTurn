@@ -397,6 +397,13 @@ MonoBehaviour:
   zoomOnChamber: 0
   lights: {fileID: 1001391882366559785}
   followCam: {fileID: 0}
+  lightIntensity: 1
+  timeToIntes: 5
+  light1: {fileID: 0}
+  light2: {fileID: 0}
+  startLights: 0
+  maxIntensity: 20
+  startIntensity: 1
 --- !u!61 &1001391884298059237
 BoxCollider2D:
   m_ObjectHideFlags: 0

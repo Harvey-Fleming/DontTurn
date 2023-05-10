@@ -555,8 +555,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1310381261
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -718,11 +718,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe6194926d8253042b03cbe2ccad679e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  followCam: {fileID: 0}
+  camPoint: {x: 0, y: 0}
   hookRange: 15
   enemySlerpSpeed: 4
   LerpSpeed: 8
   launchSpeed: 20
   grappleCooldown: 0.3
+  hookDistance: 0
+  endPoint: {x: 0, y: 0}
+  aimMaterial: {fileID: 0}
+  grappleMaterial: {fileID: 0}
   isUnlocked: 0
   isGrappling: 0
   isEnemyGrappled: 0

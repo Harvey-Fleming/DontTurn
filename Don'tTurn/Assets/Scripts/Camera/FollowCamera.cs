@@ -76,6 +76,7 @@ public class FollowCamera : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         originalPos = transform.position;
+        chamber.startLights = true;
         canShake = true;
         yield return new WaitForSeconds(4f);
         SceneManager.LoadScene("WinScreen");

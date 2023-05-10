@@ -9,6 +9,7 @@ public class CureNPC : MonoBehaviour
     [Range(0,2)] public int cureGathered;
     [SerializeField] private Dialogue finalDialogue;
     [SerializeField] private CureManager cureManager;
+    public GameObject toolIcons;
 
     private DialogueTrigger dialogueTrigger;
     public CureChamberCode cureChamber;
@@ -17,6 +18,7 @@ public class CureNPC : MonoBehaviour
     {
         dialogueTrigger = GetComponent<DialogueTrigger>();
         cureManager = FindObjectOfType<CureManager>();
+        toolIcons.SetActive(false);
     }
 
     public void CheckWin()
@@ -34,6 +36,7 @@ public class CureNPC : MonoBehaviour
 
     public void StartDialogue()
     {
+        toolIcons.SetActive(true);
         cureGathered = cureManager.cureAmount;
         dialogueTrigger.dialogue.sentences[0] = finalDialogue.sentences[cureGathered];
     }
