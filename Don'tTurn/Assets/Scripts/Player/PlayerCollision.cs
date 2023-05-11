@@ -75,6 +75,8 @@ public class PlayerCollision : MonoBehaviour
                 mapPanelScript.ShowMap(checkPointScript.checkpointNumber);
                 checkPointScript.hasVisited = true;
                 DisableAbilities();
+                GetComponent<AttackScript>().canAttack = false;
+                Debug.Log("cantattack");
                 rb2D.velocity = Vector2.zero;
                 GetComponent<PlayerMovement>().playerFootsteps.stop(STOP_MODE.IMMEDIATE);
                 MoveToTarget(restTrans);
@@ -82,6 +84,7 @@ public class PlayerCollision : MonoBehaviour
             else if (interactPressed == false)
             {
                 EnableAbilities();
+                GetComponent<AttackScript>().canAttack = true;
                 animator.SetBool("IsResting", false);
                 DataPersistenceManager.instance?.SaveGame();
                 IsMovingToTarget = false;

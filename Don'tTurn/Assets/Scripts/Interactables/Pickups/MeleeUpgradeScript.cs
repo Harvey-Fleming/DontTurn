@@ -19,6 +19,7 @@ public class MeleeUpgradeScript : MonoBehaviour, IDataPersistence
         if (onHover && Input.GetKeyDown(KeyCode.W) && !HasCollected)
         {
             meleeAttackScript.OnMeleeUpgrade();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.ItemPickup, this.transform.position);
             HasCollected = true;
         }
     }
@@ -53,4 +54,11 @@ public class MeleeUpgradeScript : MonoBehaviour, IDataPersistence
         gameData.hasCollectedUpgrade.TryGetValue(id, out HasCollected);
     }
 
+    private void Start()
+    {
+        if (HasCollected)
+        {
+            meleeAttackScript.OnMeleeUpgrade();
+        }
+    }
 }

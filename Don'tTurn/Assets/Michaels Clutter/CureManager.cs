@@ -9,6 +9,7 @@ public class CureManager : MonoBehaviour
 
     public void IncreaseCureCount()
     {
-       cureAmount++; 
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.ItemPickup, this.transform.position);
+        cureAmount++; 
     }
 }
