@@ -233,13 +233,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cureGathered: 0
-  finalDialogue:
+  firstDialogue:
     sentences:
-    - I found a way to cure the Disease, go and gather the materials. There are 2
-      marked on your map
-    - Only 1 more remaining!
-    - You did it! Let me put it together
-    name: Scientist
+    - "Fascinating, I didn\u2019t expect to see another person so soon."
+    - "Most people don\u2019t dare venture this close to the epicentre but then again,
+      it seems you and him have a lot in common. "
+    - "In any case I\u2019ve created something that I think could help you. "
+    - "It\u2019s experimental, but If you\u2019re willing to take the chance then
+      it might be the only way out of your current predicament. "
+    - "I need some tools to finish it though. I\u2019ve marked them on your map,
+      so return to me once you\u2019ve sought them out. "
+    - "Although I\u2019d be quick about it if I were you, wouldn\u2019t want you
+      following in his footsteps all the way to the end\u2026"
+    - "FIND THE TOOLS FOR THE \u2018CURE\u2019\r\n"
+    name: 
+  secondDialogue:
+    sentences:
+    - "Perfect, I\u2019ll get to work whilst you search for the other one."
+    name: 
+  thirdDialogue:
+    sentences:
+    - "Wonderful, let me just add the finishing touches. When you\u2019re ready,
+      step inside and hold on to tight to whatever humanity you have left\u2026"
+    name: 
   cureManager: {fileID: 0}
   toolIcons: {fileID: 0}
   cureChamber: {fileID: 0}
