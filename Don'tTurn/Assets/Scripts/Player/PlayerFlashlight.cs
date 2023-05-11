@@ -5,11 +5,10 @@ using UnityEngine;
 public class PlayerFlashlight : MonoBehaviour
 {
     public GameObject flashlight;
-    public BoxCollider2D flashlightCollider;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision == flashlightCollider)
+        if(collision.tag == "Player")
         {
             flashlight.SetActive(true);
         }
@@ -17,7 +16,7 @@ public class PlayerFlashlight : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision == flashlightCollider)
+        if(collision.tag == "Player")
         {
             flashlight.SetActive(false);
         }
