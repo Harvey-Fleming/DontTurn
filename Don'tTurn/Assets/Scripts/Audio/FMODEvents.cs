@@ -23,10 +23,12 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference playerDmg { get; private set; }
     [field: SerializeField] public EventReference cursePunch { get; private set; }
     [field: SerializeField] public EventReference grappleHook { get; private set; }
+    [field: SerializeField] public EventReference transformation { get; private set; }
 
     [field: Header("Ambience SFX")]
     [field: SerializeField] public EventReference levelAmbience { get; private set; }
     [field: SerializeField] public EventReference CheckpointLight { get; private set; }
+    [field: SerializeField] public EventReference EndingSFX { get; private set; }
 
     [field: Header("Enemy SFX")]
     [field: SerializeField] public EventReference duoSkellySounds { get; private set; }

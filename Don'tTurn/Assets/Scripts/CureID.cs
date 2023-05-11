@@ -13,6 +13,7 @@ public class CureID : MonoBehaviour, IDataPersistence
         cureManager = FindObjectOfType<CureManager>();
         if(hasCollectedCure)
         {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.ItemPickup, this.transform.position);
             cureManager.IncreaseCureCount();
             Destroy(gameObject);
         }

@@ -20,7 +20,7 @@ public class CorruptionAnimationSwitching : MonoBehaviour
     {
         if(corruptionScript.time == 100)
         {
-  
+            TransformAudio();
             animator.SetBool("IsCorrupt", true);
             animator.runtimeAnimatorController = corruptedAnimationController; 
         }
@@ -28,6 +28,14 @@ public class CorruptionAnimationSwitching : MonoBehaviour
         {
             animator.SetBool("IsCorrupt", false);
             animator.runtimeAnimatorController = normalAnimationController;
+        }
+    }
+
+    void TransformAudio()
+    {
+        if (animator.GetBool("IsCorrupt") == false)
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.transformation, this.transform.position);
         }
     }
 }

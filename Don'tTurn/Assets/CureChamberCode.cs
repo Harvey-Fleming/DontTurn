@@ -75,6 +75,7 @@ public class CureChamberCode : MonoBehaviour
 
     IEnumerator Open()
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.EndingSFX, this.transform.position);
         zoomOnChamber = true;
         hasNotInteracted = true;
         playerMovement.enabled = false;

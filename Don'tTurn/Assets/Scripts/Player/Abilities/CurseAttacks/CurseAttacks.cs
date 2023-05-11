@@ -91,7 +91,8 @@ public class CurseAttacks : MonoBehaviour, IDataPersistence
 
     public void PunchEnemy()
     {
-        PunchHitbox.SetActive(true); 
+        PunchHitbox.SetActive(true);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.cursePunch, this.transform.position);
     }
 
     public IEnumerator Cooldown()
