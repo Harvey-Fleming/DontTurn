@@ -127,7 +127,7 @@ public class AttackScript : MonoBehaviour
 
     public void OnMeleeUpgrade()
     {
-        UpgradeDamage += 5;
+        UpgradeDamage += 1;
     }
 
     public void ResetWindow()

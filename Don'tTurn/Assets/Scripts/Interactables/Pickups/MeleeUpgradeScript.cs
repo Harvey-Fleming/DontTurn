@@ -8,6 +8,14 @@ public class MeleeUpgradeScript : MonoBehaviour, IDataPersistence
     private bool HasCollected = false;
     [SerializeField] private string id;
 
+    private void Start() 
+    {
+        if (HasCollected)
+        {
+            meleeAttackScript.OnMeleeUpgrade();
+        }
+    }
+
     private void FixedUpdate() 
     {
         if (HasCollected == true)
