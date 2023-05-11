@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using FMODUnity;
 
-public class CheckPoint : MonoBehaviour
+public class CheckPoint : MonoBehaviour, IDataPersistence
 {
     [Header("Component References")]
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private PlayerCollision playerCollision;
+    [SerializeField] private MapPanelScript mapPanelScript;
     [SerializeField] private Transform restPointTrans;
 
     [SerializeField] public int checkpointNumber;
     [SerializeField] public bool hasVisited;
-
 
     private StudioEventEmitter emitter;
 
@@ -22,6 +22,11 @@ public class CheckPoint : MonoBehaviour
     {
         emitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.CheckpointLight, this.gameObject);
         emitter.Play();
+
+        if(hasVisited)
+        {
+            mapPanelScript.ShowMap(checkpointNumber);
+        }
     }
     private void Awake() 
     {
@@ -72,5 +77,22 @@ public class CheckPoint : MonoBehaviour
             enemyStats.Respawn();
         }
     }
+
+    #region SaveRegion
+    public void SaveData(GameData data)
+    {
+        if(data.hasUnlockedMap.ContainsKey(checkpointNumber))
+        {
+            data.hasUnlockedMap.Remove(checkpointNumber);
+        }
+        data.hasUnlockedMap.Add(checkpointNumber, hasVisited);
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.hasUnlockedMap.TryGetValue(checkpointNumber, out hasVisited);
+    }
+
+    #endregion
 
 }

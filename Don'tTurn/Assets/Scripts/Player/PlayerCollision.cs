@@ -24,7 +24,7 @@ public class PlayerCollision : MonoBehaviour
     private GameObject incomingAttacker;
     private Transform restTrans;
     private float timebetweenRegens = 1, lerpSpeed = 4f;
-    public bool interactPressed = false, isInsideTrigger = false, IsMovingToTarget = false;
+    public bool interactPressed = false, isInsideTrigger = false, IsMovingToTarget = false, canStandUp = true;
     private CureManager cureManager;
 
     private void Start() 
@@ -66,14 +66,15 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnBeginRest()
     {
-        if (isInsideTrigger && Input.GetKeyDown(KeyCode.W))
+        if (isInsideTrigger && Input.GetKeyDown(KeyCode.W) && canStandUp)
         {
             interactPressed = !interactPressed;
             if (interactPressed == true)
             {
                 checkPointScript.RespawnAllEnemies();
                 mapPanelScript.ShowMap(checkPointScript.checkpointNumber);
-                playerMovement.enabled = false;
+                checkPointScript.hasVisited = true;
+                DisableAbilities();
                 rb2D.velocity = Vector2.zero;
                 GetComponent<PlayerMovement>().playerFootsteps.stop(STOP_MODE.IMMEDIATE);
                 MoveToTarget(restTrans);
@@ -81,8 +82,8 @@ public class PlayerCollision : MonoBehaviour
             else if (interactPressed == false)
             {
                 animator.SetBool("IsResting", false);
+                EnableAbilities();
                 DataPersistenceManager.instance?.SaveGame();
-                playerMovement.enabled = true;
                 IsMovingToTarget = false;
             }
         }
@@ -96,14 +97,15 @@ public class PlayerCollision : MonoBehaviour
     {
         while(interactPressed && isInsideTrigger)
         {
-        if (playerStats.health < playerStats.maxHealth || corruptionScript.time > 0)
-        {
-            playerStats.health += 20;
-            corruptionScript.time -= 10;
+            yield return new WaitForSecondsRealtime(0.5f);
+            if (playerStats.health < playerStats.maxHealth || corruptionScript.time > 0)
+            {
+                playerStats.health += 20;
+                corruptionScript.time -= 10;
 
             if (playerStats.health > playerStats.maxHealth)
             {
-                playerStats.health = playerStats.maxHealth;
+                 playerStats.health = playerStats.maxHealth;
             }
             else if(corruptionScript.time < 0)
             {
@@ -149,7 +151,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void DisableAbilities()
     {
-        playerMovement.enabled = true;
+        playerMovement.enabled = false;
         grappleAbility.enabled = false;
         DashAbility.enabled = false;
         CursePunch.enabled = false;

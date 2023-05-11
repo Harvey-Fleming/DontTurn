@@ -31,7 +31,7 @@ public class CurseAttacks : MonoBehaviour, IDataPersistence
     {
         if(isOnCooldown == false)
         {
-            if (playerInput.bombAbilityInput && isBombUnlocked)
+            /*if (playerInput.bombAbilityInput && isBombUnlocked)
             {
                 isOnCooldown = true;
                 playerStats.OnHit(15, gameObject);
@@ -43,7 +43,7 @@ public class CurseAttacks : MonoBehaviour, IDataPersistence
                 isOnCooldown = true;
                 EatEnemyFunction();
                
-            }
+            } */
             if (playerInput.punchAbilityInput && isCursePunchUnlocked)
             {
                 isOnCooldown = true;
@@ -70,7 +70,7 @@ public class CurseAttacks : MonoBehaviour, IDataPersistence
        
     }
 
-    public void Shoot()
+    /*public void Shoot()
     {
         Instantiate(bomb, firePoint.position, firePoint.rotation); 
     }
@@ -87,7 +87,7 @@ public class CurseAttacks : MonoBehaviour, IDataPersistence
     public void EatEnemyFunction()
     {
         eatTrigger.SetActive(true); 
-    }
+    } */
 
     public void PunchEnemy()
     {

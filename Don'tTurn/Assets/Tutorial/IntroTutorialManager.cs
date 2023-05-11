@@ -162,6 +162,7 @@ public class IntroTutorialManager : MonoBehaviour
             if(checkpointStringNum < checkpointStrings.Length)
             {
                 Time.timeScale = 0;
+                playerCollision.canStandUp = false;
                 checkpointTutorial.SetActive(true);
                 checkpointText.text = checkpointStrings[checkpointStringNum];
                 if (Input.GetKeyDown(KeyCode.F))
@@ -175,6 +176,7 @@ public class IntroTutorialManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     Time.timeScale = 1;
+                    playerCollision.canStandUp = true;
                     AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
                     checkpointTutorial.SetActive(false);
                     hasUsedCheckpoint = true;
