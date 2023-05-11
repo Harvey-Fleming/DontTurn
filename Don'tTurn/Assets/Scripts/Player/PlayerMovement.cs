@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider2D;
     private PlayerInput playerInput;
+    private CorruptionScript corruptionScript;
     private Transform moveToTargetTrans;
     float hmoveValue = 0, vmoveValue = 0;
     public float moveSpeed = 3f;
@@ -46,6 +47,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
 
     private void Start()
     {
+        corruptionScript = GameObject.FindObjectOfType<CorruptionScript>();
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
@@ -128,6 +130,11 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
         float extraHeightTest = 0.05f;
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0, Vector2.down, boxCollider2D.bounds.extents.y + extraHeightTest, GroundLayerMask);
         return raycastHit.collider != null;
+    }
+
+    public void MakeIdle(float speed)
+    {
+        animator.SetFloat("Speed", speed);
     }
 
     void Flip()
