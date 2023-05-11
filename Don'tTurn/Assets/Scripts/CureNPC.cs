@@ -7,7 +7,9 @@ using UnityEngine.SceneManagement;
 public class CureNPC : MonoBehaviour
 {
     [Range(0,2)] public int cureGathered;
-    [SerializeField] private Dialogue finalDialogue;
+    [SerializeField] private Dialogue firstDialogue;
+    [SerializeField] private Dialogue secondDialogue;
+    [SerializeField] private Dialogue thirdDialogue;
     [SerializeField] private CureManager cureManager;
     public GameObject toolIcons;
 
@@ -38,6 +40,21 @@ public class CureNPC : MonoBehaviour
     {
         toolIcons.SetActive(true);
         cureGathered = cureManager.cureAmount;
-        dialogueTrigger.dialogue.sentences[0] = finalDialogue.sentences[cureGathered];
+        switch (cureGathered)
+        {
+            case 0:
+            dialogueTrigger.dialogue.sentences = firstDialogue.sentences;
+            break;
+            case 1:
+            dialogueTrigger.dialogue.sentences = secondDialogue.sentences;
+            break;
+            case 2:
+            dialogueTrigger.dialogue.sentences = thirdDialogue.sentences;
+            break;
+
+        }
+        
+
+        
     }
 }
