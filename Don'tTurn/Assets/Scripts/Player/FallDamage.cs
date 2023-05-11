@@ -23,7 +23,7 @@ public class FallDamage : MonoBehaviour
         {
             if(maxYVel <= -40f)
             {
-                TakeFallDamage(0.5f * -maxYVel);
+                TakeFallDamage(2f * -maxYVel);
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.playerDmg, this.transform.position);
             }
         }
