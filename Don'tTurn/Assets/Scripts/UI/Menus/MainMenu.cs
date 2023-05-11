@@ -8,6 +8,9 @@ public class MainMenu : MonoBehaviour
 {
 
     [SerializeField] private Button loadGameButton;
+    private IntroSeenManager introSeenManager;
+    private bool hasSeenIntro = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +18,11 @@ public class MainMenu : MonoBehaviour
        {
             loadGameButton.interactable = false;
        }
+    }
+
+    private void Awake() 
+    {
+        introSeenManager = GameObject.FindObjectOfType<IntroSeenManager>();
     }
 
     public void ExitApplication()
@@ -26,7 +34,16 @@ public class MainMenu : MonoBehaviour
     public void onNewGameClicked()
     {
         DataPersistenceManager.instance.NewGame();
-        SceneManager.LoadSceneAsync("Intro");
+        if(!introSeenManager.hasSeenIntro)
+        {
+            introSeenManager.hasSeenIntro = true;
+            SceneManager.LoadSceneAsync("Intro");
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync("Game");
+        }
+        
          
         //play audio One-Shot
         AudioManager.instance.PlayOneShot(FMODEvents.instance.menuStartClick, this.transform.position);
