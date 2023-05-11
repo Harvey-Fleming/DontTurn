@@ -23,6 +23,8 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     public Vector2 camPoint;
     private Transform grappleLineSpawn;
 
+    public LayerMask layerMask;
+
     [Header("Hook Variables")]
     [SerializeField] private float hookRange = 5f;
     [SerializeField] private float enemySlerpSpeed = 4f, LerpSpeed = 8f, launchSpeed = 5f;
@@ -108,7 +110,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     private void FindGrapplePoint()
     {
         hookDirection = mouseWorldPos - transform.position;
-        RaycastHit2D grapplehit = Physics2D.Raycast(gameObject.transform.position, hookDirection, hookRange);
+        RaycastHit2D grapplehit = Physics2D.Raycast(gameObject.transform.position, hookDirection, hookRange, layerMask);
         
         if (playerInput.meleeInput && grapplehit.collider != null && canGrapple)
         {

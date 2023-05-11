@@ -677,6 +677,7 @@ MonoBehaviour:
   attackCooldownTime: 0.3
   baseAttackDamage: 3
   UpgradeDamage: 0
+  canAttack: 1
   corruptionImage: {fileID: 0}
   currentAttackNumber: 1
   comboTimer: 0
@@ -720,6 +721,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followCam: {fileID: 0}
   camPoint: {x: 0, y: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 704
   hookRange: 15
   enemySlerpSpeed: 4
   LerpSpeed: 8
@@ -752,6 +756,7 @@ MonoBehaviour:
   isInsideTrigger: 0
   IsMovingToTarget: 0
   canStandUp: 1
+  isResting: 0
 --- !u!114 &6541144399509697044
 MonoBehaviour:
   m_ObjectHideFlags: 0
