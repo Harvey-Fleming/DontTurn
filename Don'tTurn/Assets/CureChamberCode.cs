@@ -33,6 +33,7 @@ public class CureChamberCode : MonoBehaviour
 
     public void Fix()
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.ChamberRepair, this.transform.position);
         spriteRend.sprite = chamberPhases[1];
         interactKey.SetActive(true);
         lights.SetActive(true);

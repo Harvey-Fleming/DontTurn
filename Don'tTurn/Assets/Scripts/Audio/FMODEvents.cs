@@ -40,6 +40,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference NotePickup { get; private set; }
     [field: SerializeField] public EventReference MedkitHeal { get; private set; }
     [field: SerializeField] public EventReference MushroomHeal { get; private set; }
+    [field: SerializeField] public EventReference ChamberRepair { get; private set; }
 
     [field: Header("UI SFX")]
 

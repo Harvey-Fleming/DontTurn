@@ -15,7 +15,7 @@ public class AttackScript : MonoBehaviour
     [Header("Melee Attack Stats")]
     [SerializeField] private Transform attackPointTrans;
     [SerializeField] private float attackRadius, attackCooldownTime = 0.5f, baseAttackDamage, UpgradeDamage;
-    private bool canAttack = true;
+    public bool canAttack = true;
     public GameObject corruptionImage;
 
     [Header("Melee Attack Combo Variables")]
