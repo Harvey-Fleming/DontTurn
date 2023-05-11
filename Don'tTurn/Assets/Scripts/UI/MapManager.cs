@@ -17,6 +17,11 @@ public class MapManager : MonoBehaviour
     public Button right;
     int pageNum = 0;
     public string unknownNote;
+    public Image screwdriverCircle;
+    public Image wrenchCircle;
+    public GameObject screwDriver;
+    public GameObject wrench;
+    public Sprite redX;
 
     void Start()
     {
@@ -46,6 +51,18 @@ public class MapManager : MonoBehaviour
 
     private void Update()
     {
+        if(screwDriver == null)
+        {
+            screwdriverCircle.color = Color.white;
+            screwdriverCircle.sprite = redX;
+        }
+
+        if(wrench == null)
+        {
+            wrenchCircle.color = Color.white;
+            wrenchCircle.sprite = redX;
+        }
+
         if (isOpen)
         {
             if (noteManager.notesObtained[pageNum])
