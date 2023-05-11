@@ -11,6 +11,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     [SerializeField] private CorruptionScript corruptionScript;
     private PlayerMovement playerMovement;
     private Knockback knockbackScript;
+    private AttackScript attackScript;
     private SpriteRenderer spriteRenderer;
     private DamageIndicator damageIndicatorScript;
 
@@ -43,6 +44,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         knockbackScript = GetComponent<Knockback>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         damageIndicatorScript = GetComponent<DamageIndicator>();
+        attackScript = GetComponent<AttackScript>();
 
     }
 
@@ -71,6 +73,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
             damageIndicatorScript.SpawnIndicator(attackDamage, Color.red);
             corruptionScript.OnHitCorruption(attackDamage);
             knockbackScript.ApplyKnockBack(attacker);
+            attackScript.ResetWindow();
             StartCoroutine("IFrames");
         }
     }
@@ -92,7 +95,6 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         Time.timeScale = 1;
         GetComponent<SpriteRenderer>().enabled = true;
         transform.position = spawnPoint;
-        corruptionScript.StartCoroutine(corruptionScript.Timer(corruptionScript.areaTick));
     }
 
     IEnumerator IFrames()

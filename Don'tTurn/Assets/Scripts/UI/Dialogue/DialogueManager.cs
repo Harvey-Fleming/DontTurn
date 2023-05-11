@@ -41,6 +41,9 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        playerMovement.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        playerMovement.MakeIdle(playerMovement.gameObject.GetComponent<Rigidbody2D>().velocity.x);
+        playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         playerMovement.enabled = false;
         animator.SetBool("isOpen", true); 
         Debug.Log("Starting conversation with" + dialogue.name);
@@ -84,8 +87,9 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         playerMovement.enabled = true;
-        Debug.Log("End of Conversation");
         if(isFinalNPC)
         {
             cureNPC.CheckWin();
