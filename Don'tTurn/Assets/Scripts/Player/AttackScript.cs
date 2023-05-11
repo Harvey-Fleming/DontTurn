@@ -44,7 +44,7 @@ public class AttackScript : MonoBehaviour
         {
             currentAttackNumber = 1;
             animator.SetBool("IsAttacking", true);
-            if (grappleAbility.aimingGrapple == false)
+            if (grappleAbility.aimingGrapple == false && GetComponent<PlayerCollision>().isResting == false)
             {
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.Melee1, this.transform.position);
             }

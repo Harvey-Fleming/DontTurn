@@ -24,7 +24,7 @@ public class PlayerCollision : MonoBehaviour
     private GameObject incomingAttacker;
     private Transform restTrans;
     private float timebetweenRegens = 1, lerpSpeed = 4f;
-    public bool interactPressed = false, isInsideTrigger = false, IsMovingToTarget = false, canStandUp = true;
+    public bool interactPressed = false, isInsideTrigger = false, IsMovingToTarget = false, canStandUp = true, isResting =false;
     private CureManager cureManager;
 
     private void Start() 
@@ -74,9 +74,8 @@ public class PlayerCollision : MonoBehaviour
                 checkPointScript.RespawnAllEnemies();
                 mapPanelScript.ShowMap(checkPointScript.checkpointNumber);
                 checkPointScript.hasVisited = true;
+                isResting = true;
                 DisableAbilities();
-                GetComponent<AttackScript>().canAttack = false;
-                Debug.Log("cantattack");
                 rb2D.velocity = Vector2.zero;
                 GetComponent<PlayerMovement>().playerFootsteps.stop(STOP_MODE.IMMEDIATE);
                 MoveToTarget(restTrans);
@@ -84,7 +83,7 @@ public class PlayerCollision : MonoBehaviour
             else if (interactPressed == false)
             {
                 EnableAbilities();
-                GetComponent<AttackScript>().canAttack = true;
+                isResting = false;
                 animator.SetBool("IsResting", false);
                 DataPersistenceManager.instance?.SaveGame();
                 IsMovingToTarget = false;
