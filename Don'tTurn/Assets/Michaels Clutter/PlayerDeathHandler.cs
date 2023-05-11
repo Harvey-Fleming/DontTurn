@@ -37,6 +37,5 @@ public class PlayerDeathHandler : MonoBehaviour
         player.GetComponent<SpriteRenderer>().color = Color.white;
         player.GetComponent<AttackScript>().ResetWindow();
         player.transform.position = player.GetComponent<PlayerStats>().spawnPoint;
-        corruptionScript.StartCoroutine(corruptionScript.Timer(corruptionScript.areaTick));
     }
 }
