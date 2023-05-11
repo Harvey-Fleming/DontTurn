@@ -97,7 +97,7 @@ public class PlayerCollision : MonoBehaviour
     {
         while(interactPressed && isInsideTrigger)
         {
-            yield return new WaitForSecondsRealtime(0.5f);
+            animator.SetBool("IsResting", true);
             if (playerStats.health < playerStats.maxHealth || corruptionScript.time > 0)
             {
                 playerStats.health += 20;
@@ -129,19 +129,13 @@ public class PlayerCollision : MonoBehaviour
             {
                 transform.position = restTrans.position;
                 animator.SetBool("IsResting", true);
-                if(corruptionScript.time < 100)
-                {
-                    animator.Play("player_Rest", 0);
-                }
-                else if(corruptionScript.time >= 100)
-                {
-                    animator.Play("T2Player_Crouch", 0);
-                }
+                animator.Play("player_Rest", 0);
                 IsMovingToTarget = false;
                 StartCoroutine("Regenerate");
             }
         }
     }
+
 
     private void MoveToTarget(Transform targetTrans)
     {

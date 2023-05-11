@@ -23,6 +23,7 @@ public class GameData
         hasCollectedUpgrade = new SerializableDictionary<string, bool>();
         hasCollectedNote = new SerializableDictionary<int, bool>();
         hasCollectedCure = new SerializableDictionary<int, bool>();
+        hasUnlockedMap = new SerializableDictionary<int, bool>();
 
         //Enemy Save Variables
         isEnemyDead = new SerializableDictionary<string, bool>();
