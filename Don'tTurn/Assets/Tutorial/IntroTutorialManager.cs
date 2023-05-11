@@ -149,7 +149,6 @@ public class IntroTutorialManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Time.timeScale = 1;
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
                 curseTutorial.SetActive(false);
             }
         }
