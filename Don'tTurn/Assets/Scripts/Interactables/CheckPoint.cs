@@ -23,16 +23,13 @@ public class CheckPoint : MonoBehaviour, IDataPersistence
         emitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.CheckpointLight, this.gameObject);
         emitter.Play();
 
-        if(hasVisited)
-        {
-            mapPanelScript.ShowMap(checkpointNumber);
-        }
     }
     private void Awake() 
     {
         playerStats = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
         playerCollision = GameObject.FindWithTag("Player")?.GetComponent<PlayerCollision>();
         restPointTrans = gameObject.transform.GetChild(1);
+
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
@@ -44,7 +41,13 @@ public class CheckPoint : MonoBehaviour, IDataPersistence
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other) => playerCollision.OnLeaveCheckpoint();
+    private void OnTriggerExit2D(Collider2D other) 
+    { 
+        if (other.gameObject.tag == "Player")
+        {
+            playerCollision.OnLeaveCheckpoint();
+        }
+    }
 
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -91,6 +94,17 @@ public class CheckPoint : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         data.hasUnlockedMap.TryGetValue(checkpointNumber, out hasVisited);
+        StartCoroutine(UpdateMap());
+    }
+
+    IEnumerator UpdateMap()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        if(hasVisited)
+        {
+            mapPanelScript.ShowMap(checkpointNumber);
+        }
+        yield break;
     }
 
     #endregion

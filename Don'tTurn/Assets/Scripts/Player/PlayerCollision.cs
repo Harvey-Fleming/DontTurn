@@ -81,8 +81,8 @@ public class PlayerCollision : MonoBehaviour
             }
             else if (interactPressed == false)
             {
-                animator.SetBool("IsResting", false);
                 EnableAbilities();
+                animator.SetBool("IsResting", false);
                 DataPersistenceManager.instance?.SaveGame();
                 IsMovingToTarget = false;
             }
@@ -91,13 +91,13 @@ public class PlayerCollision : MonoBehaviour
 
     public void OnEnterCheckpoint(Transform restPointTrans, GameObject checkPoint) { isInsideTrigger = true; restTrans = restPointTrans; checkPointScript = checkPoint.GetComponent<CheckPoint>();}
 
-    public void OnLeaveCheckpoint() => isInsideTrigger = false;
+    public void OnLeaveCheckpoint() {isInsideTrigger = false; EnableAbilities(); animator.SetBool("IsResting", false); interactPressed = false;}
 
     IEnumerator Regenerate()
     {
         while(interactPressed && isInsideTrigger)
         {
-            yield return new WaitForSecondsRealtime(0.5f);
+            animator.SetBool("IsResting", true);
             if (playerStats.health < playerStats.maxHealth || corruptionScript.time > 0)
             {
                 playerStats.health += 20;
@@ -129,19 +129,13 @@ public class PlayerCollision : MonoBehaviour
             {
                 transform.position = restTrans.position;
                 animator.SetBool("IsResting", true);
-                if(corruptionScript.time < 100)
-                {
-                    animator.Play("player_Rest", 0);
-                }
-                else if(corruptionScript.time >= 100)
-                {
-                    animator.Play("T2Player_Crouch", 0);
-                }
+                animator.Play("player_Rest", 0);
                 IsMovingToTarget = false;
                 StartCoroutine("Regenerate");
             }
         }
     }
+
 
     private void MoveToTarget(Transform targetTrans)
     {
