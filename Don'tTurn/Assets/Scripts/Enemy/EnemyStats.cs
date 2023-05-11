@@ -11,6 +11,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     //Component References
     private EnemyMovement enemyMovementScript;
     private PlayerStats playerStats;
+    private AttackScript playerAttack;
     private Knockback knockbackScript;
     private DamageIndicator damageIndicatorScript;
     private SpriteRenderer spriteRenderer;
@@ -41,6 +42,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     private void Awake() 
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerAttack = GameObject.Find("Player").GetComponent<AttackScript>();
         rb2D = GetComponent<Rigidbody2D>();
         enemyMovementScript = GetComponent<EnemyMovement>();
         knockbackScript = GetComponent<Knockback>();
@@ -86,6 +88,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     {
         spriteRenderer.color = normalColour;
         RandomDrop(); 
+        playerAttack.ResetWindow();
         gameObject.SetActive(false);
         isDead = true;
         //emitter.Stop();
