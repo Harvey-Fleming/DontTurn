@@ -41,7 +41,13 @@ public class CheckPoint : MonoBehaviour, IDataPersistence
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other) => playerCollision.OnLeaveCheckpoint();
+    private void OnTriggerExit2D(Collider2D other) 
+    { 
+        if (other.gameObject.tag == "Player")
+        {
+            playerCollision.OnLeaveCheckpoint();
+        }
+    }
 
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
