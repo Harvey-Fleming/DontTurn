@@ -116,6 +116,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
                 gameObject.transform.position = respawnPos;
             }
             enemyMovementScript.enabled = true;
+            enemyMovementScript.isWandering = true;
             currentHealth = maxHealth;
         }
     }

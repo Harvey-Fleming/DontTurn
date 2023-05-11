@@ -35,6 +35,7 @@ public class PlayerDeathHandler : MonoBehaviour
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         player.GetComponent<SpriteRenderer>().enabled = true;
         player.GetComponent<SpriteRenderer>().color = Color.white;
+        player.GetComponent<AttackScript>().ResetWindow();
         player.transform.position = player.GetComponent<PlayerStats>().spawnPoint;
         corruptionScript.StartCoroutine(corruptionScript.Timer(corruptionScript.areaTick));
     }

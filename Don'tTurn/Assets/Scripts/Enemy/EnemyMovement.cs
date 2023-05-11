@@ -22,7 +22,7 @@ public class EnemyMovement : MonoBehaviour
     private StudioEventEmitter aggroEmitter;
 
     [Header("States")]
-    [SerializeField] private bool isWandering;
+    [SerializeField] public bool isWandering;
     [SerializeField] private bool isAggro;
     [SerializeField] private bool isAttacking;
     [SerializeField] private bool canJump;

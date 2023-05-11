@@ -18,7 +18,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            buttonToPress.SetActive(true);
+            Debug.Log("In Trigger");
             isActive = true;
         }
        
@@ -26,7 +26,6 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        buttonToPress.SetActive(false);
         isActive = false; 
     }
 
@@ -34,6 +33,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if(isActive == true && Input.GetKeyDown(KeyCode.W))
         {
+            Debug.Log("Pressed W");
             currentDialogueNPC = this.gameObject;
             TriggerDialogue();
         }
@@ -42,12 +42,12 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
+        FindObjectOfType<DialogueManager>().isChoiceNPC = isChoiceNPC;
+        FindObjectOfType<DialogueManager>().isFinalNPC = isFinalNPC;
         if(isChoiceNPC == true)
         {
             FindObjectOfType<DialogueManager>().choiceButtons  = choiceButtons;
         }
-        FindObjectOfType<DialogueManager>().isChoiceNPC = isChoiceNPC;
-        FindObjectOfType<DialogueManager>().isFinalNPC = isFinalNPC;
         if (isFinalNPC)
         {
             cureNPCScript = GetComponent<CureNPC>();

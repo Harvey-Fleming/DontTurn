@@ -62,10 +62,10 @@ public class CurseAttackHitBoxScript : MonoBehaviour
 
             switch (attackType)
             {
-                case "Eat":
-                    Debug.Log("Entering Coroutine");
-                    StartCoroutine(EatEnemy());
-                    break;
+                //case "Eat":
+                    //Debug.Log("Entering Coroutine");
+                    //StartCoroutine(EatEnemy());
+                    //break;
                 case "Punch":
                     Debug.Log("Entering Coroutine for Punch"); 
                     PunchEnemy();
@@ -129,22 +129,18 @@ public class CurseAttackHitBoxScript : MonoBehaviour
             enemy = null;
             gameObject.SetActive(false);
             isColliding = false; 
-        }
-
-        
-        
-
+        } 
     }
 
     public IEnumerator NoCollision()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false); 
     } 
 
    public void PunchEnemy()
     {
-        enemy.GetComponent<EnemyStats>().OnHit(10 * corruptionScript.curseMutliplier, gameObject);
+        enemy.GetComponent<EnemyStats>().OnHit(Mathf.Round(10 * corruptionScript.curseMutliplier), gameObject);
         if (player.GetComponent<PlayerMovement>().facingright == true)
         { 
             enemy.GetComponent<Rigidbody2D>().velocity = transform.right * 5f;

@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText; 
     [SerializeField] private GameObject textboxObj;
+    [SerializeField] private PlayerMovement playerMovement;
     private CureNPC cureNPC;
     public bool isChoiceNPC; //checks if the NPC has a choice; 
     public bool isFinalNPC;
@@ -20,6 +21,7 @@ public class DialogueManager : MonoBehaviour
     private void Awake() 
     {
         textboxObj.SetActive(true);
+        playerMovement = GameObject.FindObjectOfType<PlayerMovement>();
     }
     
     // Start is called before the first frame update
@@ -39,7 +41,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-
+        playerMovement.enabled = false;
         animator.SetBool("isOpen", true); 
         Debug.Log("Starting conversation with" + dialogue.name);
 
@@ -82,6 +84,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        playerMovement.enabled = true;
         Debug.Log("End of Conversation");
         if(isFinalNPC)
         {
