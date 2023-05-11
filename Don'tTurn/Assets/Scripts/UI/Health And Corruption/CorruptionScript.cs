@@ -20,6 +20,8 @@ public class CorruptionScript : MonoBehaviour
 
     public float curseMutliplier;
 
+    bool coroutineEnded = false;
+
     private void Awake() 
     {
         playerStats = GameObject.FindWithTag("Player")?.GetComponent<PlayerStats>();
@@ -52,10 +54,16 @@ public class CorruptionScript : MonoBehaviour
         {
             time = 100;
         }
+
+        if(coroutineEnded == true)
+        {
+            StartCoroutine(Timer(areaTick));
+        }
     }
 
     public IEnumerator Timer(float tick)
     {
+        coroutineEnded = false;
         while(time<100)
         {
             time++;
@@ -66,6 +74,7 @@ public class CorruptionScript : MonoBehaviour
             playerStats.health--;
             yield return new WaitForSeconds(tick/4);
         }
+        coroutineEnded = true;
     }
 
     public void OnHitCorruption(float attackDamage)

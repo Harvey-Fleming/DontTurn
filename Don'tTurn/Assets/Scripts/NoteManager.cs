@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NoteManager : MonoBehaviour
 {
+    [TextArea(10, 1000)]
     public string[] notesText;
 
     public bool[] notesObtained;

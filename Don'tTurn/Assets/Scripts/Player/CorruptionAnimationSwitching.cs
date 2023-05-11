@@ -18,7 +18,7 @@ public class CorruptionAnimationSwitching : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(corruptionScript.time == 100)
+        if(corruptionScript.time == 100f)
         {
             TransformAudio();
             animator.SetBool("IsCorrupt", true);

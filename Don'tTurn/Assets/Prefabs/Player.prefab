@@ -733,6 +733,7 @@ MonoBehaviour:
   isGrappling: 0
   isEnemyGrappled: 0
   canGrapple: 1
+  aimingGrapple: 0
 --- !u!114 &6541144399509697043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,6 +751,7 @@ MonoBehaviour:
   interactPressed: 0
   isInsideTrigger: 0
   IsMovingToTarget: 0
+  canStandUp: 1
 --- !u!114 &6541144399509697044
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour
 
     public void UseMedKit()
     {
-        playerStats.health += 10;
+        playerStats.health += 25;
         medicAmount--; 
         if(playerStats.health >= 100)
         {
@@ -70,7 +70,7 @@ public class Inventory : MonoBehaviour
     } 
     public void UseMushroom()
     {
-        corruptionScript.time -= 10;
+        corruptionScript.time -= 25;
         mushroomAmount--;
     }
 

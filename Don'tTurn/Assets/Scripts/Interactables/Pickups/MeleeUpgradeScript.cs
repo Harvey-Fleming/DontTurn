@@ -7,21 +7,35 @@ public class MeleeUpgradeScript : MonoBehaviour, IDataPersistence
     [SerializeField] private AttackScript meleeAttackScript;
     private bool HasCollected = false;
     [SerializeField] private string id;
+    bool onHover;
 
-    private void FixedUpdate() 
+    private void Update() 
     {
         if (HasCollected == true)
         {
             Destroy(this.gameObject);
         }
-    }
 
-    private void OnTriggerStay2D(Collider2D other) 
-    {
-        if(Input.GetKeyDown(KeyCode.W) && other.gameObject.tag == "Player")
+        if (onHover && Input.GetKeyDown(KeyCode.W) && !HasCollected)
         {
             meleeAttackScript.OnMeleeUpgrade();
             HasCollected = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            onHover = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            onHover = true;
         }
     }
 
