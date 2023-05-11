@@ -132,9 +132,8 @@ public class AttackScript : MonoBehaviour
 
     public void ResetWindow()
     {
-        animator.SetBool("IsAttacking", false);
-        inComboWindow = true;
         comboTimer = 0;
+        inComboWindow = true;
         currentAttackNumber = 1;
     }
 
