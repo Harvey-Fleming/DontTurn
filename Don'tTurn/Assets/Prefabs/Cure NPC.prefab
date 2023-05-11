@@ -160,7 +160,7 @@ MonoBehaviour:
       so return to me once you\u2019ve sought them out. "
     - "Although I\u2019d be quick about it if I were you, wouldn\u2019t want you
       following in his footsteps all the way to the end\u2026"
-    - "FIND THE TOOLS FOR THE \u2018CURE\u2019\r. THEY'RE MARKED ON YOUR MAP.\n"
+    - FIND THE TOOLS FOR THE 'CURE'. THEY'RE MARKED ON YOUR MAP.
     name: 
   secondDialogue:
     sentences:
