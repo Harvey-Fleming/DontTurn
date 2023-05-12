@@ -60,6 +60,18 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 341424bff1df3aa4e985c77392e63ef8, type: 3}
     - {fileID: 2800000, guid: b4ef8f356ac6c3a43986ca1a6ca4c527, type: 3}
     - {fileID: 2800000, guid: 7df203c40863af440bec7d7ddb8965c6, type: 3}
+    - {fileID: 2800000, guid: d9d72682f792bd043a3e2f85930ad7c1, type: 3}
+    - {fileID: 2800000, guid: b258e484c09af754ab881845c281442c, type: 3}
+    - {fileID: 2800000, guid: 847ee72b32715664ab4f53eddeeadc76, type: 3}
+    - {fileID: 2800000, guid: 706a174ad6853914a8d2d20bef200ad3, type: 3}
+    - {fileID: 2800000, guid: 43f386ead6853ec439611699822ac260, type: 3}
+    - {fileID: 2800000, guid: 89d5a774b28824a40ab5b0a191d47f7b, type: 3}
+    - {fileID: 2800000, guid: 01ff0c78d2fc3d047afbccf6265a05da, type: 3}
+    - {fileID: 2800000, guid: ed758eec93128a549a1bc18aa9dbb9cf, type: 3}
+    - {fileID: 2800000, guid: 9dd5245b2e266ad4886f88c86f3df7a4, type: 3}
+    - {fileID: 2800000, guid: ad605578d2647a6438bb2cb61606df3a, type: 3}
+    - {fileID: 2800000, guid: 000ae77392ff909499cac96f3f268256, type: 3}
+    - {fileID: 2800000, guid: f84712d3747467f4582329ea4c859c02, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -82,6 +94,7 @@ SpriteAtlas:
   - {fileID: -676300285, guid: 3e91cb11b3230544e94f522149073b68, type: 3}
   - {fileID: -751529321, guid: 3e91cb11b3230544e94f522149073b68, type: 3}
   - {fileID: -1788786204, guid: 3e91cb11b3230544e94f522149073b68, type: 3}
+  - {fileID: 21300000, guid: d9d72682f792bd043a3e2f85930ad7c1, type: 3}
   - {fileID: 430503242, guid: 11c675d2c2f9eb6488f2f9c752b54179, type: 3}
   - {fileID: 960029268, guid: 11c675d2c2f9eb6488f2f9c752b54179, type: 3}
   - {fileID: 1301171474, guid: 11c675d2c2f9eb6488f2f9c752b54179, type: 3}
@@ -94,6 +107,8 @@ SpriteAtlas:
   - {fileID: 1183536090, guid: 43b7e813ac346664a84750d1757ab51b, type: 3}
   - {fileID: -1049763868, guid: 43b7e813ac346664a84750d1757ab51b, type: 3}
   - {fileID: -1247215670, guid: 43b7e813ac346664a84750d1757ab51b, type: 3}
+  - {fileID: 21300000, guid: 000ae77392ff909499cac96f3f268256, type: 3}
+  - {fileID: 21300000, guid: f84712d3747467f4582329ea4c859c02, type: 3}
   - {fileID: -1033062559, guid: f59f98e32bcf9c74fb371bc9ade09e9a, type: 3}
   - {fileID: -508784110, guid: f59f98e32bcf9c74fb371bc9ade09e9a, type: 3}
   - {fileID: -2016328467, guid: f59f98e32bcf9c74fb371bc9ade09e9a, type: 3}
@@ -107,6 +122,8 @@ SpriteAtlas:
   - {fileID: 1655403707, guid: f59f98e32bcf9c74fb371bc9ade09e9a, type: 3}
   - {fileID: -1426313883, guid: f59f98e32bcf9c74fb371bc9ade09e9a, type: 3}
   - {fileID: -1665978695, guid: f59f98e32bcf9c74fb371bc9ade09e9a, type: 3}
+  - {fileID: 21300000, guid: 89d5a774b28824a40ab5b0a191d47f7b, type: 3}
+  - {fileID: 21300000, guid: b258e484c09af754ab881845c281442c, type: 3}
   - {fileID: 1370540569, guid: 7df203c40863af440bec7d7ddb8965c6, type: 3}
   - {fileID: -964393449, guid: 7df203c40863af440bec7d7ddb8965c6, type: 3}
   - {fileID: 2033137102, guid: 7df203c40863af440bec7d7ddb8965c6, type: 3}
@@ -156,6 +173,8 @@ SpriteAtlas:
   - {fileID: -56431367, guid: bb156e77744fb9c4887013dfd48d3010, type: 3}
   - {fileID: -371585550, guid: bb156e77744fb9c4887013dfd48d3010, type: 3}
   - {fileID: -527557093, guid: bb156e77744fb9c4887013dfd48d3010, type: 3}
+  - {fileID: 21300000, guid: ad605578d2647a6438bb2cb61606df3a, type: 3}
+  - {fileID: 21300000, guid: 01ff0c78d2fc3d047afbccf6265a05da, type: 3}
   - {fileID: 1136605494, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
   - {fileID: -1111492485, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
   - {fileID: -1305559535, guid: e4e4d729e9afb6f45b8122b5428bb332, type: 3}
@@ -195,7 +214,9 @@ SpriteAtlas:
   - {fileID: -36665332, guid: cdb07fa912df7034b8ee2904a4a36c05, type: 3}
   - {fileID: -128614797, guid: cdb07fa912df7034b8ee2904a4a36c05, type: 3}
   - {fileID: -1820948568, guid: cdb07fa912df7034b8ee2904a4a36c05, type: 3}
+  - {fileID: 21300000, guid: 706a174ad6853914a8d2d20bef200ad3, type: 3}
   - {fileID: 21300000, guid: 668a0b6a57f181543b08585c787ccfdb, type: 3}
+  - {fileID: 21300000, guid: 43f386ead6853ec439611699822ac260, type: 3}
   - {fileID: -1121638651, guid: 32dccffa04ba581438f60d772a8e869d, type: 3}
   - {fileID: 965130151, guid: 32dccffa04ba581438f60d772a8e869d, type: 3}
   - {fileID: 1770384513, guid: 32dccffa04ba581438f60d772a8e869d, type: 3}
@@ -205,6 +226,11 @@ SpriteAtlas:
   - {fileID: 29098025, guid: 32dccffa04ba581438f60d772a8e869d, type: 3}
   - {fileID: -209106800, guid: 32dccffa04ba581438f60d772a8e869d, type: 3}
   - {fileID: 1674354132, guid: 32dccffa04ba581438f60d772a8e869d, type: 3}
+  - {fileID: 2020724984, guid: 847ee72b32715664ab4f53eddeeadc76, type: 3}
+  - {fileID: 1147171843, guid: 847ee72b32715664ab4f53eddeeadc76, type: 3}
+  - {fileID: 914009749, guid: 847ee72b32715664ab4f53eddeeadc76, type: 3}
+  - {fileID: 21300000, guid: 9dd5245b2e266ad4886f88c86f3df7a4, type: 3}
+  - {fileID: 21300000, guid: ed758eec93128a549a1bc18aa9dbb9cf, type: 3}
   - {fileID: -1240922417, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
   - {fileID: -126665640, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
   - {fileID: -2140164198, guid: 0cb23baf87f13b244b123d3c5bde2f1c, type: 3}
@@ -248,6 +274,7 @@ SpriteAtlas:
   - ShroomForest (1)_1
   - ShroomForest (1)_0
   - ShroomForest (1)_7
+  - hook2
   - Sewer edges2_0
   - Sewer edges2_1
   - Sewer edges2_2
@@ -260,6 +287,8 @@ SpriteAtlas:
   - ShroomForest2_2
   - ShroomForest2_1
   - ShroomForest2_0
+  - COLOUR BACKGROUND1
+  - Mushroom Background2
   - City_props_12
   - City_props_11
   - City_props_10
@@ -273,6 +302,8 @@ SpriteAtlas:
   - City_props_1
   - City_props_2
   - City_props_3
+  - I THINK ITS FINE
+  - Plank1
   - Town walls Shroomed_10
   - Town walls Shroomed_6
   - Town walls Shroomed_7
@@ -322,6 +353,8 @@ SpriteAtlas:
   - ShroomHead1_6
   - ShroomHead1_5
   - ShroomHead1_4
+  - chamberclosed
+  - BrickWindow
   - Inside walls 2_18
   - Inside walls 2_19
   - Inside walls 2_16
@@ -361,7 +394,9 @@ SpriteAtlas:
   - Sewer back wall_0
   - Sewer back wall_3
   - Sewer back wall_2
+  - bookcase_1
   - SkyBackground
+  - PLEASEWORK
   - ShroomHead2_4
   - ShroomHead2_5
   - ShroomHead2_6
@@ -371,6 +406,11 @@ SpriteAtlas:
   - ShroomHead2_2
   - ShroomHead2_3
   - ShroomHead2_8
+  - Backwall (1)_1
+  - Backwall (1)_0
+  - Backwall (1)_2
+  - chamberopen
+  - BrickStrip
   - Inside walls_14
   - Inside walls_15
   - Inside walls_10

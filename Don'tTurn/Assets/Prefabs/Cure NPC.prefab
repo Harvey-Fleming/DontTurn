@@ -169,7 +169,7 @@ MonoBehaviour:
   thirdDialogue:
     sentences:
     - "Wonderful, let me just add the finishing touches. When you\u2019re ready,
-      step inside and hold on to tight to whatever humanity you have left\u2026"
+      step inside and hold on to tight to whatever humanity you have left..."
     name: 
   cureManager: {fileID: 0}
   toolIcons: {fileID: 0}
