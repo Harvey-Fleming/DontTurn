@@ -13,6 +13,7 @@ public class BackToMenu : MonoBehaviour
     IEnumerator MenuScreen()
     {
         yield return new WaitForSeconds(14f);
+        Cursor.visible = true;
         SceneManager.LoadScene("Menu");
     }
    
