@@ -34,6 +34,7 @@ public class MapScript : MonoBehaviour
                     GetComponent<PlayerMovement>().playerFootsteps.stop(STOP_MODE.IMMEDIATE);
                     pMenu.SetActive(false);
                     mapManager.isOpen = true;
+                    Cursor.visible = true;
                     break;
                 case 1:
                     ToggleMap(timesPressed);
@@ -41,6 +42,7 @@ public class MapScript : MonoBehaviour
                     Time.timeScale = 1;
                     pMenuCanvas.GetComponent<PauseMenu>().resume();
                     mapManager.isOpen = false;
+                    Cursor.visible = false;
                     break; 
             }
         }
