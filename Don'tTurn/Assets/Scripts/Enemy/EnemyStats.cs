@@ -17,6 +17,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb2D;
     private BoxCollider2D boxCollider2D;
+    public BossHealth healthBar;
 
     private StudioEventEmitter emitter;
     public TextMeshProUGUI damageIndicatorText;
@@ -65,6 +66,11 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
     private void Update()
     {
+        if (maxHealth == 75)
+        {
+            healthBar.SetHealth(currentHealth);
+          
+        }
     }
 
 
@@ -174,4 +180,8 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     #endregion
 
 
+
+
+
+    
 }
