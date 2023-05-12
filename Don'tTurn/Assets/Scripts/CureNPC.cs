@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CureNPC : MonoBehaviour
+public class CureNPC : MonoBehaviour, IDataPersistence
 {
     [Range(0,2)] public int cureGathered;
     [SerializeField] private Dialogue firstDialogue;
@@ -12,6 +12,7 @@ public class CureNPC : MonoBehaviour
     [SerializeField] private Dialogue thirdDialogue;
     [SerializeField] private CureManager cureManager;
     public GameObject toolIcons;
+    private bool hasTalkedTo;
 
     private DialogueTrigger dialogueTrigger;
     public CureChamberCode cureChamber;
@@ -21,6 +22,12 @@ public class CureNPC : MonoBehaviour
         dialogueTrigger = GetComponent<DialogueTrigger>();
         cureManager = FindObjectOfType<CureManager>();
         toolIcons.SetActive(false);
+
+        if(hasTalkedTo)
+        {
+            toolIcons.SetActive(true);
+        }
+
     }
 
     public void CheckWin()
@@ -39,6 +46,7 @@ public class CureNPC : MonoBehaviour
     public void StartDialogue()
     {
         toolIcons.SetActive(true);
+        hasTalkedTo = true;
         cureGathered = cureManager.cureAmount;
         switch (cureGathered)
         {
@@ -52,9 +60,16 @@ public class CureNPC : MonoBehaviour
             dialogueTrigger.dialogue.sentences = thirdDialogue.sentences;
             break;
 
-        }
-        
+        } 
+    }
 
-        
+    public void SaveData(GameData data)
+    {
+        data.hasTalkedToFinalNPC = this.hasTalkedTo;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.hasTalkedTo = data.hasTalkedToFinalNPC;
     }
 }

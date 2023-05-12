@@ -7,6 +7,7 @@ public class GameData
 {
     public float playerHealth;
     public Vector3 spawnPoint;
+    public bool hasTalkedToFinalNPC;
     public SerializableDictionary<string, bool> isEnemyDead;
     public SerializableDictionary<string, bool> hasCollectedUpgrade;
     public SerializableDictionary<int, bool> hasCollectedNote;
@@ -19,7 +20,9 @@ public class GameData
     {
         this.playerHealth = 100f;
         this.spawnPoint = new Vector3(58,-1,0.5f);
+        hasTalkedToFinalNPC = false;
         
+
         hasCollectedUpgrade = new SerializableDictionary<string, bool>();
         hasCollectedNote = new SerializableDictionary<int, bool>();
         hasCollectedCure = new SerializableDictionary<int, bool>();
