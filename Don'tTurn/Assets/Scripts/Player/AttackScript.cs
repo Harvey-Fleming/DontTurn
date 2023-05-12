@@ -23,6 +23,8 @@ public class AttackScript : MonoBehaviour
     [SerializeField] private float comboTimer, maxcomboTimer = 0.4f;
     [SerializeField] private bool inComboWindow;
 
+    private bool meleeSfxPlayed = false;
+
     private void Start() 
     {
         playerInput = GetComponent<PlayerInput>();
@@ -42,9 +44,10 @@ public class AttackScript : MonoBehaviour
         {
             currentAttackNumber = 1;
             animator.SetBool("IsAttacking", true);
-            if (grappleAbility.aimingGrapple == false && GetComponent<PlayerCollision>().isResting == false)
+            if (grappleAbility.aimingGrapple == false && GetComponent<PlayerCollision>().isResting == false && meleeSfxPlayed == false)
             {
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.Melee1, this.transform.position);
+                meleeSfxPlayed = true;
             }
         }
     }
@@ -116,10 +119,11 @@ public class AttackScript : MonoBehaviour
         MeleeAttack();
     }
 
-    IEnumerator MeleeCooldown()
+    public IEnumerator MeleeCooldown()
     {
         yield return new WaitForSeconds(attackCooldownTime);
-        canAttack = true;   
+        canAttack = true;
+        meleeSfxPlayed = false;
         yield break;
     }
 

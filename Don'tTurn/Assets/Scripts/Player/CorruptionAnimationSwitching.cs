@@ -7,7 +7,8 @@ public class CorruptionAnimationSwitching : MonoBehaviour
     Animator animator;
     public CorruptionScript corruptionScript;
     public RuntimeAnimatorController normalAnimationController;
-    public RuntimeAnimatorController corruptedAnimationController; 
+    public RuntimeAnimatorController corruptedAnimationController;
+    private bool audioPlayed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +21,16 @@ public class CorruptionAnimationSwitching : MonoBehaviour
     {
         if(corruptionScript.time == 100f)
         {
-            TransformAudio();
+            if(audioPlayed == false)
+            {
+                TransformAudio();
+            }
             animator.SetBool("IsCorrupt", true);
             animator.runtimeAnimatorController = corruptedAnimationController; 
         }
         else
         {
+            audioPlayed = false;
             animator.SetBool("IsCorrupt", false);
             animator.runtimeAnimatorController = normalAnimationController;
         }
@@ -36,6 +41,8 @@ public class CorruptionAnimationSwitching : MonoBehaviour
         if (animator.GetBool("IsCorrupt") == false)
         {
             AudioManager.instance.PlayOneShot(FMODEvents.instance.transformation, this.transform.position);
+            audioPlayed = true;
+            Debug.Log("play transform");
         }
     }
 }

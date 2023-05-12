@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
-using TMPro; 
+using TMPro;
+using FMOD.Studio;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class DialogueManager : MonoBehaviour
         playerMovement.MakeIdle(playerMovement.gameObject.GetComponent<Rigidbody2D>().velocity.x);
         playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         playerMovement.enabled = false;
+        playerMovement.playerFootsteps.stop(STOP_MODE.IMMEDIATE);
         animator.SetBool("isOpen", true); 
         Debug.Log("Starting conversation with" + dialogue.name);
 
