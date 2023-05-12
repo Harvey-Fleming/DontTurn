@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     private float currentcoyoteTimer;
 
     [Header("Player")]
-    [SerializeField] private Cursor cursorScript;
+    [SerializeField] private CursorScript cursorScript;
     [SerializeField] private float flipTimer, maxflipTimer = 0.5f;
     private Animator animator;
     private Vector2 cursorPos;
