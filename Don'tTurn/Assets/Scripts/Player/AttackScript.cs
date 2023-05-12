@@ -35,8 +35,6 @@ public class AttackScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        attackCooldownTime = 0.05f + (0.3f / corruptionScript.curseMutliplier);
-
         HandleComboTimer();
 
         //Trigger first attack in the combo

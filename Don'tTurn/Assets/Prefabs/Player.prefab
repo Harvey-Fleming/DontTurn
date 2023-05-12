@@ -673,7 +673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPointTrans: {fileID: 6541144399207451490}
-  attackRadius: 0.8
+  attackRadius: 0.6
   attackCooldownTime: 0.3
   baseAttackDamage: 3
   UpgradeDamage: 0
@@ -681,7 +681,7 @@ MonoBehaviour:
   corruptionImage: {fileID: 0}
   currentAttackNumber: 1
   comboTimer: 0
-  maxcomboTimer: 0.8
+  maxcomboTimer: 1
   inComboWindow: 0
 --- !u!114 &1169889154146458830
 MonoBehaviour:

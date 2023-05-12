@@ -15,7 +15,7 @@ public class DebugButtonsEditor : EditorWindow
 
     private float gravityScale;
 
-    private bool isGodEnabled = false;
+    [SerializeField] private bool isGodEnabled = false;
 
     [MenuItem("Window/Debug Buttons")]
     public static void ShowWindow()
@@ -94,7 +94,7 @@ public class DebugButtonsEditor : EditorWindow
         }
         else
         {
-            playerRB2D.gravityScale = gravityScale; 
+            playerRB2D.gravityScale = 4; //I CHANGED THIS CAUSE I FUCKED UP SORRY  
 
             playerBoxCollider2D.enabled = true;
 

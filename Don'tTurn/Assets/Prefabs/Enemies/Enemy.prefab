@@ -310,7 +310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: 0
   moveSpeed: 2
-  damageRange: 1.5
+  damageRange: 2
   maxRange: 10
   wanderDistance: 25
   jumpForce: 10
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPointTrans: {fileID: 8533372426357135036}
   attackDamage: 5
-  attackRadius: 1.5
+  attackRadius: 2
 --- !u!114 &3508981245913353212
 MonoBehaviour:
   m_ObjectHideFlags: 0

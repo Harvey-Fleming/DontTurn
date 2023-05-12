@@ -132,12 +132,12 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
     public void RandomDrop()
     {
-        float medkitDropRate = UnityEngine.Random.Range(1, 20); 
+        float medkitDropRate = UnityEngine.Random.Range(1, 10); 
         if(medkitDropRate == 1)
         {
             Instantiate(MedKit, transform.position, transform.rotation); 
         }
-        float mushroomDropRate = UnityEngine.Random.Range(1, 20);
+        float mushroomDropRate = UnityEngine.Random.Range(1, 10);
         if (mushroomDropRate == 1)
         {
             Instantiate(Mushroom, transform.position, transform.rotation);
