@@ -12,6 +12,7 @@ public class FlyingEnemy : MonoBehaviour
     [SerializeField] private GameObject projectileParent;
     [SerializeField] private float FireRate = 1f;
     [SerializeField] private float nextFireTime;
+    [SerializeField] private float count;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,14 +27,19 @@ public class FlyingEnemy : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
         }
-        else if (distanceFromPlayer <= ShootingRange && nextFireTime <Time.time)
+        else if (distanceFromPlayer <= ShootingRange && nextFireTime <Time.time && count != 5) 
         {
+            count++;
             Instantiate(Projectile, projectileParent.transform.position, Quaternion.identity);
             nextFireTime = Time.time + FireRate;
         }
+
+        else if (count == 5)
+        {
+            transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
+        }
         
-    {
-        
-    }
+    
+
 }
 }
