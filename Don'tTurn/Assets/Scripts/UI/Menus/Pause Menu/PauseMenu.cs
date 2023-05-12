@@ -53,6 +53,7 @@ public class PauseMenu : MonoBehaviour
         pMenu.SetActive(false);
         pOptionsMenu.SetActive(false);
         isPaused = false;
+        Cursor.visible = false;
     }
 
     void openPauseMenu()
@@ -63,6 +64,7 @@ public class PauseMenu : MonoBehaviour
         mapScript.timesPressed = 0;
         pMenu.SetActive(true);
         isPaused = true;
+        Cursor.visible = true;
     }
 
     private void Update()

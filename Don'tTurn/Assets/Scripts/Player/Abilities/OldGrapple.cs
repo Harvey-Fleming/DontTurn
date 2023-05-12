@@ -14,7 +14,7 @@ public class OldGrapple : MonoBehaviour
     //Script References
     private PlayerInput playerInput;
     private PlayerMovement playerMovement;
-    [SerializeField] private Cursor cursorScript;
+    [SerializeField] private CursorScript cursorScript;
     private CorruptionScript corruptionScript;
 
     [Header("Hook Variables")]
@@ -33,7 +33,7 @@ public class OldGrapple : MonoBehaviour
 
     private void Awake() 
     {
-        cursorScript = GameObject.Find("Cursor").GetComponent<Cursor>();
+        cursorScript = GameObject.Find("Cursor").GetComponent<CursorScript>();
         corruptionScript = GameObject.FindObjectOfType<CorruptionScript>();
         grappleLine = GetComponent<LineRenderer>();
         rb2D = GetComponent<Rigidbody2D>();

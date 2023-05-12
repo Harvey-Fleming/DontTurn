@@ -14,7 +14,7 @@ public class PrototypeDash : MonoBehaviour, IDataPersistence
     private Rigidbody2D rb;
     private Animator animator;
     private PlayerInput playerInput;
-    private Cursor cursorScript;
+    private CursorScript cursorScript;
 
     private Vector2 cursorPos;
 
@@ -50,7 +50,7 @@ public class PrototypeDash : MonoBehaviour, IDataPersistence
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
-        cursorScript = GameObject.Find("Cursor").GetComponent<Cursor>();
+        cursorScript = GameObject.Find("Cursor").GetComponent<CursorScript>();
         rightSpawn = bulletSpawnObj.transform.GetChild(0).gameObject;
         leftSpawn = bulletSpawnObj.transform.GetChild(1).gameObject;
 

@@ -16,7 +16,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     //Script References
     private PlayerInput playerInput;
     private PlayerMovement playerMovement;
-    private Cursor cursorScript;
+    private CursorScript cursorScript;
     private AttackScript attackScript;
     private FallDamage fallDamage;
     public FollowCamera followCam;
@@ -46,7 +46,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
 
     private void Awake() 
     {
-        cursorScript = GameObject.Find("Cursor").GetComponent<Cursor>();
+        cursorScript = GameObject.Find("Cursor").GetComponent<CursorScript>();
         attackScript = GetComponent<AttackScript>();
         grappleLine = GetComponent<LineRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
