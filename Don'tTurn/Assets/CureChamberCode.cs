@@ -11,6 +11,7 @@ public class CureChamberCode : MonoBehaviour
     public Sprite[] chamberPhases;
     public CureNPC cureNPC;
     bool isFixed = false;
+    bool isFixedSfxPlayed = false;
     bool canInteract = false;
     public bool zoomOnChamber;
     public GameObject lights;
@@ -25,6 +26,7 @@ public class CureChamberCode : MonoBehaviour
     public float maxIntensity;
     public float startIntensity;
     public GameObject interactKey;
+    
 
     private void Start()
     {
@@ -33,7 +35,11 @@ public class CureChamberCode : MonoBehaviour
 
     public void Fix()
     {
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.ChamberRepair, this.transform.position);
+        if (isFixedSfxPlayed == false)
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.ChamberRepair, this.transform.position);
+            isFixedSfxPlayed = true;
+        }
         spriteRend.sprite = chamberPhases[1];
         interactKey.SetActive(true);
         lights.SetActive(true);
