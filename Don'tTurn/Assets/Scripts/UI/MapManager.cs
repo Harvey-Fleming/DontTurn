@@ -51,6 +51,7 @@ public class MapManager : MonoBehaviour
 
     private void Update()
     {
+
         if(screwDriver == null)
         {
             screwdriverCircle.color = Color.white;

@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button loadGameButton;
     private IntroSeenManager introSeenManager;
     private bool hasSeenIntro = false;
+    public GameObject saveData;
 
     // Start is called before the first frame update
     void Start()
@@ -33,17 +34,23 @@ public class MainMenu : MonoBehaviour
 
     public void onNewGameClicked()
     {
-        DataPersistenceManager.instance.NewGame();
-        if(!introSeenManager.hasSeenIntro)
+        if (DataPersistenceManager.instance.HasGameData())
         {
-            introSeenManager.hasSeenIntro = true;
-            SceneManager.LoadSceneAsync("Intro");
+            saveData.SetActive(true);
         }
-        else
+        else if(!DataPersistenceManager.instance.HasGameData())
         {
-            SceneManager.LoadSceneAsync("Game");
+            DataPersistenceManager.instance.NewGame();
+            if (!introSeenManager.hasSeenIntro)
+            {
+                introSeenManager.hasSeenIntro = true;
+                SceneManager.LoadSceneAsync("Intro");
+            }
+            else
+            {
+                SceneManager.LoadSceneAsync("Game");
+            }
         }
-        
          
         //play audio One-Shot
         AudioManager.instance.PlayOneShot(FMODEvents.instance.menuStartClick, this.transform.position);
@@ -53,6 +60,28 @@ public class MainMenu : MonoBehaviour
     {
         DataPersistenceManager.instance.LoadGame();
         SceneManager.LoadSceneAsync("Game");
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuStartClick, this.transform.position);
+    }
+
+    public void YesToSaveData()
+    {
+        DataPersistenceManager.instance.NewGame();
+        if (!introSeenManager.hasSeenIntro)
+        {
+            introSeenManager.hasSeenIntro = true;
+            SceneManager.LoadSceneAsync("Intro");
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync("Game");
+        }
+
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuStartClick, this.transform.position);
+    }
+    public void NoToSaveData()
+    {
+        saveData.SetActive(false);
+
         AudioManager.instance.PlayOneShot(FMODEvents.instance.menuStartClick, this.transform.position);
     }
 

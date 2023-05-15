@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
 
     //"Coyote Jump" Variables
     [SerializeField] private float coyoteTimer = 0.1f;
-    private float currentcoyoteTimer;
+    [SerializeField] private float currentcoyoteTimer;
 
     [Header("Player")]
     [SerializeField] private CursorScript cursorScript;
@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     void Flip()
     {
         //flips the sprite depending on their direction of movement and whether they are moving the cursor.
-        if (Input.GetAxis("Mouse Y") != 0 && Input.GetAxis("Mouse X") != 0)
+        if (Input.GetAxis("Mouse Y") != 0f || Input.GetAxis("Mouse X") != 0f)
         {
             flipTimer = maxflipTimer;
             if ((cursorPos.x < gameObject.transform.position.x) && facingright)
@@ -186,7 +186,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     void AerialJump()
     {
         //Can perform as many aerial jumps as there are max aerial jumps
-        if (aerialJumpCount > 0 && !IsGrounded() && isDoubleJumpUnlocked)
+        if (aerialJumpCount > 0 && !IsGrounded() && isDoubleJumpUnlocked && currentcoyoteTimer < 0)
         {
             if (playerInput.jumpKey)
             {

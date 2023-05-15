@@ -31,6 +31,10 @@ public class PlayerInput : MonoBehaviour
 
     public ToggleAbilityImage toggleAbil;
 
+    public PrototypeDash shotgun;
+
+    public GrappleAbility grapple;
+
     private void Start() 
     {
         dashSelected = true;
@@ -63,7 +67,7 @@ public class PlayerInput : MonoBehaviour
 
     private void NextAbilityScroll()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C) && grapple.isUnlocked && shotgun.isUnlocked)
         {
             grappleSelected = !grappleSelected;
             dashSelected = !dashSelected;

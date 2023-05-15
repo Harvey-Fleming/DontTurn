@@ -37,10 +37,11 @@ public class CureChamberCode : MonoBehaviour
     {
         if (isFixedSfxPlayed == false)
         {
+            spriteRend.sprite = chamberPhases[1];
             AudioManager.instance.PlayOneShot(FMODEvents.instance.ChamberRepair, this.transform.position);
             isFixedSfxPlayed = true;
         }
-        spriteRend.sprite = chamberPhases[1];
+
         interactKey.SetActive(true);
         lights.SetActive(true);
         isFixed = true;
@@ -83,8 +84,10 @@ public class CureChamberCode : MonoBehaviour
     IEnumerator Open()
     {
         AudioManager.instance.PlayOneShot(FMODEvents.instance.EndingSFX, this.transform.position);
+        interactKey.SetActive(false);
         zoomOnChamber = true;
         hasNotInteracted = true;
+        canInteract = false;
         playerMovement.enabled = false;
         playerMovement.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         playerMovement.playerFootsteps.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);

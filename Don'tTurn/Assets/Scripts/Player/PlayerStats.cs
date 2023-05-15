@@ -25,6 +25,8 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     public Vector3 spawnPoint;
     public PlayerDeathHandler deathHandler;
     public ParticleSystem hitFX;
+    public int abilAmount = 0;
+    public ToggleAbilityImage toggleAbil;
  
     private void Awake() 
     {
@@ -76,6 +78,12 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
             attackScript.ResetWindow();
             StartCoroutine("IFrames");
         }
+    }
+
+    public void AddAbility()
+    {
+        abilAmount++;
+        toggleAbil.ChangeGraphic();
     }
 
     public void OnDeath()

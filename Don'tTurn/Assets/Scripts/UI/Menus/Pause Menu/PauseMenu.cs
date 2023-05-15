@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject pMenu;
     [SerializeField] private GameObject pOptionsMenu;
     [SerializeField] private GameObject mapCanvas;
+    public DialogueManager dialogue;
     [SerializeField] private MapScript mapScript;
     private GameObject mapMenu;
 
@@ -38,7 +39,7 @@ public class PauseMenu : MonoBehaviour
                 resume();
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
             }
-            else
+            else if(!mapCanvas.GetComponent<MapManager>().isOpen && !dialogue.textIsActive)
             {
                 openPauseMenu();
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);

@@ -46,6 +46,16 @@ public class MapScript : MonoBehaviour
                     break; 
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && mapManager.isOpen)
+        {
+            ToggleMap(1); 
+            timesPressed--;
+            Time.timeScale = 1;
+            pMenuCanvas.GetComponent<PauseMenu>().resume();
+            Cursor.visible = false;
+            StartCoroutine(MapCooldown());
+        }
         
     }
 
@@ -83,7 +93,12 @@ public class MapScript : MonoBehaviour
             checkpoint = null;
             isCheckpoint = false;
         }
-
        
+    }
+
+    IEnumerator MapCooldown()
+    {
+        yield return new WaitForEndOfFrame();
+        mapManager.isOpen = false;
     }
 }

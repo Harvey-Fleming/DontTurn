@@ -18,7 +18,6 @@ public class DialogueTrigger : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            Debug.Log("In Trigger");
             isActive = true;
         }
        
@@ -31,9 +30,8 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Update()
     {
-        if(isActive == true && Input.GetKeyDown(KeyCode.W))
+        if(isActive == true && Input.GetKeyDown(KeyCode.W) && !FindObjectOfType<DialogueManager>().textIsActive)
         {
-            Debug.Log("Pressed W");
             currentDialogueNPC = this.gameObject;
             TriggerDialogue();
         }

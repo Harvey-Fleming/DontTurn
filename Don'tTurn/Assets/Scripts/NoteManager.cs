@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class NoteManager : MonoBehaviour
 {
@@ -8,5 +9,12 @@ public class NoteManager : MonoBehaviour
     public string[] notesText;
 
     public bool[] notesObtained;
+    public TextMeshProUGUI text;
+    int noteCount = 0;
 
+    public void AddToNoteCount()
+    {
+        noteCount++;
+        text.text = noteCount.ToString() + "/9";
+    }
 }

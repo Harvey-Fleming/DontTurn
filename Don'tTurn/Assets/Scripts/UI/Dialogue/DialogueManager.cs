@@ -16,6 +16,8 @@ public class DialogueManager : MonoBehaviour
     private CureNPC cureNPC;
     public bool isChoiceNPC; //checks if the NPC has a choice; 
     public bool isFinalNPC;
+    bool canDisplayNextSentence = false;
+    public bool textIsActive;
 
     private Queue<string> sentences; 
 
@@ -34,21 +36,27 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if(Input.GetKeyDown(KeyCode.F) && canDisplayNextSentence)
         {
             DisplayNextSentence();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && textIsActive)
+        {
+            canDisplayNextSentence = false;
+            EndDialogue();
         }
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
+        textIsActive = true;
         playerMovement.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         playerMovement.MakeIdle(playerMovement.gameObject.GetComponent<Rigidbody2D>().velocity.x);
         playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         playerMovement.enabled = false;
         playerMovement.playerFootsteps.stop(STOP_MODE.IMMEDIATE);
         animator.SetBool("isOpen", true); 
-        Debug.Log("Starting conversation with" + dialogue.name);
 
         nameText.text = dialogue.name;
 
@@ -59,16 +67,20 @@ public class DialogueManager : MonoBehaviour
             sentences.Enqueue(sentence);
         }
 
-        DisplayNextSentence(); 
+        canDisplayNextSentence = false;
+
+        DisplayNextSentence();
+        StartCoroutine(DialogueCooldown());
     }
 
     public void DisplayNextSentence()
     {
+        StartCoroutine(DialogueCooldown());
+
         if(sentences.Count == 0)
         {
             if(isChoiceNPC == true)
             {
-                Debug.Log("Enters thingy!"); 
                 for (int i = 0; i < choiceButtons.Length; i++)
                 {
                     choiceButtons[i].gameObject.SetActive(true); 
@@ -92,10 +104,18 @@ public class DialogueManager : MonoBehaviour
         playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         playerMovement.enabled = true;
+        textIsActive = false;
         if(isFinalNPC)
         {
             cureNPC.CheckWin();
         }
         animator.SetBool("isOpen", false);
+    }
+
+    IEnumerator DialogueCooldown()
+    {
+        canDisplayNextSentence = false;
+        yield return new WaitForSeconds(0.2f);
+        canDisplayNextSentence = true;
     }
 }

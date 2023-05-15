@@ -19,7 +19,7 @@ public class FallDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerMovement.IsGrounded() == true && rb2D.velocity.y == 0)
+        if(PlayerMovement.IsGrounded() == true && rb2D.velocity.y < 0.0001f)
         {
             if(maxYVel <= -40f)
             {

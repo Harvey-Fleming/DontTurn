@@ -41,6 +41,7 @@ public class Note : MonoBehaviour, IDataPersistence
         {
             noteManager.notesObtained[noteNum] = true;
             hasCollectedNote = true;
+            noteManager.AddToNoteCount();
             AudioManager.instance.PlayOneShot(FMODEvents.instance.NotePickup, this.transform.position);
             Destroy(gameObject);
         } 

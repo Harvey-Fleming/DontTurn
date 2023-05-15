@@ -167,10 +167,10 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
             }
 
             //Cancel Grapple
-            if (playerInput.jumpKey)
-            {
-                StopGrapple();
-            }
+            //if (playerInput.jumpKey)
+            //{
+            //    StopGrapple();
+            //}
         }
     }
 

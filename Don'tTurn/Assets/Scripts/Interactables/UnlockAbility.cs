@@ -21,16 +21,25 @@ public class UnlockAbility : MonoBehaviour
             switch(NPCAbility)
             {
                 case("Dash"):
-                playerObj.GetComponent<PrototypeDash>().isUnlocked = true;
+                    if(playerObj.GetComponent<PrototypeDash>().isUnlocked == false)
+                    {
+                        playerObj.GetComponent<PlayerStats>().AddAbility();
+                        playerObj.GetComponent<PrototypeDash>().isUnlocked = true;
+                    }
                 playerObj.GetComponent<PlayerInput>().dashSelected = true;
                 playerObj.GetComponent<PlayerInput>().grappleSelected = false;
-                    toggleAbil.SwitchToShotgun();
+                toggleAbil.SwitchToShotgun();
                 break;
                 case("Double Jump"):
-                playerObj.GetComponent<PlayerMovement>().isDoubleJumpUnlocked = true;
+                    playerObj.GetComponent<PlayerStats>().AddAbility();
+                    playerObj.GetComponent<PlayerMovement>().isDoubleJumpUnlocked = true;
                 break;
                 case("Grapple"):
-                playerObj.GetComponent<GrappleAbility>().isUnlocked = true;
+                    if(playerObj.GetComponent<GrappleAbility>().isUnlocked == false)
+                    {
+                        playerObj.GetComponent<PlayerStats>().AddAbility();
+                        playerObj.GetComponent<GrappleAbility>().isUnlocked = true;
+                    }
                 playerObj.GetComponent<PlayerInput>().dashSelected = false;
                 playerObj.GetComponent<PlayerInput>().grappleSelected = true;
                     toggleAbil.SwitchToGrapple();
