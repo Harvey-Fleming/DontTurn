@@ -16,9 +16,10 @@ public class DialogueManager : MonoBehaviour
     private CureNPC cureNPC;
     public bool isChoiceNPC; //checks if the NPC has a choice; 
     public bool isFinalNPC;
-    bool canDisplayNextSentence = false;
+    public bool canDisplayNextSentence = false;
     public bool textIsActive;
     public PauseMenu pause;
+    public bool canStartDialogue = true;
 
     private Queue<string> sentences; 
 
@@ -50,6 +51,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        canStartDialogue = false;
         textIsActive = true;
         playerMovement.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         playerMovement.MakeIdle(playerMovement.gameObject.GetComponent<Rigidbody2D>().velocity.x);
@@ -75,6 +77,7 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
+        canDisplayNextSentence = false;
         StartCoroutine(DialogueCooldown());
 
         if(sentences.Count == 0)
@@ -101,6 +104,10 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        if (canStartDialogue == false)
+        {
+            StartCoroutine(StartDialogueCooldown());
+        }
         playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         playerMovement.enabled = true;
@@ -110,11 +117,11 @@ public class DialogueManager : MonoBehaviour
         }
         animator.SetBool("isOpen", false);
         textIsActive = false;
+        canDisplayNextSentence = false;
     }
 
     IEnumerator DialogueCooldown()
     {
-        canDisplayNextSentence = false;
         yield return new WaitForSeconds(0.2f);
         canDisplayNextSentence = true;
     }
@@ -124,5 +131,11 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         EndDialogue();
         canDisplayNextSentence = false;
+    }
+
+    IEnumerator StartDialogueCooldown()
+    {
+        yield return new WaitForSeconds(0.1f);
+        canStartDialogue = true;
     }
 }

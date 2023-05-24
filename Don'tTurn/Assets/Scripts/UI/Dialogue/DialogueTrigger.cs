@@ -36,7 +36,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Update()
     {
-        if(isActive == true && playerInput.interactInput && !FindObjectOfType<DialogueManager>().textIsActive)
+        if(isActive == true && playerInput.interactInput && !FindObjectOfType<DialogueManager>().textIsActive && FindObjectOfType<DialogueManager>().canStartDialogue)
         {
             currentDialogueNPC = this.gameObject;
             TriggerDialogue();
