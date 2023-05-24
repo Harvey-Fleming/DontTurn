@@ -13,6 +13,7 @@ public class PlayerInput : MonoBehaviour
     public bool moveAbilityInput {get; private set;}
     public bool moveAbilityInputHeld {get; private set;}
     public bool moveAbilityInputRelease {get; private set;}
+    public bool swapmoveAbilityInput {get; private set;}
     public bool grappleSelected {get; set;}
     public bool dashSelected {get; set;}
 
@@ -51,14 +52,15 @@ public class PlayerInput : MonoBehaviour
         moveAbilityInput = Input.GetMouseButtonDown(1);
         moveAbilityInputHeld = Input.GetMouseButton(1);
         moveAbilityInputRelease = Input.GetMouseButtonUp(1);
+        swapmoveAbilityInput = Input.GetKeyDown(KeyCode.C);
 
         punchAbilityInput = Input.GetKeyDown(KeyCode.LeftShift);
-        eatAbilityInput = Input.GetKeyDown(KeyCode.Q);
-        bombAbilityInput = Input.GetKeyDown(KeyCode.E);
+        /* eatAbilityInput = Input.GetKeyDown(KeyCode.Q);
+        bombAbilityInput = Input.GetKeyDown(KeyCode.E); */
 
         consumeItem1Input = Input.GetKeyDown(KeyCode.Alpha1);
         consumeItem2Input = Input.GetKeyDown(KeyCode.Alpha2);
-        interactInput = Input.GetKeyDown(KeyCode.W);
+        interactInput = Input.GetKeyDown(KeyCode.E);
         toggleMapInput = Input.GetKeyDown(KeyCode.M);
         inventoryInput = Input.GetKeyDown(KeyCode.I);
 
@@ -67,7 +69,7 @@ public class PlayerInput : MonoBehaviour
 
     private void NextAbilityScroll()
     {
-        if (Input.GetKeyDown(KeyCode.C) && grapple.isUnlocked && shotgun.isUnlocked)
+        if (swapmoveAbilityInput && grapple.isUnlocked && shotgun.isUnlocked)
         {
             grappleSelected = !grappleSelected;
             dashSelected = !dashSelected;

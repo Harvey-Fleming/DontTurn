@@ -25,6 +25,11 @@ public class FollowCamera : MonoBehaviour
         playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
+    private void Start() 
+    {
+        transform.position = playerTransform.position;
+    }
+
     public void FixedUpdate()
     {
         if (!chamber.zoomOnChamber)
