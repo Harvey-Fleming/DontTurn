@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class DialogueTrigger : MonoBehaviour
 {
+    private PlayerInput playerInput;
     public bool isChoiceNPC; //checks if the NPC has a choice; 
     public bool isFinalNPC;
     public Dialogue dialogue;
@@ -13,6 +14,11 @@ public class DialogueTrigger : MonoBehaviour
     private GameObject currentDialogueNPC;
     private CureNPC cureNPCScript;
     private bool isActive;
+
+    private void Start() 
+    {
+        playerInput = GameObject.FindObjectOfType<PlayerInput>();
+    }
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -30,7 +36,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Update()
     {
-        if(isActive == true && Input.GetKeyDown(KeyCode.W) && !FindObjectOfType<DialogueManager>().textIsActive)
+        if(isActive == true && playerInput.interactInput && !FindObjectOfType<DialogueManager>().textIsActive)
         {
             currentDialogueNPC = this.gameObject;
             TriggerDialogue();

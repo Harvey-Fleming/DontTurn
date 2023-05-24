@@ -5,32 +5,35 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    //Component References
+    //Script References
     private PlayerStats playerStats;
+    private PlayerInput playerInput;
     private PlayerMovement playerMovement;
     public CorruptionScript corruptionScript;
     private CheckPoint checkPointScript;
     private Knockback knockbackScript;
+    private GrappleAbility grappleAbility;
+    private PrototypeDash DashAbility;
+    private CurseAttacks CursePunch;    
+    public MapPanelScript mapPanelScript;
+    private CureManager cureManager;
+
+    //Component References
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb2D;
     private Animator animator;
 
-    private GrappleAbility grappleAbility;
-    private PrototypeDash DashAbility;
-    private CurseAttacks CursePunch;
-
-    public MapPanelScript mapPanelScript;
-
     private GameObject incomingAttacker;
     private Transform restTrans;
-    private float timebetweenRegens = 1, lerpSpeed = 4f;
+    [SerializeField] private float timeBetweenRegens = 0.5f, lerpSpeed = 4f;
     public bool interactPressed = false, isInsideTrigger = false, IsMovingToTarget = false, canStandUp = true, isResting =false;
-    private CureManager cureManager;
+ 
 
     private void Start() 
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerStats = GetComponent<PlayerStats>();
+        playerInput = GetComponent<PlayerInput>();
         knockbackScript = GetComponent<Knockback>();
         playerMovement = GetComponent<PlayerMovement>();
         rb2D = GetComponent<Rigidbody2D>();
@@ -66,7 +69,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnBeginRest()
     {
-        if (isInsideTrigger && Input.GetKeyDown(KeyCode.W) && canStandUp)
+        if (isInsideTrigger && playerInput.interactInput && canStandUp)
         {
             interactPressed = !interactPressed;
             if (interactPressed == true)
@@ -114,7 +117,7 @@ public class PlayerCollision : MonoBehaviour
                 corruptionScript.time = 0f;
             }
         }
-        yield return new WaitForSeconds(timebetweenRegens);
+        yield return new WaitForSeconds(timeBetweenRegens);
         }
     }
 
