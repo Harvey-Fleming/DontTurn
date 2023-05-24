@@ -60,7 +60,7 @@ public class PlayerInput : MonoBehaviour
 
         consumeItem1Input = Input.GetKeyDown(KeyCode.Alpha1);
         consumeItem2Input = Input.GetKeyDown(KeyCode.Alpha2);
-        interactInput = Input.GetKeyDown(KeyCode.E);
+        interactInput = Input.GetKeyDown(KeyCode.F);
         toggleMapInput = Input.GetKeyDown(KeyCode.M);
         inventoryInput = Input.GetKeyDown(KeyCode.I);
 

@@ -7,33 +7,29 @@ using UnityEngine.SceneManagement;
 public class IntroChoiceManager : MonoBehaviour
 {
     public GameObject[] choices;
-    public GameObject currentChoice;
-    GameObject[] instances;
-    public Animator fade;
+    public GameObject fade;
 
 
-    private void Start()
+    public void Start()
     {
-        fade = GetComponentInChildren<Animator>();
-        fade.Play("FadeIn");
-        currentChoice = Instantiate(choices[0]);
-        currentChoice.transform.parent = GameObject.Find("Canvas").transform;
-        currentChoice.GetComponent<RectTransform>().localPosition = Vector2.zero;
-        currentChoice.transform.localScale = Vector3.one;
-
+        for (int i = 0; i < choices.Length; i++)
+        {
+            if(i == 0)
+            {
+                choices[i].SetActive(true);
+            }
+            else
+            {
+                choices[i].SetActive(false);
+            }
+        }
     }
 
-    public void SetChoice(int i)
+    public void SetChoice(int choiceNum)
     {
-        //fade.Play("FadeIn");
-        instances = GameObject.FindGameObjectsWithTag("Choice");
-        foreach (GameObject item in instances)
-        {
-            Destroy(item);
-        }
-
-        currentChoice = Instantiate(choices[i], transform.parent = GameObject.Find("Canvas").transform);
-        currentChoice.GetComponent<RectTransform>().localPosition = Vector2.zero;
+        fade.SetActive(false);
+        fade.SetActive(true);
+        StartCoroutine(DialogueDelay(choiceNum));
     }
 
     public void HelpJoshUp()
@@ -84,6 +80,23 @@ public class IntroChoiceManager : MonoBehaviour
     public void FindACure()
     {
         SceneManager.LoadScene(1);
+    }
+
+    IEnumerator DialogueDelay(int choiceNum)
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        for (int i = 0; i < choices.Length; i++)
+        {
+            if (i == choiceNum)
+            {
+                choices[i].SetActive(true);
+            }
+            else
+            {
+                choices[i].SetActive(false);
+            }
+        }
     }
 
 }

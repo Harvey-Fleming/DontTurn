@@ -44,6 +44,7 @@ public class IntroTutorialManager : MonoBehaviour
     [Header("Checkpoint")]
     bool hasUsedCheckpoint;
     public PlayerCollision playerCollision;
+    public GameObject mapIcon;
     public GameObject checkpointTutorial;
     public Text checkpointText;
     public string[] checkpointStrings;
@@ -55,6 +56,11 @@ public class IntroTutorialManager : MonoBehaviour
         spaceBarIconStartPos = spaceBarIcon.transform.position;
         mouseIconStartPos = mouseIcon.transform.position;
         player = GameObject.Find("Player");
+
+        if(hasUsedCheckpoint == false)
+        {
+            mapIcon.SetActive(false);
+        }
     }
 
     void Update()
@@ -183,6 +189,7 @@ public class IntroTutorialManager : MonoBehaviour
                     playerCollision.canStandUp = true;
                     AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
                     checkpointTutorial.SetActive(false);
+                    mapIcon.SetActive(true);
                     hasUsedCheckpoint = true;
                 }
             }

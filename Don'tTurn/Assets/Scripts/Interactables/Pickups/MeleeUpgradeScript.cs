@@ -7,6 +7,7 @@ public class MeleeUpgradeScript : MonoBehaviour, IDataPersistence
     [SerializeField] private AttackScript meleeAttackScript;
     private bool HasCollected = false;
     [SerializeField] private string id;
+    private PlayerInput playerInput;
     bool onHover;
 
     private void Update() 
@@ -16,7 +17,7 @@ public class MeleeUpgradeScript : MonoBehaviour, IDataPersistence
             Destroy(this.gameObject);
         }
 
-        if (onHover && Input.GetKeyDown(KeyCode.W) && !HasCollected)
+        if (onHover && playerInput.interactInput && !HasCollected)
         {
             meleeAttackScript.OnMeleeUpgrade();
             AudioManager.instance.PlayOneShot(FMODEvents.instance.ItemPickup, this.transform.position);
@@ -60,5 +61,7 @@ public class MeleeUpgradeScript : MonoBehaviour, IDataPersistence
         {
             meleeAttackScript.OnMeleeUpgrade();
         }
+
+        playerInput = GameObject.Find("Player").GetComponent<PlayerInput>();
     }
 }

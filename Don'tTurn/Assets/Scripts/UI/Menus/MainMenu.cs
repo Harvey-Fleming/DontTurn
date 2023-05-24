@@ -40,16 +40,7 @@ public class MainMenu : MonoBehaviour
         }
         else if(!DataPersistenceManager.instance.HasGameData())
         {
-            DataPersistenceManager.instance.NewGame();
-            if (!introSeenManager.hasSeenIntro)
-            {
-                introSeenManager.hasSeenIntro = true;
-                SceneManager.LoadSceneAsync("Intro");
-            }
-            else
-            {
-                SceneManager.LoadSceneAsync("Game");
-            }
+            NewGame();
         }
          
         //play audio One-Shot
@@ -65,16 +56,7 @@ public class MainMenu : MonoBehaviour
 
     public void YesToSaveData()
     {
-        DataPersistenceManager.instance.NewGame();
-        if (!introSeenManager.hasSeenIntro)
-        {
-            introSeenManager.hasSeenIntro = true;
-            SceneManager.LoadSceneAsync("Intro");
-        }
-        else
-        {
-            SceneManager.LoadSceneAsync("Game");
-        }
+        NewGame();
 
         AudioManager.instance.PlayOneShot(FMODEvents.instance.menuStartClick, this.transform.position);
     }
@@ -83,6 +65,21 @@ public class MainMenu : MonoBehaviour
         saveData.SetActive(false);
 
         AudioManager.instance.PlayOneShot(FMODEvents.instance.menuStartClick, this.transform.position);
+    }
+
+    public void NewGame()
+    {
+        DataPersistenceManager.instance.NewGame();
+        SceneManager.LoadSceneAsync("Intro");
+        //if (!introSeenManager.hasSeenIntro)
+        //{
+        //    introSeenManager.hasSeenIntro = true;
+        //    SceneManager.LoadSceneAsync("Intro");
+        //}
+        //else
+        //{
+        //    SceneManager.LoadSceneAsync("Game");
+        //}
     }
 
 }
