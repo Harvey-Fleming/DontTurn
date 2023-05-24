@@ -9,7 +9,6 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private Button loadGameButton;
     private IntroSeenManager introSeenManager;
-    private bool hasSeenIntro = false;
     public GameObject saveData;
 
     // Start is called before the first frame update

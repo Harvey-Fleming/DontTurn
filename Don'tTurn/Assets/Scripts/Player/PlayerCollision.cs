@@ -107,7 +107,10 @@ public class PlayerCollision : MonoBehaviour
             {
                 playerStats.health += 20;
                 corruptionScript.time -= 10;
+                animator.Play("player_Rest");
+            }
 
+            //Keep the player health at max and do not heal over it
             if (playerStats.health > playerStats.maxHealth)
             {
                  playerStats.health = playerStats.maxHealth;
@@ -115,8 +118,7 @@ public class PlayerCollision : MonoBehaviour
             else if(corruptionScript.time < 0)
             {
                 corruptionScript.time = 0f;
-            }
-        }
+            }  
         yield return new WaitForSeconds(timeBetweenRegens);
         }
     }
@@ -133,8 +135,6 @@ public class PlayerCollision : MonoBehaviour
             else if (Mathf.Abs(transform.position.x - restTrans.position.x) < 0.05f)
             {
                 transform.position = restTrans.position;
-                animator.SetBool("IsResting", true);
-                animator.Play("player_Rest", 0);
                 IsMovingToTarget = false;
                 StartCoroutine("Regenerate");
             }
