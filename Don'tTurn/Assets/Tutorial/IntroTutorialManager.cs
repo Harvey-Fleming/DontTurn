@@ -8,6 +8,7 @@ public class IntroTutorialManager : MonoBehaviour
 {
     public float fadeOutTime;
     public GameObject Player;
+    bool canSkipDialogue = true;
 
     [Header("Movement Icon")]
     public GameObject movementIcon;
@@ -38,7 +39,7 @@ public class IntroTutorialManager : MonoBehaviour
     public GameObject curseTutorial;
     public Text curseText;
     public string[] curseStrings;
-    int curseStringNum = 0;
+    [SerializeField] int curseStringNum = 0;
 
     [Header("Checkpoint")]
     bool hasUsedCheckpoint;
@@ -132,21 +133,23 @@ public class IntroTutorialManager : MonoBehaviour
 
     void CurseTutorial()
     {
-        if (curseStringNum < curseStrings.Length)
+        if (curseStringNum < (curseStrings.Length - 1))
         {
             Time.timeScale = 0;
             Player.GetComponent<PlayerMovement>().playerFootsteps.stop(STOP_MODE.IMMEDIATE);
-            curseTutorial.SetActive(true);
             curseText.text = curseStrings[curseStringNum];
-            if (Input.GetKeyDown(KeyCode.F))
+            curseTutorial.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.F) && canSkipDialogue)
             {
+                StartCoroutine(TextCooldown());
                 curseStringNum++;
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
             }
         }
-        if(curseStringNum >= curseStrings.Length - 1)
+        if(curseStringNum >= (curseStrings.Length - 1))
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            curseText.text = curseStrings[curseStringNum];
+            if (Input.GetKeyDown(KeyCode.F) && canSkipDialogue)
             {
                 Time.timeScale = 1;
                 curseTutorial.SetActive(false);
@@ -158,21 +161,23 @@ public class IntroTutorialManager : MonoBehaviour
     {
         if(!hasUsedCheckpoint && playerCollision.isInsideTrigger && !playerCollision.IsMovingToTarget && playerCollision.interactPressed)
         {
-            if(checkpointStringNum < checkpointStrings.Length)
+            checkpointText.text = checkpointStrings[checkpointStringNum];
+
+            if (checkpointStringNum < checkpointStrings.Length - 1)
             {
                 Time.timeScale = 0;
                 playerCollision.canStandUp = false;
                 checkpointTutorial.SetActive(true);
-                checkpointText.text = checkpointStrings[checkpointStringNum];
-                if (Input.GetKeyDown(KeyCode.F))
+                if (Input.GetKeyDown(KeyCode.F) && canSkipDialogue)
                 {
+                    StartCoroutine(TextCooldown());
                     checkpointStringNum++;
                     AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
                 }
             }
-            if (checkpointStringNum >= checkpointStrings.Length)
+            if (checkpointStringNum >= checkpointStrings.Length - 1)
             {
-                if (Input.GetKeyDown(KeyCode.F))
+                if (Input.GetKeyDown(KeyCode.F) && canSkipDialogue)
                 {
                     Time.timeScale = 1;
                     playerCollision.canStandUp = true;
@@ -225,5 +230,12 @@ public class IntroTutorialManager : MonoBehaviour
             yield return null;
         }
         Destroy(mouseIcon);
+    }
+
+    IEnumerator TextCooldown()
+    {
+        canSkipDialogue = false;
+        yield return new WaitForSecondsRealtime(0.2f);
+        canSkipDialogue = true;
     }
 }

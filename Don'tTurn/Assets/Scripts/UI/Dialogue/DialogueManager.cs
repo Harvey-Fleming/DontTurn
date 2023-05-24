@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     public bool isFinalNPC;
     bool canDisplayNextSentence = false;
     public bool textIsActive;
+    public PauseMenu pause;
 
     private Queue<string> sentences; 
 
@@ -43,8 +44,7 @@ public class DialogueManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape) && textIsActive)
         {
-            canDisplayNextSentence = false;
-            EndDialogue();
+            StartCoroutine(DialogueExitCooldown());
         }
     }
 
@@ -104,12 +104,12 @@ public class DialogueManager : MonoBehaviour
         playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         playerMovement.enabled = true;
-        textIsActive = false;
         if(isFinalNPC)
         {
             cureNPC.CheckWin();
         }
         animator.SetBool("isOpen", false);
+        textIsActive = false;
     }
 
     IEnumerator DialogueCooldown()
@@ -117,5 +117,12 @@ public class DialogueManager : MonoBehaviour
         canDisplayNextSentence = false;
         yield return new WaitForSeconds(0.2f);
         canDisplayNextSentence = true;
+    }
+
+    IEnumerator DialogueExitCooldown()
+    {
+        yield return new WaitForEndOfFrame();
+        EndDialogue();
+        canDisplayNextSentence = false;
     }
 }

@@ -20,6 +20,7 @@ public class IntroChoiceManager : MonoBehaviour
         currentChoice.transform.parent = GameObject.Find("Canvas").transform;
         currentChoice.GetComponent<RectTransform>().localPosition = Vector2.zero;
         currentChoice.transform.localScale = Vector3.one;
+
     }
 
     public void SetChoice(int i)

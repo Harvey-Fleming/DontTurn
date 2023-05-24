@@ -31,7 +31,6 @@ public class UnlockAbility : MonoBehaviour
                 toggleAbil.SwitchToShotgun();
                 break;
                 case("Double Jump"):
-                    playerObj.GetComponent<PlayerStats>().AddAbility();
                     playerObj.GetComponent<PlayerMovement>().isDoubleJumpUnlocked = true;
                 break;
                 case("Grapple"):

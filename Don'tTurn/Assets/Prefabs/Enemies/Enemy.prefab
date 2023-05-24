@@ -311,7 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: 0
   moveSpeed: 2
-  damageRange: 1.7
+  damageRange: 2.1
   maxRange: 10
   wanderDistance: 25
   jumpForce: 10
@@ -341,8 +341,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPointTrans: {fileID: 8533372426357135036}
-  attackDamage: 5
-  attackRadius: 1.7
+  attackDamage: 10
+  attackRadius: 2
 --- !u!114 &3508981245913353212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovementScript: {fileID: 0}
   enemyMovementScript: {fileID: 6406451567839429295}
-  baseKnockback: 5
+  baseKnockback: 4
   KnockbackDelay: 0.5
 --- !u!114 &1720932939062638641
 MonoBehaviour:

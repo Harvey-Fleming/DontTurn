@@ -43,16 +43,6 @@ AnimationClip:
       value: {fileID: 21300000, guid: c3b3120fd0f168641bf741bcc705d554, type: 3}
     - time: 0.9166667
       value: {fileID: 21300000, guid: 82ecc43662f4fa045803c68af28ad08b, type: 3}
-    - time: 1
-      value: {fileID: 21300000, guid: d5aaf75efc701e54f8af39540e7c61bc, type: 3}
-    - time: 1.0833334
-      value: {fileID: 21300000, guid: ed25c0974cce3bf41888fd0261292490, type: 3}
-    - time: 1.1666666
-      value: {fileID: 21300000, guid: e711bb4a80f935e4996266ca11e1acb8, type: 3}
-    - time: 1.25
-      value: {fileID: 21300000, guid: 2d411f175929a8b4388b477d388b6677, type: 3}
-    - time: 1.3333334
-      value: {fileID: 21300000, guid: e410b5c1553415d429adfda11e765800, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -84,17 +74,12 @@ AnimationClip:
     - {fileID: 21300000, guid: 6fbacb2b7eb919943b4fc4f7fd04e0f1, type: 3}
     - {fileID: 21300000, guid: c3b3120fd0f168641bf741bcc705d554, type: 3}
     - {fileID: 21300000, guid: 82ecc43662f4fa045803c68af28ad08b, type: 3}
-    - {fileID: 21300000, guid: d5aaf75efc701e54f8af39540e7c61bc, type: 3}
-    - {fileID: 21300000, guid: ed25c0974cce3bf41888fd0261292490, type: 3}
-    - {fileID: 21300000, guid: e711bb4a80f935e4996266ca11e1acb8, type: 3}
-    - {fileID: 21300000, guid: 2d411f175929a8b4388b477d388b6677, type: 3}
-    - {fileID: 21300000, guid: e410b5c1553415d429adfda11e765800, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.4166667
+    m_StopTime: 1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -122,20 +107,6 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.9166667
-    functionName: ResetAttack
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 1.0833334
-    functionName: MeleeAttack
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 1.3333334
     functionName: ResetAttack
     data: 
     objectReferenceParameter: {fileID: 0}

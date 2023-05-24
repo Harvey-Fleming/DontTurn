@@ -195,14 +195,21 @@ public class EnemyMovement : MonoBehaviour
         {
         rb.velocity = new Vector2(moveDirection * moveSpeed, rb.velocity.y);
         animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
-            moveSpeed = startMoveSpeed * 1.75f;  
-        }                 
+            if (!isAttacking)
+            {
+                moveSpeed = startMoveSpeed * 2.2f;
+            }
+            else
+            {
+                moveSpeed = startMoveSpeed * 1.5f;
+            }
+        }
     }
 
     void Damage()
     {
         isAttacking = true;
-        moveDirection = 0;
+        //moveDirection = 0;
         if(isAttacking)
         {
             animator.SetBool("IsAttacking", true);
