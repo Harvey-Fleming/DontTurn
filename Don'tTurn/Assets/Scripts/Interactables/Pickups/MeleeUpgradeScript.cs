@@ -9,19 +9,18 @@ public class MeleeUpgradeScript : MonoBehaviour, IDataPersistence
     [SerializeField] private string id;
     private PlayerInput playerInput;
     bool onHover;
+    private IntroTutorialManager tutorial;
+    float startY;
+    public float bobAmount;
+    public float bobSpeed;
 
     private void Update() 
     {
+        transform.position = new Vector3(transform.position.x, startY + (Mathf.Sin(Time.time * bobSpeed) * bobAmount / 1000f), transform.position.z);
+
         if (HasCollected == true)
         {
             Destroy(this.gameObject);
-        }
-
-        if (onHover && playerInput.interactInput && !HasCollected)
-        {
-            meleeAttackScript.OnMeleeUpgrade();
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.ItemPickup, this.transform.position);
-            HasCollected = true;
         }
     }
 
@@ -29,13 +28,16 @@ public class MeleeUpgradeScript : MonoBehaviour, IDataPersistence
     {
         if(collision.gameObject.tag == "Player")
         {
-            onHover = true;
+            tutorial.MeleeUpgrageTutorial();
+            meleeAttackScript.OnMeleeUpgrade();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.ItemPickup, this.transform.position);
+            HasCollected = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && !HasCollected)
         {
             onHover = true;
         }
@@ -62,6 +64,9 @@ public class MeleeUpgradeScript : MonoBehaviour, IDataPersistence
             meleeAttackScript.OnMeleeUpgrade();
         }
 
+        startY = transform.position.y;
+
         playerInput = GameObject.Find("Player").GetComponent<PlayerInput>();
+        tutorial = GameObject.Find("IntroTutorial").GetComponent<IntroTutorialManager>();
     }
 }

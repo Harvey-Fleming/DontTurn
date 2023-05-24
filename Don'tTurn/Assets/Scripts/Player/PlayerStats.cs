@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro; 
 
 public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
@@ -14,6 +15,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     private AttackScript attackScript;
     private SpriteRenderer spriteRenderer;
     private DamageIndicator damageIndicatorScript;
+    public Image healthFX;
 
     //Stats
     [Range(0, 100)] public float maxHealth = 100f, health = 100f;
@@ -61,6 +63,15 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         if(health <= 0)
         {
             OnDeath();
+        }
+
+        if(health < 30)
+        {
+            healthFX.color = new Color(1f, 0f, 0f, 0.5f - (health / 30f * 0.5f));
+        }
+        else
+        {
+            healthFX.color = new Color(1f, 0f, 0f, 0f);
         }
     }
 

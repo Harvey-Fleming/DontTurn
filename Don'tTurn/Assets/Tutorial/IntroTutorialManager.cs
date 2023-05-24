@@ -50,6 +50,11 @@ public class IntroTutorialManager : MonoBehaviour
     public string[] checkpointStrings;
     int checkpointStringNum;
 
+    [Header("Melee Upgrade")]
+    bool hasPickedUpMelee;
+    public GameObject meleeUpgPrompt;
+    bool canContinueMelee = false;
+
     void Start()
     {
         movementIconStartPos = movementIcon.transform.position;
@@ -84,6 +89,16 @@ public class IntroTutorialManager : MonoBehaviour
         }
 
         CheckpointTutorial();
+
+        if (hasPickedUpMelee)
+        {
+            if (Input.GetKeyDown(KeyCode.F) && canContinueMelee)
+            {
+                Time.timeScale = 1;
+                meleeUpgPrompt.SetActive(false);
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
+            }
+        }
     }
 
     void MovementIconBob()
@@ -185,6 +200,7 @@ public class IntroTutorialManager : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.F) && canSkipDialogue)
                 {
+                    StartCoroutine(CheckpointCooldown());
                     Time.timeScale = 1;
                     playerCollision.canStandUp = true;
                     AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
@@ -193,6 +209,17 @@ public class IntroTutorialManager : MonoBehaviour
                     hasUsedCheckpoint = true;
                 }
             }
+        }
+    }
+
+    public void MeleeUpgrageTutorial()
+    {
+        if (!hasPickedUpMelee)
+        {
+            StartCoroutine(MeleeCooldown());
+            meleeUpgPrompt.SetActive(true);
+            Time.timeScale = 0;
+            hasPickedUpMelee = true;
         }
     }
 
@@ -244,5 +271,19 @@ public class IntroTutorialManager : MonoBehaviour
         canSkipDialogue = false;
         yield return new WaitForSecondsRealtime(0.2f);
         canSkipDialogue = true;
+    }
+
+    IEnumerator CheckpointCooldown()
+    {
+        playerCollision.enabled = false;
+        yield return new WaitForSeconds(0.1f);
+        playerCollision.enabled = true;
+    }
+
+    IEnumerator MeleeCooldown()
+    {
+        canContinueMelee = false;
+        yield return new WaitForSecondsRealtime(0.2f);
+        canContinueMelee = true;
     }
 }

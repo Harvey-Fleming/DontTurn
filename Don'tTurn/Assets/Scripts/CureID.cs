@@ -8,15 +8,25 @@ public class CureID : MonoBehaviour, IDataPersistence
     private CureManager cureManager;
     [SerializeField] private int cureID;
     [SerializeField] public bool hasCollectedCure;
+    float startY;
+    public float bobSpeed;
+    public float bobAmount;
 
     private void Start() 
     {
+        startY = transform.position.y;
+
         cureManager = FindObjectOfType<CureManager>();
         if(hasCollectedCure)
         {
             cureManager.IncreaseCureCount();
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        transform.position = new Vector3(transform.position.x, startY + (Mathf.Sin(Time.time * bobSpeed) * bobAmount / 1000f), transform.position.z);
     }
 
     #region SaveRegion
