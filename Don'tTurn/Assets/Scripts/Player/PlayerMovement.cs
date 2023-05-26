@@ -78,6 +78,8 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
         GroundMovement();
 
         UpdateSound();
+
+        HandleCoyoteTimer();
     }
 
     public void DebugMovement() => rb.velocity = new Vector2(rb.velocity.x, vmoveValue * (moveSpeed * moveMultiplier) * Time.deltaTime);
@@ -92,9 +94,17 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     void CheckJump()
     {
         //Basic Jump
-        if (currentcoyoteTimer > 0f && playerInput.jumpKey)
+        bool HasJumped = false;
+        if (IsGrounded() && playerInput.jumpKey && HasJumped == false)
         {
-            IsJumping = true; jumpTime = 0;
+            IsJumping = true; jumpTime = 0; HasJumped = true;
+            Debug.Log("Ground Jump:" + HasJumped);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerJump, this.transform.position);
+        }
+        else if(!IsGrounded() && rb.velocity.y <= 0.01 && currentcoyoteTimer > 0f && playerInput.jumpKey && HasJumped == false)
+        {
+            IsJumping = true; jumpTime = 0; HasJumped = true;
+            Debug.Log("Coyote Jump:" + HasJumped);
             AudioManager.instance.PlayOneShot(FMODEvents.instance.playerJump, this.transform.position);
         }
 
@@ -105,22 +115,31 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             jumpTime += Time.deltaTime;
         }
-
+ 
+        // Stops the player from jumping when they release the jump key or jump has been active for more than the max jump time
         if (playerInput.jumpKeyReleased | jumpTime > maxJumpTime)
         {
             IsJumping = false;
+            currentcoyoteTimer = 0;
         }
 
         if (IsGrounded())
         {
-            //Reset aerial jumps when on ground
+            HasJumped = false;
             aerialJumpCount = maxAerialJumpCount;
             animator.SetBool("IsJumping", false);
             currentcoyoteTimer = coyoteTimer;
         }
-        else if (!IsGrounded())
+        else if (!IsGrounded() )
         {
             animator.SetBool("IsJumping", true);
+        }
+    }
+
+    private void HandleCoyoteTimer()
+    {
+        if(!IsGrounded() && rb.velocity.y <= 0.01)
+        {
             currentcoyoteTimer -= Time.deltaTime;
         }
     }
@@ -128,7 +147,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     public bool IsGrounded()
     {
         float extraHeightTest = 0.05f;
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0, Vector2.down, boxCollider2D.bounds.extents.y + extraHeightTest, GroundLayerMask);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0, Vector2.down, extraHeightTest, GroundLayerMask);
         return raycastHit.collider != null;
     }
 
@@ -186,8 +205,9 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     void AerialJump()
     {
         //Can perform as many aerial jumps as there are max aerial jumps
-        if (aerialJumpCount > 0 && !IsGrounded() && isDoubleJumpUnlocked && currentcoyoteTimer < 0)
+        if (aerialJumpCount > 0 && !IsGrounded() && isDoubleJumpUnlocked && currentcoyoteTimer <= 0)
         {
+            Debug.Log("Able to double jump");
             if (playerInput.jumpKey)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -233,5 +253,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     {
         data.isDoubleJumpUnlocked = this.isDoubleJumpUnlocked;
     }
+
 
 }
