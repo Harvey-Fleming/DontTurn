@@ -10,8 +10,6 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 {
     //Component References
     private EnemyMovement enemyMovementScript;
-    private PlayerStats playerStats;
-    private AttackScript playerAttack;
     private Knockback knockbackScript;
     private DamageIndicator damageIndicatorScript;
     private SpriteRenderer spriteRenderer;
@@ -43,13 +41,11 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     private void Awake() 
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        playerAttack = GameObject.Find("Player").GetComponent<AttackScript>();
         rb2D = GetComponent<Rigidbody2D>();
         enemyMovementScript = GetComponent<EnemyMovement>();
         knockbackScript = GetComponent<Knockback>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         damageIndicatorScript = GetComponent<DamageIndicator>();
-        playerStats = GameObject.FindObjectOfType<PlayerStats>();
     }
 
     // Start is called before the first frame update
@@ -69,7 +65,6 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         if (maxHealth == 75)
         {
             healthBar.SetHealth(currentHealth);
-          
         }
     }
 
@@ -94,7 +89,6 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     {
         spriteRenderer.color = normalColour;
         RandomDrop(); 
-        playerAttack.ResetWindow();
         gameObject.SetActive(false);
         isDead = true;
         //emitter.Stop();
@@ -123,6 +117,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
             }
             enemyMovementScript.enabled = true;
             enemyMovementScript.isWandering = true;
+            enemyMovementScript.ResetState();
             currentHealth = maxHealth;
         }
     }
@@ -156,7 +151,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.tag == "Player")
         {
-            playerStats.OnHit(collisionDamageDealt, gameObject);
+            other.gameObject.GetComponent<PlayerStats>()?.OnHit(collisionDamageDealt, gameObject);
         }
     }
     #endregion

@@ -102,6 +102,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (isWandering)
         {
+            Debug.Log("Is Wandering = true");
             WanderMovement();
         }
 
@@ -129,7 +130,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    IEnumerator WanderDelay()
+    public IEnumerator WanderDelay()
     {
         while (true)
         {
@@ -222,6 +223,16 @@ public class EnemyMovement : MonoBehaviour
         isAttacking = false;
     }
 
+    public void ResetState()
+    {
+        isAttacking = false;
+        isAggro = false;
+        isWandering = true;
+        StartCoroutine(WanderDelay());
+        
+    }
+
+    #region Flipping Sprite
     void CheckFlip()
     {
         //flips the sprite depending on their direction of movement
@@ -235,6 +246,7 @@ public class EnemyMovement : MonoBehaviour
         }  
     }
 
+
     private void Flip()
     {
         Vector2 currentScale = gameObject.transform.localScale;
@@ -243,7 +255,9 @@ public class EnemyMovement : MonoBehaviour
 
         facingright = !facingright;
     }
+    #endregion
 
+    #region sound
     private void UpdateSound()
     {
         if (isAggro)
@@ -270,5 +284,6 @@ public class EnemyMovement : MonoBehaviour
         }
 
     }
+    #endregion
 
 }
