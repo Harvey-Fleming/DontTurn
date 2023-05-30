@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     public bool textIsActive;
     public PauseMenu pause;
     public bool canStartDialogue = true;
+    public bool isEndingDialogue; 
 
     private Queue<string> sentences; 
 
@@ -104,6 +105,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        isEndingDialogue = true; 
         if (canStartDialogue == false)
         {
             StartCoroutine(StartDialogueCooldown());
@@ -130,12 +132,14 @@ public class DialogueManager : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         EndDialogue();
+        isEndingDialogue = false; 
         canDisplayNextSentence = false;
     }
 
     IEnumerator StartDialogueCooldown()
     {
         yield return new WaitForSeconds(0.1f);
+        isEndingDialogue = false; 
         canStartDialogue = true;
     }
 }

@@ -14,6 +14,7 @@ public class DialogueTrigger : MonoBehaviour
     private GameObject currentDialogueNPC;
     private CureNPC cureNPCScript;
     private bool isActive;
+    public bool isTalking; 
 
     private void Start() 
     {
@@ -40,6 +41,7 @@ public class DialogueTrigger : MonoBehaviour
         {
             currentDialogueNPC = this.gameObject;
             TriggerDialogue();
+            isTalking = true; 
         }
     }
 
