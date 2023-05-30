@@ -40,6 +40,7 @@ public class PrototypeDash : MonoBehaviour, IDataPersistence
     [Header("UI")]
     public GameObject shotgunUI;
     public Image circle;
+    public Image shells; 
     float timer;
     public Camera mainCamera;
     bool startCooldown;

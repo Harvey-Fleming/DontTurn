@@ -26,7 +26,8 @@ public class CureChamberCode : MonoBehaviour
     public float maxIntensity;
     public float startIntensity;
     public GameObject interactKey;
-    
+    public GameObject npcInteractKey;
+    public GameObject checkpointInteractKey; 
 
     private void Start()
     {
@@ -85,6 +86,8 @@ public class CureChamberCode : MonoBehaviour
     {
         AudioManager.instance.PlayOneShot(FMODEvents.instance.EndingSFX, this.transform.position);
         interactKey.SetActive(false);
+        npcInteractKey.SetActive(false);
+        checkpointInteractKey.SetActive(false);
         zoomOnChamber = true;
         hasNotInteracted = true;
         canInteract = false;

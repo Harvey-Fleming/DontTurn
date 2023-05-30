@@ -96,13 +96,16 @@ public class PlayerCollision : MonoBehaviour
 
     public void OnEnterCheckpoint(Transform restPointTrans, GameObject checkPoint) { isInsideTrigger = true; restTrans = restPointTrans; checkPointScript = checkPoint.GetComponent<CheckPoint>();}
 
-    public void OnLeaveCheckpoint() {isInsideTrigger = false; EnableAbilities(); animator.SetBool("IsResting", false); interactPressed = false;}
+    public void OnLeaveCheckpoint() {isInsideTrigger = false; EnableAbilities(); animator.SetBool("IsResting", false); interactPressed = false; DashAbility.circle.enabled = true; DashAbility.shells.enabled = true; }
 
     IEnumerator Regenerate()
     {
         while(interactPressed && isInsideTrigger)
         {
             animator.SetBool("IsResting", true);
+            DashAbility.shotgunUI.SetActive(false);
+            DashAbility.circle.enabled = false; 
+            DashAbility.shells.enabled = false;
             if (playerStats.health < playerStats.maxHealth || corruptionScript.time > 0)
             {
                 playerStats.health += 20;
