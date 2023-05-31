@@ -105,7 +105,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        isEndingDialogue = true; 
+       
         if (canStartDialogue == false)
         {
             StartCoroutine(StartDialogueCooldown());
@@ -120,6 +120,7 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("isOpen", false);
         textIsActive = false;
         canDisplayNextSentence = false;
+        isEndingDialogue = true;
     }
 
     IEnumerator DialogueCooldown()

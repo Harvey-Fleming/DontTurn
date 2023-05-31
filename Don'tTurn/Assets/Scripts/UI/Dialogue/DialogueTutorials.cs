@@ -25,8 +25,9 @@ public class DialogueTutorials : MonoBehaviour
         {
             if(dialogueManager.isEndingDialogue == true)
             {
-                dialogueManager.animator.SetBool("isOpen", false);
-                PicturePopUp(); 
+                StartCoroutine(StartCooldown()); 
+                //dialogueManager.animator.SetBool("isOpen", false);
+               
             }
         }
        if(isPictureUp == true && Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
@@ -39,6 +40,7 @@ public class DialogueTutorials : MonoBehaviour
             playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
             playerMovement.enabled = true;
+            pressEscapeText.SetActive(true);
         }
 
     }
@@ -57,5 +59,11 @@ public class DialogueTutorials : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         pressEscapeText.SetActive(true);
         isPictureUp = true;
+    }
+
+    public IEnumerator StartCooldown()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        PicturePopUp();
     }
 }
