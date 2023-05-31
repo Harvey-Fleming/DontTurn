@@ -172,12 +172,14 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     {
         this.health = data.playerHealth;
         this.spawnPoint = data.spawnPoint;
+        this.abilAmount = data.abilityNumber;
     }
 
     public void SaveData(GameData data)
     {
         data.playerHealth = this.health;
         data.spawnPoint = this.spawnPoint;
+        data.abilityNumber = this.abilAmount;
     }
 
 

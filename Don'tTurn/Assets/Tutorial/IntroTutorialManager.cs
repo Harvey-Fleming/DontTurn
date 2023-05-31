@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using FMOD.Studio;
 
-public class IntroTutorialManager : MonoBehaviour
+public class IntroTutorialManager : MonoBehaviour, IDataPersistence
 {
     public float fadeOutTime;
     public GameObject Player;
@@ -286,4 +286,17 @@ public class IntroTutorialManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.2f);
         canContinueMelee = true;
     }
+
+        #region SaveRegion
+    public void SaveData(GameData data)
+    {
+        data.hasUsedCheckpoint = this.hasUsedCheckpoint;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.hasUsedCheckpoint = data.hasUsedCheckpoint;
+    }
+
+    #endregion
 }

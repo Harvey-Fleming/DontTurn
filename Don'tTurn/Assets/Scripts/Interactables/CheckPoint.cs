@@ -71,7 +71,7 @@ public class CheckPoint : MonoBehaviour, IDataPersistence
     public void RespawnAllEnemies()
     {
         object[] allEnemies = Resources.FindObjectsOfTypeAll(typeof(EnemyStats));
-        Debug.Log("allEnemies array has " + allEnemies.Length + "Items");
+        //Debug.Log("allEnemies array has " + allEnemies.Length + "Items");
 
         foreach (EnemyStats enemyStats in allEnemies)
         {

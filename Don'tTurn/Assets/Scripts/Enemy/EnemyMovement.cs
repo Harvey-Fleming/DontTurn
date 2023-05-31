@@ -102,7 +102,6 @@ public class EnemyMovement : MonoBehaviour
 
         if (isWandering)
         {
-            Debug.Log("Is Wandering = true");
             WanderMovement();
         }
 

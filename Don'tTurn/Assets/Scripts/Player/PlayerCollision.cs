@@ -13,7 +13,7 @@ public class PlayerCollision : MonoBehaviour
     private CheckPoint checkPointScript;
     private Knockback knockbackScript;
     private GrappleAbility grappleAbility;
-    private PrototypeDash DashAbility;
+    [SerializeField] private PrototypeDash DashAbility;
     private CurseAttacks CursePunch;    
     public MapPanelScript mapPanelScript;
     private CureManager cureManager;
@@ -96,7 +96,7 @@ public class PlayerCollision : MonoBehaviour
 
     public void OnEnterCheckpoint(Transform restPointTrans, GameObject checkPoint) { isInsideTrigger = true; restTrans = restPointTrans; checkPointScript = checkPoint.GetComponent<CheckPoint>();}
 
-    public void OnLeaveCheckpoint() {isInsideTrigger = false; EnableAbilities(); animator.SetBool("IsResting", false); interactPressed = false; DashAbility.circle.enabled = true; DashAbility.shells.enabled = true; }
+    public void OnLeaveCheckpoint() {isInsideTrigger = false; EnableAbilities(); animator.SetBool("IsResting", false); interactPressed = false; DashAbility.shotgunUI.SetActive(true);}
 
     IEnumerator Regenerate()
     {
@@ -104,8 +104,6 @@ public class PlayerCollision : MonoBehaviour
         {
             animator.SetBool("IsResting", true);
             DashAbility.shotgunUI.SetActive(false);
-            DashAbility.circle.enabled = false; 
-            DashAbility.shells.enabled = false;
             if (playerStats.health < playerStats.maxHealth || corruptionScript.time > 0)
             {
                 playerStats.health += 20;
