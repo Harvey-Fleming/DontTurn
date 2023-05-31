@@ -53,7 +53,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        Debug.Log("start dialogue");
+        isEndingDialogue = false;
         canStartDialogue = false;
         textIsActive = true;
         playerMovement.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -107,7 +107,6 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
-       
         if (canStartDialogue == false)
         {
             StartCoroutine(StartDialogueCooldown());
@@ -123,6 +122,7 @@ public class DialogueManager : MonoBehaviour
         textIsActive = false;
         canDisplayNextSentence = false;
         isEndingDialogue = true;
+        StartCoroutine(StopEndDialogueBool());
     }
 
     IEnumerator DialogueCooldown()
@@ -144,5 +144,11 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         isEndingDialogue = false; 
         canStartDialogue = true;
+    }
+
+    IEnumerator StopEndDialogueBool()
+    {
+        yield return new WaitForSeconds(1f);
+        isEndingDialogue = false;
     }
 }

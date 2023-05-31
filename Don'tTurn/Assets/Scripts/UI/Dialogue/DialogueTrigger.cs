@@ -27,7 +27,6 @@ public class DialogueTrigger : MonoBehaviour
         {
             isActive = true;
         }
-       
     }
 
     private void OnTriggerExit2D(Collider2D collision)

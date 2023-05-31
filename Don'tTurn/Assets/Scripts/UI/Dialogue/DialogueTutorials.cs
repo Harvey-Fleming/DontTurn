@@ -36,7 +36,6 @@ public class DialogueTutorials : MonoBehaviour
         }
        if(isPictureUp == true && Input.GetKeyDown(KeyCode.F))
        {
-            Debug.Log("I PRESS F LIKE AN IDIOT");
             StartCoroutine(DisableDialogueManager());
             Time.timeScale = 1f;
             tutorialPicture.SetActive(false);
