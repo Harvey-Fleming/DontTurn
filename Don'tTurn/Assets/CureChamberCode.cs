@@ -50,7 +50,7 @@ public class CureChamberCode : MonoBehaviour
 
     private void Update()
     {
-        if (canInteract && Input.GetKeyDown(KeyCode.W) && hasNotInteracted)
+        if (canInteract && Input.GetKeyDown(KeyCode.F) && hasNotInteracted)
         {
             StartCoroutine(Open());
             UI.SetActive(false);
