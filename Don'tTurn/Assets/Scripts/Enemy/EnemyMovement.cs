@@ -158,7 +158,7 @@ public class EnemyMovement : MonoBehaviour
                 {
                     moveDirection = 1;
 
-                    if(Physics2D.Raycast(transform.position, Vector2.right, 2, jumpMask))
+                    if(Physics2D.Raycast(transform.position - new Vector3(0,0.5f), Vector2.right, 2, jumpMask))
                     {
                         if (canJump)
                         {
@@ -173,7 +173,7 @@ public class EnemyMovement : MonoBehaviour
                 {
                     moveDirection = -1;
 
-                    if (Physics2D.Raycast(transform.position, Vector2.left, 2, jumpMask))
+                    if (Physics2D.Raycast(transform.position - new Vector3(0, 0.5f), Vector2.left, 2, jumpMask))
                     {
                         if (canJump)
                         {

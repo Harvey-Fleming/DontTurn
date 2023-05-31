@@ -180,11 +180,13 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
         playerMovement.enabled = false;
         isEnemyGrappled = true;
         //Disable player movement
+        StartCoroutine(GrappleStop());
     }
 
     public void StopGrapple()
     {
         fallDamage.maxYVel = 0;
+        isEnemyGrappled = false;
         isGrappling = false;
         animator.SetBool("IsGrappling", false);
         playerMovement.ResetAirJump();
@@ -221,6 +223,12 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     public void SaveData(GameData data)
     {
         data.isGrappleUnlocked = this.isUnlocked;
+    }
+
+    IEnumerator GrappleStop()
+    {
+        yield return new WaitForSeconds(0.2f);
+        StopGrapple();
     }
 
 }

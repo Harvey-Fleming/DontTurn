@@ -7,15 +7,17 @@ public class DialogueTutorials : MonoBehaviour
     DialogueManager dialogueManager;
     DialogueTrigger dialogueTrigger;
     public GameObject tutorialPicture;
-    public GameObject pressEscapeText; 
-    bool isPictureUp;
-    private PlayerMovement playerMovement;
+    GameObject interactKey;
+    [HideInInspector] public bool isPictureUp;
+    private PlayerInput playerInput;
+    bool hasPressed;
     // Start is called before the first frame update
     void Start()
     {
         dialogueManager = GameObject.FindObjectOfType<DialogueManager>().GetComponent<DialogueManager>();
         dialogueTrigger = GetComponent<DialogueTrigger>();
-        playerMovement = GameObject.FindObjectOfType<PlayerMovement>();
+        playerInput = GameObject.Find("Player").GetComponent<PlayerInput>();
+        interactKey = tutorialPicture.transform.Find("F").gameObject;
     }
 
     // Update is called once per frame
@@ -23,26 +25,25 @@ public class DialogueTutorials : MonoBehaviour
     {
         if(dialogueTrigger.isTalking == true)
         {
-            if(dialogueManager.isEndingDialogue == true)
+            if(dialogueManager.isEndingDialogue == true && !hasPressed)
             {
+                dialogueTrigger.enabled = false;
+                playerInput.enabled = false;
+                dialogueManager.EndDialogue();
                 StartCoroutine(StartCooldown()); 
                 //dialogueManager.animator.SetBool("isOpen", false);
-               
             }
         }
-       if(isPictureUp == true && Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
-        {
+       if(isPictureUp == true && Input.GetKeyDown(KeyCode.F))
+       {
+            Debug.Log("I PRESS F LIKE AN IDIOT");
+            StartCoroutine(DisableDialogueManager());
             Time.timeScale = 1f;
             tutorialPicture.SetActive(false);
             isPictureUp = false;
             dialogueManager.textIsActive = false;
             dialogueManager.canDisplayNextSentence = false;
-            playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-            playerMovement.enabled = true;
-            pressEscapeText.SetActive(true);
-        }
-
+       }
     }
 
     public void PicturePopUp()
@@ -50,20 +51,27 @@ public class DialogueTutorials : MonoBehaviour
         Time.timeScale = 0; 
         tutorialPicture.SetActive(true);
         StartCoroutine(Cooldown()); 
-       
     }
 
 
     public IEnumerator Cooldown()
     {
-        yield return new WaitForSecondsRealtime(1f);
-        pressEscapeText.SetActive(true);
+        yield return new WaitForSecondsRealtime(3f);
+        interactKey.SetActive(true);
         isPictureUp = true;
     }
 
     public IEnumerator StartCooldown()
     {
-        yield return new WaitForSecondsRealtime(1f);
+        hasPressed = true;
+        yield return new WaitForSecondsRealtime(0.2f);
         PicturePopUp();
+    }
+
+    IEnumerator DisableDialogueManager()
+    {
+        yield return new WaitForSeconds(1f);
+        playerInput.enabled = true;
+        dialogueTrigger.enabled = true;
     }
 }

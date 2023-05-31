@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
         if (playerInput.jumpKeyReleased | jumpTime > maxJumpTime)
         {
             IsJumping = false;
-            currentcoyoteTimer = 0;
+            currentcoyoteTimer = 0f;
         }
 
         if (IsGrounded())
@@ -205,9 +205,8 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     void AerialJump()
     {
         //Can perform as many aerial jumps as there are max aerial jumps
-        if (aerialJumpCount > 0 && !IsGrounded() && isDoubleJumpUnlocked && currentcoyoteTimer <= 0)
+        if (aerialJumpCount > 0f && !IsGrounded() && isDoubleJumpUnlocked && currentcoyoteTimer <= 0f)
         {
-            Debug.Log("Able to double jump");
             if (playerInput.jumpKey)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);

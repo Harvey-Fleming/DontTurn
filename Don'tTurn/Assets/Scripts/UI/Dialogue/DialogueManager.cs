@@ -20,7 +20,8 @@ public class DialogueManager : MonoBehaviour
     public bool textIsActive;
     public PauseMenu pause;
     public bool canStartDialogue = true;
-    public bool isEndingDialogue; 
+    public bool isEndingDialogue;
+    public DialogueTutorials dialogueTutorial;
 
     private Queue<string> sentences; 
 
@@ -39,7 +40,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F) && canDisplayNextSentence)
+        if(Input.GetKeyDown(KeyCode.F) && canDisplayNextSentence && !dialogueTutorial.isPictureUp)
         {
             DisplayNextSentence();
         }
@@ -52,6 +53,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        Debug.Log("start dialogue");
         canStartDialogue = false;
         textIsActive = true;
         playerMovement.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
