@@ -295,6 +295,7 @@ MonoBehaviour:
   isDead: 0
   maxHealth: 15
   collisionDamageDealt: 10
+  stunTime: 1
   MedKit: {fileID: 0}
   Mushroom: {fileID: 0}
 --- !u!114 &6406451567839429295
@@ -328,6 +329,7 @@ MonoBehaviour:
   isAttacking: 0
   canJump: 0
   canMove: 1
+  isStunned: 0
 --- !u!114 &3202428093087440981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,6 +390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovementScript: {fileID: 0}
   enemyMovementScript: {fileID: 6406451567839429295}
+  knockbackMultiplier: 1
   baseKnockback: 4
   KnockbackDelay: 0.5
 --- !u!114 &1720932939062638641

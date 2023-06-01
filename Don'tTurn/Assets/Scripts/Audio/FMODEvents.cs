@@ -21,9 +21,12 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference curseWhispers { get; private set; }
     [field: SerializeField] public EventReference fallDmg { get; private set; }
     [field: SerializeField] public EventReference playerDmg { get; private set; }
+    [field: SerializeField] public EventReference playerDeath { get; private set; }
     [field: SerializeField] public EventReference cursePunch { get; private set; }
     [field: SerializeField] public EventReference grappleHook { get; private set; }
     [field: SerializeField] public EventReference transformation { get; private set; }
+    [field: SerializeField] public EventReference SwitchToShotgun { get; private set; }
+    [field: SerializeField] public EventReference SwitchToGrapple { get; private set; }
 
     [field: Header("Ambience SFX")]
     [field: SerializeField] public EventReference levelAmbience { get; private set; }
