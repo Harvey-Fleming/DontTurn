@@ -35,7 +35,7 @@ public class CureNPC : MonoBehaviour, IDataPersistence
 
     public void CheckWin()
     {
-        if(cureGathered == 2)
+        if(cureGathered == 4)
         {
             cureChamber.Fix();
         }
@@ -56,19 +56,19 @@ public class CureNPC : MonoBehaviour, IDataPersistence
         {
             dialogueTrigger.dialogue.sentences = firstDialogue.sentences;
         }
-        if (cureGathered == 1 && !hasTalkedTo)
+        if (cureGathered == 2 && !hasTalkedTo)
         {
             dialogueTrigger.dialogue.sentences = firstDialogue.sentences.Concat(secondDialogueAfter.sentences).ToArray();
         }
-        else if (cureGathered == 1)
+        else if (cureGathered == 2)
         {
             dialogueTrigger.dialogue.sentences = secondDialogue.sentences;
         }
-        if (cureGathered == 2 && !hasTalkedTo)
+        if (cureGathered == 4 && !hasTalkedTo)
         {
             dialogueTrigger.dialogue.sentences = firstDialogue.sentences.Concat(thirdDialogueAfter.sentences).ToArray();
         }
-        else if (cureGathered >= 2)
+        else if (cureGathered == 4)
         {
             dialogueTrigger.dialogue.sentences = thirdDialogue.sentences;
         }

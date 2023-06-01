@@ -53,6 +53,7 @@ public class CureChamberCode : MonoBehaviour
     {
         if (canInteract && Input.GetKeyDown(KeyCode.F) && hasNotInteracted)
         {
+            playerMovement.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             StartCoroutine(Open());
             UI.SetActive(false);
         }

@@ -64,6 +64,7 @@ public class DataPersistenceManager : MonoBehaviour
         Debug.Log(this.gameData.playerHealth);
         SaveGame();
         Debug.Log(this.gameData.playerHealth);
+        Debug.Log(this.gameData.hasCollectedCure);
     }
 
     public void LoadGame()

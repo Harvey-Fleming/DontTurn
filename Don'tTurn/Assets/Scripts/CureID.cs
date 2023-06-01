@@ -17,6 +17,7 @@ public class CureID : MonoBehaviour, IDataPersistence
         startY = transform.position.y;
 
         cureManager = FindObjectOfType<CureManager>();
+
         if(hasCollectedCure)
         {
             cureManager.IncreaseCureCount();
