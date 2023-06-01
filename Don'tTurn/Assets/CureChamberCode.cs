@@ -85,6 +85,10 @@ public class CureChamberCode : MonoBehaviour
     IEnumerator Open()
     {
         AudioManager.instance.PlayOneShot(FMODEvents.instance.EndingSFX, this.transform.position);
+        playerMovement.GetComponent<GrappleAbility>().enabled = false;
+        playerMovement.GetComponent<AttackScript>().enabled = false;
+        playerMovement.GetComponent<PrototypeDash>().enabled = false;
+        playerMovement.GetComponent<PlayerMovement>().enabled = false;
         interactKey.SetActive(false);
         npcInteractKey.SetActive(false);
         checkpointInteractKey.SetActive(false);

@@ -216,6 +216,7 @@ public class IntroTutorialManager : MonoBehaviour, IDataPersistence
     {
         if (!hasPickedUpMelee)
         {
+            Player.GetComponent<PlayerMovement>().playerFootsteps.stop(STOP_MODE.IMMEDIATE);
             StartCoroutine(MeleeCooldown());
             meleeUpgPrompt.SetActive(true);
             Time.timeScale = 0;

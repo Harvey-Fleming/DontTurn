@@ -22,9 +22,11 @@ public class PlayerDeathHandler : MonoBehaviour
     IEnumerator DeathRespawn()
     {
         deathFade.SetBool("hasDied", true);
+
         ParticleSystem currentDeathFX = Instantiate(deathFX);
         currentDeathFX.transform.position = player.transform.position;
         player.GetComponent<AttackScript>().enabled = false;
+        player.GetComponent<PrototypeDash>().enabled = false;
         player.GetComponent<SpriteRenderer>().color = invisible;
         player.GetComponent<BoxCollider2D>().enabled = false;
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
@@ -37,7 +39,7 @@ public class PlayerDeathHandler : MonoBehaviour
         player.GetComponent<PlayerStats>().health = player.GetComponent<PlayerStats>().maxHealth;
         corruptionScript.time = 0f;
 
-
+        player.GetComponent<PrototypeDash>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         player.GetComponent<SpriteRenderer>().enabled = true;
