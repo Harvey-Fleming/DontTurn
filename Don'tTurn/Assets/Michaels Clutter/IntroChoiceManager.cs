@@ -35,46 +35,55 @@ public class IntroChoiceManager : MonoBehaviour
     public void HelpJoshUp()
     {
         SetChoice(1);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
     }
 
     public void LeaveJoshBehind()
     {
         SetChoice(2);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
     }
 
     public void LetGoOfJosh()
     {
         SetChoice(3);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
     }
 
     public void PushTheDoor()
     {
         SetChoice(4);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
     }
 
     public void Exhaustion()
     {
         SetChoice(5);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
     }
 
     public void KickTheDoor()
     {
         SetChoice(6);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
     }
 
     public void HoldOn()
     {
         SetChoice(7);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
     }
 
     public void PushOpenDoor()
     {
         SetChoice(8);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
     }
 
     public void FightWithJosh()
     {
         SetChoice(9);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
     }
 
     public void FindACure()

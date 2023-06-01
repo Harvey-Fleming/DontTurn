@@ -37,6 +37,7 @@ public class DialogueTutorials : MonoBehaviour
        if(isPictureUp == true && Input.GetKeyDown(KeyCode.F))
        {
             StartCoroutine(DisableDialogueManager());
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
             Time.timeScale = 1f;
             tutorialPicture.SetActive(false);
             isPictureUp = false;
