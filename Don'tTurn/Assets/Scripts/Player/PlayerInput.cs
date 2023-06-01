@@ -76,10 +76,12 @@ public class PlayerInput : MonoBehaviour
             if (grappleSelected)
             {
                 toggleAbil.SwitchToGrapple();
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.SwitchToGrapple, this.transform.position);
             }
             else
             {
                 toggleAbil.SwitchToShotgun();
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.SwitchToShotgun, this.transform.position);
             }
         }
     }

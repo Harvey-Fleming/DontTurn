@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using FMOD.Studio;
 using TMPro; 
 
 public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
@@ -102,6 +103,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         GetComponent<GrappleAbility>().StopGrapple();
         health = maxHealth;
         corruptionScript.time = 0f;
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerDeath, this.transform.position);
         deathHandler.Die();
     }
 
