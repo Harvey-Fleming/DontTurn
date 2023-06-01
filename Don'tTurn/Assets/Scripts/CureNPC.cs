@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,12 @@ public class CureNPC : MonoBehaviour, IDataPersistence
     [Range(0,2)] public int cureGathered;
     [SerializeField] private Dialogue firstDialogue;
     [SerializeField] private Dialogue secondDialogue;
+    [SerializeField] private Dialogue secondDialogueAfter;
     [SerializeField] private Dialogue thirdDialogue;
+    [SerializeField] private Dialogue thirdDialogueAfter;
     [SerializeField] private CureManager cureManager;
     public GameObject toolIcons;
-    private bool hasTalkedTo;
+    [SerializeField] private bool hasTalkedTo;
 
     private DialogueTrigger dialogueTrigger;
     public CureChamberCode cureChamber;
@@ -46,21 +49,31 @@ public class CureNPC : MonoBehaviour, IDataPersistence
     public void StartDialogue()
     {
         toolIcons.SetActive(true);
-        hasTalkedTo = true;
-        cureGathered = cureManager.cureAmount;
-        switch (cureGathered)
-        {
-            case 0:
-            dialogueTrigger.dialogue.sentences = firstDialogue.sentences;
-            break;
-            case 1:
-            dialogueTrigger.dialogue.sentences = secondDialogue.sentences;
-            break;
-            case 2:
-            dialogueTrigger.dialogue.sentences = thirdDialogue.sentences;
-            break;
 
-        } 
+        cureGathered = cureManager.cureAmount;
+
+        if (cureGathered == 0)
+        {
+            dialogueTrigger.dialogue.sentences = firstDialogue.sentences;
+        }
+        if (cureGathered == 1 && !hasTalkedTo)
+        {
+            dialogueTrigger.dialogue.sentences = firstDialogue.sentences.Concat(secondDialogueAfter.sentences).ToArray();
+        }
+        else if (cureGathered == 1)
+        {
+            dialogueTrigger.dialogue.sentences = secondDialogue.sentences;
+        }
+        if (cureGathered == 2 && !hasTalkedTo)
+        {
+            dialogueTrigger.dialogue.sentences = firstDialogue.sentences.Concat(thirdDialogueAfter.sentences).ToArray();
+        }
+        else if (cureGathered == 2)
+        {
+            dialogueTrigger.dialogue.sentences = thirdDialogue.sentences;
+        }
+
+        hasTalkedTo = true;
     }
 
     public void SaveData(GameData data)

@@ -193,6 +193,7 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
 
     public void StopGrapple()
     {
+        aimingGrapple = false;
         fallDamage.maxYVel = 0;
         followCam.followPlayer = true;
         //attackScript.ResetWindow();

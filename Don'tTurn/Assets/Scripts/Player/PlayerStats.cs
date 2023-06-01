@@ -121,6 +121,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     IEnumerator IFrames()
     {
         canTakeDamage = false;
+        Physics2D.IgnoreLayerCollision(3, 6);
         for (int i = 3; i > 0; i--)
         {
             spriteRenderer.enabled = false;
@@ -128,6 +129,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
             spriteRenderer.enabled = true;
             yield return new WaitForSeconds(iframeflicker);
         }
+        Physics2D.IgnoreLayerCollision(3, 6, false);
         canTakeDamage = true;
         yield break;
     }

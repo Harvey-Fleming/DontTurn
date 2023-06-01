@@ -135,6 +135,7 @@ MonoBehaviour:
     name: Scientist
   choiceButtons: []
   buttonToPress: {fileID: 0}
+  isTalking: 0
 --- !u!114 &7407821500461434975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,17 +161,29 @@ MonoBehaviour:
       so return to me once you\u2019ve sought them out. "
     - "Although I\u2019d be quick about it if I were you, wouldn\u2019t want you
       following in his footsteps all the way to the end\u2026"
-    - <b>FIND THE TOOLS FOR THE 'CURE'. THEY'RE MARKED ON YOUR MAP.
+    - <i>Find the tools for the <b>CURE</b>. They're marked on your <b>MAP</b>.</i>
     name: 
   secondDialogue:
     sentences:
     - "Perfect, I\u2019ll get to work whilst you search for the other one."
+    name: 
+  secondDialogueAfter:
+    sentences:
+    - "Oh looks like you already have one! I\u2019ll get to work whilst you search
+      for the other one."
     name: 
   thirdDialogue:
     sentences:
     - "Wonderful, let me just add the finishing touches. When you\u2019re ready,
       step inside and hold on to tight to whatever humanity you have left..."
     name: 
+  thirdDialogueAfter:
+    sentences:
+    - "Oh looks like you already have both! Let me just add the finishing touches.
+      When you\u2019re ready, step inside and hold on to tight to whatever humanity
+      you have left..."
+    name: 
   cureManager: {fileID: 0}
   toolIcons: {fileID: 0}
+  hasTalkedTo: 0
   cureChamber: {fileID: 0}
