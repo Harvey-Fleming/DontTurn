@@ -80,6 +80,7 @@ public class PlayerCollision : MonoBehaviour
                 mapPanelScript.ShowMap(checkPointScript.checkpointNumber);
                 checkPointScript.hasVisited = true;
                 isResting = true;
+                grappleAbility.StopGrapple();
                 DisableAbilities();
                 rb2D.velocity = Vector2.zero;
                 GetComponent<PlayerMovement>().playerFootsteps.stop(STOP_MODE.IMMEDIATE);

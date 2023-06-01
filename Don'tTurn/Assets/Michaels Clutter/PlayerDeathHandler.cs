@@ -10,10 +10,11 @@ public class PlayerDeathHandler : MonoBehaviour
     public CurseFX curseFX;
     public ParticleSystem deathFX;
     public Animator deathFade;
+    public bool isDead = false;
 
     public void Die()
     {
-        
+        isDead = true;
         StartCoroutine(DeathRespawn());
         
     }
@@ -47,5 +48,6 @@ public class PlayerDeathHandler : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         deathFade.SetBool("hasDied", false);
+        isDead = false;
     }
 }

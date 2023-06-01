@@ -51,6 +51,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference notebookOpen { get; private set; }
     [field: SerializeField] public EventReference notebookTurn { get; private set; }
     [field: SerializeField] public EventReference notebookClose { get; private set; }
+    [field: SerializeField] public EventReference tutorialPopup { get; private set; }
 
     private void Awake()
     {

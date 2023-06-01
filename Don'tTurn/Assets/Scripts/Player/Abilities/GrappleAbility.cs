@@ -22,6 +22,8 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     public FollowCamera followCam;
     public Vector2 camPoint;
     private Transform grappleLineSpawn;
+    public PlayerDeathHandler playerDeathHandler;
+    public PlayerCollision playerCollision;
 
     public LayerMask layerMask;
 
@@ -83,7 +85,13 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     {
         if (isUnlocked)
         {
-            if (playerInput.moveAbilityInputHeld && playerInput.grappleSelected)
+            if (playerDeathHandler.isDead == true || playerInput.grappleSelected == false)
+            {
+                grappleLine.positionCount = 0;
+                followCam.followPlayer = true;
+                aimingGrapple = false;
+            }
+            else if (playerInput.moveAbilityInputHeld && playerInput.grappleSelected)
             {
                 //Draws a line from the player towards the cursor but stops at max distance(Hook Range) to show the player how far away they can hook from
                 aimingGrapple = true;
@@ -186,6 +194,8 @@ public class GrappleAbility : MonoBehaviour, IDataPersistence
     public void StopGrapple()
     {
         fallDamage.maxYVel = 0;
+        followCam.followPlayer = true;
+        //attackScript.ResetWindow();
         isEnemyGrappled = false;
         isGrappling = false;
         animator.SetBool("IsGrappling", false);
