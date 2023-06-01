@@ -75,7 +75,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
         }
     }
 
-    public void OnHit(float attackDamage, GameObject attacker)
+    public void OnHit(float attackDamage, GameObject attacker, int knockback)
     {
         if(canTakeDamage == true)
         {
@@ -85,7 +85,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
             currentHitFX.transform.position = transform.position;
             damageIndicatorScript.SpawnIndicator(attackDamage, Color.red);
             corruptionScript.OnHitCorruption(attackDamage);
-            knockbackScript.ApplyKnockBack(attacker);
+            knockbackScript.ApplyKnockBack(attacker, knockback);
             attackScript.ResetWindow();
             StartCoroutine("IFrames");
         }

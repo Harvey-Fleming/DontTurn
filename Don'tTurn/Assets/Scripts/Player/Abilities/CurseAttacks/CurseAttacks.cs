@@ -55,7 +55,7 @@ public class CurseAttacks : MonoBehaviour, IDataPersistence
                 }
                 else
                 {
-                    playerStats.OnHit(10, gameObject);
+                    playerStats.OnHit(10, gameObject, 5);
                     PunchEnemy();
                 }
 

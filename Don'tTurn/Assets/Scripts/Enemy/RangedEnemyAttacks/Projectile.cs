@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerStats.OnHit(10, this.gameObject) ;
+            playerStats.OnHit(10, this.gameObject, 5) ;
             Destroy(gameObject);
             print("Collision made");
         }

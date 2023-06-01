@@ -7,7 +7,7 @@ public class BulletScript : MonoBehaviour
 {
     private Rigidbody2D rb2D;
 
-    [SerializeField] private int basebulletDamage = 6, minbulletDamage = 1;
+    [SerializeField] private int basebulletDamage = 6, minbulletDamage = 1, knockback = 4;
     [SerializeField] private float bulletDamage, bulletTravelTime, bulletTravelFalloff = 0.1f;
     
 
@@ -38,7 +38,7 @@ public class BulletScript : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {
             CalculateBulletDamage();
-            other.gameObject.GetComponent<EnemyStats>()?.OnHit(Mathf.RoundToInt(bulletDamage), this.gameObject);
+            other.gameObject.GetComponent<EnemyStats>()?.OnHit(Mathf.RoundToInt(bulletDamage), this.gameObject, knockback);
             Destroy(this.gameObject);
         }
         else
