@@ -54,7 +54,7 @@ public class AttackScript : MonoBehaviour
 
     void MeleeAttack()
     {
-        if (currentAttackNumber == 1)
+        if (currentAttackNumber > 0 && currentAttackNumber < 4)
         {
             Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackPointTrans.position, attackRadius);
 
@@ -66,26 +66,6 @@ public class AttackScript : MonoBehaviour
                     StartCoroutine(Enemy.GetComponent<EnemyStats>()?.HandleStun());
                 }
 
-            } 
-        }
-        else if (currentAttackNumber == 2)
-        {
-            Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackPointTrans.position, attackRadius);
-
-            foreach(Collider2D Enemy in enemiesHit)
-            {
-                Enemy.GetComponent<EnemyStats>()?.OnHit(baseAttackDamage + UpgradeDamage, this.gameObject, 5);
-                StartCoroutine(Enemy.GetComponent<EnemyStats>()?.HandleStun());
-            } 
-        }
-        else if (currentAttackNumber == 3)
-        {
-            Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackPointTrans.position, attackRadius);
-
-            foreach(Collider2D Enemy in enemiesHit)
-            {
-                Enemy.GetComponent<EnemyStats>()?.OnHit(baseAttackDamage + UpgradeDamage, this.gameObject, 5);
-                StartCoroutine(Enemy.GetComponent<EnemyStats>()?.HandleStun()); StartCoroutine(Enemy.GetComponent<EnemyStats>()?.HandleStun());
             } 
         }
 
