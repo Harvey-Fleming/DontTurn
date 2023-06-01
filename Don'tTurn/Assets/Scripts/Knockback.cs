@@ -6,6 +6,7 @@ public class Knockback : MonoBehaviour
 {
     [SerializeField] private PlayerMovement playerMovementScript;
     [SerializeField] private EnemyMovement enemyMovementScript;
+    [SerializeField] private int knockbackMultiplier = 1;
     private Rigidbody2D rb2D;
     
     [SerializeField] private float baseKnockback = 30f, KnockbackDelay = 0.3f;
@@ -17,7 +18,7 @@ public class Knockback : MonoBehaviour
         playerMovementScript = GetComponent<PlayerMovement>();
         rb2D = GetComponent<Rigidbody2D>();
     }
-    public void ApplyKnockBack(GameObject attacker)
+    public void ApplyKnockBack(GameObject attacker, int knockback)
     {
         /*if (rb2D != null)
         {
@@ -34,7 +35,7 @@ public class Knockback : MonoBehaviour
         {
         Vector2 knockbackposdiff =  (gameObject.transform.position - attacker.transform.position).normalized;
         StartCoroutine("Reset");
-        rb2D.velocity = new Vector2(knockbackposdiff.x * baseKnockback, baseKnockback);
+        rb2D.velocity = new Vector2(knockbackposdiff.x * knockback * knockbackMultiplier, knockback * knockbackMultiplier);
         }
         else
         {

@@ -27,6 +27,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private bool isAttacking;
     [SerializeField] private bool canJump;
     [SerializeField] private bool canMove;
+    [SerializeField] public bool isStunned;
 
     private bool facingright;
 
@@ -110,7 +111,7 @@ public class EnemyMovement : MonoBehaviour
 
     void WanderMovement()
     {
-        if (Vector2.Distance(transform.position, player.position) < wanderDistance && canMove)
+        if (Vector2.Distance(transform.position, player.position) < wanderDistance && canMove && !isStunned)
         {
             rb.velocity = new Vector2(moveDirection * moveSpeed, rb.velocity.y);
             animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
@@ -150,7 +151,7 @@ public class EnemyMovement : MonoBehaviour
 
     void AggroMovement()
     {
-        if (!isAttacking)
+        if (!isAttacking && !isStunned)
         {
             if (Vector2.Distance(transform.position, player.position) > damageRange)
             {
@@ -208,12 +209,30 @@ public class EnemyMovement : MonoBehaviour
 
     void Damage()
     {
-        isAttacking = true;
-        //moveDirection = 0;
-        if(isAttacking)
+        if(!isStunned)
         {
-            animator.SetBool("IsAttacking", true);
+            isAttacking = true;
+            //moveDirection = 0;
+            if(isAttacking)
+            {
+                animator.SetBool("IsAttacking", true);
+            }
         }
+
+    }
+
+    public void HandleMoveStun(bool conditionStatus)
+    {
+        if(conditionStatus == true)
+        {
+            isStunned = true;
+            ResetAttack();
+        }
+        else
+        {
+            isStunned = false;
+        }
+
     }
 
     public void ResetAttack()

@@ -54,12 +54,38 @@ public class AttackScript : MonoBehaviour
 
     void MeleeAttack()
     {
-        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackPointTrans.position, attackRadius);
-
-        foreach(Collider2D Enemy in enemiesHit)
+        if (currentAttackNumber == 1)
         {
-            Enemy.GetComponent<EnemyStats>()?.OnHit(baseAttackDamage + UpgradeDamage, this.gameObject);
-        } 
+            Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackPointTrans.position, attackRadius);
+
+            foreach(Collider2D Enemy in enemiesHit)
+            {
+                if (Enemy.GetComponent<EnemyStats>() != null)
+                {
+                    Enemy.GetComponent<EnemyStats>()?.OnHit(baseAttackDamage + UpgradeDamage, this.gameObject, 0);
+                    StartCoroutine(Enemy.GetComponent<EnemyStats>()?.HandleStun());
+                }
+
+            } 
+        }
+        else if (currentAttackNumber == 2)
+        {
+            Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackPointTrans.position, attackRadius);
+
+            foreach(Collider2D Enemy in enemiesHit)
+            {
+                Enemy.GetComponent<EnemyStats>()?.OnHit(baseAttackDamage + UpgradeDamage, this.gameObject, 0);
+            } 
+        }
+        else if (currentAttackNumber == 3)
+        {
+            Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackPointTrans.position, attackRadius);
+
+            foreach(Collider2D Enemy in enemiesHit)
+            {
+                Enemy.GetComponent<EnemyStats>()?.OnHit(baseAttackDamage + UpgradeDamage, this.gameObject, 5);
+            } 
+        }
 
         comboTimer = maxcomboTimer;
         inComboWindow = true;

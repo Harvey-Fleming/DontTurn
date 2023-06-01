@@ -21,7 +21,7 @@ public class BeingPunchedScript : MonoBehaviour
 
         if (isPunched == true && collision.gameObject.CompareTag("Enemy"))
         {
-            enemyStats.OnHit(5, gameObject);
+            enemyStats.OnHit(5, gameObject, 5);
             isPunched = false; 
         }
         

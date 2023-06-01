@@ -50,7 +50,7 @@ public class SporesScript : MonoBehaviour
     {
         for(int i = 0; i < 5; i++)
         {
-            enemy.GetComponent<EnemyStats>().OnHit(1 * corruptionScript.curseMutliplier, gameObject); 
+            enemy.GetComponent<EnemyStats>().OnHit(1 * corruptionScript.curseMutliplier, gameObject, 5); 
             yield return new WaitForSeconds(1f);
         }
        

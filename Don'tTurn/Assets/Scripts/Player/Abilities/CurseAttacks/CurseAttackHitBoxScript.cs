@@ -91,7 +91,7 @@ public class CurseAttackHitBoxScript : MonoBehaviour
             enemyRigidBody.constraints = RigidbodyConstraints2D.FreezePositionY;
             Debug.Log("Waiting 0.1 second");
             yield return new WaitForSeconds(0.1f);
-            enemy.GetComponent<EnemyStats>().OnHit(20, player); 
+            enemy.GetComponent<EnemyStats>().OnHit(20, player, 5); 
             if(enemy.GetComponent<EnemyStats>().isDead == true)
             {
                
@@ -140,7 +140,7 @@ public class CurseAttackHitBoxScript : MonoBehaviour
 
    public void PunchEnemy()
     {
-        enemy.GetComponent<EnemyStats>().OnHit(Mathf.Round(10 * corruptionScript.curseMutliplier), gameObject);
+        enemy.GetComponent<EnemyStats>().OnHit(Mathf.Round(10 * corruptionScript.curseMutliplier), gameObject, 5);
         if (player.GetComponent<PlayerMovement>().facingright == true)
         { 
             enemy.GetComponent<Rigidbody2D>().velocity = transform.right * 5f;

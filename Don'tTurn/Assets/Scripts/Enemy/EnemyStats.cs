@@ -23,7 +23,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     //Stats Variables
     [SerializeField] private string id;
     public bool isDead = false;
-    [SerializeField] private float maxHealth = 15, collisionDamageDealt = 10;
+    [SerializeField] private float maxHealth = 15, collisionDamageDealt = 10, stunTime = 1f;
     private float currentHealth = 15;
     private Vector2 respawnPos;
     Color normalColour = Color.white;
@@ -70,17 +70,20 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
 
 
     #region TakingDamage
-    public void OnHit(float damageTaken, GameObject incomingAttacker)
+    public void OnHit(float damageTaken, GameObject incomingAttacker, int knockback)
     {
         AudioManager.instance.PlayOneShot(FMODEvents.instance.duoSkellyDmg, this.transform.position);
         damageIndicatorScript.SpawnIndicator(damageTaken, Color.white);
         currentHealth = currentHealth - damageTaken;
         StartCoroutine(ChangeColour());
-        knockbackScript.ApplyKnockBack(incomingAttacker);
+        knockbackScript.ApplyKnockBack(incomingAttacker, knockback);
         if (currentHealth <= 0)
         {
             OnDeath();
-            emitter.Stop();
+            if (emitter != null)
+            {
+                emitter.Stop();
+            }
         }
         Debug.Log(currentHealth);
     }
@@ -93,6 +96,14 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
         isDead = true;
         //emitter.Stop();
         Debug.Log("enemy sound stop");
+    }
+
+    public IEnumerator HandleStun()
+    {
+        enemyMovementScript.HandleMoveStun(true);
+        yield return new WaitForSeconds(stunTime);
+        enemyMovementScript.HandleMoveStun(false);
+        yield break;
     }
 
     //Used by Debug Buttons to respawn enemies and when Loading save data
@@ -151,7 +162,7 @@ public class EnemyStats : MonoBehaviour, IDataPersistence, IsKillable
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerStats>()?.OnHit(collisionDamageDealt, gameObject);
+            other.gameObject.GetComponent<PlayerStats>()?.OnHit(collisionDamageDealt, gameObject, 5);
         }
     }
     #endregion
