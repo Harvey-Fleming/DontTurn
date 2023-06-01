@@ -86,6 +86,9 @@ public class FollowCamera : MonoBehaviour
         yield return new WaitForSeconds(4f);
         SceneManager.LoadScene("WinScreen");
     }
-    
-    
+
+    public void SetCameraPos()
+    {
+        transform.position = playerTransform.position;
+    }
 }

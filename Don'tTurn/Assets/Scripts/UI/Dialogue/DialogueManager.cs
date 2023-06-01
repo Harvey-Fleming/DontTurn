@@ -58,7 +58,7 @@ public class DialogueManager : MonoBehaviour
         textIsActive = true;
         playerMovement.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         playerMovement.MakeIdle(playerMovement.gameObject.GetComponent<Rigidbody2D>().velocity.x);
-        playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        playerMovement.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
         playerMovement.enabled = false;
         playerMovement.playerFootsteps.stop(STOP_MODE.IMMEDIATE);
         animator.SetBool("isOpen", true); 

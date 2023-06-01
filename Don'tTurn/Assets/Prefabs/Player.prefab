@@ -629,11 +629,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   corruptionScript: {fileID: 0}
+  healthFX: {fileID: 0}
   maxHealth: 100
   health: 100
   spawnPoint: {x: 0, y: 0, z: 0}
   deathHandler: {fileID: 0}
   hitFX: {fileID: 0}
+  abilAmount: 0
+  toggleAbil: {fileID: 0}
 --- !u!114 &6541144399509697046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -652,8 +655,10 @@ MonoBehaviour:
     m_Bits: 192
   jumpForce: 13.5
   maxJumpTime: 0.025
-  maxAerialJumpCount: 0
-  coyoteTimer: 0.05
+  jumpTime: 0
+  maxAerialJumpCount: 1
+  coyoteTimer: 0.1
+  currentcoyoteTimer: 0
   cursorScript: {fileID: 0}
   flipTimer: 0
   maxflipTimer: 0.5
@@ -706,6 +711,7 @@ MonoBehaviour:
   autoBulletDestroyTime: 0.1
   shotgunUI: {fileID: 0}
   circle: {fileID: 0}
+  shells: {fileID: 0}
   mainCamera: {fileID: 0}
 --- !u!114 &2843665436220802106
 MonoBehaviour:
@@ -751,7 +757,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   corruptionScript: {fileID: 0}
+  DashAbility: {fileID: 0}
   mapPanelScript: {fileID: 0}
+  timeBetweenRegens: 0.5
+  lerpSpeed: 4
   interactPressed: 0
   isInsideTrigger: 0
   IsMovingToTarget: 0
@@ -784,6 +793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovementScript: {fileID: 6541144399509697046}
   enemyMovementScript: {fileID: 0}
+  knockbackMultiplier: 1
   baseKnockback: 5
   KnockbackDelay: 0.3
 --- !u!114 &1288422878
@@ -820,6 +830,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggleAbil: {fileID: 0}
+  shotgun: {fileID: 0}
+  grapple: {fileID: 0}
 --- !u!114 &3039935803857740443
 MonoBehaviour:
   m_ObjectHideFlags: 0
