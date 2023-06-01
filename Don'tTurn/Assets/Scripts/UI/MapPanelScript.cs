@@ -8,7 +8,7 @@ public class MapPanelScript : MonoBehaviour
     public Image[] images; 
     public MapScript MapScript;
     public GameObject icon;
-    public Vector3[] iconLoc;
+    public Transform[] iconLoc;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +24,6 @@ public class MapPanelScript : MonoBehaviour
     {
         icon.SetActive(true);
         images[mapNum - 1].gameObject.SetActive(true);
-        icon.transform.localPosition = iconLoc[mapNum - 1];
+        icon.transform.position = iconLoc[mapNum - 1].position;
     }
 }
