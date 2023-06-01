@@ -54,6 +54,7 @@ public class IntroTutorialManager : MonoBehaviour, IDataPersistence
     bool hasPickedUpMelee;
     public GameObject meleeUpgPrompt;
     bool canContinueMelee = false;
+    bool hasUsedMelee = false;
 
     void Start()
     {
@@ -92,11 +93,12 @@ public class IntroTutorialManager : MonoBehaviour, IDataPersistence
 
         if (hasPickedUpMelee)
         {
-            if (Input.GetKeyDown(KeyCode.F) && canContinueMelee)
+            if (Input.GetKeyDown(KeyCode.F) && canContinueMelee && !hasUsedMelee)
             {
                 Time.timeScale = 1;
                 meleeUpgPrompt.SetActive(false);
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
+                hasUsedMelee = true;
             }
         }
     }

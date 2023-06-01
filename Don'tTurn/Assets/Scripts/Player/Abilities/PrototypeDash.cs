@@ -22,7 +22,7 @@ public class PrototypeDash : MonoBehaviour, IDataPersistence
     [Header("Dash Variables")]
     public bool isUnlocked = false;
     [SerializeField] private float dashSpeed;
-    private bool isDashing;
+    public bool isDashing;
     private bool canDash = true;
     [SerializeField] private float dashTime, dashCooldown = 2;
     private float dashDirection;

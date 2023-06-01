@@ -438,7 +438,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1310381261
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 92362aa82237d6d40ab9e3655b1d2023, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -652,7 +652,7 @@ MonoBehaviour:
   moveSpeed: 4.5
   GroundLayerMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 128
   jumpForce: 13.5
   maxJumpTime: 0.025
   jumpTime: 0
@@ -727,6 +727,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followCam: {fileID: 0}
   camPoint: {x: 0, y: 0}
+  playerDeathHandler: {fileID: 0}
+  playerCollision: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 704
@@ -759,6 +761,8 @@ MonoBehaviour:
   corruptionScript: {fileID: 0}
   DashAbility: {fileID: 0}
   mapPanelScript: {fileID: 0}
+  restTrans: {fileID: 0}
+  tempRestTrans: {fileID: 0}
   timeBetweenRegens: 0.5
   lerpSpeed: 4
   interactPressed: 0

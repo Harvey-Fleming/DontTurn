@@ -42,6 +42,7 @@ public class DialogueManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.F) && canDisplayNextSentence && !dialogueTutorial.isPictureUp)
         {
+            Debug.Log("F BUG ERROR FUCK SAKE");
             DisplayNextSentence();
         }
 
@@ -65,6 +66,7 @@ public class DialogueManager : MonoBehaviour
 
         nameText.text = dialogue.name;
 
+        sentences.Clear(); 
         sentences.Clear(); 
 
         foreach(string sentence in dialogue.sentences)
@@ -99,6 +101,7 @@ public class DialogueManager : MonoBehaviour
             }
            
         }
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
         AudioManager.instance.PlayOneShot(FMODEvents.instance.menuTransition, this.transform.position);
         string sentence = sentences.Dequeue();
         dialogueText.text = sentence; 

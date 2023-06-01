@@ -121,7 +121,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
     IEnumerator IFrames()
     {
         canTakeDamage = false;
-        Physics2D.IgnoreLayerCollision(3, 6);
+        Physics2D.IgnoreLayerCollision(3, 6, true);
         for (int i = 3; i > 0; i--)
         {
             spriteRenderer.enabled = false;
@@ -129,12 +129,19 @@ public class PlayerStats : MonoBehaviour, IDataPersistence, IsKillable
             spriteRenderer.enabled = true;
             yield return new WaitForSeconds(iframeflicker);
         }
-        Physics2D.IgnoreLayerCollision(3, 6, false);
         canTakeDamage = true;
         yield break;
     }
     
+    public void StartIFrames()
+    {
+        Physics2D.IgnoreLayerCollision(3, 6);
+    }
 
+    public void StopIFrames()
+    {
+        Physics2D.IgnoreLayerCollision(3, 6, false);
+    }
 
 //Subscribing to on scene loaded and on scene unloaded events.
     private void OnEnable() 

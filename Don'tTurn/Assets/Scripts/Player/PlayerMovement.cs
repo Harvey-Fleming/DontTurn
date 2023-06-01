@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
 
     [Header("Player")]
     [SerializeField] private CursorScript cursorScript;
-    [SerializeField] private float flipTimer, maxflipTimer = 0.5f;
+    [SerializeField] public float flipTimer, maxflipTimer = 0.5f;
     private Animator animator;
     private Vector2 cursorPos;
     public bool facingright = true, isGodEnabled, isDoubleJumpUnlocked;
@@ -156,7 +156,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
         animator.SetFloat("Speed", speed);
     }
 
-    void Flip()
+    public void Flip()
     {
         //flips the sprite depending on their direction of movement and whether they are moving the cursor.
         if (Input.GetAxis("Mouse Y") != 0f || Input.GetAxis("Mouse X") != 0f)

@@ -11,6 +11,7 @@ public class PlayerDeathHandler : MonoBehaviour
     public ParticleSystem deathFX;
     public Animator deathFade;
     public bool isDead = false;
+    public CheckPoint checkPoint;
 
     public void Die()
     {
@@ -47,6 +48,7 @@ public class PlayerDeathHandler : MonoBehaviour
         player.GetComponent<AttackScript>().enabled = true;
         player.GetComponent<AttackScript>().ResetWindow();
         player.transform.position = player.GetComponent<PlayerStats>().spawnPoint;
+        checkPoint.RespawnAllEnemies();
 
         yield return new WaitForSeconds(2f);
         deathFade.SetBool("hasDied", false);

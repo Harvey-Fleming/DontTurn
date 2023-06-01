@@ -72,7 +72,6 @@ public class CheckPoint : MonoBehaviour, IDataPersistence
     {
         object[] allEnemies = Resources.FindObjectsOfTypeAll(typeof(EnemyStats));
         //Debug.Log("allEnemies array has " + allEnemies.Length + "Items");
-        Debug.Log("zoinks");
         foreach (EnemyStats enemyStats in allEnemies)
         {
             enemyStats.gameObject.SetActive(true);
