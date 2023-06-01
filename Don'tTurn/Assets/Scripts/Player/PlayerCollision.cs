@@ -24,7 +24,8 @@ public class PlayerCollision : MonoBehaviour
     private Animator animator;
 
     private GameObject incomingAttacker;
-    private Transform restTrans;
+    [SerializeField] private Transform restTrans;
+    [SerializeField] private Transform tempRestTrans;
     [SerializeField] private float timeBetweenRegens = 0.5f, lerpSpeed = 4f;
     public bool interactPressed = false, isInsideTrigger = false, IsMovingToTarget = false, canStandUp = true, isResting =false;
  
@@ -74,6 +75,7 @@ public class PlayerCollision : MonoBehaviour
             interactPressed = !interactPressed;
             if (interactPressed == true)
             {
+                restTrans = tempRestTrans;
                 checkPointScript.RespawnAllEnemies();
                 mapPanelScript.ShowMap(checkPointScript.checkpointNumber);
                 checkPointScript.hasVisited = true;
@@ -94,7 +96,7 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    public void OnEnterCheckpoint(Transform restPointTrans, GameObject checkPoint) { isInsideTrigger = true; restTrans = restPointTrans; checkPointScript = checkPoint.GetComponent<CheckPoint>();}
+    public void OnEnterCheckpoint(Transform restPointTrans, GameObject checkPoint) { isInsideTrigger = true; tempRestTrans = restPointTrans; checkPointScript = checkPoint.GetComponent<CheckPoint>();}
 
     public void OnLeaveCheckpoint() {isInsideTrigger = false; EnableAbilities(); animator.SetBool("IsResting", false); interactPressed = false; DashAbility.shotgunUI.SetActive(true);}
 

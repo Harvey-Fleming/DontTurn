@@ -9,6 +9,7 @@ public class PlayerDeathHandler : MonoBehaviour
     public Color invisible;
     public CurseFX curseFX;
     public ParticleSystem deathFX;
+    public Animator deathFade;
 
     public void Die()
     {
@@ -19,6 +20,7 @@ public class PlayerDeathHandler : MonoBehaviour
 
     IEnumerator DeathRespawn()
     {
+        deathFade.SetBool("hasDied", true);
         ParticleSystem currentDeathFX = Instantiate(deathFX);
         currentDeathFX.transform.position = player.transform.position;
         player.GetComponent<AttackScript>().enabled = false;
@@ -42,5 +44,8 @@ public class PlayerDeathHandler : MonoBehaviour
         player.GetComponent<AttackScript>().enabled = true;
         player.GetComponent<AttackScript>().ResetWindow();
         player.transform.position = player.GetComponent<PlayerStats>().spawnPoint;
+
+        yield return new WaitForSeconds(2f);
+        deathFade.SetBool("hasDied", false);
     }
 }

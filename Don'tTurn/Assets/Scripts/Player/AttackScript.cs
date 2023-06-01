@@ -62,7 +62,7 @@ public class AttackScript : MonoBehaviour
             {
                 if (Enemy.GetComponent<EnemyStats>() != null)
                 {
-                    Enemy.GetComponent<EnemyStats>()?.OnHit(baseAttackDamage + UpgradeDamage, this.gameObject, 0);
+                    Enemy.GetComponent<EnemyStats>()?.OnHit(baseAttackDamage + UpgradeDamage, this.gameObject, 5);
                     StartCoroutine(Enemy.GetComponent<EnemyStats>()?.HandleStun());
                 }
 
@@ -74,7 +74,8 @@ public class AttackScript : MonoBehaviour
 
             foreach(Collider2D Enemy in enemiesHit)
             {
-                Enemy.GetComponent<EnemyStats>()?.OnHit(baseAttackDamage + UpgradeDamage, this.gameObject, 0);
+                Enemy.GetComponent<EnemyStats>()?.OnHit(baseAttackDamage + UpgradeDamage, this.gameObject, 5);
+                StartCoroutine(Enemy.GetComponent<EnemyStats>()?.HandleStun());
             } 
         }
         else if (currentAttackNumber == 3)
@@ -84,6 +85,7 @@ public class AttackScript : MonoBehaviour
             foreach(Collider2D Enemy in enemiesHit)
             {
                 Enemy.GetComponent<EnemyStats>()?.OnHit(baseAttackDamage + UpgradeDamage, this.gameObject, 5);
+                StartCoroutine(Enemy.GetComponent<EnemyStats>()?.HandleStun()); StartCoroutine(Enemy.GetComponent<EnemyStats>()?.HandleStun());
             } 
         }
 
@@ -104,7 +106,6 @@ public class AttackScript : MonoBehaviour
 
                 if(playerInput.meleeInput)
                 {
-
                     if (currentAttackNumber < 3)
                     {
                         currentAttackNumber ++;

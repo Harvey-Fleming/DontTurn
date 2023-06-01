@@ -69,7 +69,7 @@ public class DialogueTutorials : MonoBehaviour
 
     IEnumerator DisableDialogueManager()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
         playerInput.enabled = true;
         dialogueTrigger.enabled = true;
     }

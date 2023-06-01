@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     [Header("Jump Movement")]
     [SerializeField] private LayerMask GroundLayerMask;
     [SerializeField] private float jumpForce = 1f, maxJumpTime = 0.1f;
-    private float jumpTime = 0;
+    [SerializeField] private float jumpTime = 0;
     public int maxAerialJumpCount = 1;
     private int aerialJumpCount;
     private bool IsJumping = false;
@@ -115,9 +115,8 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             jumpTime += Time.deltaTime;
         }
- 
         // Stops the player from jumping when they release the jump key or jump has been active for more than the max jump time
-        if (playerInput.jumpKeyReleased | jumpTime > maxJumpTime)
+        if (playerInput.jumpKeyReleased || jumpTime > maxJumpTime)
         {
             IsJumping = false;
             currentcoyoteTimer = 0f;
@@ -126,6 +125,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
         if (IsGrounded())
         {
             HasJumped = false;
+            jumpTime = 0f;
             aerialJumpCount = maxAerialJumpCount;
             animator.SetBool("IsJumping", false);
             currentcoyoteTimer = coyoteTimer;
@@ -138,7 +138,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
 
     private void HandleCoyoteTimer()
     {
-        if(!IsGrounded() && rb.velocity.y <= 0.01)
+        if(!IsGrounded() && rb.velocity.y <= 0.01f)
         {
             currentcoyoteTimer -= Time.deltaTime;
         }
