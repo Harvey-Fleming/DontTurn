@@ -16,5 +16,6 @@ public class CureManager : MonoBehaviour
     {
         AudioManager.instance.PlayOneShot(FMODEvents.instance.ItemPickup, this.transform.position);
         cureAmount++; 
+        Debug.Log(cureAmount);
     }
 }

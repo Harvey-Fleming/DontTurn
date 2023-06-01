@@ -68,7 +68,7 @@ public class CureNPC : MonoBehaviour, IDataPersistence
         {
             dialogueTrigger.dialogue.sentences = firstDialogue.sentences.Concat(thirdDialogueAfter.sentences).ToArray();
         }
-        else if (cureGathered == 2)
+        else if (cureGathered >= 2)
         {
             dialogueTrigger.dialogue.sentences = thirdDialogue.sentences;
         }
