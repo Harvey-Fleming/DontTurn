@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 public class CureChamberCode : MonoBehaviour
 {
     public PlayerMovement playerMovement;
+    public MapScript mapScript;
     public GameObject UI;
     public SpriteRenderer spriteRend;
     public Sprite[] chamberPhases;
@@ -89,6 +90,7 @@ public class CureChamberCode : MonoBehaviour
         playerMovement.GetComponent<AttackScript>().enabled = false;
         playerMovement.GetComponent<PrototypeDash>().enabled = false;
         playerMovement.GetComponent<PlayerMovement>().enabled = false;
+        mapScript.enabled = false;
         interactKey.SetActive(false);
         npcInteractKey.SetActive(false);
         checkpointInteractKey.SetActive(false);
